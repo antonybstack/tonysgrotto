@@ -1,0 +1,13 @@
+:root {
+  --notblack: #23272a;
+  --dark: #2c2f33;
+  --greyple: #99aab5;
+  --burnt: #da8b72;
+}
+
+html {
+  background-color: var(--notblack);
+}
+.App {
+  background-color: var(--dark);
+}
