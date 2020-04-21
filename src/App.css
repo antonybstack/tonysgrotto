@@ -10,4 +10,13 @@ html {
 }
 .App {
   background-color: var(--dark);
+  color: var(--greyple);
+}
+
+.ticketBlock {
+  display: flex;
+}
+
+li {
+  list-style-type: none;
 }
