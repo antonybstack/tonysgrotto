@@ -27,15 +27,20 @@ const AddBacklog = (props) => {
     axios.post("http://localhost:4000/tickets/add", newTicket).then((res) => console.log(res.data));
 
     setTickets((currentTickets) => [...currentTickets, { name: name, status: "backlog", id: uuid() }]);
-    props.history.push("/");
+
+    setName("");
+    // props.history.push("/");
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Add Ticket: <input type="text" name="name" value={name} onChange={handleChange} />
-      </label>
-      <input type="submit" name="Submit"></input>
+      <div className="addTicket">
+        <label>
+          <p>Add Ticket:</p>
+          <input type="text" name="name" value={name} onChange={handleChange} />
+        </label>
+        <input type="submit" name="Submit" className="submit"></input>
+      </div>
     </form>
   );
 };

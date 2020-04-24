@@ -5,7 +5,8 @@ import TicketDisplay from "./displays/TicketDisplay";
 import AddBacklog from "./addData/AddBacklog";
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import EditTicket from "./addData/edit-ticket";
+import EditTicket from "./addData/EditTicket";
+import ModalEdit from "./ModalEdit";
 
 function App() {
   return (
@@ -14,15 +15,10 @@ function App() {
         <Link to="/" className="navbar-brand">
           MERN-Stack Bug Tracker App
         </Link>
-        <Link to="/" className="nav-link">
-          Tickets
-        </Link>
-        <Link to="/create" className="nav-link">
-          Create Todo
-        </Link>
+        <AddBacklog />
         <Route path="/" exact component={TicketDisplay} />
-        <Route path="/edit/:id" component={EditTicket} />
-        <Route path="/create" component={AddBacklog} />
+        {/* <Route path="/edit/:id" component={EditTicket} /> */}
+        {/* <Route path="/create" component={AddBacklog} /> */}
       </div>
     </Router>
   );

@@ -2,28 +2,24 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Ticket from "../Ticket";
 import axios from "axios";
+import AddBacklog from "../addData/AddBacklog";
 
-const TicketDisplay = () => {
+const TicketDisplay = (props) => {
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/tickets/")
-      .then((response) => {
-        console.log(response.data);
-        setTickets(response.data);
-        // this.setState({ tickets: response.data });
-        // setTickets((currentTickets) => [...currentTickets, { name: name, status: "backlog", id: uuid() }]);
-        // const [tickets, setTickets] = useState(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    const interval = setInterval(() => {
+      getTickets();
+      console.log("ttt", tickets.length);
+    }, 500);
+    getTickets();
+    console.log("ttt", tickets.length);
   }, []);
 
-  // const ticketList = () => {
-  //   return <div>{tickets.map((ticket, index) => ());}</div>
-  // };
+  const getTickets = async () => {
+    const response = await axios.get("http://localhost:4000/tickets/");
+    setTickets(response.data);
+  };
 
   return (
     <div className="display">

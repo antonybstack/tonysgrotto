@@ -47,6 +47,16 @@ ticketRoutes.route("/add").post(function (req, res) {
     });
 });
 
+ticketRoutes.route("/delete/:id").delete(function (req, res) {
+  Ticket.findByIdAndRemove(req.params.id, function (err, ticket) {
+    if (err) {
+      console.log(err);
+      return res.status(500).send();
+    }
+    return res.status(200).send();
+  });
+});
+
 ticketRoutes.route("/update/:id").post(function (req, res) {
   Ticket.findById(req.params.id, function (err, ticket) {
     if (!ticket) res.status(404).send("data is not found");
