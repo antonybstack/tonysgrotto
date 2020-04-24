@@ -25,18 +25,18 @@ const TicketDisplay = () => {
   //   return <div>{tickets.map((ticket, index) => ());}</div>
   // };
 
-  const ticketList = () => {
-    //state management w/ context
-    return (
-      <div>
+  return (
+    <div className="display">
+      <div className="backlog">
+        <h1>Backlog</h1>
         {tickets.map((currentTicket, i) => (
-          <Ticket ticket={currentTicket} key={i} />
+          <div className="ticketBlock">
+            <Ticket ticket={currentTicket} key={i} />
+          </div>
         ))}
       </div>
-    );
-  };
-
-  return ticketList();
+    </div>
+  );
   // <div className="display">
   //   <div className="backlog">
   //     <h1>Backlog</h1>

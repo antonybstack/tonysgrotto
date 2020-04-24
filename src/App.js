@@ -10,22 +10,20 @@ import EditTicket from "./addData/edit-ticket";
 function App() {
   return (
     <Router>
-      <TicketProvider>
-        <div className="container">
-          <Link to="/" className="navbar-brand">
-            MERN-Stack Bug Tracker App
-          </Link>
-          <Link to="/" className="nav-link">
-            Tickets
-          </Link>
-          <Link to="/create" className="nav-link">
-            Create Todo
-          </Link>
-        </div>
-      </TicketProvider>
-      <Route path="/" exact component={TicketDisplay} />
-      <Route path="/edit/:id" component={EditTicket} />
-      <Route path="/create" component={AddBacklog} />
+      <div className="App">
+        <Link to="/" className="navbar-brand">
+          MERN-Stack Bug Tracker App
+        </Link>
+        <Link to="/" className="nav-link">
+          Tickets
+        </Link>
+        <Link to="/create" className="nav-link">
+          Create Todo
+        </Link>
+        <Route path="/" exact component={TicketDisplay} />
+        <Route path="/edit/:id" component={EditTicket} />
+        <Route path="/create" component={AddBacklog} />
+      </div>
     </Router>
   );
 }

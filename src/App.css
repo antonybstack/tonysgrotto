@@ -15,8 +15,63 @@ html {
 
 .ticketBlock {
   display: flex;
+  color: var(--greyple);
 }
 
 li {
   list-style-type: none;
+}
+
+a:link {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+  padding-left: 50px;
+  padding-top: 50px;
+}
+
+a:visited {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+  padding-left: 50px;
+  padding-top: 50px;
+}
+
+a:link.nav-link {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+  padding-left: 50px;
+  padding-top: 50px;
+}
+
+a:visited.nav-link {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+  padding-left: 50px;
+  padding-top: 50px;
+}
+
+a:link.navbar-brand {
+  font-size: 16pt;
+  display: flex;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  color: lightblue;
+}
+
+a:visited.navbar-brand {
+  font-size: 16pt;
+  display: flex;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  color: lightblue;
+}
+
+.display {
+  padding-left: 20px;
 }
