@@ -3,7 +3,6 @@ import "./App.css";
 import { TicketProvider } from "./contexts/TicketContext";
 import TicketDisplay from "./displays/TicketDisplay";
 import AddBacklog from "./addData/AddBacklog";
-
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import EditTicket from "./addData/EditTicket";
 import ModalEdit from "./ModalEdit";
