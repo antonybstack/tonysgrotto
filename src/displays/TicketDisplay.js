@@ -1,35 +1,30 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Ticket from "../Ticket";
-import axios from "axios";
+import { TicketContext } from "../contexts/TicketContext";
+import { Table } from "react-bootstrap";
+
 import AddBacklog from "../addData/AddBacklog";
 
 const TicketDisplay = (props) => {
-  const [tickets, setTickets] = useState([]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      getTickets();
-      console.log("ttt", tickets.length);
-    }, 500);
-    getTickets();
-    console.log("ttt", tickets.length);
-  }, []);
-
-  const getTickets = async () => {
-    const response = await axios.get("http://localhost:4000/tickets/");
-    setTickets(response.data);
-  };
+  const [tickets, setTickets] = useContext(TicketContext);
 
   return (
     <div className="display">
+      <p>Antony Blyakher</p>
+      <p>Number of Tickets: {tickets.length}</p>
       <div className="backlog">
         <h1>Backlog</h1>
-        {tickets.map((currentTicket, i) => (
-          <div className="ticketBlock">
-            <Ticket ticket={currentTicket} key={i} />
-          </div>
-        ))}
+        <th className="onehead"></th>
+        <th className="twohead">STATUS</th>
+        <th className="threehead">NAME</th>
+        <table>
+          <tbody>
+            {tickets.map((currentTicket, i) => (
+              <Ticket ticket={currentTicket} key={i} />
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

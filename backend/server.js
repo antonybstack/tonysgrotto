@@ -40,7 +40,7 @@ ticketRoutes.route("/add").post(function (req, res) {
   ticket
     .save()
     .then((ticket) => {
-      res.status(200).json({ ticket: "ticket added successfully" });
+      res.status(200).json({ ticket });
     })
     .catch((err) => {
       res.status(400).send("adding new ticket failed");

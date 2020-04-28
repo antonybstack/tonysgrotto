@@ -1,19 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import EditTicket from "./addData/EditTicket";
 import ModalEdit from "./ModalEdit";
+import Table from "react-bootstrap/Table";
 
 const Ticket = (props) => {
-  console.log("test");
+  // console.log("test");
+  // console.log("props", props);
   return (
-    <div>
-      {props.ticket.ticket_name && (
-        <div className="ticketItem">
-          Name: {props.ticket.ticket_name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Status: {props.ticket.ticket_status}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ID: {props.ticket._id}
-          <ModalEdit ticket={props} />
-        </div>
-      )}
-    </div>
+    <tr className="ticketItem">
+      <td className="edit-button-data">
+        <ModalEdit ticket={props} />
+      </td>
+      <td className="status-data">{props.ticket.ticket_status}</td>
+      <td className="name-data">{props.ticket.ticket_name}</td>
+      {/* <td className="id-data">ID: {props.ticket._id}</td> */}
+    </tr>
   );
 };
 

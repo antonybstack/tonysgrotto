@@ -1,8 +1,11 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { TicketContext } from "../contexts/TicketContext";
+import Ticket from "../Ticket";
 
 const EditTicket = (props) => {
+  const [tickets, setTickets] = useState(TicketContext);
   const [ticket, setTicket] = useState("");
   const [name, setName] = useState("");
   console.log(props);
@@ -30,12 +33,11 @@ const EditTicket = (props) => {
       ticket_name: name,
       ticket_status: "backlog",
     };
-
     axios.post("http://localhost:4000/tickets/update/" + ticket._id, newTicket).then((res) => console.log(res.data));
 
     // props.history.push("/");
 
-    // setTickets((currentTickets) => [...currentTickets, { name: name, status: "backlog", id: uuid() }]);
+    setTickets(TicketContext);
     setName(""); //empties textbox
   };
 

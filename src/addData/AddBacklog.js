@@ -5,11 +5,9 @@ import uuid from "uuid/v1";
 import axios from "axios";
 //props takes in data from Link, includes data like location /create
 const AddBacklog = (props) => {
-  const [tickets, setTickets] = useState("");
+  const [tickets, setTickets] = useContext(TicketContext);
 
   const [name, setName] = useState("");
-
-  console.log("test", props);
 
   const handleChange = (e) => {
     setName(e.target.value);
@@ -24,9 +22,11 @@ const AddBacklog = (props) => {
       ticket_status: "backlog",
     };
 
-    axios.post("http://localhost:4000/tickets/add", newTicket).then((res) => console.log(res.data));
+    axios.post("http://localhost:4000/tickets/add", newTicket).then((res) => {
+      setTickets((currentTickets) => [...currentTickets, { _id: res.data.ticket._id, ticket_name: name, ticket_status: "backlog" }]);
+    });
 
-    setTickets((currentTickets) => [...currentTickets, { name: name, status: "backlog", id: uuid() }]);
+    //setTickets((currentTickets) => [...currentTickets, { _id: uuid(), ticket_name: name, ticket_status: "backlog" }]);
 
     setName("");
     // props.history.push("/");

@@ -5,9 +5,9 @@
   --burnt: #da8b72;
 }
 
-html {
+body {
   background-color: var(--notblack);
-  font-size: 20pt;
+  font-size: 15pt;
   font-family: runescape-uf-regular;
 }
 .App {
@@ -17,7 +17,6 @@ html {
 }
 
 .ticketBlock {
-  display: flex;
   color: var(--greyple);
 }
 
@@ -63,16 +62,15 @@ a:visited.nav-link {
 
 a:link.navbar-brand {
   font-size: 24pt;
-  display: flex;
   padding-top: 20px;
   padding-left: 20px;
   padding-bottom: 20px;
   color: lightblue;
+  width: 315px;
 }
 
 a:visited.navbar-brand {
   font-size: 24pt;
-  display: flex;
   padding-top: 20px;
   padding-left: 20px;
   padding-bottom: 20px;
@@ -95,7 +93,7 @@ a:visited.navbar-brand {
   padding: 2px 32px;
   text-align: center;
   text-decoration: none;
-  display: block;
+
   height: 36px;
   font-family: runescape-uf-regular;
   font-size: 18pt;
@@ -103,7 +101,6 @@ a:visited.navbar-brand {
 }
 
 .addTicket input[type="text"] {
-  display: block;
   float: left;
   height: 30px;
   width: 35%;
@@ -116,7 +113,6 @@ a:visited.navbar-brand {
 }
 
 .ticketItem {
-  display: flex;
   padding-bottom: 15px;
 }
 
@@ -148,4 +144,39 @@ button {
   display: block;
   float: right;
   margin-top: 30px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table,
+td,
+th {
+}
+td {
+  width: 400px;
+  text-align: left;
+}
+
+td.edit-button-data {
+  width: 150px;
+}
+
+td.status-data {
+  width: 150px;
+}
+td.name-data {
+  width: 500px;
+}
+
+th.onehead {
+  padding-right: 153px;
+}
+th.twohead {
+  padding-right: 86px;
+}
+
+th.threehead {
+  padding-right: 155px;
 }
