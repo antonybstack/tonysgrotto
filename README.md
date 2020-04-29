@@ -6,4 +6,4 @@ This is a web app ive been developing for fun that contains an unorganized colle
 
 ### Current features
 
-- a bug tracker that uses CRUD opertions with database
+- a bug tracker. CRUD opertions with database are real time, and implemented using only react's context and state (without using sockets which I think is really cool. And it seems to render data changes faster than websockets would)
