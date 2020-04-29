@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 
 const EditTicket = (props) => {
   const [ticket, setTicket] = useState("");
-  const [name, setName] = useState("");
   console.log(props);
   console.log(props.value.ticket.ticket._id);
   useEffect(() => {

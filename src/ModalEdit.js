@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Modal from "react-modal";
 import EditTicket from "./addData/EditTicket";
 import DeleteTicket from "./addData/DeleteTicket";

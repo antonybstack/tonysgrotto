@@ -1,10 +1,7 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import Ticket from "../Ticket";
 import { TicketContext } from "../contexts/TicketContext";
-import { Table } from "react-bootstrap";
-
-import AddBacklog from "../addData/AddBacklog";
 
 const TicketDisplay = (props) => {
   const [tickets, setTickets] = useContext(TicketContext);

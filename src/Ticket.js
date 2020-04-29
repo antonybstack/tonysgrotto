@@ -1,6 +1,5 @@
 import React from "react";
 import ModalEdit from "./ModalEdit";
-import Table from "react-bootstrap/Table";
 
 const Ticket = (props) => {
   // console.log("test");
@@ -12,6 +11,7 @@ const Ticket = (props) => {
       </td>
       <td className="status-data">{props.ticket.ticket_status}</td>
       <td className="name-data">{props.ticket.ticket_name}</td>
+      <td className="name-data">{props.ticket._id}</td>
       {/* <td className="id-data">ID: {props.ticket._id}</td> */}
     </tr>
   );

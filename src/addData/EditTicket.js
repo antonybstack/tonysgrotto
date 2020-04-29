@@ -1,11 +1,10 @@
 import React from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { TicketContext } from "../contexts/TicketContext";
-import Ticket from "../Ticket";
 
 const EditTicket = (props) => {
-  const [tickets, setTickets] = useState(TicketContext);
+  const [tickets, setTickets] = useContext(TicketContext);
   const [ticket, setTicket] = useState("");
   const [name, setName] = useState("");
   console.log(props);
@@ -33,11 +32,32 @@ const EditTicket = (props) => {
       ticket_name: name,
       ticket_status: "backlog",
     };
-    axios.post("http://localhost:4000/tickets/update/" + ticket._id, newTicket).then((res) => console.log(res.data));
+    console.log("this is testing tickets in editticket", tickets);
+    axios.post("http://localhost:4000/tickets/update/" + ticket._id, newTicket).then((res) => {
+      console.log(res.data);
+      tickets.map((ticket, index) => {
+        ticket._id === res.data.ticket._id && console.log("map", ticket, index);
+        const i = index;
+        const newTickets = tickets.slice();
+        newTickets.splice(index, 1, {
+          ...ticket,
+          ticket_name: res.data.ticket.ticket_name,
+        });
+        console.log(newTickets);
+        setTickets(newTickets);
+      });
+    });
 
+    // axios.post("http://localhost:4000/tickets/update/" + ticket._id, newTicket).then((res) => {
+    //   const newTickets = tickets.slice();
+    // newTickets.splice(index, 1, {
+    //   ...ticket,
+    //   name: "sprint",
+    // });
+    //   setTickets(newTickets);
+    // });
     // props.history.push("/");
 
-    setTickets(TicketContext);
     setName(""); //empties textbox
   };
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { useContext, useState } from "react";
 import { TicketContext } from "../contexts/TicketContext";
-import uuid from "uuid/v1";
 import axios from "axios";
 //props takes in data from Link, includes data like location /create
 const AddBacklog = (props) => {
@@ -21,7 +20,7 @@ const AddBacklog = (props) => {
       ticket_name: name,
       ticket_status: "backlog",
     };
-
+    console.log("this is testing tickets in addbacklog", tickets);
     axios.post("http://localhost:4000/tickets/add", newTicket).then((res) => {
       setTickets((currentTickets) => [...currentTickets, { _id: res.data.ticket._id, ticket_name: name, ticket_status: "backlog" }]);
     });

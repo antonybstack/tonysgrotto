@@ -51,7 +51,7 @@ ticketRoutes.route("/delete/:id").delete(function (req, res) {
   Ticket.findByIdAndRemove(req.params.id, function (err, ticket) {
     if (err) {
       console.log(err);
-      return res.status(500).send();
+      return res.status(500).send(ticket);
     }
     return res.status(200).send();
   });
@@ -66,7 +66,7 @@ ticketRoutes.route("/update/:id").post(function (req, res) {
     ticket
       .save()
       .then((ticket) => {
-        res.json("Ticket updated");
+        res.json({ ticket });
       })
       .catch((err) => {
         res.status(400).send("Update not possible");
