@@ -40,7 +40,7 @@ const EditTicket = (props) => {
         const i = index;
         const newTickets = tickets.slice();
         newTickets.splice(index, 1, {
-          ...ticket,
+          ...ticket, //remove 1 element before 'index' and insert the following)
           ticket_name: res.data.ticket.ticket_name,
         });
         console.log(newTickets);

@@ -6,9 +6,7 @@ const Ticket = (props) => {
   // console.log("props", props);
   return (
     <tr className="ticketItem">
-      <td className="edit-button-data">
-        <ModalEdit ticket={props} />
-      </td>
+      <td className="edit-button-data">{props.ticket.ticket_name && <ModalEdit ticket={props} />}</td>
       <td className="status-data">{props.ticket.ticket_status}</td>
       <td className="name-data">{props.ticket.ticket_name}</td>
       <td className="name-data">{props.ticket._id}</td>
