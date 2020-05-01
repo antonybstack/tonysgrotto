@@ -3,11 +3,9 @@ import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { TicketContext } from "../contexts/TicketContext";
 
-const EditTicket = (props) => {
+const DeleteTicket = (props) => {
   const [tickets, setTickets] = useContext(TicketContext);
   const [ticket, setTicket] = useState("");
-  console.log(props);
-  console.log(props.value.ticket.ticket._id);
   useEffect(() => {
     axios
       .get("http://localhost:4000/tickets/" + props.value.ticket.ticket._id)
@@ -21,17 +19,15 @@ const EditTicket = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log({ ticket });
-
     axios.delete("http://localhost:4000/tickets/delete/" + ticket._id).then((res) => {
-      console.log(res.data);
-      tickets.map((ticket, index) => {
-        ticket._id === res.data.ticket._id && console.log("map", ticket, index);
-        const i = index;
-        const newTickets = tickets.slice();
-        newTickets.splice(index, 1); //remove 1 element before 'index' (3rd parameter is empty because we dont want to insert anything)
-        console.log(newTickets);
-        setTickets(newTickets);
+      tickets.map((t, index) => {
+        if (t._id === ticket._id) {
+          const i = index;
+          console.log(i);
+          const newTickets = tickets.slice();
+          newTickets.splice(i, 1); //remove 1 element before 'index' (3rd parameter is empty because we dont want to insert anything)
+          setTickets(newTickets);
+        }
       });
     });
 
@@ -40,6 +36,10 @@ const EditTicket = (props) => {
     // setTickets((currentTickets) => [...currentTickets, { name: name, status: "backlog", id: uuid() }]);
   };
 
-  return <button onClick={handleSubmit}>Delete Ticket</button>;
+  return (
+    <button className="deleteBtn" onClick={handleSubmit}>
+      Delete Ticket
+    </button>
+  );
 };
-export default EditTicket;
+export default DeleteTicket;

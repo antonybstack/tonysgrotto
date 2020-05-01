@@ -4,12 +4,10 @@ import axios from "axios";
 export const TicketContext = createContext();
 
 export const TicketProvider = (props) => {
-  console.log(props);
   const [tickets, setTickets] = useState([]);
   useEffect(() => {
     if (tickets.length) return; // so, we call just once
     getTickets();
-    console.log("1", { tickets });
   }, []);
 
   const getTickets = async () => {

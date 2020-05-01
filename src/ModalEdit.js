@@ -4,13 +4,25 @@ import EditTicket from "./addData/EditTicket";
 import DeleteTicket from "./addData/DeleteTicket";
 
 const customStyles = {
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(44, 47, 51, 0.75)",
+  },
   content: {
+    paddingLeft: "75px",
+    paddingRight: "75px",
+    paddingBottom: "50px",
     top: "50%",
     left: "50%",
     right: "auto",
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    background: "var(--dark)",
   },
 };
 
@@ -37,15 +49,17 @@ const ModalEdit = (props) => {
   return (
     <div>
       <button className="editButton" onClick={openModal}>
-        edit/delete
+        edit
       </button>
       <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} style={customStyles} contentLabel="Example Modal">
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}>edit/delete</h2>
         <EditTicket value={props} />
-        <DeleteTicket value={props} />
-        <button className="closeModal" onClick={closeModal}>
-          close
-        </button>
+        <div className="">
+          <DeleteTicket value={props} />
+          <button className="closeModal" onClick={closeModal}>
+            Close
+          </button>
+        </div>
       </Modal>
     </div>
   );

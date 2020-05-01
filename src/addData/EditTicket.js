@@ -6,9 +6,10 @@ import { TicketContext } from "../contexts/TicketContext";
 const EditTicket = (props) => {
   const [tickets, setTickets] = useContext(TicketContext);
   const [ticket, setTicket] = useState("");
-  const [name, setName] = useState("");
+  const [name, setName] = useState(props.value.ticket.ticket.ticket_name);
+  const [status, setStatus] = useState("backlog");
   console.log(props);
-  console.log(props.value.ticket.ticket._id);
+  console.log(tickets);
   useEffect(() => {
     axios
       .get("http://localhost:4000/tickets/" + props.value.ticket.ticket._id)
@@ -20,57 +21,73 @@ const EditTicket = (props) => {
       });
   }, []);
 
-  const handleChange = (e) => {
+  const handleChangeName = (e) => {
     setName(e.target.value);
     console.log({ name });
+  };
+  const handleChangeStatus = (e) => {
+    setStatus(e.target.value);
+    console.log({ status });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log({ ticket });
     const newTicket = {
       ticket_name: name,
-      ticket_status: "backlog",
+      ticket_status: status,
     };
-    console.log("this is testing tickets in editticket", tickets);
     axios.post("http://localhost:4000/tickets/update/" + ticket._id, newTicket).then((res) => {
+      console.log(ticket._id);
       console.log(res.data);
-      tickets.map((ticket, index) => {
-        ticket._id === res.data.ticket._id && console.log("map", ticket, index);
-        const i = index;
-        const newTickets = tickets.slice();
-        newTickets.splice(index, 1, {
-          ...ticket, //remove 1 element before 'index' and insert the following)
-          ticket_name: res.data.ticket.ticket_name,
-        });
-        console.log(newTickets);
-        setTickets(newTickets);
+      tickets.map((t, index) => {
+        if (t._id === ticket._id) {
+          const i = index;
+          console.log(i);
+          const newTickets = tickets.slice();
+          newTickets.splice(index, 1, {
+            ...ticket, //remove 1 element before 'index' and insert the following)
+            ticket_name: res.data.ticket.ticket_name,
+            ticket_status: res.data.ticket.ticket_status,
+          });
+          setTickets(newTickets);
+        }
       });
+      // tickets.map((ticket, index) => {
+      //   const i = index;
+      //   const newTickets = tickets.slice();
+      //   newTickets.splice(index, 1, {
+      //     ...ticket, //remove 1 element before 'index' and insert the following)
+      //     ticket_name: res.data.ticket.ticket_name,
+      //     ticket_status: res.data.ticket.ticket_status,
+      //   });
+      //   console.log(newTickets);
+      //   setTickets(newTickets);
+      // });
     });
 
-    // axios.post("http://localhost:4000/tickets/update/" + ticket._id, newTicket).then((res) => {
-    //   const newTickets = tickets.slice();
-    // newTickets.splice(index, 1, {
-    //   ...ticket,
-    //   name: "sprint",
-    // });
-    //   setTickets(newTickets);
-    // });
-    // props.history.push("/");
-
     setName(""); //empties textbox
+    setStatus(""); //empties textbox
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="editTicket">
-        <label>
-          <p>Change Name:</p>
-          <input type="text" name="name" value={name} onChange={handleChange} />
-        </label>
+    <div className="editForm">
+      <form onSubmit={handleSubmit}>
+        <label for="name">Change Name:</label>
+        <input type="text" name="name" value={name} onChange={handleChangeName} />
+
+        <label for="status">Change Status:</label>
+        <select name="status" value={status} onChange={handleChangeStatus}>
+          <option selected value="backlog">
+            backlog
+          </option>
+          <option value="sprint">sprint</option>
+          <option value="progress">progress</option>
+          <option value="done">done</option>
+        </select>
+
         <input type="submit" name="Submit" className="submit"></input>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 export default EditTicket;
