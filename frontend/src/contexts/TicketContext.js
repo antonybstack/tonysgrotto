@@ -4,6 +4,7 @@ import axios from "axios";
 export const TicketContext = createContext();
 
 export const TicketProvider = (props) => {
+  console.log("context mounted");
   const [tickets, setTickets] = useState([]);
   useEffect(() => {
     if (tickets.length) return; // so, we call just once

@@ -85,10 +85,10 @@ ticketRoutes.route("/update/:id").post(function (req, res) {
 });
 
 app.use("/tickets", ticketRoutes);
-app.use(express.static(path.join(__dirname, "frontend/build")));
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend/build/index.html"));
-});
+// app.use(express.static(path.join(__dirname, "frontend/build")));
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "frontend/build/index.html"));
+// });
 
 app.listen(process.env.port || 8080, () => {
   console.log("Express app is running on port 8080");
