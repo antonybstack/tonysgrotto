@@ -10,7 +10,7 @@
     "server": "nodemon server.js",
     "frontend": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run frontend\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false  npm install --only=dev --prefix frontend &&npm install --prefix frontend && npm run build --prefix frontend"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
   "author": "",
@@ -20,9 +20,10 @@
     "concurrently": "^5.2.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.9.10"
+    "mongoose": "^5.9.10",
+    "react-scripts": "^3.4.1"
   },
   "engines": {
-    "node": "12.16.1"
+    "node": "12.16.x"
   }
 }
