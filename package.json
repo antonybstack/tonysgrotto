@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server.js",
     "dev": "concurrently \"npm run server\" \"npm start\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false cd .. && cd frontend && npm install && npm run build && cd .. && cd backend"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false  cd frontend && npm install && npm run build && cd .."
   },
   "keywords": [],
   "author": "",

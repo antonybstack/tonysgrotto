@@ -19,7 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "client": "cd .. && cd backend && npm run server",
+    "client": "cd .. && npm run server",
     "dev": "concurrently \"npm run client\" \"npm start\""
   },
   "proxy": "http://localhost:5000",
