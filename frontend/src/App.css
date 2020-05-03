@@ -14,6 +14,8 @@ body {
   background-color: var(--dark);
   color: var(--greyple);
   font-family: runescape-uf-regular;
+  padding-left: 20px;
+  padding-top: 20px;
 }
 
 .ticketBlock {
@@ -32,7 +34,7 @@ a:link {
   color: pink;
   background-color: transparent;
   text-decoration: none;
-  padding-left: 50px;
+  padding-left: 0px;
   padding-top: 50px;
 }
 
@@ -62,8 +64,6 @@ a:visited.nav-link {
 
 a:link.navbar-brand {
   font-size: 24pt;
-  padding-top: 20px;
-  padding-left: 20px;
   padding-bottom: 20px;
   color: lightblue;
   width: 315px;
@@ -71,21 +71,17 @@ a:link.navbar-brand {
 
 a:visited.navbar-brand {
   font-size: 24pt;
-  padding-top: 20px;
-  padding-left: 20px;
   padding-bottom: 20px;
   color: lightblue;
 }
 
 .display {
-  padding-left: 20px;
   padding-bottom: 50px;
   min-height: 500px;
   display: flex;
 }
 
 .addTicket {
-  padding-left: 20px;
 }
 
 .addTicket .submit {
@@ -110,7 +106,6 @@ a:visited.navbar-brand {
 
 .example {
   width: 50%;
-  padding-left: 20px;
 }
 
 .ticketItem {
@@ -156,16 +151,16 @@ th.nameheader {
 }
 
 .backlog {
-  width: 25%;
+  width: 500px;
 }
 .sprint {
-  width: 25%;
+  width: 500px;
 }
 .progress {
-  width: 25%;
+  width: 500px;
 }
 .done {
-  width: 25%;
+  width: 500px;
 }
 
 /* edit form */
@@ -220,4 +215,11 @@ select {
   font-size: 18pt;
   border: none;
   cursor: pointer;
+}
+
+.validation {
+  color: #d96d6d;
+  padding-left: 0px;
+  width: 500px;
+  margin: 0;
 }

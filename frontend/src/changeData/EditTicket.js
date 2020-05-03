@@ -8,6 +8,7 @@ const EditTicket = (props) => {
   const [ticket, setTicket] = useState("");
   const [name, setName] = useState(props.value.ticket.ticket.ticket_name);
   const [status, setStatus] = useState("backlog");
+  const [validation, setValidation] = useState("");
   console.log(props);
   console.log(tickets);
   useEffect(() => {
@@ -21,6 +22,16 @@ const EditTicket = (props) => {
       });
   }, []);
 
+  const validate = (name) => {
+    if (name == "") {
+      setValidation("field cannot be empty");
+      return false;
+    } else {
+      setValidation("");
+      return true;
+    }
+  };
+
   const handleChangeName = (e) => {
     setName(e.target.value);
     console.log({ name });
@@ -32,41 +43,43 @@ const EditTicket = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newTicket = {
-      ticket_name: name,
-      ticket_status: status,
-    };
-    axios.post("api/tickets/update/" + ticket._id, newTicket).then((res) => {
-      console.log(ticket._id);
-      console.log(res.data);
-      tickets.map((t, index) => {
-        if (t._id === ticket._id) {
-          const i = index;
-          console.log(i);
-          const newTickets = tickets.slice();
-          newTickets.splice(index, 1, {
-            ...ticket, //remove 1 element before 'index' and insert the following)
-            ticket_name: res.data.ticket.ticket_name,
-            ticket_status: res.data.ticket.ticket_status,
-          });
-          setTickets(newTickets);
-        }
+    if (validate(name)) {
+      const newTicket = {
+        ticket_name: name,
+        ticket_status: status,
+      };
+      axios.post("api/tickets/update/" + ticket._id, newTicket).then((res) => {
+        console.log(ticket._id);
+        console.log(res.data);
+        tickets.map((t, index) => {
+          if (t._id === ticket._id) {
+            const i = index;
+            console.log(i);
+            const newTickets = tickets.slice();
+            newTickets.splice(index, 1, {
+              ...ticket, //remove 1 element before 'index' and insert the following)
+              ticket_name: res.data.ticket.ticket_name,
+              ticket_status: res.data.ticket.ticket_status,
+            });
+            setTickets(newTickets);
+          }
+        });
+        // tickets.map((ticket, index) => {
+        //   const i = index;
+        //   const newTickets = tickets.slice();
+        //   newTickets.splice(index, 1, {
+        //     ...ticket, //remove 1 element before 'index' and insert the following)
+        //     ticket_name: res.data.ticket.ticket_name,
+        //     ticket_status: res.data.ticket.ticket_status,
+        //   });
+        //   console.log(newTickets);
+        //   setTickets(newTickets);
+        // });
       });
-      // tickets.map((ticket, index) => {
-      //   const i = index;
-      //   const newTickets = tickets.slice();
-      //   newTickets.splice(index, 1, {
-      //     ...ticket, //remove 1 element before 'index' and insert the following)
-      //     ticket_name: res.data.ticket.ticket_name,
-      //     ticket_status: res.data.ticket.ticket_status,
-      //   });
-      //   console.log(newTickets);
-      //   setTickets(newTickets);
-      // });
-    });
 
-    setName(""); //empties textbox
-    setStatus(""); //empties textbox
+      setName(""); //empties textbox
+      setStatus(""); //empties textbox
+    }
   };
 
   return (
@@ -74,7 +87,7 @@ const EditTicket = (props) => {
       <form onSubmit={handleSubmit}>
         <label for="name">Change Name:</label>
         <input type="text" name="name" value={name} onChange={handleChangeName} />
-
+        <p className="validation">{validation}</p>
         <label for="status">Change Status:</label>
         <select name="status" value={status} onChange={handleChangeStatus}>
           <option selected value="backlog">
