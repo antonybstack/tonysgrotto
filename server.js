@@ -12,7 +12,16 @@ app.use(cors());
 //bodyparser middleware
 app.use(bodyParser.json());
 
-const db = process.env.DATABASE_URL;
+var db = "";
+
+if (process.env.DATABASE_URL) {
+  db = process.env.DATABASE_URL;
+} else {
+  db = require("./keys").mongoURI;
+}
+
+// console.log(db);
+// console.log(process.env.DATABASE_URL);
 
 mongoose
   .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
