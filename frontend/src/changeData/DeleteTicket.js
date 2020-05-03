@@ -8,7 +8,7 @@ const DeleteTicket = (props) => {
   const [ticket, setTicket] = useState("");
   useEffect(() => {
     axios
-      .get("http://localhost:4000/tickets/" + props.value.ticket.ticket._id)
+      .get("api/tickets/" + props.value.ticket.ticket._id)
       .then((response) => {
         setTicket(response.data);
       })
@@ -19,7 +19,7 @@ const DeleteTicket = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.delete("http://localhost:4000/tickets/delete/" + ticket._id).then((res) => {
+    axios.delete("api/tickets/delete/" + ticket._id).then((res) => {
       tickets.map((t, index) => {
         if (t._id === ticket._id) {
           const i = index;

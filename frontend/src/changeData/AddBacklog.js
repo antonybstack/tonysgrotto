@@ -21,7 +21,7 @@ const AddBacklog = (props) => {
       ticket_status: "backlog",
     };
     console.log("this is testing tickets in addbacklog", tickets);
-    axios.post("http://localhost:4000/tickets/add", newTicket).then((res) => {
+    axios.post("api/tickets/add", newTicket).then((res) => {
       setTickets((currentTickets) => [...currentTickets, { _id: res.data.ticket._id, ticket_name: name, ticket_status: "backlog" }]);
     });
 

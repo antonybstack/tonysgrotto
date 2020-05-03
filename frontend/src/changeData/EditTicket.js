@@ -12,7 +12,7 @@ const EditTicket = (props) => {
   console.log(tickets);
   useEffect(() => {
     axios
-      .get("http://localhost:4000/tickets/" + props.value.ticket.ticket._id)
+      .get("api/tickets/" + props.value.ticket.ticket._id)
       .then((response) => {
         setTicket(response.data);
       })
@@ -36,7 +36,7 @@ const EditTicket = (props) => {
       ticket_name: name,
       ticket_status: status,
     };
-    axios.post("http://localhost:4000/tickets/update/" + ticket._id, newTicket).then((res) => {
+    axios.post("api/tickets/update/" + ticket._id, newTicket).then((res) => {
       console.log(ticket._id);
       console.log(res.data);
       tickets.map((t, index) => {
