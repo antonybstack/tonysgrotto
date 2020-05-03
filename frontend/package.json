@@ -19,8 +19,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "client": "cd .. && npm run server",
-    "dev": "concurrently \"npm run client\" \"npm start\""
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:5000",
   "eslintConfig": {
