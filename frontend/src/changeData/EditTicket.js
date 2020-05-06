@@ -4,6 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import { TicketContext } from "../contexts/TicketContext";
 
 const EditTicket = (props) => {
+  console.log("EditTicket mounted");
   const [tickets, setTickets] = useContext(TicketContext);
   const [ticket, setTicket] = useState("");
   const [name, setName] = useState(props.value.ticket.ticket.ticket_name);
@@ -20,10 +21,10 @@ const EditTicket = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [props.value.ticket.ticket._id]);
 
   const validate = (name) => {
-    if (name == "") {
+    if (name === "") {
       setValidation("field cannot be empty");
       return false;
     } else {
@@ -63,6 +64,7 @@ const EditTicket = (props) => {
             });
             setTickets(newTickets);
           }
+          return null;
         });
         // tickets.map((ticket, index) => {
         //   const i = index;

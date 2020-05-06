@@ -2,8 +2,7 @@ import React from "react";
 import ModalEdit from "../Modals/ModalEdit";
 
 const Ticket = (props) => {
-  // console.log("test");
-  // console.log("props", props);
+  console.log("Ticket object mounted");
   return (
     <tr className="ticketItem">
       <td className="edit-button-data">{props.ticket.ticket_name && <ModalEdit ticket={props} />}</td>

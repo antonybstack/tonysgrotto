@@ -1,3 +1,8 @@
+<!-- dependencies -->
+
+npm install
+npm install nodemon -g
+
 <!-- Cannot be loaded because running scripts is disabled on this system -->
 
 To change the execution policy for the default, start Windows PowerShell with the "Run as administrator" option. To change the execution policy for the current user, run "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned"
@@ -5,6 +10,8 @@ To change the execution policy for the default, start Windows PowerShell with th
 <!-- server startup -->
 
 npm run dev
+
+or
 
 terminal 1: 'nodemon server' in \tonysgrotto\backend
 terminal 2: 'mongod' in \tonysgrotto
@@ -18,6 +25,11 @@ git status
 git add .
 git commit -m "message"
 git push origin master (git push origin branch-name)
+
+<!-- push to heroku server -->
+git add .
+git commit -m "message"
+git push origin heroku
 
 <!-- makes new branch -->
 

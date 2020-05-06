@@ -5,9 +5,15 @@ import TicketDisplay from "./displays/TicketDisplay";
 import AddBacklog from "./changeData/AddBacklog";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
+// App is a component that acts as a container for all other components
 function App() {
+  console.log("App mounted");
   return (
+    // Every Context object comes with a Provider component which consumes all nested components
+    // consumed components to subscribe to context changes.
     <TicketProvider>
+      {/* We will wrap <Router /> in <Provider /> so that route handlers can get access to the store. */}
+      {/* so that when the URL changes, <Router /> will match a branch of its routes, and render their configured components */}
       <Router>
         <div className="App">
           <Link to="/" className="navbar-brand">
@@ -23,4 +29,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; //export one component

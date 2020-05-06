@@ -4,6 +4,7 @@ import { TicketContext } from "../contexts/TicketContext";
 import axios from "axios";
 //props takes in data from Link, includes data like location /create
 const AddBacklog = (props) => {
+  console.log("AddBacklog mounted");
   const [tickets, setTickets] = useContext(TicketContext);
   const [name, setName] = useState("");
   const [validation, setValidation] = useState("");
@@ -14,7 +15,7 @@ const AddBacklog = (props) => {
   };
 
   const validate = (name) => {
-    if (name == "") {
+    if (name === "") {
       setValidation("field cannot be empty");
       return false;
     } else {

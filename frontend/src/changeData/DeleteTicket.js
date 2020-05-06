@@ -4,6 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import { TicketContext } from "../contexts/TicketContext";
 
 const DeleteTicket = (props) => {
+  console.log("DeleteTicket mounted");
   const [tickets, setTickets] = useContext(TicketContext);
   const [ticket, setTicket] = useState("");
   useEffect(() => {
@@ -15,7 +16,7 @@ const DeleteTicket = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [props.value.ticket.ticket._id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,12 +29,14 @@ const DeleteTicket = (props) => {
           newTickets.splice(i, 1); //remove 1 element before 'index' (3rd parameter is empty because we dont want to insert anything)
           setTickets(newTickets);
         }
+        return null;
       });
     });
 
     // props.history.push("/");
 
     // setTickets((currentTickets) => [...currentTickets, { name: name, status: "backlog", id: uuid() }]);
+    
   };
 
   return (
