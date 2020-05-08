@@ -3,10 +3,15 @@ import { useContext } from "react";
 import Ticket from "../contexts/Ticket";
 import { TicketContext } from "../contexts/TicketContext";
 
-const TicketDisplay = (props) => {
+//this component is subscribed to context changes
+const TicketDisplay = () => {
   console.log("TicketDisplay mounted");
+  //state that is able to update context
   const [tickets] = useContext(TicketContext);
+
+  //displays the data from TicketContext
   return (
+    // react fragment so that div(13 to 16) and div(17 to 46) dont need to be wrapped in an extra div
     <React.Fragment>
       <div>
         <p>User: Tony</p>
@@ -17,11 +22,6 @@ const TicketDisplay = (props) => {
           <h1>Backlog</h1>
           <span className="nameheader">NAME</span>
           <table>
-            {/* <tbody>
-              {tickets.map((currentTicket, i) => (
-                <Ticket ticket={currentTicket} key={i} />
-              ))}
-            </tbody> */}
             <tbody>{tickets.map((currentTicket, i) => currentTicket.ticket_status === "backlog" && <Ticket ticket={currentTicket} key={i} />)}</tbody>
           </table>
         </div>
@@ -38,7 +38,7 @@ const TicketDisplay = (props) => {
           <table>
             <tbody>{tickets.map((currentTicket, i) => currentTicket.ticket_status === "progress" && <Ticket ticket={currentTicket} key={i} />)}</tbody>
           </table>
-        </div> 
+        </div>
         <div className="done">
           <h1>Done</h1>
           <span className="nameheader">NAME</span>

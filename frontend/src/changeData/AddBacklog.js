@@ -3,17 +3,18 @@ import { useContext, useState } from "react";
 import { TicketContext } from "../contexts/TicketContext";
 import axios from "axios";
 //props takes in data from Link, includes data like location /create
-const AddBacklog = (props) => {
+const AddBacklog = () => {
   console.log("AddBacklog mounted");
+  //state that is able to update context
   const [tickets, setTickets] = useContext(TicketContext);
   const [name, setName] = useState("");
-  const [validation, setValidation] = useState("");
+  const [validation, setValidation] = useState(""); //input validation message
 
   const handleChange = (e) => {
     setName(e.target.value);
-    console.log({ name });
   };
 
+  //checks if input field is empty
   const validate = (name) => {
     if (name === "") {
       setValidation("field cannot be empty");
@@ -26,20 +27,18 @@ const AddBacklog = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    //checks if empty
     if (validate(name)) {
+      //creates ticket object
       const newTicket = {
         ticket_name: name,
         ticket_status: "backlog",
       };
-      console.log("this is testing tickets in addbacklog", tickets);
+      // HTTP POST method sends data to the server
       axios.post("api/tickets/add", newTicket).then((res) => {
-        setTickets((currentTickets) => [...currentTickets, { _id: res.data.ticket._id, ticket_name: name, ticket_status: "backlog" }]);
+        setTickets((currentTickets) => [...currentTickets, { _id: res.data.ticket._id, ticket_name: name, ticket_status: "backlog" }]); //push ticket object to state array
       });
-
-      //setTickets((currentTickets) => [...currentTickets, { _id: uuid(), ticket_name: name, ticket_status: "backlog" }]);
-
-      setName("");
-      // props.history.push("/");
+      setName(""); //resets name input field
     }
   };
 

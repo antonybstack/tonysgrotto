@@ -16,6 +16,7 @@ function App() {
       {/* so that when the URL changes, <Router /> will match a branch of its routes, and render their configured components */}
       <Router>
         <div className="App">
+          {/*  links text to route */}
           <Link to="/" className="navbar-brand">
             MERN-Stack Bug Tracker App
           </Link>

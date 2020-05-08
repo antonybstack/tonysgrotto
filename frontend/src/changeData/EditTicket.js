@@ -8,10 +8,10 @@ const EditTicket = (props) => {
   const [tickets, setTickets] = useContext(TicketContext);
   const [ticket, setTicket] = useState("");
   const [name, setName] = useState(props.value.ticket.ticket.ticket_name);
-  const [status, setStatus] = useState("backlog");
-  const [validation, setValidation] = useState("");
-  console.log(props);
-  console.log(tickets);
+  const [status, setStatus] = useState(props.value.ticket.ticket.ticket_status);
+  const [validation, setValidation] = useState(""); //input validation message
+
+  //gets ticket using ticket._id from database
   useEffect(() => {
     axios
       .get("api/tickets/" + props.value.ticket.ticket._id)
@@ -23,6 +23,7 @@ const EditTicket = (props) => {
       });
   }, [props.value.ticket.ticket._id]);
 
+  //checks if input field is empty
   const validate = (name) => {
     if (name === "") {
       setValidation("field cannot be empty");
@@ -35,27 +36,25 @@ const EditTicket = (props) => {
 
   const handleChangeName = (e) => {
     setName(e.target.value);
-    console.log({ name });
   };
   const handleChangeStatus = (e) => {
     setStatus(e.target.value);
-    console.log({ status });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    //checks if empty
     if (validate(name)) {
+      //creates ticket object
       const newTicket = {
         ticket_name: name,
         ticket_status: status,
       };
+      // HTTP POST method sends data with updated ticket to the server
       axios.post("api/tickets/update/" + ticket._id, newTicket).then((res) => {
-        console.log(ticket._id);
-        console.log(res.data);
+        // iterates tickets array to find specific ticket to delete
         tickets.map((t, index) => {
           if (t._id === ticket._id) {
-            const i = index;
-            console.log(i);
             const newTickets = tickets.slice();
             newTickets.splice(index, 1, {
               ...ticket, //remove 1 element before 'index' and insert the following)
@@ -66,35 +65,19 @@ const EditTicket = (props) => {
           }
           return null;
         });
-        // tickets.map((ticket, index) => {
-        //   const i = index;
-        //   const newTickets = tickets.slice();
-        //   newTickets.splice(index, 1, {
-        //     ...ticket, //remove 1 element before 'index' and insert the following)
-        //     ticket_name: res.data.ticket.ticket_name,
-        //     ticket_status: res.data.ticket.ticket_status,
-        //   });
-        //   console.log(newTickets);
-        //   setTickets(newTickets);
-        // });
       });
-
-      setName(""); //empties textbox
-      setStatus(""); //empties textbox
     }
   };
 
   return (
     <div className="editForm">
       <form onSubmit={handleSubmit}>
-        <label for="name">Change Name:</label>
+        <label htmlFor="name">Change Name:</label>
         <input type="text" name="name" value={name} onChange={handleChangeName} />
         <p className="validation">{validation}</p>
-        <label for="status">Change Status:</label>
+        <label htmlFor="status">Change Status:</label>
         <select name="status" value={status} onChange={handleChangeStatus}>
-          <option selected value="backlog">
-            backlog
-          </option>
+          <option defaultValue="backlog">backlog</option>
           <option value="sprint">sprint</option>
           <option value="progress">progress</option>
           <option value="done">done</option>

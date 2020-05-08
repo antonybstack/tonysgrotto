@@ -32,7 +32,6 @@ Modal.setAppElement(document.getElementById("root"));
 const ModalEdit = (props) => {
   var subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  // console.log(props);
   function openModal() {
     setIsOpen(true);
   }
