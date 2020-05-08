@@ -20,19 +20,7 @@ const signToken = (userID) => {
   );
 };
 
-// userRoutes.post("/register", (req, res) => {
-//   const { username, password, role } = new User(req.body);
-//   user
-//     .save()
-//     .then((user) => {
-//       res.status(200).json({ user });
-//     })
-//     .catch((err) => {
-//       res.status(400).send("adding new user failed");
-//     });
-// });
-
-//create account
+//CREATE
 userRoutes.post("/register", (req, res) => {
   const { username, password, role } = req.body;
   //check if username exists first
@@ -52,7 +40,7 @@ userRoutes.post("/register", (req, res) => {
   });
 });
 
-//login
+// LOGIN
 // "local coming from LocalStrategy in passport.js"
 userRoutes.post("/login", passport.authenticate("local", { session: false }), (req, res) => {
   if (req.isAuthenticated()) {
@@ -66,24 +54,26 @@ userRoutes.post("/login", passport.authenticate("local", { session: false }), (r
   }
 });
 
-//logout
+//LOGOUT
 userRoutes.get("/logout", passport.authenticate("jwt", { session: false }), (req, res) => {
   res.clearCookie("access_token");
   res.json({ user: { username: "", role: "" }, success: true });
 });
 
-// const userInput = {
-//   username: "root",
-//   password: "root",
-//   role: "admin",
-// };
+//CHECK IF ADMIN
+userRoutes.get("/admin", passport.authenticate("jwt", { session: false }), (req, res) => {
+  if (req.user.role === "admin") {
+    res.status(200).json({ message: { msgBody: "You are an admin", msgError: false } });
+  } else res.status(403).json({ message: { msgBody: "You're not an admin,go away", msgError: true } });
+});
 
-// const user = new User(userInput);
-// user.save((err, document) => {
-//   if (err) console.log(err);
-//   console.log(document);
-// });
+//CHECK IF AUTHENTICATED
+userRoutes.get("/authenticated", passport.authenticate("jwt", { session: false }), (req, res) => {
+  const { username, role } = req.user;
+  res.status(200).json({ isAuthenticated: true, user: { username, role } });
+});
 
+//get all users, should delete later
 userRoutes.route("/").get(function (req, res) {
   User.find(function (err, users) {
     if (err) {
@@ -93,39 +83,5 @@ userRoutes.route("/").get(function (req, res) {
     }
   });
 });
-
-// userRoutes.route("/:id").get(function (req, res) {
-//   let id = req.params.id;
-//   User.findById(id, function (err, user) {
-//     res.json(user);
-//   });
-// });
-
-// userRoutes.route("/delete/:id").delete(function (req, res) {
-//   User.findByIdAndRemove(req.params.id, function (err, user) {
-//     if (err) {
-//       console.log(err);
-//       return res.status(500).send({ user });
-//     }
-//     return res.status(200).send({ user });
-//   });
-// });
-
-// userRoutes.route("/update/:id").post(function (req, res) {
-//   User.findById(req.params.id, function (err, user) {
-//     if (!user) res.status(404).send("data is not found");
-//     else user.user_name = req.body.user_name;
-//     user.user_status = req.body.user_status;
-
-//     user
-//       .save()
-//       .then((user) => {
-//         res.json({ user });
-//       })
-//       .catch((err) => {
-//         res.status(400).send("Update not possible");
-//       });
-//   });
-// });
 
 module.exports = userRoutes;

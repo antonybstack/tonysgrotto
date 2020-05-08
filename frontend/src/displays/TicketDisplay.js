@@ -2,11 +2,14 @@ import React from "react";
 import { useContext } from "react";
 import Ticket from "../contexts/Ticket";
 import { TicketContext } from "../contexts/TicketContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 //this component is subscribed to context changes
 const TicketDisplay = () => {
   console.log("TicketDisplay mounted");
   //state that is able to update context
+  const { user, setUser, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  console.log(user, isAuthenticated);
   const [tickets] = useContext(TicketContext);
 
   //displays the data from TicketContext
