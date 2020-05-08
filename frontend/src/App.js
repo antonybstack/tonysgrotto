@@ -3,6 +3,13 @@ import "./App.css";
 import { TicketProvider } from "./contexts/TicketContext";
 import AuthProvider from "./contexts/AuthContext";
 import NavBar from "./components/NavBar";
+import Login from "./components/Login";
+import Home from "./components/Home";
+// import Todos from "./components/Todos";
+import Register from "./components/Register";
+import Admin from "./components/Admin";
+import PrivateRoute from "./hocs/PrivateRoute";
+import UnPrivateRoute from "./hocs/UnPrivateRoute";
 import TicketDisplay from "./displays/TicketDisplay";
 import AddBacklog from "./changeData/AddBacklog";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -21,9 +28,11 @@ function App() {
           <div className="App">
             {/*  links text to route */}
             <NavBar />
-            <Link to="/" className="navbar-brand">
-              MERN-Stack Bug Tracker App
-            </Link>
+            <Route exact path="/" component={Home} />
+            <UnPrivateRoute path="/login" component={Login} />
+            <UnPrivateRoute path="/register" component={Register} />
+            {/* <PrivateRoute path="/todos" roles={["user", "admin"]} component={Todos} /> */}
+            <PrivateRoute path="/admin" roles={["admin"]} component={Admin} />
             <AddBacklog />
             <Route path="/" exact component={TicketDisplay} />
             {/* <Route path="/edit/:id" component={EditTicket} /> */}
