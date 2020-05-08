@@ -17,7 +17,6 @@ const TicketDisplay = () => {
     // react fragment so that div(13 to 16) and div(17 to 46) dont need to be wrapped in an extra div
     <React.Fragment>
       <div>
-        <p>User: Tony</p>
         <p>Number of Tickets: {tickets.length}</p>
       </div>
       <div className="display">

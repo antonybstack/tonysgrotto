@@ -1,14 +1,17 @@
 import React from "react";
 import { useContext, useState } from "react";
 import { TicketContext } from "../contexts/TicketContext";
+import { AuthContext } from "../contexts/AuthContext";
 import axios from "axios";
 //props takes in data from Link, includes data like location /create
 const AddBacklog = () => {
   console.log("AddBacklog mounted");
   //state that is able to update context
   const [tickets, setTickets] = useContext(TicketContext);
+  const { isAuthenticated, user } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [validation, setValidation] = useState(""); //input validation message
+  console.log("here", isAuthenticated);
 
   const handleChange = (e) => {
     setName(e.target.value);
@@ -44,15 +47,17 @@ const AddBacklog = () => {
 
   return (
     <React.Fragment>
-      <form onSubmit={handleSubmit}>
-        <div className="addTicket">
-          <label>
-            <p>Add Ticket:</p>
-            <input type="text" name="name" value={name} onChange={handleChange} />
-          </label>
-          <input type="submit" name="Submit" className="submit"></input>
-        </div>
-      </form>
+      {isAuthenticated === true && (
+        <form onSubmit={handleSubmit}>
+          <div className="addTicket">
+            <label>
+              <p>Add Ticket:</p>
+              <input type="text" name="name" value={name} onChange={handleChange} />
+            </label>
+            <input type="submit" name="Submit" className="submit"></input>
+          </div>
+        </form>
+      )}
       <div className="validation">{validation}</div>
     </React.Fragment>
   );

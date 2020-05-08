@@ -7,17 +7,35 @@
 
 body {
   background-color: var(--notblack);
-  font-size: 15pt;
-  font-family: runescape-uf-regular;
+  font-size: 1em;
+  /* font-family: runescape-uf-regular; */
+  color: var(--greyple);
 }
 .App {
   background-color: var(--dark);
   color: var(--greyple);
-  font-family: runescape-uf-regular;
+  /* font-family: runescape-uf-regular; */
   padding-left: 20px;
   padding-top: 20px;
 }
 
+a:link {
+  color: rgb(104, 187, 255);
+  background-color: transparent;
+
+  padding-left: 0px;
+  padding-top: 50px;
+}
+
+a:visited {
+  color: rgb(104, 187, 255);
+  background-color: transparent;
+
+  padding-left: 50px;
+  padding-top: 50px;
+}
+
+/* 
 .ticketBlock {
   color: var(--greyple);
 }
@@ -30,21 +48,7 @@ h1 {
   font-weight: normal;
 }
 
-a:link {
-  color: pink;
-  background-color: transparent;
-  text-decoration: none;
-  padding-left: 0px;
-  padding-top: 50px;
-}
 
-a:visited {
-  color: pink;
-  background-color: transparent;
-  text-decoration: none;
-  padding-left: 50px;
-  padding-top: 50px;
-}
 
 a:link.nav-link {
   color: pink;
@@ -114,7 +118,7 @@ a:visited.navbar-brand {
 
 .editButton {
   margin-left: 10px;
-  background-color: var(--greyple); /* Green */
+  background-color: var(--greyple);
   color: var(--dark);
   text-align: center;
   text-decoration: none;
@@ -163,7 +167,7 @@ th.nameheader {
   width: 500px;
 }
 
-/* edit form */
+
 .editForm {
   color: white;
 }
@@ -223,3 +227,4 @@ select {
   width: 500px;
   margin: 0;
 }
+*/
