@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const bodyParser = require("body-parser");
 const path = require("path");
 
 const app = express();
@@ -10,7 +9,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 
 //bodyparser middleware
-app.use(bodyParser.json());
+app.use(express.json());
 
 var db = "";
 
@@ -28,8 +27,8 @@ mongoose
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console("error!!!", err));
 
-const tickets = require("./routes/api/tickets");
-app.use("/api/tickets", tickets);
+app.use("/api/tickets", require("./routes/api/tickets"));
+app.use("/api/users", require("./routes/api/users"));
 
 //serve static assets if in production
 if (process.env.NODE_ENV === "production") {
