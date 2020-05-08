@@ -2,6 +2,7 @@ const express = require("express");
 const userRoutes = express.Router();
 const passport = require("passport");
 const passportConfig = require("../../passport");
+const passportJWT = require("passport-jwt");
 const JWT = require("jsonwebtoken");
 
 // User model
@@ -63,6 +64,12 @@ userRoutes.post("/login", passport.authenticate("local", { session: false }), (r
     res.cookie("access_token", token, { httpOnly: true, sameSite: true });
     res.status(200).json({ isAuthenticated: true, user: { username, role } });
   }
+});
+
+//logout
+userRoutes.get("/logout", passport.authenticate("jwt", { session: false }), (req, res) => {
+  res.clearCookie("access_token");
+  res.json({ user: { username: "", role: "" }, success: true });
 });
 
 // const userInput = {
