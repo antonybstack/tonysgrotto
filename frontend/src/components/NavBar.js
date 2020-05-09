@@ -53,7 +53,7 @@ const Navbar = (props) => {
         <div>
           <p>
             Welcome &lt;
-            <img src={require("../assets/avatars/" + user.avatar + ".png")} alt="Logo" width="20" /> {user.username}&gt;
+            <img src={user.avatar && require("../assets/avatars/" + user.avatar + ".png")} alt="Logo" width="20" /> {user.username}&gt;
           </p>
         </div>
       </>
