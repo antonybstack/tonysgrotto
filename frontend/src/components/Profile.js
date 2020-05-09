@@ -9,7 +9,16 @@ const Profile = ({ userID }) => {
   return (
     <span>
       <span>created by: </span>
-      {profiles.map((currentProfile, i) => currentProfile._id === userID && <span>{currentProfile.username}</span>)}
+      {profiles.map(
+        (currentProfile, i) =>
+          currentProfile._id === userID && (
+            <span>
+              &lt;
+              <img src={require("../assets/avatars/" + currentProfile.avatar + ".png")} alt="Logo" width="20" />
+              {currentProfile.username}&gt;
+            </span>
+          )
+      )}
     </span>
   );
 };

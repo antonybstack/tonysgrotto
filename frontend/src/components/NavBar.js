@@ -6,6 +6,8 @@ import { AuthContext } from "../contexts/AuthContext";
 const Navbar = (props) => {
   const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
 
+  console.log(user.username);
+  console.log(user.avatar);
   const onClickLogoutHandler = () => {
     AuthService.logout().then((data) => {
       if (data.success) {
@@ -48,6 +50,12 @@ const Navbar = (props) => {
         <button type="button" className="btn btn-link nav-item nav-link" onClick={onClickLogoutHandler}>
           Logout
         </button>
+        <div>
+          <p>
+            Welcome &lt;
+            <img src={require("../assets/avatars/" + user.avatar + ".png")} alt="Logo" width="20" /> {user.username}&gt;
+          </p>
+        </div>
       </>
     );
   };

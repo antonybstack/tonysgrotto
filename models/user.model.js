@@ -19,6 +19,12 @@ let User = new Schema({
     enum: ["user", "admin"],
     required: true,
   },
+  avatar: {
+    type: Number,
+    default: function () {
+      return Math.floor(Math.random() * Math.floor(18));
+    },
+  },
   register_date: {
     type: Date,
     default: Date.now,

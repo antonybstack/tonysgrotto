@@ -46,12 +46,12 @@ userRoutes.post("/login", passport.authenticate("local", { session: false }), (r
   if (req.isAuthenticated()) {
     console.log(req.isAuthenticated());
     //req.user is coming from: password.use in passport.js uses comparepassword function, that function is in user.model.js which returns user object if password matches ('this')
-    const { _id, username, role } = req.user;
+    const { _id, username, role, avatar } = req.user;
     //creates JWT token
     const token = signToken(_id);
     //set cookie as access token. httpOnly protects from Cross-site scripting attacks, cannot steal cookie using javascript. sameSite protects from Cross-site forgery attacks
     res.cookie("access_token", token, { httpOnly: true, sameSite: true });
-    res.status(200).json({ isAuthenticated: true, user: { _id, username, role }, message: { msgBody: "Account successfully logged in", msgError: false } });
+    res.status(200).json({ isAuthenticated: true, user: { _id, username, role, avatar }, message: { msgBody: "Account successfully logged in", msgError: false } });
   }
 });
 
@@ -70,8 +70,8 @@ userRoutes.get("/admin", passport.authenticate("jwt", { session: false }), (req,
 
 //CHECK IF AUTHENTICATED
 userRoutes.get("/authenticated", passport.authenticate("jwt", { session: false }), (req, res) => {
-  const { _id, username, role } = req.user;
-  res.status(200).json({ isAuthenticated: true, user: { _id, username, role } });
+  const { _id, username, role, avatar } = req.user;
+  res.status(200).json({ isAuthenticated: true, user: { _id, username, role, avatar } });
 });
 
 // get current user object
