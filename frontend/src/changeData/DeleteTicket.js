@@ -4,7 +4,6 @@ import { useState, useEffect, useContext } from "react";
 import { TicketContext } from "../contexts/TicketContext";
 
 const DeleteTicket = (props) => {
-  console.log("DeleteTicket mounted");
   //state that is able to update context
   const [tickets, setTickets] = useContext(TicketContext);
   const [ticket, setTicket] = useState("");

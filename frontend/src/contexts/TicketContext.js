@@ -7,7 +7,6 @@ import axios from "axios";
 export const TicketContext = createContext(); //creating Context object with empty object
 
 export const TicketProvider = (props) => {
-  console.log("TicketContext mounted");
   const [tickets, setTickets] = useState([]);
   useEffect(() => {
     // populates tickets array. Send HTTP request to server

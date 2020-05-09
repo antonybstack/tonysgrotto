@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import AuthService from "../services/Auth";
 import Message from "../components/Message";
+import axios from "axios";
 
 const Register = (props) => {
   const [user, setUser] = useState({ username: "", password: "", role: "" });
@@ -23,8 +24,8 @@ const Register = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    AuthService.register(user).then((data) => {
-      const { message } = data;
+    axios.post("/api/users/register", user).then((res) => {
+      const { message } = res.data;
       setMessage(message);
       resetForm();
       if (!message.msgError) {

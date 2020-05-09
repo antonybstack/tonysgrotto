@@ -2,7 +2,6 @@
 export default {
   //login function that takes in user object which has username and password
   login: (user) => {
-    console.log(user);
     return fetch("/api/users/login", {
       method: "post",
       body: JSON.stringify(user),
@@ -15,7 +14,6 @@ export default {
     });
   },
   register: (user) => {
-    console.log(user);
     return fetch("/api/users/register", {
       method: "post",
       body: JSON.stringify(user),
@@ -39,7 +37,6 @@ export default {
     });
   },
   getUser: (user) => {
-    console.log(user);
     return fetch("/api/users/getuser").then((res) => {
       if (res.status !== 401) return res.json().then((data) => data);
     });

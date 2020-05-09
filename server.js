@@ -21,9 +21,6 @@ if (process.env.DATABASE_URL) {
   db = require("./keys").mongoURI;
 }
 
-// console.log(db);
-// console.log(process.env.DATABASE_URL);
-
 mongoose
   .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB Connected..."))

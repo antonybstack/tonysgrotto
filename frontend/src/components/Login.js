@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import Auth from "../services/Auth";
 import Message from "../components/Message";
 import { AuthContext } from "../contexts/AuthContext";
+import axios from "axios";
 
 const Login = (props) => {
   const [user, setUser] = useState({ username: "", password: "" });
@@ -14,15 +15,19 @@ const Login = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    Auth.login(user).then((data) => {
-      console.log(data);
-      const { isAuthenticated, user, message } = data;
-      if (isAuthenticated) {
-        authContext.setUser(user);
-        authContext.setIsAuthenticated(isAuthenticated);
-        props.history.push("/todos");
-      } else setMessage(message);
-    });
+    axios
+      .post("/api/users/login", user)
+      .then((res) => {
+        const { isAuthenticated, user } = res.data;
+        if (isAuthenticated) {
+          authContext.setUser(user);
+          authContext.setIsAuthenticated(isAuthenticated);
+          props.history.push("/");
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
