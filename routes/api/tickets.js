@@ -23,6 +23,7 @@ ticketRoutes.route("/:id").get(function (req, res) {
 
 ticketRoutes.route("/add").post(function (req, res) {
   let ticket = new Ticket(req.body);
+  console.log("route log", req.body, res.body);
   ticket
     .save()
     .then((ticket) => {

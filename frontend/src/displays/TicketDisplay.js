@@ -12,6 +12,8 @@ const TicketDisplay = () => {
   console.log(user, isAuthenticated);
   const [tickets] = useContext(TicketContext);
 
+  console.log(tickets);
+
   //displays the data from TicketContext
   return (
     // react fragment so that div(13 to 16) and div(17 to 46) dont need to be wrapped in an extra div

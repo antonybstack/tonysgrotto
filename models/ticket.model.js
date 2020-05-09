@@ -8,6 +8,10 @@ let Ticket = new Schema({
   ticket_status: {
     type: String,
   },
+  created_by: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 module.exports = Ticket = mongoose.model("Ticket", Ticket);

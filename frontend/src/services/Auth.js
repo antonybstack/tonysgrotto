@@ -38,4 +38,10 @@ export default {
       else return { isAuthenticated: false, user: { username: "", role: "" } };
     });
   },
+  getUser: (user) => {
+    console.log(user);
+    return fetch("/api/users/getuser").then((res) => {
+      if (res.status !== 401) return res.json().then((data) => data);
+    });
+  },
 };

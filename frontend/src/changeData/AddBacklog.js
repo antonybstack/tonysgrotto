@@ -8,10 +8,10 @@ const AddBacklog = () => {
   console.log("AddBacklog mounted");
   //state that is able to update context
   const [tickets, setTickets] = useContext(TicketContext);
-  const { isAuthenticated, user } = useContext(AuthContext);
+  const { user, isAuthenticated, profile } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [validation, setValidation] = useState(""); //input validation message
-  console.log("here", isAuthenticated);
+  console.log("hereeeeeeeee", { profile });
 
   const handleChange = (e) => {
     setName(e.target.value);
@@ -36,10 +36,11 @@ const AddBacklog = () => {
       const newTicket = {
         ticket_name: name,
         ticket_status: "backlog",
+        created_by: profile,
       };
       // HTTP POST method sends data to the server
       axios.post("api/tickets/add", newTicket).then((res) => {
-        setTickets((currentTickets) => [...currentTickets, { _id: res.data.ticket._id, ticket_name: name, ticket_status: "backlog" }]); //push ticket object to state array
+        setTickets((currentTickets) => [...currentTickets, { _id: res.data.ticket._id, ticket_name: name, ticket_status: "backlog", created_by: { profile } }]); //push ticket object to state array
       });
       setName(""); //resets name input field
     }

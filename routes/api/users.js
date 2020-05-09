@@ -73,6 +73,18 @@ userRoutes.get("/authenticated", passport.authenticate("jwt", { session: false }
   res.status(200).json({ isAuthenticated: true, user: { username, role } });
 });
 
+// get current user object
+userRoutes.get("/getuser", passport.authenticate("jwt", { session: false }), (req, res) => {
+  res.json(req.user);
+});
+
+userRoutes.get("/:id", (req, res) => {
+  let id = req.params.id;
+  User.findById(id, function (err, user) {
+    res.json(user);
+  });
+});
+
 //get all users, should delete later
 userRoutes.route("/").get(function (req, res) {
   User.find(function (err, users) {
