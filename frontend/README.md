@@ -26,11 +26,6 @@ git add .
 git commit -m "message"
 git push origin master (git push origin branch-name)
 
-<!-- push to heroku server -->
-git add .
-git commit -m "message"
-git push origin heroku
-
 <!-- makes new branch -->
 
 git checkout -b new-branch-name
@@ -47,6 +42,21 @@ git reset --hard
 <!-- push current branch to master -->
 
 git push origin 'current-branch':master
+
+<!-- switch branch  -->
+
+git checkout 'branch-name'
+
+<!-- updating local master with remote master -->
+
+git pull --rebase origin master
+
+<!-- push heroku app -->
+
+git add .  
+git commit -am "heroku deploy"  
+heroku git:remote -a still-headland-32486
+git push heroku master
 
 <!-- what helped me implement backend -->
 
