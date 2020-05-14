@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthService from "../services/Auth";
 import { AuthContext } from "../contexts/AuthContext";
+import Chat from "./Chat";
 
 const Navbar = (props) => {
   const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
@@ -60,14 +61,17 @@ const Navbar = (props) => {
     );
   };
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link to="/">
-        <div className="navbar-brand">MERN-Stack Bug Tracker App</div>
-      </Link>
-      <div className="collapse navbar-collapse" id="navbarText">
-        <ul className="navbar-nav mr-auto">{!isAuthenticated ? unauthenticatedNavBar() : authenticatedNavBar()}</ul>
-      </div>
-    </nav>
+    <React.Fragment>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <Link to="/">
+          <div className="navbar-brand">MERN-Stack Bug Tracker App</div>
+        </Link>
+        <div className="collapse navbar-collapse" id="navbarText">
+          <ul className="navbar-nav mr-auto">{!isAuthenticated ? unauthenticatedNavBar() : authenticatedNavBar()}</ul>
+        </div>
+      </nav>
+      <Chat />
+    </React.Fragment>
   );
 };
 

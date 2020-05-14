@@ -1,4 +1,6 @@
 const express = require("express");
+const http = require("http");
+const socketIo = require("socket.io");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
@@ -34,8 +36,26 @@ if (process.env.NODE_ENV === "production") {
   // Set static folder
   app.use(express.static("frontend/build"));
   app.get("*", (req, res) => {
+    // creating an index.html file in the directory and serve our html in there
     res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/index.html");
   });
 }
 
-app.listen(PORT, () => console.log("Server is running on Port: " + PORT));
+const server = http.createServer(app);
+//initialize a new instance of socket.io by passing the http (the HTTP server) object
+const io = socketIo(server);
+
+//listen on the connection event for incoming sockets and log it to the console.
+
+io.on("connection", (socket) => {
+  socket.on("chat message", (msg) => {
+    io.emit("chat message", msg);
+  });
+});
+
+server.listen(PORT, () => console.log("Server is running on Port: " + PORT));
+// app.listen(PORT, () => console.log("Server is running on Port: " + PORT));

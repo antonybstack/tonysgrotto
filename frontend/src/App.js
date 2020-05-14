@@ -5,6 +5,7 @@ import { ProfileProvider } from "./contexts/ProfileContext";
 import AuthProvider from "./contexts/AuthContext";
 import NavBar from "./components/NavBar";
 import Login from "./components/Login";
+import Chat from "./components/Chat";
 import Home from "./components/Home";
 // import Todos from "./components/Todos";
 import Register from "./components/Register";
@@ -35,6 +36,7 @@ function App() {
               <PrivateRoute path="/admin" roles={["admin"]} component={Admin} />
               <AddBacklog />
               <Route path="/" exact component={TicketDisplay} />
+              {/* <Route path="/chat" exact component={Chat} /> */}
               {/* <Route path="/edit/:id" component={EditTicket} /> */}
               {/* <Route path="/create" component={AddBacklog} /> */}
             </div>
