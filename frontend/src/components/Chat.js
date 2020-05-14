@@ -25,9 +25,13 @@ const Chat = (props) => {
       });
     };
     getData();
-    // console.log(data);
 
-    const socket = io.connect(window.location.hostname);
+    //window.location.hostname is for heroku deploy
+    var hostname = "http://localhost:5000";
+    if (window.location.hostname.toString() != "localhost") {
+      hostname = window.location.hostname;
+    }
+    const socket = io.connect(hostname);
     socket.on("chat message", function (msg) {
       setMessages((currentMessages) => [...currentMessages, msg]); //push ticket object to state array
     });
@@ -38,8 +42,14 @@ const Chat = (props) => {
   };
 
   const send = (e) => {
-    const socket = io.connect(window.location.hostname);
     e.preventDefault();
+    //window.location.hostname is for heroku deploy
+    var hostname = "http://localhost:5000";
+    if (window.location.hostname.toString() != "localhost") {
+      hostname = window.location.hostname;
+    }
+    const socket = io.connect(hostname);
+
     //checks if empty
     socket.emit("chat message", message);
     setMessage("");
