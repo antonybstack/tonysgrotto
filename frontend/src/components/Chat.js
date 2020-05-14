@@ -11,6 +11,12 @@ const Chat = (props) => {
   const [validation, setValidation] = useState(""); //input validation message
   const [messages, setMessages] = useState([]);
   const [data, setData] = useState([]);
+  // var db = "";
+  // if (process.env.DATABASE_URL) {
+  //   db = process.env.DATABASE_URL;
+  // } else {
+  //   db = require("../../../keys").mongoURI;
+  // }
 
   useEffect(() => {
     const getData = async () => {
@@ -27,7 +33,7 @@ const Chat = (props) => {
     getData();
     // console.log(data);
 
-    const socket = io.connect("http://127.0.0.1:5000");
+    const socket = io.connect(window.location.hostname);
     socket.on("chat message", function (msg) {
       setMessages((currentMessages) => [...currentMessages, msg]); //push ticket object to state array
     });
@@ -38,7 +44,7 @@ const Chat = (props) => {
   };
 
   const send = (e) => {
-    const socket = io.connect("http://127.0.0.1:5000");
+    const socket = io.connect(window.location.hostname);
     e.preventDefault();
     //checks if empty
     socket.emit("chat message", message);
