@@ -30,9 +30,27 @@ a:link {
 a:visited {
   color: rgb(104, 187, 255);
   background-color: transparent;
-
   padding-left: 50px;
   padding-top: 50px;
+}
+
+.chatbox {
+  background-color: white;
+  padding: 0.1em;
+  padding-bottom: 1em;
+  line-height: 0.25em;
+  width: 15em;
+  border-style: inset;
+  border-width: 1px;
+  color: black;
+  height: 200px;
+  overflow: auto;
+}
+
+.chatinput {
+  width: 17.95em;
+  border-style: inset;
+  border-width: 1px;
 }
 
 /* 

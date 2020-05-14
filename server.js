@@ -30,6 +30,7 @@ mongoose
 
 app.use("/api/tickets", require("./routes/api/tickets"));
 app.use("/api/users", require("./routes/api/users"));
+app.use("/api/chats", require("./routes/api/chats"));
 
 //serve static assets if in production
 if (process.env.NODE_ENV === "production") {
@@ -52,8 +53,18 @@ const io = socketIo(server);
 //listen on the connection event for incoming sockets and log it to the console.
 
 io.on("connection", (socket) => {
+  console.log("USER CONNECTED...");
+  sendStatus = function (s) {
+    socket.emit("status", s);
+  };
+
   socket.on("chat message", (msg) => {
     io.emit("chat message", msg);
+    console.log(msg);
+    sendStatus({
+      message: "Message sent",
+      clear: true,
+    });
   });
 });
 

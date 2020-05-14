@@ -10,52 +10,62 @@ const Chat = (props) => {
   const { user, isAuthenticated } = useContext(AuthContext);
   const [validation, setValidation] = useState(""); //input validation message
   const [messages, setMessages] = useState([]);
+  const [data, setData] = useState([]);
 
-  const socket = io.connect("http://127.0.0.1:5000");
+  useEffect(() => {
+    const getData = async () => {
+      const response = await axios.get("/api/chats");
+      console.log(response.data);
+      setData(response.data);
+      // console.log(data);
+      response.data.map((currentData, i) => {
+        console.log("currentdata", currentData);
+        // console.log("currentdata", currentData.message);
+        setMessages((currentMessages) => [...currentMessages, currentData.message]);
+      });
+    };
+    getData();
+    // console.log(data);
 
-  console.log(socket);
+    const socket = io.connect("http://127.0.0.1:5000");
+    socket.on("chat message", function (msg) {
+      setMessages((currentMessages) => [...currentMessages, msg]); //push ticket object to state array
+    });
+  }, []);
 
   const handleChange = (e) => {
     setMessage(e.target.value);
   };
 
-  const validate = (message) => {
-    if (message === "") {
-      setValidation("field cannot be empty");
-      return false;
-    } else {
-      setValidation("");
-      return true;
-    }
-  };
-
   const send = (e) => {
+    const socket = io.connect("http://127.0.0.1:5000");
     e.preventDefault();
     //checks if empty
-
     socket.emit("chat message", message);
-    addMessages();
+    var elem = document.getElementById("chatty");
+    elem.scrollTop = elem.scrollHeight;
   };
 
-  const addMessages = () => {
-    socket.on("chat message", function (msg) {
-      // $("#messages").append($("<li>").text(msg));
-      setMessages((currentMessages) => [...currentMessages, msg]);
+  const test = () => {
+    console.log(messages);
+    // messages.map((currentMessage, i) => {
+    //   return currentMessages;
+    // });
+    return messages.map((currentData, i) => {
+      return <p>{currentData}</p>;
     });
   };
-
-  //   socket.on("message", addMessages());
 
   return (
     <React.Fragment>
       <div id="messages">
         <h1>Chat Room</h1>
-        {messages.map((currentMessage, i) => (
-          <div>{currentMessage}</div>
-        ))}
+        <div id="chatty" className="chatbox">
+          {test()}
+        </div>
       </div>
       <div>
-        <textarea type="text" name="message" placeholder="Your Message Here" value={message} onChange={handleChange} />
+        <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" value={message} onChange={handleChange} />
         <button onClick={send}>Send</button>
       </div>
     </React.Fragment>
