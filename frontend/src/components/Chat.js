@@ -42,6 +42,7 @@ const Chat = (props) => {
     e.preventDefault();
     //checks if empty
     socket.emit("chat message", message);
+    setMessage("");
     var elem = document.getElementById("chatty");
     elem.scrollTop = elem.scrollHeight;
   };
