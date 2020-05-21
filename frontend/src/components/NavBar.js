@@ -70,7 +70,6 @@ const Navbar = (props) => {
           <ul className="navbar-nav mr-auto">{!isAuthenticated ? unauthenticatedNavBar() : authenticatedNavBar()}</ul>
         </div>
       </nav>
-      <Chat />
     </React.Fragment>
   );
 };

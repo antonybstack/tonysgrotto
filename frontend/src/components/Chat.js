@@ -31,9 +31,13 @@ const Chat = (props) => {
       });
     };
     getData();
-    // console.log(data);
 
-    const socket = io.connect(window.location.hostname);
+    //window.location.hostname is for heroku deploy
+    var hostname = "http://localhost:5000";
+    if (window.location.hostname.toString() != "localhost") {
+      hostname = window.location.hostname;
+    }
+    const socket = io.connect(hostname);
     socket.on("chat message", function (msg) {
       setMessages((currentMessages) => [...currentMessages, msg]); //push ticket object to state array
     });
@@ -44,37 +48,46 @@ const Chat = (props) => {
   };
 
   const send = (e) => {
-    const socket = io.connect(window.location.hostname);
     e.preventDefault();
+    //window.location.hostname is for heroku deploy
+    var hostname = "http://localhost:5000";
+    if (window.location.hostname.toString() != "localhost") {
+      hostname = window.location.hostname;
+    }
+    const socket = io.connect(hostname);
+
     //checks if empty
     socket.emit("chat message", message);
+    setMessage("");
     var elem = document.getElementById("chatty");
     elem.scrollTop = elem.scrollHeight;
   };
 
-  const test = () => {
+  const displayMessages = () => {
     console.log(messages);
     // messages.map((currentMessage, i) => {
     //   return currentMessages;
     // });
     return messages.map((currentData, i) => {
-      return <p>{currentData}</p>;
+      return <p className="chatMessage">{currentData}</p>;
     });
   };
 
   return (
-    <React.Fragment>
+    <div className="chatroom">
       <div id="messages">
-        <h1>Chat Room</h1>
+        <h3>Chatroom</h3>
         <div id="chatty" className="chatbox">
-          {test()}
+          {displayMessages()}
         </div>
       </div>
       <div>
-        <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" value={message} onChange={handleChange} />
-        <button onClick={send}>Send</button>
+        <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
+        <button className="chatSend" onClick={send}>
+          Send
+        </button>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

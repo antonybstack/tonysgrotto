@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import Ticket from "../contexts/Ticket";
+import Ticket from "./Ticket";
 import { TicketContext } from "../contexts/TicketContext";
 import { AuthContext } from "../contexts/AuthContext";
 

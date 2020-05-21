@@ -1,6 +1,6 @@
 import React from "react";
 import ModalEdit from "../Modals/ModalEdit";
-import Profile from "../components/Profile";
+import Profile from "./Profile";
 
 //this component's purpose is for cleaner code and is used in EditTicket. EditTicket takes data from TicketContext and passes that data to this component to output the html.
 const Ticket = (props) => {
