@@ -56,6 +56,16 @@ io.on("connection", (socket) => {
   console.log("USER CONNECTED...");
   sendStatus = function (s) {
     socket.emit("status", s);
+    let connections = io.sockets.connected;
+    for (let c in connections) {
+      let socketSessionID = connections[c].conn.id;
+      console.log(socketSessionID);
+      // if(sessionID === socketSessionID) {
+      //   connections[c].disconnect();
+      // }
+    }
+    // console.log(io.sockets.clients().connected[0]);
+    // console.log(io.of("/").clients().connected);
   };
 
   socket.on("chat message", (msg) => {
@@ -66,6 +76,8 @@ io.on("connection", (socket) => {
       clear: true,
     });
   });
+
+  socket.on("disconnect", () => console.log("Client disconnected"));
 });
 
 server.listen(PORT, () => console.log("Server is running on Port: " + PORT));

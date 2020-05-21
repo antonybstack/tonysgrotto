@@ -8,7 +8,8 @@ let Chat = new Schema({
   //   ref: "User",
   // },
   user: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
     required: "User is required",
   },
   message: {

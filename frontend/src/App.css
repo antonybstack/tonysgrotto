@@ -1,3 +1,5 @@
+@import url("https://cloud.typography.com/6804272/781004/css/fonts.css");
+
 :root {
   --notblack: #23272a;
   --dark: #2c2f33;
@@ -6,7 +8,6 @@
 }
 
 * {
-  /* all elements */
 }
 
 html {
@@ -14,19 +15,20 @@ html {
 
 body {
   background-color: var(--notblack);
-  font-size: 1.2em;
-  /* font-family: runescape-uf-regular; */
+  font-size: 1em;
+
   color: var(--greyple);
+  margin-right: 15%;
+  margin-left: 15%;
 }
 
 .App {
   background-color: var(--dark);
   color: var(--greyple);
-  font-family: runescape-uf-regular;
 
-  padding-top: 1em;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
+  /* padding-left: 5em; */
 }
 
 a:link {
@@ -54,9 +56,9 @@ a:visited {
 .chatbox {
   background-color: white;
   padding: 0.1em;
-  padding-bottom: 1em;
-  min-height: 20em;
-  width: 15em;
+  padding-bottom: 2em;
+  height: 20em;
+  width: 18em;
   border-style: inset;
   border-width: 1px;
   color: black;
@@ -76,6 +78,8 @@ a:visited {
 
 .chatroom {
   float: right;
+
+  font-size: 1rem;
 }
 
 .chatSend {
@@ -93,199 +97,20 @@ h3 {
 
 .chatMessage {
   margin: 0.35em;
-  line-height: 0.9em;
+  line-height: 1em;
 }
 
-/* 
-.ticketBlock {
-  color: var(--greyple);
+.test {
+  padding: 2%;
 }
 
-li {
-  list-style-type: none;
+.chatProfile {
+  overflow: hidden;
+  white-space: nowrap;
+  color: cornflowerblue;
 }
 
-h1 {
-  font-weight: normal;
+.notLoggedIn {
+  color: darkgray;
+  line-height: 1em;
 }
-
-
-
-a:link.nav-link {
-  color: pink;
-  background-color: transparent;
-  text-decoration: none;
-  padding-left: 50px;
-  padding-top: 50px;
-}
-
-a:visited.nav-link {
-  color: pink;
-  background-color: transparent;
-  text-decoration: none;
-  padding-left: 50px;
-  padding-top: 50px;
-}
-
-a:link.navbar-brand {
-  font-size: 24pt;
-  padding-bottom: 20px;
-  color: lightblue;
-  width: 315px;
-}
-
-a:visited.navbar-brand {
-  font-size: 24pt;
-  padding-bottom: 20px;
-  color: lightblue;
-}
-
-.display {
-  padding-bottom: 50px;
-  min-height: 500px;
-  display: flex;
-}
-
-.addTicket {
-}
-
-.addTicket .submit {
-  background-color: lightblue;
-  color: var(--dark);
-  padding: 2px 32px;
-  text-align: center;
-  text-decoration: none;
-
-  height: 36px;
-  font-family: runescape-uf-regular;
-  font-size: 18pt;
-  border: none;
-}
-
-.addTicket input[type="text"] {
-  float: left;
-  height: 30px;
-  width: 35%;
-  border: 2px solid white;
-}
-
-.example {
-  width: 50%;
-}
-
-.ticketItem {
-  padding-bottom: 15px;
-}
-
-.editButton {
-  margin-left: 10px;
-  background-color: var(--greyple);
-  color: var(--dark);
-  text-align: center;
-  text-decoration: none;
-  display: block;
-  border: solid black 0.5px;
-  font-size: 12pt;
-}
-
-button {
-  font-family: runescape-uf-regular;
-  font-size: 16pt;
-}
-
-table {
-  border-collapse: collapse;
-}
-
-td {
-  width: 400px;
-  text-align: left;
-}
-
-td.edit-button-data {
-  padding-bottom: 2px;
-  padding-right: 20px;
-  width: 10px;
-}
-
-td.name-data {
-}
-
-th.nameheader {
-  padding-left: 66px;
-}
-
-.backlog {
-  width: 500px;
-}
-.sprint {
-  width: 500px;
-}
-.progress {
-  width: 500px;
-}
-.done {
-  width: 500px;
-}
-
-
-.editForm {
-  color: white;
-}
-.editForm input[type="text"],
-select {
-  width: 100%;
-  padding: 2px 0px 4px 6px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 0px;
-  box-sizing: border-box;
-  font-family: runescape-uf-regular;
-  font-size: 18pt;
-}
-
-.editForm input[type="submit"] {
-  width: 100%;
-  background-color: lightblue;
-  color: black;
-  font-family: runescape-uf-regular;
-  font-size: 18pt;
-  padding: 6px 0px 8px 0px;
-  margin: 8px 0px 0px 0px;
-  border: none;
-  cursor: pointer;
-}
-
-.editForm input[type="submit"]:hover {
-  background-color: #79c5de;
-}
-
-.deleteBtn {
-  margin-top: 60px;
-  background-color: lightpink;
-  color: black;
-  font-family: runescape-uf-regular;
-  font-size: 18pt;
-  border: none;
-  cursor: pointer;
-}
-
-.closeModal {
-  float: right;
-  margin-top: 60px;
-  background-color: white;
-  color: black;
-  font-family: runescape-uf-regular;
-  font-size: 18pt;
-  border: none;
-  cursor: pointer;
-}
-
-.validation {
-  color: #d96d6d;
-  padding-left: 0px;
-  width: 500px;
-  margin: 0;
-}
-*/

@@ -15,22 +15,17 @@ export default ({ children }) => {
   const [tickets, setTickets] = useContext(TicketContext);
   //   const auth = useContext(AuthContext);
 
-  console.log(profiles.length);
-  console.log(tickets.length);
   //   console.log(auth);
   useEffect(() => {
     if (profiles.length !== 0) {
       setProfileLoaded(true);
-      console.log("profiles loaded!");
     }
     if (tickets.length !== 0) {
       setTicketLoaded(true);
-      console.log("tickets loaded!");
     }
     console.log(ticketLoaded, profileLoaded);
     if (ticketLoaded === true && profileLoaded === true) {
       setAppLoaded(true);
-      console.log("app loaded!", appLoaded);
     }
   }, [profiles.length, tickets.length]);
 

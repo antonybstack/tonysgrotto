@@ -11,7 +11,6 @@ const TicketDisplay = () => {
   const { user, setUser, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const { tickets, tickLoaded } = useContext(TicketContext);
   const { profLoaded } = useContext(TicketContext);
-  console.log(tickLoaded);
 
   //displays the data from TicketContext
   return (

@@ -1,47 +1,36 @@
 import React, { Component } from "react";
 import { useContext, useState, useEffect } from "react";
-// import { TicketContext } from "../contexts/TicketContext";
 import { AuthContext } from "../contexts/AuthContext";
+import { ProfileContext } from "../contexts/ProfileContext";
+import { ChatContext } from "../contexts/ChatContext";
 import axios from "axios";
 import * as io from "socket.io-client";
 
 const Chat = (props) => {
   const [message, setMessage] = useState("");
   const { user, isAuthenticated } = useContext(AuthContext);
-  const [validation, setValidation] = useState(""); //input validation message
-  const [messages, setMessages] = useState([]);
-  const [data, setData] = useState([]);
-  // var db = "";
-  // if (process.env.DATABASE_URL) {
-  //   db = process.env.DATABASE_URL;
-  // } else {
-  //   db = require("../../../keys").mongoURI;
-  // }
+  const { chats } = useContext(ChatContext);
+  const { profiles, setProfiles, profLoaded } = useContext(ProfileContext);
 
   useEffect(() => {
-    const getData = async () => {
-      const response = await axios.get("/api/chats");
-      console.log(response.data);
-      setData(response.data);
-      // console.log(data);
-      response.data.map((currentData, i) => {
-        console.log("currentdata", currentData);
-        // console.log("currentdata", currentData.message);
-        setMessages((currentMessages) => [...currentMessages, currentData.message]);
-      });
-    };
-    getData();
-
+    console.log(chats);
+    // const getData = async () => {
+    //   if (isAuthenticated) {
+    //     console.log("getData was run!");
+    //     const response = await axios.get("/api/chats");
+    //     setData(response.data);
+    //     response.data.map((currentData, i) => {
+    //       setMessages((currentMessages) => [...currentMessages, currentData]);
+    //     });
+    //   } else {
+    //     setMessages([]);
+    //   }
+    // };
     //window.location.hostname is for heroku deploy
-    var hostname = "http://localhost:5000";
-    if (window.location.hostname.toString() != "localhost") {
-      hostname = window.location.hostname;
-    }
-    const socket = io.connect(hostname);
-    socket.on("chat message", function (msg) {
-      setMessages((currentMessages) => [...currentMessages, msg]); //push ticket object to state array
-    });
-  }, []);
+    //uses promise so that connectSocket runs after getData is complete
+    // getData();
+    //rerenders when user logs in and user updates so that it notifies that the user has joined the chatroom
+  }, [isAuthenticated]);
 
   const handleChange = (e) => {
     setMessage(e.target.value);
@@ -49,46 +38,106 @@ const Chat = (props) => {
 
   const send = (e) => {
     e.preventDefault();
-    //window.location.hostname is for heroku deploy
-    var hostname = "http://localhost:5000";
-    if (window.location.hostname.toString() != "localhost") {
-      hostname = window.location.hostname;
-    }
-    const socket = io.connect(hostname);
+    if (isAuthenticated) {
+      const newChat = {
+        user: user,
+        message: message,
+      };
 
-    //checks if empty
-    socket.emit("chat message", message);
-    setMessage("");
-    var elem = document.getElementById("chatty");
-    elem.scrollTop = elem.scrollHeight;
+      axios.post("api/chats/add", newChat);
+
+      //window.location.hostname is for heroku deploy
+      var hostname = "http://localhost:5000";
+      if (window.location.hostname.toString() != "localhost") {
+        hostname = window.location.hostname;
+      }
+      const socket = io.connect(hostname);
+
+      let chatPacket = {
+        user: user._id,
+        message: message,
+      };
+      socket.emit("chat message", chatPacket);
+      setMessage("");
+      var elem = document.getElementById("chatty");
+      elem.scrollTop = elem.scrollHeight;
+    }
   };
 
-  const displayMessages = () => {
-    console.log(messages);
-    // messages.map((currentMessage, i) => {
-    //   return currentMessages;
-    // });
-    return messages.map((currentData, i) => {
-      return <p className="chatMessage">{currentData}</p>;
+  const findProfile = (id) => {
+    var tempProfile = {
+      user: "",
+      message: "",
+    };
+    profiles.filter((profile) => {
+      if (profile._id === id) {
+        tempProfile = {
+          user: profile.username,
+          avatar: profile.avatar,
+        };
+      }
+    });
+    return tempProfile;
+  };
+
+  const displayChats = () => {
+    console.log(chats);
+    return chats.map((currentData, i) => {
+      let tempProfile = findProfile(currentData.user);
+      return (
+        <div className="chatMessage">
+          <span className="chatProfile">
+            <span>
+              <img src={tempProfile.avatar && require("../assets/avatars/" + tempProfile.avatar + ".png")} alt="Logo" width="15" />
+              &nbsp;
+            </span>
+            <span>{tempProfile.user}:&nbsp;</span>
+          </span>
+          <span>{currentData.message}</span>
+        </div>
+      );
     });
   };
 
-  return (
-    <div className="chatroom">
-      <div id="messages">
-        <h3>Chatroom</h3>
-        <div id="chatty" className="chatbox">
-          {displayMessages()}
+  const authenticatedChat = () => {
+    return (
+      <div className="chatroom">
+        <div id="messages">
+          <h3>Chatroom</h3>
+          <div id="chatty" className="chatbox">
+            {displayChats()}
+          </div>
+        </div>
+        <div>
+          <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
+          <button className="chatSend" onClick={send}>
+            Send
+          </button>
         </div>
       </div>
-      <div>
-        <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
-        <button className="chatSend" onClick={send}>
-          Send
-        </button>
+    );
+  };
+
+  const unauthenticatedChat = () => {
+    return (
+      <div className="chatroom">
+        <div id="messages">
+          <h3>Chatroom</h3>
+          <div id="chatty" className="chatbox">
+            <div className="notLoggedIn">Must be logged in to access the chatroom</div>
+          </div>
+        </div>
+        <div>
+          <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} disabled />
+          <button className="chatSend" onClick={null} disabled>
+            Send
+          </button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
+
+  return <React.Fragment>{!isAuthenticated ? unauthenticatedChat() : authenticatedChat()}</React.Fragment>;
 };
 
 export default Chat;

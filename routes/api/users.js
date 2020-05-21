@@ -58,6 +58,7 @@ userRoutes.post("/login", passport.authenticate("local", { session: false }), (r
 //LOGOUT
 userRoutes.get("/logout", passport.authenticate("jwt", { session: false }), (req, res) => {
   res.clearCookie("access_token");
+
   res.json({ user: { username: "", role: "" }, success: true });
 });
 

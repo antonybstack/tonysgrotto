@@ -21,7 +21,7 @@ export default ({ children }) => {
         setIsAuthenticated(res.data.isAuthenticated);
         setTimeout(() => {
           setIsLoaded(true);
-        }, 500);
+        }, 100);
 
         // const { isAuthenticated, user } = res.data;
         // if (isAuthenticated) {

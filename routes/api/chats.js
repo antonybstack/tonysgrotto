@@ -21,7 +21,7 @@ chatRoutes.route("/add").post(function (req, res) {
   var chat = new Chat(req.body);
   chat.save((err) => {
     if (err) sendStatus(500);
-    io.emit("chat", req.body);
+    // io.emit("chat", req.body);
     res.sendStatus(200);
   });
   // let chat = new Chat(req.body);
