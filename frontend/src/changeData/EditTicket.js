@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import { TicketContext } from "../contexts/TicketContext";
 
 const EditTicket = (props) => {
-  const [tickets, setTickets] = useContext(TicketContext);
+  const { tickets, setTickets } = useContext(TicketContext);
   const [ticket, setTicket] = useState("");
   const [name, setName] = useState(props.value.ticket.ticket.ticket_name);
   const [status, setStatus] = useState(props.value.ticket.ticket.ticket_status);

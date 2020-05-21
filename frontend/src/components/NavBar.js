@@ -6,7 +6,7 @@ import Chat from "./Chat";
 
 const Navbar = (props) => {
   const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
-
+  console.log(user);
   console.log(user.username);
   console.log(user.avatar);
   const onClickLogoutHandler = () => {

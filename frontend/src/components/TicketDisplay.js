@@ -2,18 +2,23 @@ import React from "react";
 import { useContext } from "react";
 import Ticket from "./Ticket";
 import { TicketContext } from "../contexts/TicketContext";
+import { ProfileContext } from "../contexts/ProfileContext";
 import { AuthContext } from "../contexts/AuthContext";
 
 //this component is subscribed to context changes
 const TicketDisplay = () => {
   //state that is able to update context
   const { user, setUser, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
-  const [tickets] = useContext(TicketContext);
+  const { tickets, tickLoaded } = useContext(TicketContext);
+  const { profLoaded } = useContext(TicketContext);
+  console.log(tickLoaded);
 
   //displays the data from TicketContext
   return (
     // react fragment so that div(13 to 16) and div(17 to 46) dont need to be wrapped in an extra div
     <React.Fragment>
+      {/* {tickLoaded === true && profLoaded === true && (
+        <React.Fragment> */}
       <div>
         <p>Number of Tickets: {tickets.length}</p>
       </div>
@@ -47,6 +52,8 @@ const TicketDisplay = () => {
           </table>
         </div>
       </div>
+      {/* </React.Fragment>
+      )} */}
     </React.Fragment>
   );
 };

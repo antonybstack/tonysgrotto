@@ -6,7 +6,7 @@ import axios from "axios";
 //props takes in data from Link, includes data like location /create
 const AddTicket = () => {
   //state that is able to update context
-  const [tickets, setTickets] = useContext(TicketContext);
+  const { tickets, setTickets } = useContext(TicketContext);
   const { user, isAuthenticated } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [validation, setValidation] = useState(""); //input validation message

@@ -9,7 +9,7 @@ export const AuthContext = createContext();
 export default ({ children }) => {
   const [user, setUser] = useState(null); // user that is logged in
   const [isAuthenticated, setIsAuthenticated] = useState(false); // for checking if this logged in user is authenticated or not
-  const [isLoaded, setIsLoaded] = useState(false); // see if the app is loaded
+  const [isLoaded, setIsLoaded] = useState(false); // see if the authentication is loaded
 
   useEffect(() => {
     axios
@@ -44,5 +44,13 @@ export default ({ children }) => {
   }, []);
 
   // providing user and isAuthenticated variables to be global variables
-  return <div>{!isLoaded ? <h1>Loading</h1> : <AuthContext.Provider value={{ user, setUser, isAuthenticated, setIsAuthenticated }}>{children}</AuthContext.Provider>}</div>;
+  return (
+    <div>
+      {!isLoaded ? (
+        <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
+      ) : (
+        <AuthContext.Provider value={{ user, setUser, isAuthenticated, setIsAuthenticated }}>{children}</AuthContext.Provider>
+      )}
+    </div>
+  );
 };

@@ -40,6 +40,12 @@ a:visited {
   padding-top: 50px;
 }
 
+.loading {
+  position: fixed; /* or absolute */
+  top: 40%;
+  left: 40%;
+}
+
 .chatbox {
   background-color: white;
   padding: 0.1em;

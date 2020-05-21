@@ -5,7 +5,7 @@ import { TicketContext } from "../contexts/TicketContext";
 
 const DeleteTicket = (props) => {
   //state that is able to update context
-  const [tickets, setTickets] = useContext(TicketContext);
+  const { tickets, setTickets } = useContext(TicketContext);
   const [ticket, setTicket] = useState("");
 
   //gets ticket using ticket._id from database
