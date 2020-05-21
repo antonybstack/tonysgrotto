@@ -1,6 +1,8 @@
 import React, { createContext, useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import Auth from "../services/Auth";
 import axios from "axios";
+import App from "../App";
 
 //purpose of this context is to hold the information of an individual user that is logged in on the website
 
@@ -17,7 +19,10 @@ export default ({ children }) => {
       .then((res) => {
         setUser(res.data.user);
         setIsAuthenticated(res.data.isAuthenticated);
-        setIsLoaded(true);
+        setTimeout(() => {
+          setIsLoaded(true);
+        }, 500);
+
         // const { isAuthenticated, user } = res.data;
         // if (isAuthenticated) {
         //   authContext.setUser(user);
@@ -27,7 +32,10 @@ export default ({ children }) => {
       .catch(function (error) {
         setUser({ username: "", role: "" });
         setIsAuthenticated(false);
-        setIsLoaded(true);
+        setTimeout(() => {
+          setIsLoaded(true);
+        }, 500);
+
         console.log(error);
       });
 
@@ -47,9 +55,14 @@ export default ({ children }) => {
   return (
     <div>
       {!isLoaded ? (
-        <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
+        <div className="test">
+          <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
+        </div>
       ) : (
-        <AuthContext.Provider value={{ user, setUser, isAuthenticated, setIsAuthenticated }}>{children}</AuthContext.Provider>
+        <div className="test">
+          <AuthContext.Provider value={{ user, setUser, isAuthenticated, setIsAuthenticated }}>{children}</AuthContext.Provider>
+          {/* <img className="loading" src={require("../assets/loading.gif")} alt="loading..." /> */}
+        </div>
       )}
     </div>
   );

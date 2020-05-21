@@ -19,16 +19,16 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 // App is a component that acts as a container for all other components
 function App() {
   return (
-    <AuthProvider>
-      {/* // Every Context object comes with a Provider component which consumes all nested components
+    <div className="App">
+      <AuthProvider>
+        {/* // Every Context object comes with a Provider component which consumes all nested components
       consumed components to subscribe to context changes. */}
-      <ProfileProvider>
-        <TicketProvider>
-          {/* <LoadedProvider> */}
-          {/* We will wrap <Router /> in <Provider /> so that route handlers can get access to the store. */}
-          {/* so that when the URL changes, <Router /> will match a branch of its routes, and render their configured components */}
-          <Router>
-            <div className="App">
+        <ProfileProvider>
+          <TicketProvider>
+            {/* <LoadedProvider> */}
+            {/* We will wrap <Router /> in <Provider /> so that route handlers can get access to the store. */}
+            {/* so that when the URL changes, <Router /> will match a branch of its routes, and render their configured components */}
+            <Router>
               {/*  links text to route */}
               <NavBar />
               <Chat />
@@ -41,12 +41,12 @@ function App() {
               {/* <Route path="/chat" exact component={Chat} /> */}
               {/* <Route path="/edit/:id" component={EditTicket} /> */}
               {/* <Route path="/create" component={AddTicket} /> */}
-            </div>
-          </Router>
-          {/* </LoadedProvider> */}
-        </TicketProvider>
-      </ProfileProvider>
-    </AuthProvider>
+            </Router>
+            {/* </LoadedProvider> */}
+          </TicketProvider>
+        </ProfileProvider>
+      </AuthProvider>
+    </div>
   );
 }
 
