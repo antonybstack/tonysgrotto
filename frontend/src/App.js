@@ -12,8 +12,8 @@ import Register from "./components/Register";
 import Admin from "./components/Admin";
 import PrivateRoute from "./hocs/PrivateRoute";
 import UnPrivateRoute from "./hocs/UnPrivateRoute";
-import TicketDisplay from "./displays/TicketDisplay";
-import AddBacklog from "./changeData/AddBacklog";
+import TicketDisplay from "./components/TicketDisplay";
+import AddTicket from "./changeData/AddTicket";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // App is a component that acts as a container for all other components
@@ -30,15 +30,16 @@ function App() {
             <div className="App">
               {/*  links text to route */}
               <NavBar />
+              <Chat />
               <UnPrivateRoute path="/login" component={Login} />
               <UnPrivateRoute path="/register" component={Register} />
               {/* <PrivateRoute path="/todos" roles={["user", "admin"]} component={Todos} /> */}
               <PrivateRoute path="/admin" roles={["admin"]} component={Admin} />
-              <AddBacklog />
+              <AddTicket />
               <Route path="/" exact component={TicketDisplay} />
               {/* <Route path="/chat" exact component={Chat} /> */}
               {/* <Route path="/edit/:id" component={EditTicket} /> */}
-              {/* <Route path="/create" component={AddBacklog} /> */}
+              {/* <Route path="/create" component={AddTicket} /> */}
             </div>
           </Router>
         </TicketProvider>

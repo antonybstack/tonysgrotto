@@ -5,18 +5,24 @@
   --burnt: #da8b72;
 }
 
+* {
+  /* all elements */
+}
+
 body {
   background-color: var(--notblack);
-  font-size: 1em;
+  font-size: 1.2em;
   /* font-family: runescape-uf-regular; */
   color: var(--greyple);
 }
+
 .App {
   background-color: var(--dark);
   color: var(--greyple);
-  /* font-family: runescape-uf-regular; */
-  padding-left: 20px;
-  padding-top: 20px;
+  font-family: runescape-uf-regular;
+  padding-right: 15%;
+  padding-left: 15%;
+  padding-top: 1em;
 }
 
 a:link {
@@ -38,19 +44,45 @@ a:visited {
   background-color: white;
   padding: 0.1em;
   padding-bottom: 1em;
-  line-height: 0.25em;
+  min-height: 20em;
   width: 15em;
   border-style: inset;
   border-width: 1px;
   color: black;
-  height: 200px;
   overflow: auto;
+  resize: vertical;
+  word-wrap: break-word;
+  line-height: 0.8em;
 }
 
 .chatinput {
-  width: 17.95em;
+  width: 18em;
   border-style: inset;
   border-width: 1px;
+  float: left;
+  resize: vertical;
+}
+
+.chatroom {
+  float: right;
+}
+
+.chatSend {
+  padding-top: 0.65em;
+  padding-bottom: 0.65em;
+  padding-right: 0.5em;
+  float: right;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: lighter;
+}
+
+.chatMessage {
+  margin: 0.35em;
+  line-height: 0.9em;
 }
 
 /* 
