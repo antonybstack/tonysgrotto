@@ -3,17 +3,45 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { ProfileContext } from "../contexts/ProfileContext";
 import { ChatContext } from "../contexts/ChatContext";
+import { SocketContext } from "../contexts/SocketContext";
 import axios from "axios";
 import * as io from "socket.io-client";
 
 const Chat = (props) => {
   const [message, setMessage] = useState("");
   const { user, isAuthenticated } = useContext(AuthContext);
-  const { chats } = useContext(ChatContext);
+  const { chats, setChats } = useContext(ChatContext);
   const { profiles, setProfiles, profLoaded } = useContext(ProfileContext);
+  const { socket } = useContext(SocketContext);
 
   useEffect(() => {
-    console.log(chats);
+    console.log(socket);
+    //connect to socket io
+    //window.location.hostname is for heroku deploy
+    // var hostname = "http://localhost:5000";
+    // if (window.location.hostname.toString() != "localhost") {
+    //   hostname = window.location.hostname;
+    // }
+    // const socket = io.connect(hostname);
+    // console.log(chats);
+    // console.log(user);
+    // //create user object to send
+    if (isAuthenticated) {
+      const newUser = {
+        username: user.username,
+        userid: user._id,
+        avatar: user.avatar,
+      };
+      socket.emit("new user", newUser);
+      socket.on("chat message", function (msg) {
+        setChats((currentChats) => [...currentChats, msg]); //push ticket object to state array
+      });
+      socket.on("new user", (data) => {
+        console.log("here!");
+        console.log(data);
+      });
+    }
+
     // const getData = async () => {
     //   if (isAuthenticated) {
     //     console.log("getData was run!");
@@ -26,8 +54,8 @@ const Chat = (props) => {
     //     setMessages([]);
     //   }
     // };
-    //window.location.hostname is for heroku deploy
-    //uses promise so that connectSocket runs after getData is complete
+    // window.location.hostname is for heroku deploy
+    // uses promise so that connectSocket runs after getData is complete
     // getData();
     //rerenders when user logs in and user updates so that it notifies that the user has joined the chatroom
   }, [isAuthenticated]);
@@ -47,18 +75,20 @@ const Chat = (props) => {
       axios.post("api/chats/add", newChat);
 
       //window.location.hostname is for heroku deploy
-      var hostname = "http://localhost:5000";
-      if (window.location.hostname.toString() != "localhost") {
-        hostname = window.location.hostname;
-      }
-      const socket = io.connect(hostname);
+      // var hostname = "http://localhost:5000";
+      // if (window.location.hostname.toString() != "localhost") {
+      //   hostname = window.location.hostname;
+      // }
+      // const socket = io.connect(hostname);
 
       let chatPacket = {
         user: user._id,
         message: message,
       };
       socket.emit("chat message", chatPacket);
+
       setMessage("");
+
       var elem = document.getElementById("chatty");
       elem.scrollTop = elem.scrollHeight;
     }

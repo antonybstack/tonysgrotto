@@ -4,6 +4,7 @@ import "./App.css";
 import TicketProvider from "./contexts/TicketContext";
 import ProfileProvider from "./contexts/ProfileContext";
 import AuthProvider from "./contexts/AuthContext";
+import SocketProvider from "./contexts/SocketContext";
 import ChatProvider from "./contexts/ChatContext";
 import NavBar from "./components/NavBar";
 import Login from "./components/Login";
@@ -22,32 +23,34 @@ function App() {
   return (
     <div className="App">
       <AuthProvider>
-        {/* // Every Context object comes with a Provider component which consumes all nested components
+        <SocketProvider>
+          {/* // Every Context object comes with a Provider component which consumes all nested components
       consumed components to subscribe to context changes. */}
-        <ProfileProvider>
-          <TicketProvider>
-            <ChatProvider>
-              {/* <LoadedProvider> */}
-              {/* We will wrap <Router /> in <Provider /> so that route handlers can get access to the store. */}
-              {/* so that when the URL changes, <Router /> will match a branch of its routes, and render their configured components */}
-              <Router>
-                {/*  links text to route */}
-                <NavBar />
-                <Chat />
-                <UnPrivateRoute path="/login" component={Login} />
-                <UnPrivateRoute path="/register" component={Register} />
-                {/* <PrivateRoute path="/todos" roles={["user", "admin"]} component={Todos} /> */}
-                <PrivateRoute path="/admin" roles={["admin"]} component={Admin} />
-                <AddTicket />
-                <Route path="/" exact component={TicketDisplay} />
-                {/* <Route path="/chat" exact component={Chat} /> */}
-                {/* <Route path="/edit/:id" component={EditTicket} /> */}
-                {/* <Route path="/create" component={AddTicket} /> */}
-              </Router>
-              {/* </LoadedProvider> */}
-            </ChatProvider>
-          </TicketProvider>
-        </ProfileProvider>
+          <ProfileProvider>
+            <TicketProvider>
+              <ChatProvider>
+                {/* <LoadedProvider> */}
+                {/* We will wrap <Router /> in <Provider /> so that route handlers can get access to the store. */}
+                {/* so that when the URL changes, <Router /> will match a branch of its routes, and render their configured components */}
+                <Router>
+                  {/*  links text to route */}
+                  <NavBar />
+                  <Chat />
+                  <UnPrivateRoute path="/login" component={Login} />
+                  <UnPrivateRoute path="/register" component={Register} />
+                  {/* <PrivateRoute path="/todos" roles={["user", "admin"]} component={Todos} /> */}
+                  <PrivateRoute path="/admin" roles={["admin"]} component={Admin} />
+                  <AddTicket />
+                  <Route path="/" exact component={TicketDisplay} />
+                  {/* <Route path="/chat" exact component={Chat} /> */}
+                  {/* <Route path="/edit/:id" component={EditTicket} /> */}
+                  {/* <Route path="/create" component={AddTicket} /> */}
+                </Router>
+                {/* </LoadedProvider> */}
+              </ChatProvider>
+            </TicketProvider>
+          </ProfileProvider>
+        </SocketProvider>
       </AuthProvider>
     </div>
   );

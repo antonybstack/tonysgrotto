@@ -2,17 +2,22 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthService from "../services/Auth";
 import { AuthContext } from "../contexts/AuthContext";
+import { SocketContext } from "../contexts/SocketContext";
 import Chat from "./Chat";
+import * as io from "socket.io-client";
 
 const Navbar = (props) => {
   const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
+  const { socket } = useContext(SocketContext);
   const onClickLogoutHandler = () => {
-    AuthService.logout().then((data) => {
-      if (data.success) {
-        setUser(data.user);
-        setIsAuthenticated(false);
-      }
-    });
+    socket.disconnect();
+    console.log(socket);
+    // AuthService.logout().then((data) => {
+    //   if (data.success) {
+    //     setUser(data.user);
+    //     setIsAuthenticated(false);
+    //   }
+    // });
   };
 
   const unauthenticatedNavBar = () => {

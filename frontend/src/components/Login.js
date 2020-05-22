@@ -26,28 +26,29 @@ const Login = (props) => {
           authContext.setUser(user);
           authContext.setIsAuthenticated(isAuthenticated);
 
-          console.log("connectSocket was run!");
-          var hostname = "http://localhost:5000";
-          if (window.location.hostname.toString() != "localhost") {
-            hostname = window.location.hostname;
-          }
-          const socket = io.connect(hostname);
-          socket.on("chat message", function (msg) {
-            setChats((currentChats) => [...currentChats, msg]);
-          });
+          // console.log("connectSocket was run!");
+          // var hostname = "http://localhost:5000";
+          // if (window.location.hostname.toString() != "localhost") {
+          //   hostname = window.location.hostname;
+          // }
+          // const socket = io.connect(hostname);
+          // socket.on("chat message", function (msg) {
+          //   setChats((currentChats) => [...currentChats, msg]);
+          // });
 
-          let chatPacket = {
-            user: user._id,
-            message: "has joined the chatroom!",
-          };
-          socket.emit("chat message", chatPacket);
-          // socket.close();
-          socket.emit("disconnect");
+          // let chatPacket = {
+          //   user: user._id,
+          //   message: "has joined the chatroom!",
+          // };
+          // socket.emit("chat message", chatPacket);
+          // // socket.close();
+          // socket.emit("disconnect");
 
           props.history.push("/");
-        } else {
-          setChats([]);
         }
+        // else {
+        //   setChats([]);
+        // }
       })
       .catch(function (error) {
         console.log(error);
