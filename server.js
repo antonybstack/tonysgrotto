@@ -91,7 +91,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("new user", function (data) {
-    io.emit("new user", data);
+    io.emit("new user", users);
     console.log(data);
     socket.user = {
       username: data.username,

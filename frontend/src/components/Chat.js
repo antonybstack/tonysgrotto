@@ -6,6 +6,7 @@ import { ChatContext } from "../contexts/ChatContext";
 import { SocketContext } from "../contexts/SocketContext";
 import axios from "axios";
 import * as io from "socket.io-client";
+import UsersOnline from "./UsersOnline";
 
 const Chat = (props) => {
   const [message, setMessage] = useState("");
@@ -13,6 +14,7 @@ const Chat = (props) => {
   const { chats, setChats } = useContext(ChatContext);
   const { profiles, setProfiles, profLoaded } = useContext(ProfileContext);
   const { socket } = useContext(SocketContext);
+  const [usersOnline, setUsersOnline] = useState([]);
 
   useEffect(() => {
     console.log(socket);
@@ -39,6 +41,7 @@ const Chat = (props) => {
       socket.on("new user", (data) => {
         console.log("here!");
         console.log(data);
+        setUsersOnline((currentUsers) => [...currentUsers, data]);
       });
     }
 
@@ -138,11 +141,15 @@ const Chat = (props) => {
             {displayChats()}
           </div>
         </div>
-        <div>
+        <div className="chatbar">
           <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
           <button className="chatSend" onClick={send}>
             Send
           </button>
+        </div>
+        <div className="usersOnline">
+          <h5>Users Currently Online:</h5>
+          <UsersOnline />
         </div>
       </div>
     );
@@ -162,6 +169,10 @@ const Chat = (props) => {
           <button className="chatSend" onClick={null} disabled>
             Send
           </button>
+        </div>
+        <div className="usersOnline">
+          <h5>Users Currently Online:</h5>
+          <UsersOnline />
         </div>
       </div>
     );

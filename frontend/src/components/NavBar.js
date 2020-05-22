@@ -12,12 +12,12 @@ const Navbar = (props) => {
   const onClickLogoutHandler = () => {
     socket.disconnect();
     console.log(socket);
-    // AuthService.logout().then((data) => {
-    //   if (data.success) {
-    //     setUser(data.user);
-    //     setIsAuthenticated(false);
-    //   }
-    // });
+    AuthService.logout().then((data) => {
+      if (data.success) {
+        setUser(data.user);
+        setIsAuthenticated(false);
+      }
+    });
   };
 
   const unauthenticatedNavBar = () => {

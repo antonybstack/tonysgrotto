@@ -82,6 +82,11 @@ a:visited {
   font-size: 1rem;
 }
 
+.chatbar {
+  height: 2.35em;
+  width: 18.37em;
+}
+
 .chatSend {
   padding-top: 0.65em;
   padding-bottom: 0.65em;
@@ -113,4 +118,24 @@ h3 {
 .notLoggedIn {
   color: darkgray;
   line-height: 1em;
+}
+
+.usersOnline {
+  background-color: var(--notblack);
+  border-style: inset;
+  border-color: rgb(136, 136, 136);
+  border-width: 0.5em;
+  color: green;
+  padding: 1em;
+}
+
+.usersOnline h5 {
+  line-height: 0em;
+  font-size: inherit;
+  font-weight: normal;
+  color: var(--greyple);
+  margin-top: 0.5em;
+}
+
+.onlineUser {
 }
