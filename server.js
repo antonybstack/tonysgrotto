@@ -59,20 +59,49 @@ connections = [];
 
 io.on("connection", (socket) => {
   function currentUsers() {
-    io.sockets.emit("get users", users);
+    io.sockets.emit("get users", connections);
   }
-  console.log("USER CONNECTED...");
+  console.log("USER CONNECTED...", socket.id);
+  // let currentSocket;
+  // for (var key in socket.nsp.connected) {
+  //   if (socket.nsp.connected.hasOwnProperty(key)) {
+  //     currentSocket = key;
+  //   }
+  // }
+  // console.log("Connected --> Socket: ", currentSocket);
+
+  console.log("IO connection function --> Current Users:: ", users);
+  let num = Math.floor(Math.random() * Math.floor(999999));
   // usersOnline++;
-  connections.push(socket);
-  console.log("Connected: %s sockets connected", connections.length);
+  userConnection = {
+    socketid: socket.id,
+    username: "guest" + num,
+    userid: "0",
+    avatar: "99",
+  };
+  connections.push(userConnection);
+  console.log("Connected --> Connections: ", connections);
+  //console.log("Connected: %s sockets connected", connections.length);
   // io.sockets.emit("broadcast", usersOnline + " people online!");
+
+  getConnections = function () {
+    // socket.emit("connections");
+    console.log("blah blah", connections);
+  };
+
+  socket.on("get connections", () => {
+    io.emit("get connections", connections);
+    // getConnections({
+    //   message: "test",
+    // });
+  });
 
   sendStatus = function (s) {
     socket.emit("status", s);
     let connections = io.sockets.connected;
     for (let c in connections) {
       let socketSessionID = connections[c].conn.id;
-      console.log(socketSessionID);
+      console.log("SendStatus function--> ", socketSessionID);
       // if(sessionID === socketSessionID) {
       //   connections[c].disconnect();
       // }
@@ -92,30 +121,52 @@ io.on("connection", (socket) => {
 
   socket.on("new user", function (data) {
     io.emit("new user", users);
-    console.log(data);
     socket.user = {
       username: data.username,
       userid: data.userid,
       avatar: data.avatar,
     };
-    console.log(socket.user);
     users.push(socket.user);
-    console.log(users);
     // users.push(socket.username);
     // updateUsernames();
     sendStatus({
       message: "Message sent",
       clear: true,
     });
-    currentUsers();
+
+    console.log("New user function --> Data: ", data);
+    console.log("New user function --> Current Users:: ", users);
   });
 
-  socket.on("disconnect", (data) => {
-    console.log("Client disconnected. Reason: ", data);
+  socket.on("disconnect", () => {
+    for (var i = 0; i < connections.length; i++) {
+      console.log("sldkjfsldfjk", connections[i].socketid, socket.id);
+      if (connections[i].socketid === socket.id) {
+        connections.splice(i, 1);
+      }
+    }
+    io.emit("disconnect", connections);
+    console.log("Client disconnected. Reason: ", "Current Users: ", users);
+    console.log("disconnected data: ", socket.id);
+
+    // let currentSocket;
+    // for (var key in socket.nsp) {
+    //   if (socket.nsp.hasOwnProperty(key)) {
+    //     console.log("loop:", key);
+    //   }
+    // }
+    // console.log("Disconnected --> Socket: ", socket.nsp.conn);
+
+    // if (users !== "undefined") {
+    //   for (var i = 0; i <= users.length; i++) {
+    //     if (users[i] === socket.user) {
+    //       users.splice(users.indexOf(socket.user), 1);
+    //     }
+    //   }
+    // }
+
     // users.splice(users.id.indexOf(socket.user.id), 1);
     // if (typeof socket.user.userid === 'undefined') console.log("socket", socket.user.userid);
-    console.log(data);
-    console.log(socket.user);
     // io.sockets.emit("logout", "user information:" + data);
     // if (typeof socket.user.userid === "undefined") console.log("undef");
     // if (typeof users !== "undefined") {
@@ -127,15 +178,6 @@ io.on("connection", (socket) => {
     //   var x = arrayItem.prop1 + 2;
     //   console.log(x);
     // });
-    if (users !== "undefined") {
-      for (var i = 0; i <= users.length; i++) {
-        if (users[i] === socket.user) {
-          users.splice(users.indexOf(socket.user), 1);
-        }
-      }
-    }
-
-    currentUsers();
     // connections.splice(connections.indexOf(socket), 1);
     // console.log('Disconnected: %s socket connected', connections.length)
     // io.sockets.emit("broadcast", usersOnline + " people online!");

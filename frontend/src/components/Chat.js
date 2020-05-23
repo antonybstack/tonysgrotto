@@ -18,6 +18,12 @@ const Chat = (props) => {
 
   useEffect(() => {
     console.log(socket);
+
+    // socket.emit("get users");
+    // socket.on("get users", (users) => {
+    //   console.log("here!");
+    //   console.log(users);
+    // });
     //connect to socket io
     //window.location.hostname is for heroku deploy
     // var hostname = "http://localhost:5000";
@@ -38,8 +44,12 @@ const Chat = (props) => {
       socket.on("chat message", function (msg) {
         setChats((currentChats) => [...currentChats, msg]); //push ticket object to state array
       });
+      socket.on("status", (s) => {
+        console.log("status!");
+        console.log(s);
+      });
       socket.on("new user", (data) => {
-        console.log("here!");
+        console.log("new user!");
         console.log(data);
         setUsersOnline((currentUsers) => [...currentUsers, data]);
       });
@@ -164,7 +174,7 @@ const Chat = (props) => {
             <div className="notLoggedIn">Must be logged in to access the chatroom</div>
           </div>
         </div>
-        <div>
+        <div className="chatbar">
           <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} disabled />
           <button className="chatSend" onClick={null} disabled>
             Send

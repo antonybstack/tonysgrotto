@@ -16,20 +16,34 @@ const UsersOnline = () => {
   const [usersOnline, setUsersOnline] = useState([]);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      //   socket.on("new user", (data) => {
-      //     console.log("here!");
-      //     console.log(data);
-      //     setUsersOnline((currentUsers) => [...currentUsers, data]);
-      //   });
-      socket.on("get users", (data) => {
-        console.log("here!");
-        console.log(data);
+    socket.emit("get connections", "test");
+    socket.on("get connections", (data) => {
+      console.log("connections!");
+      console.log(data);
+      setUsersOnline(data);
+    });
+    socket.on("disconnect", (data) => {
+      console.log("someone disconnected!");
+      console.log(Array.isArray(data));
+      console.log(data);
+      if (Array.isArray(data)) {
         setUsersOnline(data);
-      });
-    }
-  }, [usersOnline, user]);
-
+      }
+    });
+    // if (isAuthenticated) {
+    //   socket.on("new user", (data) => {
+    //     console.log("here!");
+    //     console.log(data);
+    //     setUsersOnline((currentUsers) => [...currentUsers, data]);
+    //   });
+    // socket.on("get users", (data) => {
+    //   console.log("here!");
+    //   console.log(data);
+    //   setUsersOnline(data);
+    // });
+    // }
+  }, []);
+  console.log(usersOnline);
   const findProfile = (id) => {
     var tempProfile = {
       user: "",
@@ -47,8 +61,18 @@ const UsersOnline = () => {
   };
 
   const displayUsersOnline = () => {
+    let tempProfile;
+    console.log(usersOnline);
     return usersOnline.map((currentUser, i) => {
-      let tempProfile = findProfile(currentUser.userid);
+      if (currentUser.userid !== "0") {
+        tempProfile = findProfile(currentUser.userid);
+      } else {
+        tempProfile = {
+          user: currentUser.username,
+          avatar: currentUser.avatar,
+        };
+      }
+
       return (
         <React.Fragment>
           <div className="onlineUser">
