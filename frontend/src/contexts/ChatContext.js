@@ -41,7 +41,7 @@ export default ({ children }) => {
     };
     //rerenders when user logs in and user updates so that it notifies that the user has joined the chatroom
     checkLoad();
-  }, []);
+  }, [isAuthenticated]);
   console.log(chats);
 
   // provider passes context to all children compoents, no matter how deep it is

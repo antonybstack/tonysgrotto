@@ -43,9 +43,9 @@ const Chat = (props) => {
       };
       socket.emit("authenticated user", authenticatedUser);
 
-      // socket.on("chat message", function (msg) {
-      //   setChats((currentChats) => [...currentChats, msg]); //push ticket object to state array
-      // });
+      socket.on("chat message", function (msg) {
+        setChats((currentChats) => [...currentChats, msg]); //push ticket object to state array
+      });
       // socket.on("status", (s) => {
       //   console.log("status!");
       //   console.log(s);
