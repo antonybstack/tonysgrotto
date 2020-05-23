@@ -71,7 +71,7 @@ export default ({ children }) => {
         </div>
       ) : (
         <div className="test">
-          <SocketContext.Provider value={{ socket }}>{children}</SocketContext.Provider>
+          <SocketContext.Provider value={{ socket, setSocket }}>{children}</SocketContext.Provider>
           {/* <img className="loading" src={require("../assets/loading.gif")} alt="loading..." /> */}
         </div>
       )}

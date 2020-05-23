@@ -4,6 +4,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { ProfileContext } from "../contexts/ProfileContext";
 import { ChatContext } from "../contexts/ChatContext";
 import { SocketContext } from "../contexts/SocketContext";
+import { UsersOnlineContext } from "../contexts/UsersOnlineContext";
 import axios from "axios";
 import * as io from "socket.io-client";
 
@@ -13,36 +14,9 @@ const UsersOnline = () => {
   const { chats, setChats } = useContext(ChatContext);
   const { profiles, setProfiles, profLoaded } = useContext(ProfileContext);
   const { socket } = useContext(SocketContext);
-  const [usersOnline, setUsersOnline] = useState([]);
+  const { usersOnline, setUsersOnline } = useContext(UsersOnlineContext);
 
-  useEffect(() => {
-    socket.emit("get connections", "test");
-    socket.on("get connections", (data) => {
-      console.log("connections!");
-      console.log(data);
-      setUsersOnline(data);
-    });
-    socket.on("disconnect", (data) => {
-      console.log("someone disconnected!");
-      console.log(Array.isArray(data));
-      console.log(data);
-      if (Array.isArray(data)) {
-        setUsersOnline(data);
-      }
-    });
-    // if (isAuthenticated) {
-    //   socket.on("new user", (data) => {
-    //     console.log("here!");
-    //     console.log(data);
-    //     setUsersOnline((currentUsers) => [...currentUsers, data]);
-    //   });
-    // socket.on("get users", (data) => {
-    //   console.log("here!");
-    //   console.log(data);
-    //   setUsersOnline(data);
-    // });
-    // }
-  }, []);
+  useEffect(() => {}, []);
   console.log(usersOnline);
   const findProfile = (id) => {
     var tempProfile = {

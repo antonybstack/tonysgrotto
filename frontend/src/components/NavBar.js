@@ -3,21 +3,61 @@ import { Link } from "react-router-dom";
 import AuthService from "../services/Auth";
 import { AuthContext } from "../contexts/AuthContext";
 import { SocketContext } from "../contexts/SocketContext";
+import { UsersOnlineContext } from "../contexts/UsersOnlineContext";
 import Chat from "./Chat";
 import * as io from "socket.io-client";
 
 const Navbar = (props) => {
   const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
-  const { socket } = useContext(SocketContext);
+  const { socket, setSocket } = useContext(SocketContext);
+  const { usersOnline, setUsersOnline } = useContext(UsersOnlineContext);
+
   const onClickLogoutHandler = () => {
+    console.log(socket.id);
+    socket.emit("get connections", "test");
+
+    socket.on("get connections", (data) => {
+      console.log("connections!");
+      console.log(data);
+    });
+
+    for (var i = 0; i < usersOnline.length; i++) {
+      console.log("sldkjfsldfjk", usersOnline[i].socketid, socket.id);
+      if (usersOnline[i].socketid === socket.id) {
+        usersOnline.splice(i, 1);
+      }
+    }
+
+    // let num = Math.floor(Math.random() * Math.floor(999999));
+    // const tempUser = {
+    //   socketid: socket.id,
+    //   username: "guest" + num,
+    //   userid: "0",
+    //   avatar: "99",
+    // };
     socket.disconnect();
-    console.log(socket);
+    // socket.emit("guest user", tempUser);
+
     AuthService.logout().then((data) => {
       if (data.success) {
         setUser(data.user);
         setIsAuthenticated(false);
       }
     });
+    var hostname = "http://localhost:5000";
+    if (window.location.hostname.toString() != "localhost") {
+      hostname = window.location.hostname;
+    }
+    const tempSocket = io.connect(hostname);
+    setSocket(tempSocket);
+    // setTimeout(async () => {
+    //   socket.emit("get connections", "test");
+    //   socket.on("get connections", (data) => {
+    //     console.log("connections!");
+    //     console.log(data);
+    //     setUsersOnline(data);
+    //   });
+    // }, 500);
   };
 
   const unauthenticatedNavBar = () => {

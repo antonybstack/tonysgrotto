@@ -6,6 +6,7 @@ import ProfileProvider from "./contexts/ProfileContext";
 import AuthProvider from "./contexts/AuthContext";
 import SocketProvider from "./contexts/SocketContext";
 import ChatProvider from "./contexts/ChatContext";
+import UsersOnlineProvider from "./contexts/UsersOnlineContext";
 import NavBar from "./components/NavBar";
 import Login from "./components/Login";
 import Chat from "./components/Chat";
@@ -29,24 +30,26 @@ function App() {
           <ProfileProvider>
             <TicketProvider>
               <ChatProvider>
-                {/* <LoadedProvider> */}
-                {/* We will wrap <Router /> in <Provider /> so that route handlers can get access to the store. */}
-                {/* so that when the URL changes, <Router /> will match a branch of its routes, and render their configured components */}
-                <Router>
-                  {/*  links text to route */}
-                  <NavBar />
-                  <Chat />
-                  <UnPrivateRoute path="/login" component={Login} />
-                  <UnPrivateRoute path="/register" component={Register} />
-                  {/* <PrivateRoute path="/todos" roles={["user", "admin"]} component={Todos} /> */}
-                  <PrivateRoute path="/admin" roles={["admin"]} component={Admin} />
-                  <AddTicket />
-                  <Route path="/" exact component={TicketDisplay} />
-                  {/* <Route path="/chat" exact component={Chat} /> */}
-                  {/* <Route path="/edit/:id" component={EditTicket} /> */}
-                  {/* <Route path="/create" component={AddTicket} /> */}
-                </Router>
-                {/* </LoadedProvider> */}
+                <UsersOnlineProvider>
+                  {/* <LoadedProvider> */}
+                  {/* We will wrap <Router /> in <Provider /> so that route handlers can get access to the store. */}
+                  {/* so that when the URL changes, <Router /> will match a branch of its routes, and render their configured components */}
+                  <Router>
+                    {/*  links text to route */}
+                    <NavBar />
+                    <Chat />
+                    <UnPrivateRoute path="/login" component={Login} />
+                    <UnPrivateRoute path="/register" component={Register} />
+                    {/* <PrivateRoute path="/todos" roles={["user", "admin"]} component={Todos} /> */}
+                    <PrivateRoute path="/admin" roles={["admin"]} component={Admin} />
+                    <AddTicket />
+                    <Route path="/" exact component={TicketDisplay} />
+                    {/* <Route path="/chat" exact component={Chat} /> */}
+                    {/* <Route path="/edit/:id" component={EditTicket} /> */}
+                    {/* <Route path="/create" component={AddTicket} /> */}
+                  </Router>
+                  {/* </LoadedProvider> */}
+                </UsersOnlineProvider>
               </ChatProvider>
             </TicketProvider>
           </ProfileProvider>

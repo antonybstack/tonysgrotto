@@ -17,7 +17,7 @@ const Chat = (props) => {
   const [usersOnline, setUsersOnline] = useState([]);
 
   useEffect(() => {
-    console.log(socket);
+    console.log(socket.id);
 
     // socket.emit("get users");
     // socket.on("get users", (users) => {
@@ -35,24 +35,26 @@ const Chat = (props) => {
     // console.log(user);
     // //create user object to send
     if (isAuthenticated) {
-      const newUser = {
+      const authenticatedUser = {
+        socketid: socket.id,
         username: user.username,
         userid: user._id,
         avatar: user.avatar,
       };
-      socket.emit("new user", newUser);
-      socket.on("chat message", function (msg) {
-        setChats((currentChats) => [...currentChats, msg]); //push ticket object to state array
-      });
-      socket.on("status", (s) => {
-        console.log("status!");
-        console.log(s);
-      });
-      socket.on("new user", (data) => {
-        console.log("new user!");
-        console.log(data);
-        setUsersOnline((currentUsers) => [...currentUsers, data]);
-      });
+      socket.emit("authenticated user", authenticatedUser);
+
+      // socket.on("chat message", function (msg) {
+      //   setChats((currentChats) => [...currentChats, msg]); //push ticket object to state array
+      // });
+      // socket.on("status", (s) => {
+      //   console.log("status!");
+      //   console.log(s);
+      // });
+      // socket.on("new user", (data) => {
+      //   console.log("new user!");
+      //   console.log(data);
+      //   setUsersOnline((currentUsers) => [...currentUsers, data]);
+      // });
     }
 
     // const getData = async () => {

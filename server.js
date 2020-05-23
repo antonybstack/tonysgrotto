@@ -73,13 +73,13 @@ io.on("connection", (socket) => {
   console.log("IO connection function --> Current Users:: ", users);
   let num = Math.floor(Math.random() * Math.floor(999999));
   // usersOnline++;
-  userConnection = {
+  newUser = {
     socketid: socket.id,
     username: "guest" + num,
     userid: "0",
     avatar: "99",
   };
-  connections.push(userConnection);
+  connections.push(newUser);
   console.log("Connected --> Connections: ", connections);
   //console.log("Connected: %s sockets connected", connections.length);
   // io.sockets.emit("broadcast", usersOnline + " people online!");
@@ -119,26 +119,50 @@ io.on("connection", (socket) => {
     });
   });
 
-  socket.on("new user", function (data) {
-    io.emit("new user", users);
-    socket.user = {
+  socket.on("authenticated user", function (data) {
+    newUser = {
+      socketid: data.socketid,
       username: data.username,
       userid: data.userid,
       avatar: data.avatar,
     };
-    users.push(socket.user);
+
+    for (var i = 0; i < connections.length; i++) {
+      console.log("sldkjfsldfjk", connections[i].socketid, socket.id);
+      if (connections[i].socketid === data.socketid) {
+        connections.splice(i, 1);
+      }
+    }
+
+    connections.push(newUser);
     // users.push(socket.username);
     // updateUsernames();
-    sendStatus({
-      message: "Message sent",
-      clear: true,
-    });
 
-    console.log("New user function --> Data: ", data);
-    console.log("New user function --> Current Users:: ", users);
+    io.emit("authenticated user", connections);
+
+    console.log("authenticated user function --> Data: ", data);
+    console.log("authenticated user function --> Current Users:: ", connections);
   });
 
-  socket.on("disconnect", () => {
+  socket.on("guest user", function (data) {
+    newUser = {
+      socketid: data.socketid,
+      username: data.username,
+      userid: data.userid,
+      avatar: data.avatar,
+    };
+
+    connections.push(newUser);
+    // users.push(socket.username);
+    // updateUsernames();
+
+    io.emit("guest user", connections);
+
+    console.log("Guest user function --> Data: ", data);
+    console.log("Guest user function --> Current Users:: ", connections);
+  });
+
+  socket.on("disconnect", (data) => {
     for (var i = 0; i < connections.length; i++) {
       console.log("sldkjfsldfjk", connections[i].socketid, socket.id);
       if (connections[i].socketid === socket.id) {
@@ -146,43 +170,9 @@ io.on("connection", (socket) => {
       }
     }
     io.emit("disconnect", connections);
-    console.log("Client disconnected. Reason: ", "Current Users: ", users);
+    console.log("Client disconnected. Reason: ", "Current Users: ", connections);
     console.log("disconnected data: ", socket.id);
-
-    // let currentSocket;
-    // for (var key in socket.nsp) {
-    //   if (socket.nsp.hasOwnProperty(key)) {
-    //     console.log("loop:", key);
-    //   }
-    // }
-    // console.log("Disconnected --> Socket: ", socket.nsp.conn);
-
-    // if (users !== "undefined") {
-    //   for (var i = 0; i <= users.length; i++) {
-    //     if (users[i] === socket.user) {
-    //       users.splice(users.indexOf(socket.user), 1);
-    //     }
-    //   }
-    // }
-
-    // users.splice(users.id.indexOf(socket.user.id), 1);
-    // if (typeof socket.user.userid === 'undefined') console.log("socket", socket.user.userid);
-    // io.sockets.emit("logout", "user information:" + data);
-    // if (typeof socket.user.userid === "undefined") console.log("undef");
-    // if (typeof users !== "undefined") {
-    //   console.log("user[0]", users[0]);
-    //   console.log("user[0][1]", users[0].userid);
-    //   console.log(users);
-    // }
-    // users.forEach(function (user) {
-    //   var x = arrayItem.prop1 + 2;
-    //   console.log(x);
-    // });
-    // connections.splice(connections.indexOf(socket), 1);
-    // console.log('Disconnected: %s socket connected', connections.length)
-    // io.sockets.emit("broadcast", usersOnline + " people online!");
   });
 });
 
 server.listen(PORT, () => console.log("Server is running on Port: " + PORT));
-// app.listen(PORT, () => console.log("Server is running on Port: " + PORT));
