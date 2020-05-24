@@ -7,6 +7,7 @@ import { SocketContext } from "../contexts/SocketContext";
 import { UsersOnlineContext } from "../contexts/UsersOnlineContext";
 import axios from "axios";
 import moment from "moment";
+import moment_timezone from "moment-timezone";
 import * as io from "socket.io-client";
 
 const UsersOnline = () => {
@@ -23,7 +24,7 @@ const UsersOnline = () => {
 
     const socketSeconds = Number(socketTimestamp.seconds + socketTimestamp.minutes * 60 + socketTimestamp.hour * 3600);
 
-    let date = moment();
+    let date = moment().tz("America/New_York");
     let newDate = {
       seconds: date.seconds(),
       minutes: date.minutes(),

@@ -6,6 +6,7 @@ import { ChatContext } from "../contexts/ChatContext";
 import { SocketContext } from "../contexts/SocketContext";
 import axios from "axios";
 import moment from "moment";
+import moment_timezone from "moment-timezone";
 import * as io from "socket.io-client";
 import UsersOnline from "./UsersOnline";
 
@@ -99,7 +100,7 @@ const Chat = (props) => {
       // }
       // const socket = io.connect(hostname);
 
-      let date = moment();
+      let date = moment().tz("America/New_York");
       let newDate = {
         seconds: date.seconds(),
         minutes: date.minutes(),
@@ -142,7 +143,7 @@ const Chat = (props) => {
   const calcTime = (socketTimestamp) => {
     const socketSeconds = Number(socketTimestamp.seconds + socketTimestamp.minutes * 60 + socketTimestamp.hour * 3600);
 
-    let date = moment();
+    let date = moment().tz("America/New_York");
     let newDate = {
       seconds: date.seconds(),
       minutes: date.minutes(),

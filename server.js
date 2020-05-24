@@ -10,6 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const moment = require("moment");
+const moment_timezone = require("moment-timezone");
 
 app.use(cors());
 
@@ -76,7 +77,7 @@ io.on("connection", (socket) => {
   let num = Math.floor(Math.random() * Math.floor(999999));
   // usersOnline++;
 
-  let date = moment();
+  let date = moment().tz("America/New_York");
   let newDate = {
     seconds: date.seconds(),
     minutes: date.minutes(),
@@ -134,7 +135,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("authenticated user", function (data) {
-    let date = moment();
+    let date = moment().tz("America/New_York");
     let newDate = {
       seconds: date.seconds(),
       minutes: date.minutes(),
@@ -170,7 +171,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("guest user", function (data) {
-    let date = moment();
+    let date = moment().tz("America/New_York");
     let newDate = {
       seconds: date.seconds(),
       minutes: date.minutes(),
