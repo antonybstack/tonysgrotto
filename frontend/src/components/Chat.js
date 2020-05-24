@@ -5,6 +5,7 @@ import { ProfileContext } from "../contexts/ProfileContext";
 import { ChatContext } from "../contexts/ChatContext";
 import { SocketContext } from "../contexts/SocketContext";
 import axios from "axios";
+import moment from "moment";
 import * as io from "socket.io-client";
 import UsersOnline from "./UsersOnline";
 
@@ -98,14 +99,14 @@ const Chat = (props) => {
       // }
       // const socket = io.connect(hostname);
 
-      var date = new Date();
+      let date = moment();
       let newDate = {
-        seconds: date.getSeconds(),
-        minutes: date.getMinutes(),
-        hour: date.getHours(),
-        day: date.getDate(),
-        month: date.getMonth(),
-        year: date.getFullYear(),
+        seconds: date.seconds(),
+        minutes: date.minutes(),
+        hour: date.hours(),
+        day: date.date(),
+        month: date.month() + 1,
+        year: date.year(),
       };
 
       let chatPacket = {
@@ -141,14 +142,14 @@ const Chat = (props) => {
   const calcTime = (socketTimestamp) => {
     const socketSeconds = Number(socketTimestamp.seconds + socketTimestamp.minutes * 60 + socketTimestamp.hour * 3600);
 
-    let date = new Date();
+    let date = moment();
     let newDate = {
-      seconds: date.getSeconds(),
-      minutes: date.getMinutes(),
-      hour: date.getHours(),
-      day: date.getDate(),
-      month: date.getMonth(),
-      year: date.getFullYear(),
+      seconds: date.seconds(),
+      minutes: date.minutes(),
+      hour: date.hours(),
+      day: date.date(),
+      month: date.month() + 1,
+      year: date.year(),
     };
 
     const currentSeconds = Number(newDate.seconds + newDate.minutes * 60 + newDate.hour * 3600);

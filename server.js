@@ -9,6 +9,8 @@ const cookieParser = require("cookie-parser");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const moment = require("moment");
+
 app.use(cors());
 
 //bodyparser middleware
@@ -74,14 +76,14 @@ io.on("connection", (socket) => {
   let num = Math.floor(Math.random() * Math.floor(999999));
   // usersOnline++;
 
-  var date = new Date();
+  let date = moment();
   let newDate = {
-    seconds: date.getSeconds(),
-    minutes: date.getMinutes(),
-    hour: date.getHours(),
-    day: date.getDate(),
-    month: date.getMonth(),
-    year: date.getFullYear(),
+    seconds: date.seconds(),
+    minutes: date.minutes(),
+    hour: date.hours(),
+    day: date.date(),
+    month: date.month() + 1,
+    year: date.year(),
   };
 
   newUser = {
@@ -132,14 +134,14 @@ io.on("connection", (socket) => {
   });
 
   socket.on("authenticated user", function (data) {
-    var date = new Date();
+    let date = moment();
     let newDate = {
-      seconds: date.getSeconds(),
-      minutes: date.getMinutes(),
-      hour: date.getHours(),
-      day: date.getDate(),
-      month: date.getMonth(),
-      year: date.getFullYear(),
+      seconds: date.seconds(),
+      minutes: date.minutes(),
+      hour: date.hours(),
+      day: date.date(),
+      month: date.month() + 1,
+      year: date.year(),
     };
 
     newUser = {
@@ -168,14 +170,14 @@ io.on("connection", (socket) => {
   });
 
   socket.on("guest user", function (data) {
-    var date = new Date();
+    let date = moment();
     let newDate = {
-      seconds: date.getSeconds(),
-      minutes: date.getMinutes(),
-      hour: date.getHours(),
-      day: date.getDate(),
-      month: date.getMonth(),
-      year: date.getFullYear(),
+      seconds: date.seconds(),
+      minutes: date.minutes(),
+      hour: date.hours(),
+      day: date.date(),
+      month: date.month() + 1,
+      year: date.year(),
     };
 
     newUser = {

@@ -4,6 +4,7 @@ import { ProfileContext } from "../contexts/ProfileContext";
 import { ChatContext } from "../contexts/ChatContext";
 import { SocketContext } from "../contexts/SocketContext";
 import axios from "axios";
+import moment from "moment";
 import * as io from "socket.io-client";
 
 //Context provides a way to pass data through the component tree without having to pass props down manually at every level.
@@ -17,6 +18,10 @@ export default ({ children }) => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    let date = moment();
+    console.log("@@@@@@@@ ", date.seconds());
+    console.log("@@@@@@@@ ", moment(date, "HH:mm:ss: A").diff(moment().startOf("day"), "seconds"));
+
     socket.on("disconnect", (connections) => {
       console.log("someone disconnected!");
       console.log(Array.isArray(connections));
@@ -56,6 +61,7 @@ export default ({ children }) => {
     const loaded = async () => {
       const response = await getConnections();
       setTimeout(async () => {
+        console.log(usersOnline);
         setLoaded(true);
       }, 200);
     };

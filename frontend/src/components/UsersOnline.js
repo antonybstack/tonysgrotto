@@ -6,6 +6,7 @@ import { ChatContext } from "../contexts/ChatContext";
 import { SocketContext } from "../contexts/SocketContext";
 import { UsersOnlineContext } from "../contexts/UsersOnlineContext";
 import axios from "axios";
+import moment from "moment";
 import * as io from "socket.io-client";
 
 const UsersOnline = () => {
@@ -22,14 +23,14 @@ const UsersOnline = () => {
 
     const socketSeconds = Number(socketTimestamp.seconds + socketTimestamp.minutes * 60 + socketTimestamp.hour * 3600);
 
-    let date = new Date();
+    let date = moment();
     let newDate = {
-      seconds: date.getSeconds(),
-      minutes: date.getMinutes(),
-      hour: date.getHours(),
-      day: date.getDate(),
-      month: date.getMonth(),
-      year: date.getFullYear(),
+      seconds: date.seconds(),
+      minutes: date.minutes(),
+      hour: date.hours(),
+      day: date.date(),
+      month: date.month() + 1,
+      year: date.year(),
     };
     console.log("currentTime: ", newDate);
 
@@ -98,6 +99,7 @@ const UsersOnline = () => {
     let tempProfile;
     // console.log(usersOnline);
     return usersOnline.map((currentUser, i) => {
+      console.log(currentUser);
       if (currentUser.userid !== "0") {
         let profileWithoutTime = findProfile(currentUser.userid);
         tempProfile = {
