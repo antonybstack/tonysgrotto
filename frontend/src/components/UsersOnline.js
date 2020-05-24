@@ -18,6 +18,8 @@ const UsersOnline = () => {
   const [timeStamps, setTimeStamps] = useState([]);
 
   const calcTime = (socketTimestamp) => {
+    console.log("socketTimestamp: ", socketTimestamp);
+
     const socketSeconds = Number(socketTimestamp.seconds + socketTimestamp.minutes * 60 + socketTimestamp.hour * 3600);
 
     let date = new Date();
@@ -29,6 +31,7 @@ const UsersOnline = () => {
       month: date.getMonth(),
       year: date.getFullYear(),
     };
+    console.log("currentTime: ", newDate);
 
     const currentSeconds = Number(newDate.seconds + newDate.minutes * 60 + newDate.hour * 3600);
     // console.log(socketSeconds);
@@ -59,7 +62,7 @@ const UsersOnline = () => {
   }
 
   useInterval(() => {
-    console.log(usersOnline);
+    // console.log(usersOnline);
     let timestamps = [];
     usersOnline.map((currentUser, i) => {
       let secondsAgo = calcTime(currentUser.timestamp);
@@ -111,7 +114,7 @@ const UsersOnline = () => {
       }
 
       const formatTime = (seconds) => {
-        console.log(seconds);
+        // console.log(seconds);
         if (seconds >= 60 && seconds < 120) {
           return "1 minute";
         } else if (seconds >= 3600 && seconds < 7200) {

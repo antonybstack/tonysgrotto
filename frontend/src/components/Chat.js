@@ -180,7 +180,7 @@ const Chat = (props) => {
   }
 
   useInterval(() => {
-    console.log(usersOnline);
+    // console.log(usersOnline);
     let timestamps = [];
     usersOnline.map((currentUser, i) => {
       let secondsAgo = calcTime(currentUser.timestamp);
@@ -195,7 +195,7 @@ const Chat = (props) => {
   }, 1000);
 
   const formatTime = (seconds) => {
-    console.log(seconds);
+    // console.log(seconds);
     if (seconds >= 60 && seconds < 120) {
       return "1 minute";
     } else if (seconds >= 3600 && seconds < 7200) {
@@ -214,7 +214,7 @@ const Chat = (props) => {
   };
 
   const displayChats = () => {
-    console.log(chats);
+    // console.log(chats);
     return chats.map((currentData, i) => {
       let tempProfile = findProfile(currentData.user);
       return (
