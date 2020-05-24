@@ -141,4 +141,12 @@ h3 {
 .loginTime {
   color: grey;
   font-style: italic;
+  font-size: 0.8em;
+}
+
+.chatTime {
+  color: grey;
+  font-style: italic;
+  font-size: 0.8em;
+  float: right;
 }

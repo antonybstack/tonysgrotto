@@ -16,11 +16,13 @@ export default ({ children }) => {
     const getData = async () => {
       if (isAuthenticated) {
         console.log("getData was run!");
+        setChats([]);
         axios.get("/api/chats").then((res) => {
           let temp = res.data;
           console.log(temp);
           temp.map((currentData, i) => {
-            console.log(currentData);
+            console.log(temp.timestamp);
+
             setChats((currentChats) => [...currentChats, currentData]);
           });
         });

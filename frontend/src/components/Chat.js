@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { ProfileContext } from "../contexts/ProfileContext";
 import { ChatContext } from "../contexts/ChatContext";
@@ -15,24 +15,9 @@ const Chat = (props) => {
   const { profiles, setProfiles, profLoaded } = useContext(ProfileContext);
   const { socket } = useContext(SocketContext);
   const [usersOnline, setUsersOnline] = useState([]);
+  const [timeStamps, setTimeStamps] = useState([]);
 
   useEffect(() => {
-    console.log(socket.id);
-    var date = new Date();
-    console.log(date);
-    console.log(date.getMinutes());
-
-    var date = new Date();
-    let newDate = {
-      seconds: date.getSeconds(),
-      minutes: date.getMinutes(),
-      hour: date.getHours(),
-      day: date.getDate(),
-      month: date.getMonth(),
-      year: date.getFullYear(),
-    };
-
-    console.log(newDate);
     // socket.emit("get users");
     // socket.on("get users", (users) => {
     //   console.log("here!");
@@ -58,6 +43,7 @@ const Chat = (props) => {
       socket.emit("authenticated user", authenticatedUser);
 
       socket.on("chat message", function (msg) {
+        axios.post("api/chats/add", msg);
         setChats((currentChats) => [...currentChats, msg]); //push ticket object to state array
       });
       // socket.on("status", (s) => {
@@ -101,7 +87,9 @@ const Chat = (props) => {
         message: message,
       };
 
-      axios.post("api/chats/add", newChat);
+      // socket.on("chat message", function (msg) {
+      //   axios.post("api/chats/add", msg);
+      // });
 
       //window.location.hostname is for heroku deploy
       // var hostname = "http://localhost:5000";
@@ -110,9 +98,20 @@ const Chat = (props) => {
       // }
       // const socket = io.connect(hostname);
 
+      var date = new Date();
+      let newDate = {
+        seconds: date.getSeconds(),
+        minutes: date.getMinutes(),
+        hour: date.getHours(),
+        day: date.getDate(),
+        month: date.getMonth(),
+        year: date.getFullYear(),
+      };
+
       let chatPacket = {
         user: user._id,
         message: message,
+        timestamp: newDate,
       };
       socket.emit("chat message", chatPacket);
 
@@ -139,6 +138,81 @@ const Chat = (props) => {
     return tempProfile;
   };
 
+  const calcTime = (socketTimestamp) => {
+    const socketSeconds = Number(socketTimestamp.seconds + socketTimestamp.minutes * 60 + socketTimestamp.hour * 3600);
+
+    let date = new Date();
+    let newDate = {
+      seconds: date.getSeconds(),
+      minutes: date.getMinutes(),
+      hour: date.getHours(),
+      day: date.getDate(),
+      month: date.getMonth(),
+      year: date.getFullYear(),
+    };
+
+    const currentSeconds = Number(newDate.seconds + newDate.minutes * 60 + newDate.hour * 3600);
+    // console.log(socketSeconds);
+    // console.log(currentSeconds);
+    const secondsAgo = currentSeconds - socketSeconds;
+    // console.log(secondsAgo);
+    return Number(secondsAgo);
+  };
+
+  function useInterval(callback, delay) {
+    const savedCallback = useRef();
+
+    // Remember the latest callback.
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+
+    // Set up the interval.
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+      if (delay !== null) {
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  }
+
+  useInterval(() => {
+    console.log(usersOnline);
+    let timestamps = [];
+    usersOnline.map((currentUser, i) => {
+      let secondsAgo = calcTime(currentUser.timestamp);
+      // console.log(Number(secondsAgo));
+      let timestamp = {
+        socketid: currentUser.socketid,
+        time: secondsAgo,
+      };
+      timestamps.push(timestamp);
+    });
+    setTimeStamps(timestamps);
+  }, 1000);
+
+  const formatTime = (seconds) => {
+    console.log(seconds);
+    if (seconds >= 60 && seconds < 120) {
+      return "1 minute";
+    } else if (seconds >= 3600 && seconds < 7200) {
+      return "1 hour";
+    } else if (seconds >= 86400 && seconds < 172800) {
+      return Math.floor(seconds / 86400) + " day(s)";
+    } else if (seconds > 60 && seconds < 3600) {
+      return Math.floor(seconds / 60) + " minutes";
+    } else if (seconds >= 7200 && seconds < 86400) {
+      return Math.floor(seconds / 3600) + " hrs";
+    } else if (seconds >= 172800) {
+      return Math.floor(seconds / 86400) + " days";
+    } else {
+      return seconds + "s";
+    }
+  };
+
   const displayChats = () => {
     console.log(chats);
     return chats.map((currentData, i) => {
@@ -153,6 +227,7 @@ const Chat = (props) => {
             <span>{tempProfile.user}:&nbsp;</span>
           </span>
           <span>{currentData.message}</span>
+          <span className="chatTime">sent {formatTime(calcTime(currentData.timestamp))} ago.</span>
         </div>
       );
     });
