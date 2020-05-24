@@ -127,6 +127,7 @@ h3 {
   border-width: 0.5em;
   color: green;
   padding: 1em;
+  width: 25em;
 }
 
 .usersOnline h5 {
@@ -137,5 +138,7 @@ h3 {
   margin-top: 0.5em;
 }
 
-.onlineUser {
+.loginTime {
+  color: grey;
+  font-style: italic;
 }

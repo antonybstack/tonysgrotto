@@ -14,14 +14,9 @@ export const UsersOnlineContext = createContext(); //creating Context object wit
 export default ({ children }) => {
   const { socket } = useContext(SocketContext);
   const [usersOnline, setUsersOnline] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    socket.emit("get connections", "test");
-    socket.on("get connections", (data) => {
-      console.log("connections!");
-      console.log(data);
-      setUsersOnline(data);
-    });
     socket.on("disconnect", (connections) => {
       console.log("someone disconnected!");
       console.log(Array.isArray(connections));
@@ -42,6 +37,30 @@ export default ({ children }) => {
       setUsersOnline(data);
     });
 
+    socket.emit("get connections", "test");
+    socket.on("get connections", (data) => {
+      console.log("connections!");
+      console.log(data);
+      setUsersOnline(data);
+    });
+
+    const getConnections = async () => {
+      socket.emit("get connections", "test");
+      socket.on("get connections", (data) => {
+        console.log("connections!");
+        console.log(data);
+        setUsersOnline(data);
+      });
+    };
+
+    const loaded = async () => {
+      const response = await getConnections();
+      setTimeout(async () => {
+        setLoaded(true);
+      }, 200);
+    };
+    loaded();
+
     // if (isAuthenticated) {
     //   socket.on("new user", (data) => {
     //     console.log("here!");
@@ -56,5 +75,13 @@ export default ({ children }) => {
     // }
   }, [socket]);
 
-  return <UsersOnlineContext.Provider value={{ usersOnline, setUsersOnline }}>{children}</UsersOnlineContext.Provider>;
+  return (
+    <React.Fragment>
+      {!loaded ? (
+        <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
+      ) : (
+        <UsersOnlineContext.Provider value={{ usersOnline, setUsersOnline }}>{children}</UsersOnlineContext.Provider>
+      )}
+    </React.Fragment>
+  );
 };

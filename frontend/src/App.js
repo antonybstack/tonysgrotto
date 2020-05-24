@@ -17,6 +17,7 @@ import PrivateRoute from "./hocs/PrivateRoute";
 import UnPrivateRoute from "./hocs/UnPrivateRoute";
 import TicketDisplay from "./components/TicketDisplay";
 import AddTicket from "./changeData/AddTicket";
+import UsersOnline from "./components/UsersOnline";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // App is a component that acts as a container for all other components
@@ -37,6 +38,7 @@ function App() {
                   <Router>
                     {/*  links text to route */}
                     <NavBar />
+                    <UsersOnline />
                     <Chat />
                     <UnPrivateRoute path="/login" component={Login} />
                     <UnPrivateRoute path="/register" component={Register} />

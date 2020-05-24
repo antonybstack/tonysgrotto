@@ -18,7 +18,21 @@ const Chat = (props) => {
 
   useEffect(() => {
     console.log(socket.id);
+    var date = new Date();
+    console.log(date);
+    console.log(date.getMinutes());
 
+    var date = new Date();
+    let newDate = {
+      seconds: date.getSeconds(),
+      minutes: date.getMinutes(),
+      hour: date.getHours(),
+      day: date.getDate(),
+      month: date.getMonth(),
+      year: date.getFullYear(),
+    };
+
+    console.log(newDate);
     // socket.emit("get users");
     // socket.on("get users", (users) => {
     //   console.log("here!");
@@ -159,10 +173,6 @@ const Chat = (props) => {
             Send
           </button>
         </div>
-        <div className="usersOnline">
-          <h5>Users Currently Online:</h5>
-          <UsersOnline />
-        </div>
       </div>
     );
   };
@@ -181,10 +191,6 @@ const Chat = (props) => {
           <button className="chatSend" onClick={null} disabled>
             Send
           </button>
-        </div>
-        <div className="usersOnline">
-          <h5>Users Currently Online:</h5>
-          <UsersOnline />
         </div>
       </div>
     );

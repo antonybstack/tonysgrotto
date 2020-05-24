@@ -58,9 +58,9 @@ users = [];
 connections = [];
 
 io.on("connection", (socket) => {
-  function currentUsers() {
-    io.sockets.emit("get users", connections);
-  }
+  var loggedIn = true;
+  var loggedInTimer = 0;
+
   console.log("USER CONNECTED...", socket.id);
   // let currentSocket;
   // for (var key in socket.nsp.connected) {
@@ -73,11 +73,23 @@ io.on("connection", (socket) => {
   console.log("IO connection function --> Current Users:: ", users);
   let num = Math.floor(Math.random() * Math.floor(999999));
   // usersOnline++;
+
+  var date = new Date();
+  let newDate = {
+    seconds: date.getSeconds(),
+    minutes: date.getMinutes(),
+    hour: date.getHours(),
+    day: date.getDate(),
+    month: date.getMonth(),
+    year: date.getFullYear(),
+  };
+
   newUser = {
     socketid: socket.id,
     username: "guest" + num,
     userid: "0",
     avatar: "99",
+    timestamp: newDate,
   };
   connections.push(newUser);
   console.log("Connected --> Connections: ", connections);
@@ -120,11 +132,22 @@ io.on("connection", (socket) => {
   });
 
   socket.on("authenticated user", function (data) {
+    var date = new Date();
+    let newDate = {
+      seconds: date.getSeconds(),
+      minutes: date.getMinutes(),
+      hour: date.getHours(),
+      day: date.getDate(),
+      month: date.getMonth(),
+      year: date.getFullYear(),
+    };
+
     newUser = {
       socketid: data.socketid,
       username: data.username,
       userid: data.userid,
       avatar: data.avatar,
+      timestamp: newDate,
     };
 
     for (var i = 0; i < connections.length; i++) {
@@ -145,11 +168,22 @@ io.on("connection", (socket) => {
   });
 
   socket.on("guest user", function (data) {
+    var date = new Date();
+    let newDate = {
+      seconds: date.getSeconds(),
+      minutes: date.getMinutes(),
+      hour: date.getHours(),
+      day: date.getDate(),
+      month: date.getMonth(),
+      year: date.getFullYear(),
+    };
+
     newUser = {
       socketid: data.socketid,
       username: data.username,
       userid: data.userid,
       avatar: data.avatar,
+      timestamp: newDate,
     };
 
     connections.push(newUser);
