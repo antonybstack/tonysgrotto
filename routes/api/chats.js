@@ -36,6 +36,16 @@ chatRoutes.route("/add").post(function (req, res) {
   //   });
 });
 
+chatRoutes.route("/delete/:id").delete(function (req, res) {
+  Chat.findByIdAndRemove(req.params.id, function (err, chat) {
+    if (err) {
+      console.log(err);
+      return res.status(500).send({ chat });
+    }
+    return res.status(200).send({ chat });
+  });
+});
+
 // chatRoutes.route("/:id").get(function (req, res) {
 //   let id = req.params.id;
 //   Chat.findById(id, function (err, chat) {

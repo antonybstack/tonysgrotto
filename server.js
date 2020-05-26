@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 5000;
 
 const moment = require("moment");
 const moment_timezone = require("moment-timezone");
+const axios = require("axios");
 
 app.use(cors());
 
@@ -126,7 +127,9 @@ io.on("connection", (socket) => {
   };
 
   socket.on("chat message", (msg) => {
-    io.emit("chat message", msg);
+    
+    io.emit("chat message", msg); 
+    axios.post("http://localhost:5000/api/chats/add", msg);
     console.log(msg);
     sendStatus({
       message: "Message sent",

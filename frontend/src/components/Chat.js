@@ -19,6 +19,8 @@ const Chat = (props) => {
   const [usersOnline, setUsersOnline] = useState([]);
   const [timeStamps, setTimeStamps] = useState([]);
 
+ 
+
   useEffect(() => {
     // socket.emit("get users");
     // socket.on("get users", (users) => {
@@ -44,10 +46,7 @@ const Chat = (props) => {
       };
       socket.emit("authenticated user", authenticatedUser);
 
-      socket.on("chat message", function (msg) {
-        axios.post("api/chats/add", msg);
-        setChats((currentChats) => [...currentChats, msg]); //push ticket object to state array
-      });
+      
       // socket.on("status", (s) => {
       //   console.log("status!");
       //   console.log(s);
@@ -57,7 +56,14 @@ const Chat = (props) => {
       //   console.log(data);
       //   setUsersOnline((currentUsers) => [...currentUsers, data]);
       // });
+      socket.on("chat message", function (msg) {
+        console.log(msg);
+        // axios.post("api/chats/add", msg);
+        setChats((currentChats) => [...currentChats, msg]); //push chat object to state array
+      });
     }
+
+    
 
     // const getData = async () => {
     //   if (isAuthenticated) {
@@ -115,13 +121,16 @@ const Chat = (props) => {
         message: message,
         timestamp: newDate,
       };
+      console.log("HEEEEERE :)");
       socket.emit("chat message", chatPacket);
 
       setMessage("");
 
       var elem = document.getElementById("chatty");
       elem.scrollTop = elem.scrollHeight;
+      
     }
+    
   };
 
   const findProfile = (id) => {
@@ -235,6 +244,22 @@ const Chat = (props) => {
     });
   };
 
+  const clearChats = () => {
+    // e.preventDefault();
+    chats.map((t, index) => {
+      axios.delete("api/chats/delete/" + t._id);
+      // if (t._id === chat._id) {
+      //   const i = index;
+      //   const newChats = chats.slice();
+      //   newChats.splice(i, 1); //remove 1 element before 'index' (3rd parameter is empty because we dont want to insert anything)
+      //   setChats(newChats);
+      // }
+      // return null;
+    });
+    
+
+  }
+
   const authenticatedChat = () => {
     return (
       <div className="chatroom">
@@ -250,6 +275,9 @@ const Chat = (props) => {
             Send
           </button>
         </div>
+        <button className="clearChats" onClick={clearChats}>
+            clear
+          </button>
       </div>
     );
   };
@@ -269,6 +297,7 @@ const Chat = (props) => {
             Send
           </button>
         </div>
+        
       </div>
     );
   };
