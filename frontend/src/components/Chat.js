@@ -19,8 +19,6 @@ const Chat = (props) => {
   const [usersOnline, setUsersOnline] = useState([]);
   const [timeStamps, setTimeStamps] = useState([]);
 
- 
-
   useEffect(() => {
     // socket.emit("get users");
     // socket.on("get users", (users) => {
@@ -46,7 +44,6 @@ const Chat = (props) => {
       };
       socket.emit("authenticated user", authenticatedUser);
 
-      
       // socket.on("status", (s) => {
       //   console.log("status!");
       //   console.log(s);
@@ -62,8 +59,6 @@ const Chat = (props) => {
         setChats((currentChats) => [...currentChats, msg]); //push chat object to state array
       });
     }
-
-    
 
     // const getData = async () => {
     //   if (isAuthenticated) {
@@ -122,15 +117,14 @@ const Chat = (props) => {
         timestamp: newDate,
       };
       console.log("HEEEEERE :)");
+      console.log(window.location.hostname);
       socket.emit("chat message", chatPacket);
 
       setMessage("");
 
       var elem = document.getElementById("chatty");
       elem.scrollTop = elem.scrollHeight;
-      
     }
-    
   };
 
   const findProfile = (id) => {
@@ -256,9 +250,7 @@ const Chat = (props) => {
       // }
       // return null;
     });
-    
-
-  }
+  };
 
   const authenticatedChat = () => {
     return (
@@ -276,8 +268,8 @@ const Chat = (props) => {
           </button>
         </div>
         <button className="clearChats" onClick={clearChats}>
-            clear
-          </button>
+          clear
+        </button>
       </div>
     );
   };
@@ -297,7 +289,6 @@ const Chat = (props) => {
             Send
           </button>
         </div>
-        
       </div>
     );
   };

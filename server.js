@@ -127,14 +127,34 @@ io.on("connection", (socket) => {
   };
 
   socket.on("chat message", (msg) => {
-    
-    io.emit("chat message", msg); 
-    axios.post("http://localhost:5000/api/chats/add", msg);
+    io.emit("chat message", msg);
+    // axios.post("/api/chats/add", msg);
+
+    const addChat = async () => {
+      await axios
+        .post("http://localhost:5000/api/chats/add", msg)
+        .then((res) => {
+          console.log("chat added!", msg);
+        })
+        .catch(function (error) {
+          console.log(error);
+          axios
+            .post("http://still-headland-32486.herokuapp.com/api/chats/add", msg)
+            .then((res) => {
+              console.log("chat added!", msg);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        });
+    };
+    addChat();
+
     console.log(msg);
-    sendStatus({
-      message: "Message sent",
-      clear: true,
-    });
+    // sendStatus({
+    //   message: "Message sent",
+    //   clear: true,
+    // });
   });
 
   socket.on("authenticated user", function (data) {
