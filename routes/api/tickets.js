@@ -21,7 +21,7 @@ ticketRoutes.route("/:id").get(function (req, res) {
   });
 });
 
-ticketRoutes.route("/add").post(function (req, res) {
+ticketRoutes.route("/add").post(function (req, res, err) {
   let ticket = new Ticket(req.body);
   console.log("route log", req.body, res.body);
   ticket
@@ -30,7 +30,8 @@ ticketRoutes.route("/add").post(function (req, res) {
       res.status(200).json({ ticket });
     })
     .catch((err) => {
-      res.status(400).send("adding new ticket failed");
+      // res.status(400).send("adding new ticket failed");
+      res.status(400).json({ message: { msgBody: "Ticket requires name", msgError: true } });
     });
 });
 

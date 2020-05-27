@@ -6,6 +6,7 @@ const getStyle = (props) => {
 };
 
 const Message = (props) => {
+  console.log(props.message.msgBody);
   return (
     <div className={getStyle(props)} role="alert">
       {props.message.msgBody}

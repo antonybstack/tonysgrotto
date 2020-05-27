@@ -1,7 +1,9 @@
 import React from "react";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { TicketContext } from "../contexts/TicketContext";
 import { AuthContext } from "../contexts/AuthContext";
+import { SocketContext } from "../contexts/SocketContext";
+import Message from "../components/Message";
 import axios from "axios";
 //props takes in data from Link, includes data like location /create
 const AddTicket = () => {
@@ -9,27 +11,32 @@ const AddTicket = () => {
   const { tickets, setTickets } = useContext(TicketContext);
   const { user, isAuthenticated } = useContext(AuthContext);
   const [name, setName] = useState("");
-  const [validation, setValidation] = useState(""); //input validation message
+  const [message, setMessage] = useState(null);
+  const { socket } = useContext(SocketContext);
+
+  useEffect(() => {
+    setMessage(null);
+  }, [socket]);
 
   const handleChange = (e) => {
     setName(e.target.value);
   };
 
   //checks if input field is empty
-  const validate = (name) => {
-    if (name === "") {
-      setValidation("field cannot be empty");
-      return false;
-    } else {
-      setValidation("");
-      return true;
-    }
-  };
+  // const validate = (name) => {
+  //   if (name === "") {
+  //     setValidation("field cannot be empty");
+  //     return false;
+  //   } else {
+  //     setValidation("");
+  //     return true;
+  //   }
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     //checks if empty
-    if (validate(name)) {
+    if (true) {
       //creates ticket object
       const newTicket = {
         ticket_name: name,
@@ -37,9 +44,16 @@ const AddTicket = () => {
         created_by: user,
       };
       // HTTP POST method sends data to the server
-      axios.post("api/tickets/add", newTicket).then((res) => {
-        setTickets((currentTickets) => [...currentTickets, { _id: res.data.ticket._id, ticket_name: name, ticket_status: "backlog", created_by: user._id }]); //push ticket object to state array
-      });
+      axios
+        .post("api/tickets/add", newTicket)
+        .then((res) => {
+          console.log(res);
+          setMessage(null);
+          setTickets((currentTickets) => [...currentTickets, { _id: res.data.ticket._id, ticket_name: name, ticket_status: "backlog", created_by: user._id }]); //push ticket object to state array
+        })
+        .catch(function (error) {
+          setMessage(error.response.data.message);
+        });
       setName(""); //resets name input field
     }
   };
@@ -57,7 +71,8 @@ const AddTicket = () => {
           </div>
         </form>
       )}
-      <div className="validation">{validation}</div>
+      {message ? <Message message={message} /> : null}
+      {/* <div className="validation">{validation}</div> */}
     </React.Fragment>
   );
 };

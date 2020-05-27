@@ -7,34 +7,17 @@ import { SocketContext } from "../contexts/SocketContext";
 import axios from "axios";
 import moment from "moment";
 import moment_timezone from "moment-timezone";
-import * as io from "socket.io-client";
-import UsersOnline from "./UsersOnline";
 
 const Chat = (props) => {
   const [message, setMessage] = useState("");
   const { user, isAuthenticated } = useContext(AuthContext);
   const { chats, setChats } = useContext(ChatContext);
-  const { profiles, setProfiles, profLoaded } = useContext(ProfileContext);
+  const { profiles } = useContext(ProfileContext);
   const { socket } = useContext(SocketContext);
   const [usersOnline, setUsersOnline] = useState([]);
   const [timeStamps, setTimeStamps] = useState([]);
 
   useEffect(() => {
-    // socket.emit("get users");
-    // socket.on("get users", (users) => {
-    //   console.log("here!");
-    //   console.log(users);
-    // });
-    //connect to socket io
-    //window.location.hostname is for heroku deploy
-    // var hostname = "http://localhost:5000";
-    // if (window.location.hostname.toString() != "localhost") {
-    //   hostname = window.location.hostname;
-    // }
-    // const socket = io.connect(hostname);
-    // console.log(chats);
-    // console.log(user);
-    // //create user object to send
     if (isAuthenticated) {
       const authenticatedUser = {
         socketid: socket.id,
@@ -43,41 +26,14 @@ const Chat = (props) => {
         avatar: user.avatar,
       };
       socket.emit("authenticated user", authenticatedUser);
-
-      // socket.on("status", (s) => {
-      //   console.log("status!");
-      //   console.log(s);
-      // });
-      // socket.on("new user", (data) => {
-      //   console.log("new user!");
-      //   console.log(data);
-      //   setUsersOnline((currentUsers) => [...currentUsers, data]);
-      // });
       socket.on("chat message", function (msg) {
         socket.on("status", (statusMessage) => {
           console.log(statusMessage);
         });
         console.log(msg);
-        // axios.post("api/chats/add", msg);
         setChats((currentChats) => [...currentChats, msg]); //push chat object to state array
       });
     }
-
-    // const getData = async () => {
-    //   if (isAuthenticated) {
-    //     console.log("getData was run!");
-    //     const response = await axios.get("/api/chats");
-    //     setData(response.data);
-    //     response.data.map((currentData, i) => {
-    //       setMessages((currentMessages) => [...currentMessages, currentData]);
-    //     });
-    //   } else {
-    //     setMessages([]);
-    //   }
-    // };
-    // window.location.hostname is for heroku deploy
-    // uses promise so that connectSocket runs after getData is complete
-    // getData();
     //rerenders when user logs in and user updates so that it notifies that the user has joined the chatroom
   }, [isAuthenticated]);
 
@@ -93,27 +49,7 @@ const Chat = (props) => {
         message: message,
       };
 
-      // socket.on("chat message", function (msg) {
-      //   axios.post("api/chats/add", msg);
-      // });
-
-      //window.location.hostname is for heroku deploy
-      // var hostname = "http://localhost:5000";
-      // if (window.location.hostname.toString() != "localhost") {
-      //   hostname = window.location.hostname;
-      // }
-      // const socket = io.connect(hostname);
-
       let date = moment().tz("America/New_York");
-      // let newDate = {
-      //   seconds: date.seconds(),
-      //   minutes: date.minutes(),
-      //   hour: date.hours(),
-      //   day: date.date(),
-      //   month: date.month() + 1,
-      //   year: date.year(),
-      // };
-
       let chatPacket = {
         user: user._id,
         message: message,
@@ -175,11 +111,9 @@ const Chat = (props) => {
   }
 
   useInterval(() => {
-    // console.log(usersOnline);
     let timestamps = [];
     usersOnline.map((currentUser, i) => {
       let secondsAgo = calcTime(currentUser.timestamp);
-      // console.log(Number(secondsAgo));
       let timestamp = {
         socketid: currentUser.socketid,
         time: secondsAgo,
@@ -190,7 +124,6 @@ const Chat = (props) => {
   }, 1000);
 
   const formatTime = (seconds) => {
-    // console.log(seconds);
     if (seconds >= 60 && seconds < 120) {
       return "1 minute";
     } else if (seconds >= 3600 && seconds < 7200) {
@@ -209,7 +142,6 @@ const Chat = (props) => {
   };
 
   const displayChats = () => {
-    // console.log(chats);
     return chats.map((currentData, i) => {
       let tempProfile = findProfile(currentData.user);
       return (
@@ -229,16 +161,8 @@ const Chat = (props) => {
   };
 
   const clearChats = () => {
-    // e.preventDefault();
     chats.map((t, index) => {
       axios.delete("api/chats/delete/" + t._id);
-      // if (t._id === chat._id) {
-      //   const i = index;
-      //   const newChats = chats.slice();
-      //   newChats.splice(i, 1); //remove 1 element before 'index' (3rd parameter is empty because we dont want to insert anything)
-      //   setChats(newChats);
-      // }
-      // return null;
     });
   };
 

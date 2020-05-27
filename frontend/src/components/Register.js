@@ -24,16 +24,6 @@ const Register = (props) => {
     setUser({ username: "", password: "", role: "user" });
   };
 
-  const validate = () => {
-    if (user.username.length < 4 || user.username.length > 20) {
-      setMessage("Username must be between 4 and 20 characters long");
-    } else if (user.password.length < 4 || user.password.length > 20) {
-      setMessage("Password must be between 4 and 20 characters long");
-    } else {
-      setMessage("");
-    }
-  };
-
   const redirectCounter = () => {
     console.log("exe");
     var i = 5;
@@ -43,21 +33,21 @@ const Register = (props) => {
         props.history.push("/login");
       } else {
         console.log(i);
-        setRedirectMessage("You will be redirected to the login page in " + i + " seconds");
+        if (i === 5 || i === 2) {
+          setRedirectMessage("You will be redirected to sign in " + i + " seconds.");
+        } else if (i === 4 || i === 1) {
+          setRedirectMessage("You will be redirected to sign in " + i + " seconds..");
+        } else {
+          setRedirectMessage("You will be redirected to sign in " + i + " seconds...");
+        }
         i--;
         setTimeout(check, 1000); // check again in a second
       }
     };
     check();
-    // for (i = 0; i < 5; i++) {
-    //   setRedirectMessage("You will be redirected to the login page in" + i + " seconds")
-    // }
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    // if (user.username.length < 4 || user.username.length > 20) {
-    //   setMessage("Username must be between 4 and 20 characters long");
-    // }
     axios
       .post("/api/users/register", user)
       .then((res) => {
@@ -73,10 +63,6 @@ const Register = (props) => {
         setMessage(message);
       });
   };
-
-  // const redirect = () => {
-  //   props.history.push("/login");
-  // }
 
   return (
     <div>

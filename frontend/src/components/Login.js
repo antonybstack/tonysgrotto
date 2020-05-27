@@ -21,66 +21,26 @@ const Login = (props) => {
     axios
       .post("/api/users/login", user)
       .then((res) => {
+        console.log(res);
         const { isAuthenticated, user } = res.data;
         if (isAuthenticated) {
           authContext.setUser(user);
           authContext.setIsAuthenticated(isAuthenticated);
-
-          // console.log("connectSocket was run!");
-          // var hostname = "http://localhost:5000";
-          // if (window.location.hostname.toString() != "localhost") {
-          //   hostname = window.location.hostname;
-          // }
-          // const socket = io.connect(hostname);
-          // socket.on("chat message", function (msg) {
-          //   setChats((currentChats) => [...currentChats, msg]);
-          // });
-
-          // let chatPacket = {
-          //   user: user._id,
-          //   message: "has joined the chatroom!",
-          // };
-          // socket.emit("chat message", chatPacket);
-          // // socket.close();
-          // socket.emit("disconnect");
-
-          props.history.push("/");
+          setMessage({ msgBody: "Account successfully logged in", msgError: false });
+          // props.history.push("/");
         }
         // else {
         //   setChats([]);
         // }
       })
       .catch(function (error) {
-        console.log(error);
+        console.log(message);
+        setMessage({ msgBody: "Invalid username or password", msgError: true });
+        console.log(error.response);
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.statusText);
       });
-
-    // const connectSocket = async () => {
-    //   if (isAuthenticated) {
-    //     console.log("connectSocket was run!");
-    //     const result = await getData();
-    //     var hostname = "http://localhost:5000";
-    //     if (window.location.hostname.toString() != "localhost") {
-    //       hostname = window.location.hostname;
-    //     }
-    //     const socket = io.connect(hostname);
-    //     socket.on("chat message", function (msg) {
-    //       setMessages((currentMessages) => [...currentMessages, msg]);
-    //     });
-
-    //     let chatPacket = {
-    //       user: user._id,
-    //       message: "has joined the chatroom!",
-    //     };
-    //     socket.emit("chat message", chatPacket);
-    //     // socket.close();
-    //     socket.emit("disconnect");
-    //   } else {
-    //     setMessages([]);
-    //   }
-    // };
-
-    //uses promise so that connectSocket runs after getData is complete
-    // connectSocket();
   };
 
   return (

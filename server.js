@@ -5,9 +5,12 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const flash = require("connect-flash");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+app.use(flash());
 
 const moment = require("moment");
 const moment_timezone = require("moment-timezone");

@@ -153,8 +153,10 @@ h3 {
 
 .errorMessage {
   color: red;
+  font-size: smaller;
 }
 
 .successMessage {
   color: green;
+  font-size: smaller;
 }

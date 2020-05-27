@@ -52,6 +52,7 @@ userRoutes.post("/register", (req, res) => {
 // LOGIN
 // "local coming from LocalStrategy in passport.js"
 userRoutes.post("/login", passport.authenticate("local", { session: false }), (req, res) => {
+  //isAuthenticated aka req.session.passport.user !== undefined
   if (req.isAuthenticated()) {
     console.log(req.isAuthenticated());
     //req.user is coming from: password.use in passport.js uses comparepassword function, that function is in user.model.js which returns user object if password matches ('this')
