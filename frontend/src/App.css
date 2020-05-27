@@ -150,3 +150,11 @@ h3 {
   font-size: 0.8em;
   float: right;
 }
+
+.errorMessage {
+  color: red;
+}
+
+.successMessage {
+  color: green;
+}

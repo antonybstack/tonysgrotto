@@ -36,11 +36,11 @@ export default ({ children }) => {
       console.log(data);
       setUsersOnline(data);
     });
-    socket.on("guest user", (data) => {
-      console.log("guest connection!");
-      console.log(data);
-      setUsersOnline(data);
-    });
+    // socket.on("guest user", (data) => {
+    //   console.log("guest connection!");
+    //   console.log(data);
+    //   setUsersOnline(data);
+    // });
 
     socket.emit("get connections", "test");
     socket.on("get connections", (data) => {
@@ -63,7 +63,7 @@ export default ({ children }) => {
       setTimeout(async () => {
         console.log(usersOnline);
         setLoaded(true);
-      }, 200);
+      }, 100);
     };
     loaded();
 

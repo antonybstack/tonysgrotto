@@ -20,7 +20,7 @@ const signToken = (userID) => {
   );
 };
 
-//CREATE
+//REGISTER
 userRoutes.post("/register", (req, res) => {
   const { username, password, role } = req.body;
   //check if username exists first
@@ -32,10 +32,19 @@ userRoutes.post("/register", (req, res) => {
     //if username doesnt exist yet
     else {
       const newUser = new User({ username, password, role });
-      newUser.save((err) => {
-        if (err) res.status(500).json({ message: { msgBody: err, msgError: true } });
-        else res.status(201).json({ message: { msgBody: "Account successfully created", msgError: false } });
-      });
+      //username length check
+      if (username.length < 4 || username.length > 20) {
+        res.status(400).json({ message: { msgBody: "Username must be between 4 and 20 characters long", msgError: true } });
+        //password length check
+      } else if (password.length < 4 || password.length > 20) {
+        res.status(400).json({ message: { msgBody: "Password must be between 4 and 20 characters long", msgError: true } });
+      } else {
+        newUser.save((err) => {
+          //if mongoose schema creation error
+          if (err) res.status(500).json({ message: { msgBody: err, msgError: true } });
+          else res.status(201).json({ message: { msgBody: "Account successfully created.", msgError: false } });
+        });
+      }
     }
   });
 });

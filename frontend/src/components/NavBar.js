@@ -6,13 +6,14 @@ import { SocketContext } from "../contexts/SocketContext";
 import { UsersOnlineContext } from "../contexts/UsersOnlineContext";
 import Chat from "./Chat";
 import * as io from "socket.io-client";
+import axios from "axios";
 
 const Navbar = (props) => {
   const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
   const { socket, setSocket } = useContext(SocketContext);
   const { usersOnline, setUsersOnline } = useContext(UsersOnlineContext);
 
-  const onClickLogoutHandler = () => {
+  const onClickLogoutHandler = async () => {
     console.log(socket.id);
     socket.emit("get connections", "test");
 
@@ -38,12 +39,27 @@ const Navbar = (props) => {
     socket.disconnect();
     // socket.emit("guest user", tempUser);
 
-    AuthService.logout().then((data) => {
-      if (data.success) {
-        setUser(data.user);
-        setIsAuthenticated(false);
-      }
-    });
+    // const addChat = async () => {
+    await axios
+      .get("/api/users/logout")
+      .then((res) => {
+        console.log("Logged out!", res);
+        if (res.data.success) {
+          setUser(res.data.user);
+          setIsAuthenticated(false);
+        }
+      })
+      .catch(function (error) {
+        console.log("Logged out failed", error);
+      });
+    // };
+
+    // AuthService.logout().then((data) => {
+    //   if (data.success) {
+    //     setUser(data.user);
+    //     setIsAuthenticated(false);
+    //   }
+    // });
     var hostname = "http://localhost:5000";
     if (window.location.hostname.toString() != "localhost") {
       hostname = window.location.hostname;

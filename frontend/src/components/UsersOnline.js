@@ -20,26 +20,10 @@ const UsersOnline = () => {
   const [timeStamps, setTimeStamps] = useState([]);
 
   const calcTime = (socketTimestamp) => {
-    console.log("socketTimestamp: ", socketTimestamp);
-
-    const socketSeconds = Number(socketTimestamp.seconds + socketTimestamp.minutes * 60 + socketTimestamp.hour * 3600);
-
     let date = moment().tz("America/New_York");
-    let newDate = {
-      seconds: date.seconds(),
-      minutes: date.minutes(),
-      hour: date.hours(),
-      day: date.date(),
-      month: date.month() + 1,
-      year: date.year(),
-    };
-    console.log("currentTime: ", newDate);
-
-    const currentSeconds = Number(newDate.seconds + newDate.minutes * 60 + newDate.hour * 3600);
-    // console.log(socketSeconds);
-    // console.log(currentSeconds);
+    const currentSeconds = moment(date).diff(moment().startOf("day"), "seconds");
+    const socketSeconds = moment(socketTimestamp).diff(moment().startOf("day"), "seconds");
     const secondsAgo = currentSeconds - socketSeconds;
-    // console.log(secondsAgo);
     return Number(secondsAgo);
   };
 

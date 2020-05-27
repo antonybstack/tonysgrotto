@@ -54,6 +54,9 @@ const Chat = (props) => {
       //   setUsersOnline((currentUsers) => [...currentUsers, data]);
       // });
       socket.on("chat message", function (msg) {
+        socket.on("status", (statusMessage) => {
+          console.log(statusMessage);
+        });
         console.log(msg);
         // axios.post("api/chats/add", msg);
         setChats((currentChats) => [...currentChats, msg]); //push chat object to state array
@@ -102,19 +105,19 @@ const Chat = (props) => {
       // const socket = io.connect(hostname);
 
       let date = moment().tz("America/New_York");
-      let newDate = {
-        seconds: date.seconds(),
-        minutes: date.minutes(),
-        hour: date.hours(),
-        day: date.date(),
-        month: date.month() + 1,
-        year: date.year(),
-      };
+      // let newDate = {
+      //   seconds: date.seconds(),
+      //   minutes: date.minutes(),
+      //   hour: date.hours(),
+      //   day: date.date(),
+      //   month: date.month() + 1,
+      //   year: date.year(),
+      // };
 
       let chatPacket = {
         user: user._id,
         message: message,
-        timestamp: newDate,
+        timestamp: date,
       };
       console.log("HEEEEERE :)");
       console.log(window.location.hostname);
@@ -144,23 +147,10 @@ const Chat = (props) => {
   };
 
   const calcTime = (socketTimestamp) => {
-    const socketSeconds = Number(socketTimestamp.seconds + socketTimestamp.minutes * 60 + socketTimestamp.hour * 3600);
-
     let date = moment().tz("America/New_York");
-    let newDate = {
-      seconds: date.seconds(),
-      minutes: date.minutes(),
-      hour: date.hours(),
-      day: date.date(),
-      month: date.month() + 1,
-      year: date.year(),
-    };
-
-    const currentSeconds = Number(newDate.seconds + newDate.minutes * 60 + newDate.hour * 3600);
-    // console.log(socketSeconds);
-    // console.log(currentSeconds);
+    const currentSeconds = moment(date).diff(moment().startOf("day"), "seconds");
+    const socketSeconds = moment(socketTimestamp).diff(moment().startOf("day"), "seconds");
     const secondsAgo = currentSeconds - socketSeconds;
-    // console.log(secondsAgo);
     return Number(secondsAgo);
   };
 

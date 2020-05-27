@@ -13,6 +13,7 @@ let User = new Schema({
     type: String,
     required: true,
     min: 4,
+    max: 20,
   },
   role: {
     type: String,

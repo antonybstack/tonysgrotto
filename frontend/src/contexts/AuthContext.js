@@ -34,7 +34,7 @@ export default ({ children }) => {
         setIsAuthenticated(false);
         setTimeout(() => {
           setIsLoaded(true);
-        }, 500);
+        }, 100);
 
         console.log(error);
       });
