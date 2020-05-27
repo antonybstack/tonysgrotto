@@ -1,8 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import ReactDOM from "react-dom";
-import Auth from "../services/Auth";
 import axios from "axios";
-import App from "../App";
 
 //purpose of this context is to hold the information of an individual user that is logged in on the website
 
@@ -22,12 +19,6 @@ export default ({ children }) => {
         setTimeout(() => {
           setIsLoaded(true);
         }, 100);
-
-        // const { isAuthenticated, user } = res.data;
-        // if (isAuthenticated) {
-        //   authContext.setUser(user);
-        //   authContext.setIsAuthenticated(isAuthenticated);
-        //   props.history.push("/");
       })
       .catch(function (error) {
         setUser({ username: "", role: "" });
@@ -38,17 +29,6 @@ export default ({ children }) => {
 
         console.log(error);
       });
-
-    // return fetch("/api/users/authenticated").then((res) => {
-    //   if (res.status !== 401) return res.json().then((data) => data);
-    //   else return { isAuthenticated: false, user: { username: "", role: "" } };
-    // });
-
-    // Auth.isAuthenticated().then((data) => {
-    //   setUser(data.user);
-    //   setIsAuthenticated(data.isAuthenticated);
-    //   setIsLoaded(true);
-    // });
   }, []);
 
   // providing user and isAuthenticated variables to be global variables
@@ -61,7 +41,6 @@ export default ({ children }) => {
       ) : (
         <div className="test">
           <AuthContext.Provider value={{ user, setUser, isAuthenticated, setIsAuthenticated }}>{children}</AuthContext.Provider>
-          {/* <img className="loading" src={require("../assets/loading.gif")} alt="loading..." /> */}
         </div>
       )}
     </div>

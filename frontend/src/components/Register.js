@@ -1,6 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
-import AuthService from "../services/Auth";
 import Message from "../components/Message";
 import axios from "axios";
 
@@ -25,11 +23,9 @@ const Register = (props) => {
   };
 
   const redirectCounter = () => {
-    console.log("exe");
     var i = 5;
     const check = () => {
       if (i === 0) {
-        console.log("exe1");
         props.history.push("/login");
       } else {
         console.log(i);

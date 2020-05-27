@@ -28,14 +28,13 @@ const DeleteTicket = (props) => {
     // HTTP DELETE method send request to the server
     axios.delete("api/tickets/delete/" + ticket._id).then((res) => {
       // iterates tickets array to find specific ticket to delete
-      tickets.map((t, index) => {
+      tickets.forEach((t, index) => {
         if (t._id === ticket._id) {
           const i = index;
           const newTickets = tickets.slice();
           newTickets.splice(i, 1); //remove 1 element before 'index' (3rd parameter is empty because we dont want to insert anything)
           setTickets(newTickets);
         }
-        return null;
       });
     });
   };

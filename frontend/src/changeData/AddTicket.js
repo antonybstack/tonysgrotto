@@ -8,7 +8,7 @@ import axios from "axios";
 //props takes in data from Link, includes data like location /create
 const AddTicket = () => {
   //state that is able to update context
-  const { tickets, setTickets } = useContext(TicketContext);
+  const { setTickets } = useContext(TicketContext);
   const { user, isAuthenticated } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [message, setMessage] = useState(null);
@@ -21,17 +21,6 @@ const AddTicket = () => {
   const handleChange = (e) => {
     setName(e.target.value);
   };
-
-  //checks if input field is empty
-  // const validate = (name) => {
-  //   if (name === "") {
-  //     setValidation("field cannot be empty");
-  //     return false;
-  //   } else {
-  //     setValidation("");
-  //     return true;
-  //   }
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();

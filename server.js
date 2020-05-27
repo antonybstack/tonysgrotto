@@ -12,8 +12,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(flash());
 
-const moment = require("moment");
-const moment_timezone = require("moment-timezone");
+const moment = require("moment-timezone");
 const axios = require("axios");
 
 app.use(cors());

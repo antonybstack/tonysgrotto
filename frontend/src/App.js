@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-// import LoadedProvider from "./contexts/LoadedContext";
 import TicketProvider from "./contexts/TicketContext";
 import ProfileProvider from "./contexts/ProfileContext";
 import AuthProvider from "./contexts/AuthContext";
@@ -10,7 +9,6 @@ import UsersOnlineProvider from "./contexts/UsersOnlineContext";
 import NavBar from "./components/NavBar";
 import Login from "./components/Login";
 import Chat from "./components/Chat";
-// import Todos from "./components/Todos";
 import Register from "./components/Register";
 import Admin from "./components/Admin";
 import PrivateRoute from "./hocs/PrivateRoute";
@@ -18,7 +16,7 @@ import UnPrivateRoute from "./hocs/UnPrivateRoute";
 import TicketDisplay from "./components/TicketDisplay";
 import AddTicket from "./changeData/AddTicket";
 import UsersOnline from "./components/UsersOnline";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // App is a component that acts as a container for all other components
 function App() {
@@ -46,11 +44,7 @@ function App() {
                     <PrivateRoute path="/admin" roles={["admin"]} component={Admin} />
                     <AddTicket />
                     <Route path="/" exact component={TicketDisplay} />
-                    {/* <Route path="/chat" exact component={Chat} /> */}
-                    {/* <Route path="/edit/:id" component={EditTicket} /> */}
-                    {/* <Route path="/create" component={AddTicket} /> */}
                   </Router>
-                  {/* </LoadedProvider> */}
                 </UsersOnlineProvider>
               </ChatProvider>
             </TicketProvider>

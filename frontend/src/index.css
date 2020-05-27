@@ -11,13 +11,6 @@ body {
   font-style: normal;
 }
 
-@font-face {
-  font-family: "Whitney";
-  font-style: normal;
-  font-weight: 400;
-  src: url("//cloud.typography.com/6804272/781004/css/fonts.css"); /* IE9 Compat Modes */
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }

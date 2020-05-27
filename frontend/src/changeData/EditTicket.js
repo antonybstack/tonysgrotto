@@ -52,7 +52,7 @@ const EditTicket = (props) => {
       // HTTP POST method sends data with updated ticket to the server
       axios.post("api/tickets/update/" + ticket._id, newTicket).then((res) => {
         // iterates tickets array to find specific ticket to delete
-        tickets.map((t, index) => {
+        tickets.forEach((t, index) => {
           if (t._id === ticket._id) {
             const newTickets = tickets.slice();
             newTickets.splice(index, 1, {

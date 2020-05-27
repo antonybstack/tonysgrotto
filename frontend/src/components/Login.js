@@ -1,16 +1,12 @@
 import React, { useState, useContext } from "react";
-import Auth from "../services/Auth";
 import Message from "../components/Message";
 import { AuthContext } from "../contexts/AuthContext";
-import { ChatContext } from "../contexts/ChatContext";
 import axios from "axios";
-import * as io from "socket.io-client";
 
-const Login = (props) => {
+const Login = () => {
   const [user, setUser] = useState({ username: "", password: "" });
   const [message, setMessage] = useState(null);
   const authContext = useContext(AuthContext);
-  const { chats, setChats } = useContext(ChatContext);
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -21,25 +17,15 @@ const Login = (props) => {
     axios
       .post("/api/users/login", user)
       .then((res) => {
-        console.log(res);
         const { isAuthenticated, user } = res.data;
         if (isAuthenticated) {
           authContext.setUser(user);
           authContext.setIsAuthenticated(isAuthenticated);
           setMessage({ msgBody: "Account successfully logged in", msgError: false });
-          // props.history.push("/");
         }
-        // else {
-        //   setChats([]);
-        // }
       })
       .catch(function (error) {
-        console.log(message);
         setMessage({ msgBody: "Invalid username or password", msgError: true });
-        console.log(error.response);
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.statusText);
       });
   };
 

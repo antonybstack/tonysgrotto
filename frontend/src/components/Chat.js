@@ -1,12 +1,11 @@
-import React, { Component } from "react";
-import { useContext, useState, useEffect, useRef } from "react";
+import React from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { ProfileContext } from "../contexts/ProfileContext";
 import { ChatContext } from "../contexts/ChatContext";
 import { SocketContext } from "../contexts/SocketContext";
 import axios from "axios";
-import moment from "moment";
-import moment_timezone from "moment-timezone";
+import moment from "moment-timezone";
 
 const Chat = (props) => {
   const [message, setMessage] = useState("");
@@ -14,8 +13,6 @@ const Chat = (props) => {
   const { chats, setChats } = useContext(ChatContext);
   const { profiles } = useContext(ProfileContext);
   const { socket } = useContext(SocketContext);
-  const [usersOnline, setUsersOnline] = useState([]);
-  const [timeStamps, setTimeStamps] = useState([]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -44,11 +41,6 @@ const Chat = (props) => {
   const send = (e) => {
     e.preventDefault();
     if (isAuthenticated) {
-      const newChat = {
-        user: user,
-        message: message,
-      };
-
       let date = moment().tz("America/New_York");
       let chatPacket = {
         user: user._id,
@@ -71,7 +63,7 @@ const Chat = (props) => {
       user: "",
       message: "",
     };
-    profiles.filter((profile) => {
+    profiles.forEach((profile) => {
       if (profile._id === id) {
         tempProfile = {
           user: profile.username,
@@ -90,46 +82,13 @@ const Chat = (props) => {
     return Number(secondsAgo);
   };
 
-  function useInterval(callback, delay) {
-    const savedCallback = useRef();
-
-    // Remember the latest callback.
-    useEffect(() => {
-      savedCallback.current = callback;
-    }, [callback]);
-
-    // Set up the interval.
-    useEffect(() => {
-      function tick() {
-        savedCallback.current();
-      }
-      if (delay !== null) {
-        let id = setInterval(tick, delay);
-        return () => clearInterval(id);
-      }
-    }, [delay]);
-  }
-
-  useInterval(() => {
-    let timestamps = [];
-    usersOnline.map((currentUser, i) => {
-      let secondsAgo = calcTime(currentUser.timestamp);
-      let timestamp = {
-        socketid: currentUser.socketid,
-        time: secondsAgo,
-      };
-      timestamps.push(timestamp);
-    });
-    setTimeStamps(timestamps);
-  }, 1000);
-
   const formatTime = (seconds) => {
     if (seconds >= 60 && seconds < 120) {
       return "1 minute";
     } else if (seconds >= 3600 && seconds < 7200) {
       return "1 hour";
     } else if (seconds >= 86400 && seconds < 172800) {
-      return Math.floor(seconds / 86400) + " day(s)";
+      return Math.floor(seconds / 86400) + " day";
     } else if (seconds > 60 && seconds < 3600) {
       return Math.floor(seconds / 60) + " minutes";
     } else if (seconds >= 7200 && seconds < 86400) {
@@ -145,7 +104,7 @@ const Chat = (props) => {
     return chats.map((currentData, i) => {
       let tempProfile = findProfile(currentData.user);
       return (
-        <div className="chatMessage">
+        <div className="chatMessage" key={i}>
           <span className="chatProfile">
             <span>
               <img src={tempProfile.avatar && require("../assets/avatars/" + tempProfile.avatar + ".png")} alt="Logo" width="15" />
@@ -161,7 +120,7 @@ const Chat = (props) => {
   };
 
   const clearChats = () => {
-    chats.map((t, index) => {
+    chats.forEach((t) => {
       axios.delete("api/chats/delete/" + t._id);
     });
   };

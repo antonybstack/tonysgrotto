@@ -5,6 +5,7 @@ const getStyle = (props) => {
   else return "successMessage";
 };
 
+//error message handling
 const Message = (props) => {
   console.log(props.message.msgBody);
   return (
