@@ -4,17 +4,20 @@ import { AuthContext } from "../contexts/AuthContext";
 import { ProfileContext } from "../contexts/ProfileContext";
 import { ChatContext } from "../contexts/ChatContext";
 import { SocketContext } from "../contexts/SocketContext";
+import Message from "../components/Message";
 import axios from "axios";
 import moment from "moment-timezone";
 
 const Chat = (props) => {
   const [message, setMessage] = useState("");
+  const [errMessage, setErrMessage] = useState(null);
   const { user, isAuthenticated } = useContext(AuthContext);
   const { chats, setChats } = useContext(ChatContext);
   const { profiles } = useContext(ProfileContext);
   const { socket } = useContext(SocketContext);
   console.log("Chat");
   useEffect(() => {
+    setErrMessage(null);
     if (isAuthenticated) {
       const authenticatedUser = {
         socketid: socket.id,
@@ -36,7 +39,10 @@ const Chat = (props) => {
 
   const send = (e) => {
     e.preventDefault();
-    if (isAuthenticated) {
+    if (message === "") {
+      setErrMessage({ msgBody: "message cannot be empty", msgError: true });
+    } else if (isAuthenticated) {
+      setErrMessage(null);
       let date = moment().tz("America/New_York");
       let chatPacket = {
         user: user._id,
@@ -113,8 +119,21 @@ const Chat = (props) => {
     });
   };
 
-  const clearChats = () => {
-    chats.forEach((t) => {
+  const clearChats = async () => {
+    var temp;
+    const updateBeforeClear = async () => {
+      await axios.get("/api/chats").then((res) => {
+        temp = res.data;
+        console.log(temp);
+        // temp.forEach((currentData) => {
+        //   setChats((currentChats) => [...currentChats, currentData]);
+        // });
+      });
+    };
+    await updateBeforeClear();
+
+    console.log(temp);
+    temp.forEach((t) => {
       axios.delete("api/chats/delete/" + t._id);
     });
   };
@@ -134,6 +153,7 @@ const Chat = (props) => {
             Send
           </button>
         </div>
+        {errMessage ? <Message message={errMessage} /> : null}
         <button className="clearChats" onClick={clearChats}>
           clear
         </button>
