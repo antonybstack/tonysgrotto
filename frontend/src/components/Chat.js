@@ -15,7 +15,14 @@ const Chat = (props) => {
   const { chats, setChats } = useContext(ChatContext);
   const { profiles } = useContext(ProfileContext);
   const { socket } = useContext(SocketContext);
+  const [count, setCount] = useState(0);
   console.log("Chat");
+  useEffect(() => {
+    setInterval(() => {
+      setCount((prevTime) => prevTime + 1);
+    }, 1000);
+  }, []);
+
   useEffect(() => {
     setErrMessage(null);
     if (isAuthenticated) {
@@ -124,18 +131,23 @@ const Chat = (props) => {
     const updateBeforeClear = async () => {
       await axios.get("/api/chats").then((res) => {
         temp = res.data;
-        console.log(temp);
-        // temp.forEach((currentData) => {
-        //   setChats((currentChats) => [...currentChats, currentData]);
-        // });
       });
     };
     await updateBeforeClear();
 
-    console.log(temp);
     temp.forEach((t) => {
       axios.delete("api/chats/delete/" + t._id);
     });
+
+    setChats([]);
+
+    let date = moment().tz("America/New_York");
+    let chatPacket = {
+      user: user._id,
+      message: "***chats cleared***",
+      timestamp: date,
+    };
+    setChats((currentChats) => [...currentChats, chatPacket]);
   };
 
   const authenticatedChat = () => {
@@ -154,9 +166,11 @@ const Chat = (props) => {
           </button>
         </div>
         {errMessage ? <Message message={errMessage} /> : null}
-        <button className="clearChats" onClick={clearChats}>
-          clear
-        </button>
+        {user.role === "admin" ? (
+          <button className="clearChats" onClick={clearChats}>
+            clear
+          </button>
+        ) : null}
       </div>
     );
   };
