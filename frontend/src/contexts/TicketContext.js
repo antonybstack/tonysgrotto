@@ -14,17 +14,28 @@ export default ({ children }) => {
     const getTickets = async () => {
       const response = await axios.get("/api/tickets");
       setTickets(response.data);
+    };
+
+    const load = async () => {
+      await getTickets();
       setTickLoaded(true);
     };
-    getTickets();
+
+    load();
   }, []);
   // provider passes context to all children compoents, no matter how deep it is
   return (
     <div>
       {!tickLoaded ? (
-        <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
+        <React.Fragment>
+          {console.log("ticket not loaded")}
+          <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
+        </React.Fragment>
       ) : (
-        <TicketContext.Provider value={{ tickets, setTickets, tickLoaded }}>{children}</TicketContext.Provider>
+        <React.Fragment>
+          {console.log("ticket loaded")}
+          <TicketContext.Provider value={{ tickets, setTickets, tickLoaded }}>{children}</TicketContext.Provider>
+        </React.Fragment>
       )}
     </div>
   );

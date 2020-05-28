@@ -7,7 +7,8 @@ const getStyle = (props) => {
 
 //error message handling
 const Message = (props) => {
-  console.log(props.message.msgBody);
+  console.log("Message");
+
   return (
     <div className={getStyle(props)} role="alert">
       {props.message.msgBody}

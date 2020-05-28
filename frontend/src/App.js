@@ -20,6 +20,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // App is a component that acts as a container for all other components
 function App() {
+  console.log("App");
   return (
     <div className="App">
       <AuthProvider>

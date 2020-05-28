@@ -13,7 +13,7 @@ const Chat = (props) => {
   const { chats, setChats } = useContext(ChatContext);
   const { profiles } = useContext(ProfileContext);
   const { socket } = useContext(SocketContext);
-
+  console.log("Chat");
   useEffect(() => {
     if (isAuthenticated) {
       const authenticatedUser = {
@@ -24,10 +24,6 @@ const Chat = (props) => {
       };
       socket.emit("authenticated user", authenticatedUser);
       socket.on("chat message", function (msg) {
-        socket.on("status", (statusMessage) => {
-          console.log(statusMessage);
-        });
-        console.log(msg);
         setChats((currentChats) => [...currentChats, msg]); //push chat object to state array
       });
     }
@@ -47,8 +43,6 @@ const Chat = (props) => {
         message: message,
         timestamp: date,
       };
-      console.log("HEEEEERE :)");
-      console.log(window.location.hostname);
       socket.emit("chat message", chatPacket);
 
       setMessage("");

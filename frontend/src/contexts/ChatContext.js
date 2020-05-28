@@ -12,12 +12,11 @@ export default ({ children }) => {
   const [chats, setChats] = useState([]);
   const [chatLoaded, setChatLoaded] = useState(false);
   useEffect(() => {
-    const getData = async () => {
+    const getChats = async () => {
       if (isAuthenticated) {
         setChats([]);
-        axios.get("/api/chats").then((res) => {
+        await axios.get("/api/chats").then((res) => {
           let temp = res.data;
-
           temp.forEach((currentData) => {
             setChats((currentChats) => [...currentChats, currentData]);
           });
@@ -25,19 +24,30 @@ export default ({ children }) => {
       }
     };
 
-    //uses promise so that connectSocket runs after getData is complete
-    const checkLoad = async () => {
-      await getData();
-      setTimeout(() => {
-        setChatLoaded(true);
-      }, 100);
+    const load = async () => {
+      await getChats();
+      setChatLoaded(true);
     };
+
+    load();
+
     //rerenders when user logs in and user updates so that it notifies that the user has joined the chatroom
-    checkLoad();
   }, [isAuthenticated]);
 
   // provider passes context to all children compoents, no matter how deep it is
   return (
-    <div>{!chatLoaded ? <img className="loading" src={require("../assets/loading.gif")} alt="loading..." /> : <ChatContext.Provider value={{ chats, setChats }}>{children}</ChatContext.Provider>}</div>
+    <div>
+      {!chatLoaded ? (
+        <React.Fragment>
+          {console.log("chat not loaded")}
+          <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          {console.log("chat loaded")}
+          <ChatContext.Provider value={{ chats, setChats }}>{children}</ChatContext.Provider>
+        </React.Fragment>
+      )}
+    </div>
   );
 };

@@ -7,6 +7,8 @@ import { TicketContext } from "../contexts/TicketContext";
 const TicketDisplay = () => {
   const { tickets } = useContext(TicketContext);
 
+  console.log("TicketDisplay");
+
   //displays the data from TicketContext
   return (
     // react fragment so that div(13 to 16) and div(17 to 46) dont need to be wrapped in an extra div

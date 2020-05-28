@@ -6,6 +6,8 @@ import Profile from "./Profile";
 const Ticket = (props) => {
   let userID = props.ticket.created_by.toString();
 
+  console.log("Ticket");
+
   return (
     <tr className="ticketItem">
       <td>{props.ticket.ticket_name && <ModalEdit ticket={props} />}</td>

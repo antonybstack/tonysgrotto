@@ -14,6 +14,8 @@ const AddTicket = () => {
   const [message, setMessage] = useState(null);
   const { socket } = useContext(SocketContext);
 
+  console.log("AddTicket");
+
   useEffect(() => {
     setMessage(null);
   }, [socket]);
@@ -36,7 +38,6 @@ const AddTicket = () => {
       axios
         .post("api/tickets/add", newTicket)
         .then((res) => {
-          console.log(res);
           setMessage(null);
           setTickets((currentTickets) => [...currentTickets, { _id: res.data.ticket._id, ticket_name: name, ticket_status: "backlog", created_by: user._id }]); //push ticket object to state array
         })

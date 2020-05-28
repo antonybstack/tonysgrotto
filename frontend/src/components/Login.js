@@ -8,6 +8,8 @@ const Login = () => {
   const [message, setMessage] = useState(null);
   const authContext = useContext(AuthContext);
 
+  console.log("Login");
+
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };

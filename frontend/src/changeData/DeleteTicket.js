@@ -8,6 +8,7 @@ const DeleteTicket = (props) => {
   const { tickets, setTickets } = useContext(TicketContext);
   const [ticket, setTicket] = useState("");
 
+  console.log("DeleteTicket");
   //gets ticket using ticket._id from database
   useEffect(() => {
     const getTicket = async () => {

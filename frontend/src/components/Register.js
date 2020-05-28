@@ -8,6 +8,8 @@ const Register = (props) => {
   const [redirectMessage, setRedirectMessage] = useState("");
   let timerID = useRef(null);
 
+  console.log("Register");
+
   useEffect(() => {
     return () => {
       clearTimeout(timerID);
@@ -28,7 +30,6 @@ const Register = (props) => {
       if (i === 0) {
         props.history.push("/login");
       } else {
-        console.log(i);
         if (i === 5 || i === 2) {
           setRedirectMessage("You will be redirected to sign in " + i + " seconds.");
         } else if (i === 4 || i === 1) {
@@ -47,14 +48,12 @@ const Register = (props) => {
     axios
       .post("/api/users/register", user)
       .then((res) => {
-        console.log(res.data);
         const { message } = res.data;
         setMessage(message);
         resetForm();
         redirectCounter();
       })
       .catch((error) => {
-        console.log(error.response.data);
         const { message } = error.response.data;
         setMessage(message);
       });

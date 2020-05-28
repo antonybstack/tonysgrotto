@@ -9,24 +9,34 @@ export const ProfileContext = createContext(); //creating Context object with em
 export default ({ children }) => {
   const [profiles, setProfiles] = useState([]);
   const [profLoaded, setProfLoaded] = useState(false); // see if the app is loaded
-
   useEffect(() => {
     //populates profiles array. Send HTTP request to server
     const getProfiles = async () => {
       const response = await axios.get("/api/users");
       setProfiles(response.data);
+    };
+
+    const load = async () => {
+      await getProfiles();
       setProfLoaded(true);
     };
-    getProfiles();
+
+    load();
   }, []);
 
   // provider passes context to all children compoents, no matter how deep it is
   return (
     <div>
       {!profLoaded ? (
-        <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
+        <React.Fragment>
+          {console.log("profile not loaded")}
+          <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
+        </React.Fragment>
       ) : (
-        <ProfileContext.Provider value={{ profiles, setProfiles, profLoaded }}>{children}</ProfileContext.Provider>
+        <React.Fragment>
+          {console.log("profile loaded")}
+          <ProfileContext.Provider value={{ profiles, setProfiles, profLoaded }}>{children}</ProfileContext.Provider>
+        </React.Fragment>
       )}
     </div>
   );

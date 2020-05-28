@@ -9,33 +9,35 @@ export const SocketContext = createContext(); //creating Context object with emp
 export default ({ children }) => {
   const [socketLoaded, setSocketLoaded] = useState(false);
   const [socket, setSocket] = useState([]);
+
   useEffect(() => {
     const createSocket = async () => {
       var hostname = "http://localhost:5000";
       if (window.location.hostname.toString() !== "localhost") {
         hostname = window.location.hostname;
       }
-      const tempSocket = io.connect(hostname);
+      const tempSocket = await io.connect(hostname);
       setSocket(tempSocket);
     };
 
-    const loaded = async () => {
+    const load = async () => {
       await createSocket();
-      setTimeout(async () => {
-        setSocketLoaded(true);
-      }, 100);
+      setSocketLoaded(true);
     };
-    loaded();
+
+    load();
   }, []);
 
   return (
     <div>
       {!socketLoaded ? (
         <div className="test">
+          {console.log("socket not loaded")}
           <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
         </div>
       ) : (
         <div className="test">
+          {console.log("socket loaded")}
           <SocketContext.Provider value={{ socket, setSocket }}>{children}</SocketContext.Provider>
         </div>
       )}

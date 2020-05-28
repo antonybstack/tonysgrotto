@@ -11,6 +11,8 @@ const Navbar = (props) => {
   const { socket, setSocket } = useContext(SocketContext);
   const { usersOnline } = useContext(UsersOnlineContext);
 
+  console.log("Navbar");
+
   const onClickLogoutHandler = async () => {
     socket.emit("get connections");
 
@@ -25,14 +27,13 @@ const Navbar = (props) => {
     await axios
       .get("/api/users/logout")
       .then((res) => {
-        console.log("Logged out!", res);
         if (res.data.success) {
           setUser(res.data.user);
           setIsAuthenticated(false);
         }
       })
       .catch(function (error) {
-        console.log("Logged out failed", error);
+        console.log(error);
       });
 
     var hostname = "http://localhost:5000";

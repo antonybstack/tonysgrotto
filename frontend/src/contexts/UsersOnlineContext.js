@@ -10,6 +10,28 @@ export default ({ children }) => {
   const { socket } = useContext(SocketContext);
   const [usersOnline, setUsersOnline] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    const getConnections = async () => {
+      await socket.emit("get connections", "test");
+      socket.on("get connections", (data) => {
+        setUsersOnline(data);
+      });
+    };
+    const loaded = async () => {
+      await getConnections();
+      setLoaded(true);
+    };
+    loaded();
+
+    socket.on("disconnect", (connections) => {
+      if (Array.isArray(connections)) {
+        setUsersOnline(connections);
+      }
+    });
+    socket.on("authenticated user", (data) => {
+      setUsersOnline(data);
+    });
+  }, [socket]);
 
   useEffect(() => {
     socket.on("disconnect", (connections) => {
@@ -20,31 +42,20 @@ export default ({ children }) => {
     socket.on("authenticated user", (data) => {
       setUsersOnline(data);
     });
-    socket.emit("get connections", "test");
-    socket.on("get connections", (data) => {
-      setUsersOnline(data);
-    });
-    const getConnections = async () => {
-      socket.emit("get connections", "test");
-      socket.on("get connections", (data) => {
-        setUsersOnline(data);
-      });
-    };
-    const loaded = async () => {
-      await getConnections();
-      setTimeout(async () => {
-        setLoaded(true);
-      }, 100);
-    };
-    loaded();
-  }, [socket]);
+  }, []);
 
   return (
     <React.Fragment>
       {!loaded ? (
-        <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
+        <React.Fragment>
+          {console.log("usersOnline not loaded")}
+          <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
+        </React.Fragment>
       ) : (
-        <UsersOnlineContext.Provider value={{ usersOnline, setUsersOnline }}>{children}</UsersOnlineContext.Provider>
+        <React.Fragment>
+          {console.log("usersOnline loaded")}
+          <UsersOnlineContext.Provider value={{ usersOnline, setUsersOnline }}>{children}</UsersOnlineContext.Provider>
+        </React.Fragment>
       )}
     </React.Fragment>
   );

@@ -9,7 +9,7 @@ const EditTicket = (props) => {
   const [name, setName] = useState(props.value.ticket.ticket.ticket_name);
   const [status, setStatus] = useState(props.value.ticket.ticket.ticket_status);
   const [validation, setValidation] = useState(""); //input validation message
-
+  console.log("EditTicket");
   //gets ticket using ticket._id from database
   useEffect(() => {
     axios

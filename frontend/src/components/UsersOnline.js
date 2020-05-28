@@ -7,6 +7,8 @@ const UsersOnline = () => {
   const { usersOnline } = useContext(UsersOnlineContext);
   const [count, setCount] = useState(0);
 
+  console.log("UsersOnline");
+
   const calcTimeSinceLogin = (socketTimestamp) => {
     let date = moment().tz("America/New_York");
     const currentSeconds = moment(date).diff(moment().startOf("day"), "seconds");
