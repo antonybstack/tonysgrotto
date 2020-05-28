@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { TicketContext } from "../contexts/TicketContext";
+import { Button } from "react-bootstrap";
 
 const DeleteTicket = (props) => {
   //state that is able to update context
@@ -13,7 +14,7 @@ const DeleteTicket = (props) => {
   useEffect(() => {
     const getTicket = async () => {
       await axios
-        .get("api/tickets/" + props.value.ticket.ticket._id)
+        .get("api/tickets/" + props.value.ticket._id)
         .then((res) => {
           setTicket(res.data);
         })
@@ -22,7 +23,7 @@ const DeleteTicket = (props) => {
         });
     };
     getTicket();
-  }, [props.value.ticket.ticket._id]);
+  }, [props.value.ticket._id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,9 +42,12 @@ const DeleteTicket = (props) => {
   };
 
   return (
-    <button className="deleteBtn" onClick={handleSubmit}>
+    // <button className="deleteBtn" onClick={handleSubmit}>
+    //   Delete Ticket
+    // </button>
+    <Button variant="danger" onClick={handleSubmit}>
       Delete Ticket
-    </button>
+    </Button>
   );
 };
 export default DeleteTicket;

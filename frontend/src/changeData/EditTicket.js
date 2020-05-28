@@ -2,14 +2,16 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { TicketContext } from "../contexts/TicketContext";
+import { Form, Button } from "react-bootstrap";
 
 const EditTicket = (props) => {
+  console.log("EditTicket", props);
   const { tickets, setTickets } = useContext(TicketContext);
   const [ticket, setTicket] = useState("");
   const [name, setName] = useState(props.value.ticket.ticket.ticket_name);
   const [status, setStatus] = useState(props.value.ticket.ticket.ticket_status);
   const [validation, setValidation] = useState(""); //input validation message
-  console.log("EditTicket");
+  console.log("EditTicket", props);
   //gets ticket using ticket._id from database
   useEffect(() => {
     axios
@@ -65,26 +67,47 @@ const EditTicket = (props) => {
           return null;
         });
       });
+      props.action();
     }
   };
 
   return (
-    <div className="editForm">
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Change Name:</label>
-        <input type="text" name="name" value={name} onChange={handleChangeName} />
-        <p className="validation">{validation}</p>
-        <label htmlFor="status">Change Status:</label>
-        <select name="status" value={status} onChange={handleChangeStatus}>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group>
+        <Form.Label>Change Name</Form.Label>
+        <Form.Control type="text" value={name} onChange={handleChangeName} />
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label>Change Status</Form.Label>
+        <Form.Control as="select" onChange={handleChangeStatus}>
           <option defaultValue="backlog">backlog</option>
           <option value="sprint">sprint</option>
           <option value="progress">progress</option>
           <option value="done">done</option>
-        </select>
+        </Form.Control>
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
 
-        <input type="submit" name="Submit" className="submit"></input>
-      </form>
-    </div>
+    // <div className="editForm">
+    //   <form onSubmit={handleSubmit}>
+    //     <label htmlFor="name">Change Name:</label>
+    //     <input type="text" name="name" value={name} onChange={handleChangeName} />
+    //     <p className="validation">{validation}</p>
+    //     <label htmlFor="status">Change Status:</label>
+    //     <select name="status" value={status} onChange={handleChangeStatus}>
+    //       <option defaultValue="backlog">backlog</option>
+    //       <option value="sprint">sprint</option>
+    //       <option value="progress">progress</option>
+    //       <option value="done">done</option>
+    //     </select>
+
+    //     <input type="submit" name="Submit" className="submit"></input>
+    //   </form>
+    // </div>
   );
 };
 export default EditTicket;

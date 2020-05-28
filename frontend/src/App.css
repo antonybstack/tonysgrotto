@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --notblack: #23272a;
   --dark: #2c2f33;
   --greyple: #99aab5;
@@ -8,8 +8,7 @@
 * {
 }
 
-html {
-}
+
 
 body {
   background-color: var(--notblack);
@@ -19,16 +18,55 @@ body {
   margin-right: 15%;
   margin-left: 15%;
 }
+*/
+/* @media (min-width: 576px) {
+  .card-decky {
+    display: flex;
+    flex-flow: row wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+} */
+.test {
+}
+.card-deck {
+  width: 100.8%;
+  padding: 1em 1em 1em 1em;
 
-.App {
-  background-color: var(--dark);
-  color: var(--greyple);
-
-  width: 100%;
-  min-height: 100%;
-  /* padding-left: 5em; */
+  /* margin-left: 25px;
+  margin-right: -25px; */
+}
+.NavDropdown.Item-logout {
+  background-color: purple;
+  color: white;
 }
 
+.App {
+  background-color: grey;
+  width: 100%;
+  /* color: var(--greyple); */
+  /* 
+  width: 100%;
+  min-height: 100%; */
+}
+
+html {
+  background-color: grey;
+  margin: 0;
+  padding: 0;
+  /* color: var(--greyple); */
+
+  /* width: 100%;
+  min-height: 100%; */
+}
+
+/* .loading {
+  position: relative;
+  margin-left: 45%;
+  margin-top: 15%;
+  padding-bottom: 20%;
+} */
+/*
 a:link {
   color: rgb(104, 187, 255);
   background-color: transparent;
@@ -157,4 +195,4 @@ h3 {
 .successMessage {
   color: green;
   font-size: smaller;
-}
+} */

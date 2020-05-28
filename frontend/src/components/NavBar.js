@@ -5,8 +5,9 @@ import { SocketContext } from "../contexts/SocketContext";
 import { UsersOnlineContext } from "../contexts/UsersOnlineContext";
 import * as io from "socket.io-client";
 import axios from "axios";
+import { Navbar, NavDropdown, Nav } from "react-bootstrap";
 
-const Navbar = (props) => {
+const Navbarr = (props) => {
   const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
   const { socket, setSocket } = useContext(SocketContext);
   const { usersOnline } = useContext(UsersOnlineContext);
@@ -46,58 +47,59 @@ const Navbar = (props) => {
 
   const unauthenticatedNavBar = () => {
     return (
-      <>
-        <Link to="/">
-          <li className="nav-item nav-link">Home</li>
-        </Link>
-        <Link to="/login">
-          <li className="nav-item nav-link">Login</li>
-        </Link>
-        <Link to="/register">
-          <li className="nav-item nav-link">Register</li>
-        </Link>
-      </>
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar.Brand href="/">tonysgrotto</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Link to="/">
+              <li className="nav-item nav-link">Home</li>
+            </Link>
+            <NavDropdown title="Account" id="basic-nav-dropdown">
+              <NavDropdown.Item>
+                <Link to="/login">Login</Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link to="/register">Register</Link>
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     );
   };
 
   const authenticatedNavBar = () => {
     return (
-      <>
-        <Link to="/">
-          <li className="nav-item nav-link">Home</li>
-        </Link>
-        {/* <Link to="/todos">
-          <li className="nav-item nav-link">Todos</li>
-        </Link> */}
-        {user.role === "admin" ? (
-          <Link to="/admin">
-            <li className="nav-item nav-link">Admin</li>
-          </Link>
-        ) : null}
-        <button type="button" className="btn btn-link nav-item nav-link" onClick={onClickLogoutHandler}>
-          Logout
-        </button>
-        <div>
-          <p>
-            Welcome &lt;
-            <img src={user.avatar && require("../assets/avatars/" + user.avatar + ".png")} alt="Logo" width="20" /> {user.username}&gt;
-          </p>
-        </div>
-      </>
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar.Brand href="/">tonysgrotto</Navbar.Brand>
+        <Navbar.Text>
+          &nbsp;&nbsp;&nbsp;
+          <img src={user.avatar && require("../assets/avatars/" + user.avatar + ".png")} alt="Logo" width="20" /> {user.username}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </Navbar.Text>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Link to="/">
+              <li className="nav-item nav-link">Home</li>
+            </Link>
+            <NavDropdown title="Account" id="basic-nav-dropdown">
+              {user.role === "admin" ? (
+                <>
+                  <NavDropdown.Item>
+                    <Link to="/admin">Admin</Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                </>
+              ) : null}
+              <NavDropdown.Item onClick={onClickLogoutHandler}>Logout</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     );
   };
-  return (
-    <React.Fragment>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <Link to="/">
-          <div className="navbar-brand">MERN-Stack Bug Tracker App</div>
-        </Link>
-        <div className="collapse navbar-collapse" id="navbarText">
-          <ul className="navbar-nav mr-auto">{!isAuthenticated ? unauthenticatedNavBar() : authenticatedNavBar()}</ul>
-        </div>
-      </nav>
-    </React.Fragment>
-  );
+  return <>{!isAuthenticated ? unauthenticatedNavBar() : authenticatedNavBar()}</>;
 };
 
-export default Navbar;
+export default Navbarr;

@@ -8,19 +8,18 @@ const Profile = ({ userID }) => {
   console.log("Profile");
 
   return (
-    <span>
-      <span>created by: </span>
+    <>
+      <span>created by:&nbsp;&nbsp;</span>
       {profiles.map(
         (currentProfile, i) =>
           currentProfile._id === userID && (
             <span key={i}>
-              &lt;
               <img src={currentProfile.avatar && require("../assets/avatars/" + currentProfile.avatar + ".png")} alt="Logo" width="20" />
-              {currentProfile.username}&gt;
+              {currentProfile.username}
             </span>
           )
       )}
-    </span>
+    </>
   );
 };
 

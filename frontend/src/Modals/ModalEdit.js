@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 import EditTicket from "../changeData/EditTicket";
 import DeleteTicket from "../changeData/DeleteTicket";
+import { Button } from "react-bootstrap";
 
 const customStyles = {
   overlay: {
@@ -47,9 +48,12 @@ const ModalEdit = (props) => {
 
   return (
     <div>
-      <button className="editButton" onClick={openModal}>
+      {/* <button className="editButton" onClick={openModal}>
         edit
-      </button>
+      </button> */}
+      <Button variant="outline-primary" onClick={openModal}>
+        Edit
+      </Button>{" "}
       <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} style={customStyles} contentLabel="Example Modal">
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}>edit/delete</h2>
         <EditTicket value={props} />
