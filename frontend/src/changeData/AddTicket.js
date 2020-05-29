@@ -59,7 +59,6 @@ const AddTicket = () => {
       <React.Fragment>
         <Form inline onSubmit={handleSubmit}>
           <Form.Group>
-            {/* <Form.Label>Add Ticket: </Form.Label> */}
             <Form.Control id="ticket" type="text" value={name} onChange={handleChange} placeholder="e.g. deploy react app" />
             <Button variant="primary" type="submit">
               Add Ticket

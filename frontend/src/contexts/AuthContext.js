@@ -34,18 +34,18 @@ export default ({ children }) => {
 
   // providing user and isAuthenticated variables to be global variables
   return (
-    <div>
+    <React.Fragment>
       {!authLoaded ? (
-        <div className="test">
+        <React.Fragment>
           {console.log("auth not loaded")}
           <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
-        </div>
+        </React.Fragment>
       ) : (
-        <div className="test">
+        <React.Fragment>
           {console.log("auth loaded")}
           <AuthContext.Provider value={{ user, setUser, isAuthenticated, setIsAuthenticated }}>{children}</AuthContext.Provider>
-        </div>
+        </React.Fragment>
       )}
-    </div>
+    </React.Fragment>
   );
 };

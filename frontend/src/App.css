@@ -27,53 +27,108 @@ body {
     margin-left: -15px;
   }
 } */
-.test {
+
+html,
+body {
+  height: 100%;
+  background-color: grey;
+  margin: 0;
+  padding: 0;
+}
+#root {
+  height: 100%;
+}
+
+.App {
+  background-color: grey;
+  height: 100%;
+}
+
+/* HOME PAGE GRID LAYOUT */
+
+.addTicket {
+  grid-area: addT;
 }
 .card-deck {
-  width: 100.8%;
+  grid-area: cards;
+}
+
+.home {
+  display: grid;
+  grid-template-areas:
+    "users addT addT "
+    "users cards chat"
+    "users cards chat";
+
+  grid-template-columns: 1fr 80% 18%;
+  /* grid-template-rows: 0% 60% 25%; */
+}
+
+.users {
+  grid-area: users;
+  width: auto;
+  display: flex;
+  /* background-color: #111; */
+}
+
+.chat {
+  grid-area: chat;
+  display: flex;
+  /* background-color: #111; */
+}
+
+.usersOnline {
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  transition: 0.5s;
+  float: left;
+  grid-area: users;
+  width: 0;
+  background-color: white;
+  /* border-style: inset;
+  border-color: rgb(136, 136, 136);
+  border-width: 0.5em; */
+  color: green;
+}
+
+.userlist {
+  display: block;
+  white-space: nowrap;
+  /* background-color: #111; */
+}
+
+.displayChatroom {
+  display: block;
+  white-space: nowrap;
+  /* background-color: #111; */
+}
+
+#openbtn {
+  height: 100%;
+  width: 1em;
+  float: right;
+  text-align: center;
+  border-radius: 0;
+}
+
+.test {
+  writing-mode: vertical-lr;
+  text-orientation: sideways-right;
+  transform: translateX(-10px);
+}
+
+.card-deck {
+  width: 100% !important;
   padding: 1em 1em 1em 1em;
 
   /* margin-left: 25px;
   margin-right: -25px; */
 }
+
 .NavDropdown.Item-logout {
   background-color: purple;
   color: white;
-}
-
-#mydiv {
-  position: absolute;
-  z-index: 9;
-  background-color: #f1f1f1;
-  border: 1px solid #d3d3d3;
-  text-align: center;
-}
-
-#mydivheader {
-  padding: 10px;
-  cursor: move;
-  z-index: 10;
-  background-color: #2196f3;
-  color: #fff;
-}
-
-.App {
-  background-color: grey;
-  width: 100%;
-  /* color: var(--greyple); */
-  /* 
-  width: 100%;
-  min-height: 100%; */
-}
-
-html {
-  background-color: grey;
-  margin: 0;
-  padding: 0;
-  /* color: var(--greyple); */
-
-  /* width: 100%;
-  min-height: 100%; */
 }
 
 .alert1 {
@@ -83,7 +138,7 @@ html {
 }
 
 .addTicket {
-  width: 20em;
+  /* width: 100%; */
   padding: 1em;
 }
 
@@ -100,14 +155,21 @@ html {
   border-style: solid;
   padding: 0.5em;
   font-size: 1rem;
+
+  overflow-x: hidden;
+  transition: 0.5s;
+
+  width: 0;
+  background-color: white;
+  color: green;
 }
 
 .chatbox {
   background-color: white;
   padding: 0.1em;
-  padding-bottom: 2em;
+  /* padding-bottom: 2em; */
   height: 20em;
-  width: 18em;
+  width: 100%;
   border-style: inset;
   border-width: 1px;
   color: black;
@@ -124,23 +186,59 @@ html {
 
 .chatbar {
   height: 2.35em;
-  width: 18.37em;
+  /* width: 18.37em; */
 }
 
 .chatinput {
-  width: 18em;
-  border-style: inset;
-  border-width: 1px;
-  float: left;
-  resize: vertical;
+  width: 80% !important;
+  height: 4em !important;
+  border-style: inset !important;
+  border-width: 1px !important;
+  float: right !important;
+  /* resize: vertical !important; */
 }
 
 .chatSend {
   padding-top: 0.65em;
-  padding-bottom: 0.65em;
-  padding-right: 0.5em;
+  padding-bottom: 1em;
+  width: 20% !important;
+  height: 4em !important;
   float: right;
 }
+.handle {
+  cursor: grab;
+  background-color: rgb(231, 231, 231);
+  text-align: center;
+}
+
+.handle:active {
+  cursor: grabbing;
+  background-color: rgb(195, 195, 195);
+}
+
+.chatMessage {
+  margin: 0.35em;
+  line-height: 1em;
+}
+
+.chatProfile {
+  overflow: hidden;
+  white-space: nowrap;
+  color: cornflowerblue;
+}
+
+.chatTime {
+  color: grey;
+  font-style: italic;
+  font-size: 0.8em;
+  float: right;
+}
+
+/* .floatleft {
+  float: right;
+  width: 15%;
+  word-wrap: break-word;
+} */
 
 /* .loading {
   position: relative;
@@ -220,14 +318,8 @@ h3 {
   font-weight: lighter;
 }
 
-.chatMessage {
-  margin: 0.35em;
-  line-height: 1em;
-}
 
-.test {
-  padding: 2%;
-}
+
 
 .chatProfile {
   overflow: hidden;
@@ -239,17 +331,9 @@ h3 {
   color: darkgray;
   line-height: 1em;
 }
+/*  */
 
-.usersOnline {
-  background-color: var(--notblack);
-  border-style: inset;
-  border-color: rgb(136, 136, 136);
-  border-width: 0.5em;
-  color: green;
-  padding: 1em;
-  width: 25em;
-}
-
+/*  
 .usersOnline h5 {
   line-height: 0em;
   font-size: inherit;

@@ -45,18 +45,18 @@ export default ({ children }) => {
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       {!loaded ? (
-        <React.Fragment>
+        <>
           {console.log("usersOnline not loaded")}
           <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
-        </React.Fragment>
+        </>
       ) : (
-        <React.Fragment>
+        <>
           {console.log("usersOnline loaded")}
           <UsersOnlineContext.Provider value={{ usersOnline, setUsersOnline }}>{children}</UsersOnlineContext.Provider>
-        </React.Fragment>
+        </>
       )}
-    </React.Fragment>
+    </>
   );
 };

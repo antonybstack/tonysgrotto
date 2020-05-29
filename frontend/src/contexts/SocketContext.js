@@ -29,18 +29,18 @@ export default ({ children }) => {
   }, []);
 
   return (
-    <div>
+    <>
       {!socketLoaded ? (
-        <div className="test">
+        <>
           {console.log("socket not loaded")}
           <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
-        </div>
+        </>
       ) : (
-        <div className="test">
+        <>
           {console.log("socket loaded")}
           <SocketContext.Provider value={{ socket, setSocket }}>{children}</SocketContext.Provider>
-        </div>
+        </>
       )}
-    </div>
+    </>
   );
 };

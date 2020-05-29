@@ -6,15 +6,15 @@ import AuthProvider from "./contexts/AuthContext";
 import SocketProvider from "./contexts/SocketContext";
 import ChatProvider from "./contexts/ChatContext";
 import UsersOnlineProvider from "./contexts/UsersOnlineContext";
-import NavBarr from "./components/NavBar";
+import Home from "./components/Home";
 import Login from "./components/Login";
-import Chat from "./components/Chat";
 import Register from "./components/Register";
 import Admin from "./components/Admin";
 import PrivateRoute from "./hocs/PrivateRoute";
 import UnPrivateRoute from "./hocs/UnPrivateRoute";
 import TicketDisplay from "./components/TicketDisplay";
-import AddTicket from "./changeData/AddTicket";
+import NavBarr from "./components/NavBar";
+
 import UsersOnline from "./components/UsersOnline";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -41,9 +41,8 @@ function App() {
                     <UnPrivateRoute path="/login" component={Login} />
                     <UnPrivateRoute path="/register" component={Register} />
                     <PrivateRoute path="/admin" roles={["admin"]} component={Admin} />
-                    <AddTicket />
-                    <Route path="/" exact component={TicketDisplay} />
-                    <Chat />
+
+                    <Route path="/" exact component={Home} />
                   </Router>
                 </UsersOnlineProvider>
               </ChatProvider>

@@ -1,11 +1,15 @@
 import React from "react";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { UsersOnlineContext } from "../contexts/UsersOnlineContext";
+import { Button } from "react-bootstrap";
 import moment from "moment-timezone";
 
 const UsersOnline = () => {
   const { usersOnline } = useContext(UsersOnlineContext);
   const [count, setCount] = useState(0);
+
+  // const [width, setWidth] = React.useState('100px')
+  const refElem = useRef();
 
   console.log("UsersOnline");
 
@@ -40,20 +44,28 @@ const UsersOnline = () => {
     }, 1000);
   }, []);
 
+  function toggleMenu() {
+    if (refElem.current.clientWidth === 0) {
+      document.getElementById("leftSidepanel").style.width = "15em";
+    } else {
+      document.getElementById("leftSidepanel").style.width = "0em";
+    }
+  }
+
   const displayUsersOnline = () => {
     return usersOnline.map((currentUser, i) => {
       let thisUserTime = formatTime(calcTimeSinceLogin(currentUser.timestamp));
 
       return (
         <React.Fragment key={i}>
-          <div>
+          <span>
             <span>
               <img src={currentUser.avatar && require("../assets/avatars/" + currentUser.avatar + ".png")} alt="Logo" width="15" />
               &nbsp;
             </span>
             <span>{currentUser.username}&nbsp;</span>
             <span className="loginTime">logged in {thisUserTime} ago.</span>
-          </div>
+          </span>
         </React.Fragment>
       );
     });
@@ -61,9 +73,14 @@ const UsersOnline = () => {
 
   return (
     <React.Fragment>
-      <div className="usersOnline">
-        <h5>Users Currently Online:</h5>
-        {displayUsersOnline()}
+      <div className="users">
+        <Button id="openbtn" onClick={toggleMenu}>
+          <span className="test">Users Online</span>
+        </Button>
+        <div id="leftSidepanel" className="usersOnline" ref={refElem}>
+          {/* <h5>Users Currently Online:</h5> */}
+          <div className="userlist">{displayUsersOnline()}</div>
+        </div>
       </div>
     </React.Fragment>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { ProfileContext } from "../contexts/ProfileContext";
 import { ChatContext } from "../contexts/ChatContext";
@@ -8,6 +8,7 @@ import Message from "../components/Message";
 import axios from "axios";
 import moment from "moment-timezone";
 import Draggable, { DraggableCore } from "react-draggable";
+import { FormControl, Button, Form } from "react-bootstrap";
 
 const Chat = (props) => {
   const [message, setMessage] = useState("");
@@ -18,6 +19,9 @@ const Chat = (props) => {
   const { socket } = useContext(SocketContext);
   const [count, setCount] = useState(0);
   console.log("Chat");
+
+  const refElem = useRef();
+
   useEffect(() => {
     setInterval(() => {
       setCount((prevTime) => prevTime + 1);
@@ -151,22 +155,40 @@ const Chat = (props) => {
     setChats((currentChats) => [...currentChats, chatPacket]);
   };
 
-  const authenticatedChat = () => {
+  function toggleMenu() {
+    console.log(refElem);
+
+    if (refElem.current.clientWidth === 0) {
+      document.getElementById("rightSidepanel").style.width = "15em";
+    } else {
+      document.getElementById("rightSidepanel").style.width = "0em";
+    }
+    document.getElementById("rightSidepanel").style.width = "20em";
+  }
+
+  const draggableChat = () => {
     return (
-      <Draggable>
+      <Draggable handle=".handle" defaultPosition={{ x: 0, y: 0 }}>
         <div className="chatroom">
+          <div className="handle">Click and hold to drag</div>
           <div id="messages">
             <h3>Chatroom</h3>
             <div id="chatty" className="chatbox">
               {displayChats()}
             </div>
           </div>
-          <div className="chatbar">
-            <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
-            <button className="chatSend" onClick={send}>
+          {/* <div className="chatbar"> */}
+          {/* <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} /> */}
+          <Form inline>
+            <FormControl className="chatinput" as="textarea" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
+            <Button className="chatSend" variant="primary" onClick={send}>
               Send
-            </button>
-          </div>
+            </Button>{" "}
+          </Form>
+          {/* <button className="chatSend" onClick={send}>
+              Send
+            </button> */}
+          {/* </div> */}
           {errMessage ? <Message message={errMessage} /> : null}
           {user.role === "admin" ? (
             <button className="clearChats" onClick={clearChats}>
@@ -178,10 +200,55 @@ const Chat = (props) => {
     );
   };
 
+  const displayChatroom = () => {
+    return (
+      <div>
+        <div className="handle">Click and hold to drag</div>
+        <div id="messages">
+          <h3>Chatroom</h3>
+          <div id="chatty" className="chatbox">
+            {displayChats()}
+          </div>
+        </div>
+        {/* <div className="chatbar"> */}
+        {/* <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} /> */}
+        <Form inline>
+          <FormControl className="chatinput" as="textarea" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
+          <Button className="chatSend" variant="primary" onClick={send}>
+            Send
+          </Button>{" "}
+        </Form>
+        {errMessage ? <Message message={errMessage} /> : null}
+        {user.role === "admin" ? (
+          <button className="clearChats" onClick={clearChats}>
+            clear
+          </button>
+        ) : null}
+      </div>
+    );
+  };
+
+  const authenticatedChat = () => {
+    return (
+      <React.Fragment>
+        <div className="chat">
+          <Button id="openbtn" onClick={toggleMenu}>
+            <span className="test">Chat</span>
+          </Button>
+          <div id="rightSidepanel" className="chatroom" ref={refElem}>
+            {/* <h5>Users Currently Online:</h5> */}
+            <div className="displayChatroom">{displayChatroom()}</div>
+          </div>
+        </div>
+      </React.Fragment>
+    );
+  };
+
   const unauthenticatedChat = () => {
     return (
-      <Draggable>
+      <Draggable handle=".handle">
         <div className="chatroom">
+          <div className="handle">Click and hold to drag</div>
           <div id="messages">
             <h3>Chatroom</h3>
             <div id="chatty" className="chatbox">

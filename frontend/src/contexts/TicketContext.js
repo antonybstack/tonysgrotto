@@ -25,18 +25,18 @@ export default ({ children }) => {
   }, []);
   // provider passes context to all children compoents, no matter how deep it is
   return (
-    <div>
+    <>
       {!tickLoaded ? (
-        <React.Fragment>
+        <>
           {console.log("ticket not loaded")}
           <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
-        </React.Fragment>
+        </>
       ) : (
-        <React.Fragment>
+        <>
           {console.log("ticket loaded")}
           <TicketContext.Provider value={{ tickets, setTickets, tickLoaded }}>{children}</TicketContext.Provider>
-        </React.Fragment>
+        </>
       )}
-    </div>
+    </>
   );
 };
