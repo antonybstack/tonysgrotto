@@ -7,6 +7,7 @@ import { SocketContext } from "../contexts/SocketContext";
 import Message from "../components/Message";
 import axios from "axios";
 import moment from "moment-timezone";
+import Draggable, { DraggableCore } from "react-draggable";
 
 const Chat = (props) => {
   const [message, setMessage] = useState("");
@@ -152,45 +153,49 @@ const Chat = (props) => {
 
   const authenticatedChat = () => {
     return (
-      <div className="chatroom">
-        <div id="messages">
-          <h3>Chatroom</h3>
-          <div id="chatty" className="chatbox">
-            {displayChats()}
+      <Draggable>
+        <div className="chatroom">
+          <div id="messages">
+            <h3>Chatroom</h3>
+            <div id="chatty" className="chatbox">
+              {displayChats()}
+            </div>
           </div>
+          <div className="chatbar">
+            <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
+            <button className="chatSend" onClick={send}>
+              Send
+            </button>
+          </div>
+          {errMessage ? <Message message={errMessage} /> : null}
+          {user.role === "admin" ? (
+            <button className="clearChats" onClick={clearChats}>
+              clear
+            </button>
+          ) : null}
         </div>
-        <div className="chatbar">
-          <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
-          <button className="chatSend" onClick={send}>
-            Send
-          </button>
-        </div>
-        {errMessage ? <Message message={errMessage} /> : null}
-        {user.role === "admin" ? (
-          <button className="clearChats" onClick={clearChats}>
-            clear
-          </button>
-        ) : null}
-      </div>
+      </Draggable>
     );
   };
 
   const unauthenticatedChat = () => {
     return (
-      <div className="chatroom">
-        <div id="messages">
-          <h3>Chatroom</h3>
-          <div id="chatty" className="chatbox">
-            <div className="notLoggedIn">Must be logged in to access the chatroom</div>
+      <Draggable>
+        <div className="chatroom">
+          <div id="messages">
+            <h3>Chatroom</h3>
+            <div id="chatty" className="chatbox">
+              <div className="notLoggedIn">Must be logged in to access the chatroom</div>
+            </div>
+          </div>
+          <div className="chatbar">
+            <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} disabled />
+            <button className="chatSend" onClick={null} disabled>
+              Send
+            </button>
           </div>
         </div>
-        <div className="chatbar">
-          <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} disabled />
-          <button className="chatSend" onClick={null} disabled>
-            Send
-          </button>
-        </div>
-      </div>
+      </Draggable>
     );
   };
 

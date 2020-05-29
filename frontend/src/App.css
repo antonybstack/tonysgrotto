@@ -41,6 +41,22 @@ body {
   color: white;
 }
 
+#mydiv {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  border: 1px solid #d3d3d3;
+  text-align: center;
+}
+
+#mydivheader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #2196f3;
+  color: #fff;
+}
+
 .App {
   background-color: grey;
   width: 100%;
@@ -58,6 +74,72 @@ html {
 
   /* width: 100%;
   min-height: 100%; */
+}
+
+.alert1 {
+  padding-top: 0.5em;
+  margin: 0;
+  border: 0;
+}
+
+.addTicket {
+  width: 20em;
+  padding: 1em;
+}
+
+#ticket::placeholder {
+  font-style: italic;
+  color: lightgray;
+}
+
+.chatroom {
+  float: right;
+  background-color: white;
+  border: grey;
+  border-width: 2px;
+  border-style: solid;
+  padding: 0.5em;
+  font-size: 1rem;
+}
+
+.chatbox {
+  background-color: white;
+  padding: 0.1em;
+  padding-bottom: 2em;
+  height: 20em;
+  width: 18em;
+  border-style: inset;
+  border-width: 1px;
+  color: black;
+  overflow: auto;
+  resize: vertical;
+  word-wrap: break-word;
+  line-height: 0.8em;
+}
+
+.notLoggedIn {
+  color: darkgray;
+  line-height: 1em;
+}
+
+.chatbar {
+  height: 2.35em;
+  width: 18.37em;
+}
+
+.chatinput {
+  width: 18em;
+  border-style: inset;
+  border-width: 1px;
+  float: left;
+  resize: vertical;
+}
+
+.chatSend {
+  padding-top: 0.65em;
+  padding-bottom: 0.65em;
+  padding-right: 0.5em;
+  float: right;
 }
 
 /* .loading {
@@ -104,13 +186,7 @@ a:visited {
   line-height: 0.8em;
 }
 
-.chatinput {
-  width: 18em;
-  border-style: inset;
-  border-width: 1px;
-  float: left;
-  resize: vertical;
-}
+
 
 .chatroom {
   float: right;
@@ -121,6 +197,14 @@ a:visited {
 .chatbar {
   height: 2.35em;
   width: 18.37em;
+}
+
+.chatinput {
+  width: 18em;
+  border-style: inset;
+  border-width: 1px;
+  float: left;
+  resize: vertical;
 }
 
 .chatSend {

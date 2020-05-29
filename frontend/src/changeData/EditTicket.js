@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { TicketContext } from "../contexts/TicketContext";
 import { Form, Button } from "react-bootstrap";
+import Message from "../components/Message";
 
 const EditTicket = (props) => {
   console.log("EditTicket", props);
@@ -11,6 +12,7 @@ const EditTicket = (props) => {
   const [name, setName] = useState(props.value.ticket.ticket.ticket_name);
   const [status, setStatus] = useState(props.value.ticket.ticket.ticket_status);
   const [validation, setValidation] = useState(""); //input validation message
+  const [message, setMessage] = useState(null);
   console.log("EditTicket", props);
   //gets ticket using ticket._id from database
   useEffect(() => {
@@ -45,14 +47,16 @@ const EditTicket = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     //checks if empty
-    if (validate(name)) {
-      //creates ticket object
-      const newTicket = {
-        ticket_name: name,
-        ticket_status: status,
-      };
-      // HTTP POST method sends data with updated ticket to the server
-      axios.post("api/tickets/update/" + ticket._id, newTicket).then((res) => {
+
+    //creates ticket object
+    const newTicket = {
+      ticket_name: name,
+      ticket_status: status,
+    };
+    // HTTP POST method sends data with updated ticket to the server
+    axios
+      .post("api/tickets/update/" + ticket._id, newTicket)
+      .then((res) => {
         // iterates tickets array to find specific ticket to delete
         tickets.forEach((t, index) => {
           if (t._id === ticket._id) {
@@ -66,9 +70,12 @@ const EditTicket = (props) => {
           }
           return null;
         });
+        props.action();
+      })
+      .catch(function (error) {
+        console.log(error.response);
+        setMessage(error.response.data.message);
       });
-      props.action();
-    }
   };
 
   return (
@@ -76,8 +83,8 @@ const EditTicket = (props) => {
       <Form.Group>
         <Form.Label>Change Name</Form.Label>
         <Form.Control type="text" value={name} onChange={handleChangeName} />
+        {message ? <Message message={message} /> : null}
       </Form.Group>
-
       <Form.Group>
         <Form.Label>Change Status</Form.Label>
         <Form.Control as="select" onChange={handleChangeStatus}>

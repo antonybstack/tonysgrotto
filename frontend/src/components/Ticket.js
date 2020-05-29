@@ -32,7 +32,7 @@ const Ticket = (props) => {
           <EditTicket value={prop} action={editTicketHandler} />
         </Modal.Body>
         <Modal.Footer>
-          <DeleteTicket value={ticket} />
+          <DeleteTicket value={prop} action={editTicketHandler} />
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>

@@ -5,7 +5,7 @@ import { SocketContext } from "../contexts/SocketContext";
 import { UsersOnlineContext } from "../contexts/UsersOnlineContext";
 import * as io from "socket.io-client";
 import axios from "axios";
-import { Navbar, NavDropdown, Nav } from "react-bootstrap";
+import { Navbar, NavDropdown, Nav, Collapse } from "react-bootstrap";
 
 const Navbarr = (props) => {
   const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
@@ -83,7 +83,7 @@ const Navbarr = (props) => {
             <Link to="/">
               <li className="nav-item nav-link">Home</li>
             </Link>
-            <NavDropdown title="Account" id="basic-nav-dropdown">
+            <NavDropdown title="Account">
               {user.role === "admin" ? (
                 <>
                   <NavDropdown.Item>

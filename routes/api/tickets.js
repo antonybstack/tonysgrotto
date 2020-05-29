@@ -56,7 +56,7 @@ ticketRoutes.route("/update/:id").post(function (req, res) {
         res.json({ ticket });
       })
       .catch((err) => {
-        res.status(400).send("Update not possible");
+        res.status(400).json({ message: { msgBody: "Ticket requires name", msgError: true } });
       });
   });
 });

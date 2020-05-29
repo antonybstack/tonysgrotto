@@ -36,13 +36,14 @@ function App() {
                   <Router>
                     {/*  links text to route */}
                     <NavBarr />
-                    {/* <UsersOnline />
-                    <Chat /> */}
+                    {/* <UsersOnline /> */}
+
                     <UnPrivateRoute path="/login" component={Login} />
                     <UnPrivateRoute path="/register" component={Register} />
                     <PrivateRoute path="/admin" roles={["admin"]} component={Admin} />
-                    {/* <AddTicket /> */}
+                    <AddTicket />
                     <Route path="/" exact component={TicketDisplay} />
+                    <Chat />
                   </Router>
                 </UsersOnlineProvider>
               </ChatProvider>

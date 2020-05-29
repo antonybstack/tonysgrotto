@@ -14,7 +14,7 @@ const DeleteTicket = (props) => {
   useEffect(() => {
     const getTicket = async () => {
       await axios
-        .get("api/tickets/" + props.value.ticket._id)
+        .get("api/tickets/" + props.value.ticket.ticket._id)
         .then((res) => {
           setTicket(res.data);
         })
@@ -23,7 +23,7 @@ const DeleteTicket = (props) => {
         });
     };
     getTicket();
-  }, [props.value.ticket._id]);
+  }, [props.value.ticket.ticket._id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,6 +39,7 @@ const DeleteTicket = (props) => {
         }
       });
     });
+    props.action();
   };
 
   return (
