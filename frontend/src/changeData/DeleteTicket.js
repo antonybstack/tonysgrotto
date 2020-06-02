@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { TicketContext } from "../contexts/TicketContext";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 
 const DeleteTicket = (props) => {
   //state that is able to update context
@@ -46,9 +46,20 @@ const DeleteTicket = (props) => {
     // <button className="deleteBtn" onClick={handleSubmit}>
     //   Delete Ticket
     // </button>
-    <Button variant="danger" onClick={handleSubmit}>
-      Delete Ticket
-    </Button>
+    <>
+      {ticket ? (
+        <Button variant="danger" onClick={handleSubmit} className="delete">
+          Delete
+        </Button>
+      ) : (
+        <Button variant="danger" onClick={handleSubmit} disabled>
+          <Spinner animation="border" variant="light" className="loadingSpinner" />
+        </Button>
+      )}
+    </>
+    //   <Button variant="danger" onClick={handleSubmit}>
+    //   {ticket ? "delete" : <Spinner animation="border" variant="light" className="loadingSpinner" />}
+    //  </Button>
   );
 };
 export default DeleteTicket;

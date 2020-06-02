@@ -1,8 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import Message from "../components/Message";
 import { AuthContext } from "../contexts/AuthContext";
 import axios from "axios";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Overlay, Tooltip, Spinner } from "react-bootstrap";
 
 const Login = (props) => {
   console.log("Login");
@@ -10,66 +10,74 @@ const Login = (props) => {
   const [message, setMessage] = useState(null);
   const [authLoaded, setAuthLoaded] = useState(false);
   const authContext = useContext(AuthContext);
-
+  const [clicked, setClicked] = useState(false);
+  const [show, setShow] = useState(false);
+  const [typeError, setErrorType] = useState("");
+  const target = useRef(null);
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+  // const clk = async () => {
+  //   setClicked(true);
+  // };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post("/api/users/login", user)
-      .then((res) => {
-        const { isAuthenticated, user } = res.data;
-        if (isAuthenticated) {
-          authContext.setUser(user);
-          authContext.setIsAuthenticated(isAuthenticated);
-          setMessage({ msgBody: "Account successfully logged in", msgError: false });
-          props.action();
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-        setMessage({ msgBody: "Invalid username or password", msgError: true });
-      });
+    if (clicked === true) {
+      axios
+        .post("/api/users/login", user)
+        .then((res) => {
+          const { isAuthenticated, user } = res.data;
+          if (isAuthenticated) {
+            setMessage({ msgBody: "Account successfully logged in", msgError: false });
+            setErrorType("loginSuccessMessage");
+            setShow(true);
+            setTimeout(function () {
+              authContext.setUser(user);
+              authContext.setIsAuthenticated(isAuthenticated);
+              setClicked(false);
+
+              props.action();
+            }, 1500);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+          setErrorType("loginErrorMessage");
+          setShow(true);
+          setClicked(false);
+          setMessage({ msgBody: "Invalid username or password", msgError: true });
+        });
+    }
   };
 
   const onSubmitDemo = (e) => {
+    console.log("clicked", clicked);
     e.preventDefault();
     let userDemo = { username: "demo", password: "demo" };
     axios.post("/api/users/login", userDemo).then((res) => {
       const { isAuthenticated, user } = res.data;
       if (isAuthenticated) {
-        authContext.setUser(user);
-        authContext.setIsAuthenticated(isAuthenticated);
         setMessage({ msgBody: "Account successfully logged in", msgError: false });
-        props.action();
+        setErrorType("loginSuccessMessage");
+        setShow(true);
+        setTimeout(function () {
+          authContext.setUser(user);
+          authContext.setIsAuthenticated(isAuthenticated);
+          setClicked(false);
+
+          props.action();
+        }, 1500);
       }
+      // const { isAuthenticated, user } = res.data;
+      // authContext.setUser(user);
+      // authContext.setIsAuthenticated(isAuthenticated);
+      // props.action();
+      // setMessage({ msgBody: "Account successfully logged in", msgError: false });
     });
   };
 
   return (
-    /* <form onSubmit={onSubmit}>
-        <h3>Please sign in</h3>
-        <label htmlFor="username" className="sr-only">
-          Username:&nbsp;
-        </label>
-        <input type="text" name="username" onChange={onChange} className="form-control" placeholder="Enter Username" />
-        <label htmlFor="password" className="sr-only">
-          Password:&nbsp;
-        </label>
-        <input type="password" name="password" onChange={onChange} className="form-control" placeholder="Enter Password" />
-        <button className="btn btn-lg btn-primary btn-block" type="submit">
-          Log in
-        </button>
-      </form>
-      <form onSubmit={onSubmitDemo}>
-        <button className="btn btn-lg btn-primary btn-block" type="submit">
-          DEMO
-        </button>
-      </form>
-      {message ? <Message message={message} /> : null}
-    </div> */
     <>
       <Form onSubmit={onSubmit}>
         <Form.Group>
@@ -78,9 +86,16 @@ const Login = (props) => {
         </Form.Group>
         <Form.Group>
           <Form.Label>Password</Form.Label>
-          <Form.Control type="text" name="password" onChange={onChange} />
+          <Form.Control type="password" name="password" onChange={onChange} />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button
+          ref={target}
+          variant="primary"
+          type="submit"
+          onClick={() => {
+            setClicked(true);
+          }}
+        >
           Submit
         </Button>
         <Form onSubmit={onSubmitDemo} className="demo">
@@ -90,8 +105,19 @@ const Login = (props) => {
         </Form>
         {/* {message ? <Message message={message} /> : null} */}
       </Form>
+      <Overlay delay={{ show: 50, hide: 50 }} target={target.current} show={show} placement="right-end">
+        {(props) => (
+          <Tooltip id={typeError} {...props}>
+            {console.log(message)}
+            <Message message={message} />
+          </Tooltip>
+          //    <Tooltip id={message.msgError === true ? "loginErrorMessage" : "loginSuccessMessage"} {...props}>
+          //    <Message message={message} />
+          //  </Tooltip>
+        )}
+      </Overlay>
 
-      {message ? <Message message={message} /> : null}
+      {/* {message ? <Message message={message} /> : null} */}
     </>
   );
 };

@@ -1,16 +1,27 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 
 const getStyle = (props) => {
-  // if (props.message.msgError) return "errorMessage";
-  // else return "successMessage";
+  if (props.message.msgError) return "errorMessage";
+  else return "successMessage";
 };
 
 //error message handling
 const Message = (props) => {
   console.log("Message");
-
-  return <Alert variant="danger">{props.message.msgBody ? props.message.msgBody : null}</Alert>;
+  console.log(props);
+  if (props.message != undefined && props.message != null) {
+    // return <div className={getStyle(props)}>{props.message.msgBody ? props.message.msgBody : null}</div>;
+    return (
+      <>
+        <div className={getStyle(props)}>{props.message.msgBody}</div>
+        {props.message.msgError === false && <Spinner animation="border" variant="light" className="successSpinner" />}
+      </>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default Message;

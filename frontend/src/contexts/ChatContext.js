@@ -1,5 +1,6 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+
 import axios from "axios";
 
 // Context provides a way to pass data through the component tree without having to pass props down manually at every level.
@@ -11,6 +12,7 @@ export default ({ children }) => {
   const { isAuthenticated } = useContext(AuthContext);
   const [chats, setChats] = useState([]);
   const [chatLoaded, setChatLoaded] = useState(false);
+
   useEffect(() => {
     const getChats = async () => {
       if (isAuthenticated) {

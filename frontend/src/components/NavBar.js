@@ -4,6 +4,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { SocketContext } from "../contexts/SocketContext";
 import { UsersOnlineContext } from "../contexts/UsersOnlineContext";
 import Login from "./Login";
+import Register from "./Register";
 import * as io from "socket.io-client";
 import axios from "axios";
 import { Navbar, NavDropdown, Nav, Modal, Button } from "react-bootstrap";
@@ -12,15 +13,20 @@ const Navbarr = (props) => {
   const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
   const { socket, setSocket } = useContext(SocketContext);
   const { usersOnline } = useContext(UsersOnlineContext);
-  const [show, setShow] = useState(false);
+  const [loginShow, setLoginShow] = useState(false);
+  const [registerShow, setRegisterShow] = useState(false);
 
   console.log("Navbar");
 
-  const editTicketHandler = () => {
-    setShow(false);
+  const loginHandler = () => {
+    setLoginShow(false);
+  };
+  const registerHandler = () => {
+    setRegisterShow(false);
+    setLoginShow(true);
   };
 
-  function MyVerticallyCenteredModal1(props) {
+  function LoginModal(props) {
     // let prop = props;
     return (
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-50w">
@@ -28,7 +34,25 @@ const Navbarr = (props) => {
           <Modal.Title id="contained-modal-title-vcenter">Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Login value={props} action={editTicketHandler} />
+          <Login value={props} action={loginHandler} />
+        </Modal.Body>
+        <Modal.Footer>
+          {/* <DeleteTicket value={prop} action={editTicketHandler} /> */}
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+
+  function RegisterModal(props) {
+    // let prop = props;
+    return (
+      <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-50w">
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">Register</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Register value={props} action={registerHandler} />
         </Modal.Body>
         <Modal.Footer>
           {/* <DeleteTicket value={prop} action={editTicketHandler} /> */}
@@ -81,17 +105,20 @@ const Navbarr = (props) => {
             </Link>
             <NavDropdown smooth={true} duration={500} title="Account" id="basic-nav-dropdown">
               <NavDropdown.Item smooth={true} duration={500}>
-                <div data-dismiss="OverlayTrigger" onClick={() => setShow(true)}>
+                <div data-dismiss="OverlayTrigger" onClick={() => setLoginShow(true)}>
                   Login
                 </div>
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link to="/register">Register</Link>
+              <NavDropdown.Item smooth={true} duration={500}>
+                <div data-dismiss="OverlayTrigger" onClick={() => setRegisterShow(true)}>
+                  Register
+                </div>
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
-        <MyVerticallyCenteredModal1 show={show} onHide={() => setShow(false)} />
+        <LoginModal show={loginShow} onHide={() => setLoginShow(false)} />
+        <RegisterModal show={registerShow} onHide={() => setRegisterShow(false)} />
       </Navbar>
     );
   };
@@ -100,7 +127,7 @@ const Navbarr = (props) => {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand href="/">tonysgrotto</Navbar.Brand>
-        <Navbar.Text>
+        <Navbar.Text className="navProfile">
           &nbsp;&nbsp;&nbsp;
           <img src={user.avatar && require("../assets/avatars/" + user.avatar + ".png")} alt="Logo" width="20" /> {user.username}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </Navbar.Text>
@@ -119,8 +146,15 @@ const Navbarr = (props) => {
                   <NavDropdown.Divider />
                 </>
               ) : null}
-              <NavDropdown.Item onClick={onClickLogoutHandler}>Logout</NavDropdown.Item>
+              <NavDropdown.Item onClick={onClickLogoutHandler} smooth={true} duration={500}>
+                <div data-dismiss="OverlayTrigger">Logout</div>
+              </NavDropdown.Item>
             </NavDropdown>
+          </Nav>
+          <Nav>
+            <Nav.Link href="https://github.com/antonybstack/tonysgrotto" target="_blank">
+              <img src={require("../assets/github.png")} alt="github" width="100" />
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

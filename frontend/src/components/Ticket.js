@@ -1,10 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import ModalEdit from "../Modals/ModalEdit";
 import Profile from "./Profile";
 import { OverlayTrigger, Overlay, Popover, Button, Modal, Tooltip } from "react-bootstrap";
 import EditTicket from "../changeData/EditTicket";
 import DeleteTicket from "../changeData/DeleteTicket";
 import { useSpring, animated } from "react-spring";
+import { MobileContext } from "../contexts/MobileContext.js";
 
 //this component's purpose is for cleaner code and is used in EditTicket. EditTicket takes data from TicketContext and passes that data to this component to output the html.
 const Ticket = (props) => {
@@ -14,7 +15,12 @@ const Ticket = (props) => {
   const spring = useSpring({ opacity: 1, from: { opacity: 0 } });
   let ticket = props;
   let tipPlacement = "right";
+  const { windowSize } = useContext(MobileContext);
+
   if (props.ticket.ticket_status === "done") tipPlacement = "left";
+  if (windowSize.width < 850) {
+    tipPlacement = "bottom";
+  }
 
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);

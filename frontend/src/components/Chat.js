@@ -4,6 +4,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { ProfileContext } from "../contexts/ProfileContext";
 import { ChatContext } from "../contexts/ChatContext";
 import { SocketContext } from "../contexts/SocketContext";
+import { MobileContext } from "../contexts/MobileContext.js";
 import Message from "../components/Message";
 import axios from "axios";
 import moment from "moment-timezone";
@@ -18,9 +19,9 @@ const Chat = (props) => {
   const { profiles } = useContext(ProfileContext);
   const { socket } = useContext(SocketContext);
   const [count, setCount] = useState(0);
-  console.log("Chat");
-
+  const { windowSize } = useContext(MobileContext);
   const refElem = useRef();
+  console.log("Chat");
 
   useEffect(() => {
     setInterval(() => {
@@ -155,14 +156,54 @@ const Chat = (props) => {
     setChats((currentChats) => [...currentChats, chatPacket]);
   };
 
-  function toggleMenu() {
+  useEffect(() => {
     console.log(refElem);
-
-    if (refElem.current.clientWidth === 0) {
-      document.getElementById("rightSidepanel").style.width = "18em";
+    if (windowSize.width < 850) {
+      document.getElementById("rightSidepanelMobile").style.height = "0em";
+      document.getElementById("rightSidepanelMobile").style.width = "calc(100% - .7em)";
+      document.getElementById("rightSidepanelMobile").style.hidden = false;
     } else {
       document.getElementById("rightSidepanel").style.width = "0em";
+      document.getElementById("rightSidepanel").style.height = "100%";
+      document.getElementById("rightSidepanel").style.hidden = false;
     }
+  }, [windowSize]);
+
+  function toggleMenu() {
+    console.log(windowSize.width);
+    if (windowSize.width < 850) {
+      if (refElem.current.clientHeight === 0) {
+        document.getElementById("rightSidepanelMobile").style.height = "15em";
+        document.getElementById("rightSidepanelMobile").style.width = "calc(100% - .7em)";
+      } else {
+        document.getElementById("rightSidepanelMobile").style.height = "0em";
+        document.getElementById("rightSidepanelMobile").style.width = "calc(100% - .7em)";
+      }
+    } else {
+      if (refElem.current.clientWidth === 0) {
+        document.getElementById("rightSidepanel").style.width = "15em";
+        document.getElementById("rightSidepanel").style.height = "100%";
+      } else {
+        document.getElementById("rightSidepanel").style.width = "0em";
+        document.getElementById("rightSidepanel").style.height = "100%";
+      }
+    }
+    // let checkMobile = window.matchMedia("(max-width: 850px)").matches;
+    // if (checkMobile) {
+    //   console.log(checkMobile);
+    //   if (refElem.current.clientHeight === 0) {
+    //     document.getElementById("rightSidepanel").style.height = "15em";
+    //   } else {
+    //     document.getElementById("rightSidepanel").style.height = "0em";
+    //   }
+    // } else {
+    //   console.log(checkMobile);
+    //   if (refElem.current.clientWidth === 0) {
+    //     document.getElementById("rightSidepanel").style.width = "15em";
+    //   } else {
+    //     document.getElementById("rightSidepanel").style.width = "0em";
+    //   }
+    // }
   }
 
   const draggableChat = () => {
@@ -229,11 +270,20 @@ const Chat = (props) => {
     return (
       <React.Fragment>
         <div className="chat">
-          <div id="rightSidepanel" className="chatroom" ref={refElem}>
+          {windowSize.width < 850 ? (
+            <div id="rightSidepanelMobile" className="chatroomMobile" ref={refElem}>
+              <div className="displayChatroom">{displayChatroom()}</div>
+            </div>
+          ) : (
+            <div id="rightSidepanel" className="chatroom" ref={refElem}>
+              <div className="displayChatroom">{displayChatroom()}</div>
+            </div>
+          )}
+          {/* <div id="rightSidepanel" className="chatroom" ref={refElem}>
             <div className="displayChatroom">{displayChatroom()}</div>
-          </div>
+          </div> */}
           <Button id="openbtn2" variant="info" onClick={toggleMenu}>
-            <span className="sideText">Chat</span>
+            <img src={require("../assets/chat.png")} alt="Chat" width="40" />
           </Button>
         </div>
       </React.Fragment>
@@ -244,11 +294,17 @@ const Chat = (props) => {
     return (
       <React.Fragment>
         <div className="chat">
-          <div id="rightSidepanel" className="chatroom" ref={refElem}>
-            <div className="notLoggedIn">Must be logged in to chat</div>
-          </div>
+          {windowSize.width < 850 ? (
+            <div id="rightSidepanelMobile" className="chatroomMobile" ref={refElem}>
+              <div className="notLoggedIn">Must be logged in to chat</div>
+            </div>
+          ) : (
+            <div id="rightSidepanel" className="chatroom" ref={refElem}>
+              <div className="notLoggedIn">Must be logged in to chat</div>
+            </div>
+          )}
           <Button id="openbtn2" variant="info" onClick={toggleMenu}>
-            <div className="sideText">Chat</div>
+            <img src={require("../assets/chat.png")} alt="Chat" width="40" />
           </Button>
         </div>
       </React.Fragment>

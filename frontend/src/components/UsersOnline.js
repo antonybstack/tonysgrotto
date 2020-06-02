@@ -3,13 +3,14 @@ import { useContext, useState, useEffect, useRef } from "react";
 import { UsersOnlineContext } from "../contexts/UsersOnlineContext";
 import { Button, ListGroup, Fade } from "react-bootstrap";
 import { useSpring, animated } from "react-spring";
+import { MobileContext } from "../contexts/MobileContext.js";
 import moment from "moment-timezone";
 
 const UsersOnline = () => {
   const { usersOnline } = useContext(UsersOnlineContext);
   const [count, setCount] = useState(0);
   const spring = useSpring({ opacity: 1, from: { opacity: 0 } });
-
+  const { windowSize } = useContext(MobileContext);
   // const [width, setWidth] = React.useState('100px')
   const refElem = useRef();
 
@@ -46,11 +47,37 @@ const UsersOnline = () => {
     }, 1000);
   }, []);
 
-  function toggleMenu() {
-    if (refElem.current.clientWidth === 0) {
-      document.getElementById("leftSidepanel").style.width = "15em";
+  useEffect(() => {
+    console.log(refElem);
+    if (windowSize.width < 850) {
+      document.getElementById("leftSidepanelMobile").style.height = "0em";
+      document.getElementById("leftSidepanelMobile").style.width = "calc(100% - .5em)";
+      document.getElementById("leftSidepanelMobile").style.hidden = false;
     } else {
       document.getElementById("leftSidepanel").style.width = "0em";
+      document.getElementById("leftSidepanel").style.height = "100%";
+      document.getElementById("leftSidepanel").style.hidden = false;
+    }
+  }, [windowSize]);
+
+  function toggleMenu() {
+    console.log(windowSize.width);
+    if (windowSize.width < 850) {
+      if (refElem.current.clientHeight === 0) {
+        document.getElementById("leftSidepanelMobile").style.height = "15em";
+        document.getElementById("leftSidepanelMobile").style.width = "calc(100% - .5em)";
+      } else {
+        document.getElementById("leftSidepanelMobile").style.height = "0em";
+        document.getElementById("leftSidepanelMobile").style.width = "calc(100% - .5em)";
+      }
+    } else {
+      if (refElem.current.clientWidth === 0) {
+        document.getElementById("leftSidepanel").style.width = "15em";
+        document.getElementById("leftSidepanel").style.height = "100%";
+      } else {
+        document.getElementById("leftSidepanel").style.width = "0em";
+        document.getElementById("leftSidepanel").style.height = "100%";
+      }
     }
   }
 
@@ -77,14 +104,18 @@ const UsersOnline = () => {
     <React.Fragment>
       <div className="users">
         {/* <animated.div style={props}>I will fade in</animated.div> */}
-        <Button id="openbtn" onClick={toggleMenu} variant="info">
-          <span className="sideText">Users Online</span>
+        <Button id="openbtn" onClick={toggleMenu}>
+          <img src={require("../assets/users.png")} alt="Chat" width="40" />
         </Button>
-
-        <div id="leftSidepanel" className="usersOnline" ref={refElem}>
-          {/* <h5>Users Currently Online:</h5> */}
-          <ListGroup className="userlist">{displayUsersOnline()}</ListGroup>
-        </div>
+        {windowSize.width < 850 ? (
+          <div id="leftSidepanelMobile" className="usersOnlineMobile" ref={refElem}>
+            <ListGroup className="userlist">{displayUsersOnline()}</ListGroup>
+          </div>
+        ) : (
+          <div id="leftSidepanel" className="usersOnline" ref={refElem}>
+            <ListGroup className="userlist">{displayUsersOnline()}</ListGroup>
+          </div>
+        )}
       </div>
     </React.Fragment>
   );

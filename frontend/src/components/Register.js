@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Message from "../components/Message";
+import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 
 const Register = (props) => {
@@ -28,7 +29,7 @@ const Register = (props) => {
     var i = 5;
     const check = () => {
       if (i === 0) {
-        props.history.push("/login");
+        props.action();
       } else {
         if (i === 5 || i === 2) {
           setRedirectMessage("You will be redirected to sign in " + i + " seconds.");
@@ -60,27 +61,50 @@ const Register = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <h3>Please Register</h3>
-        <label htmlFor="username" className="sr-only">
-          Username:&nbsp;
-        </label>
-        <input type="text" name="username" value={user.username} onChange={onChange} className="form-control" placeholder="Enter Username" />
-        <label htmlFor="password" className="sr-only">
-          Password:&nbsp;
-        </label>
-        <input type="password" name="password" value={user.password} onChange={onChange} className="form-control" placeholder="Enter Password" />
+    <>
+      <Form onSubmit={onSubmit}>
+        <Form.Group>
+          <Form.Label>Username</Form.Label>
+          <Form.Control type="text" name="username" onChange={onChange} />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="text" name="password" onChange={onChange} />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+        {/* {message ? <Message message={message} /> : null} */}
+      </Form>
 
-        <button type="submit">Register</button>
-      </form>
       {message ? (
         <React.Fragment>
           <Message message={message} />
           <div style={{ fontStyle: "italic" }}>{redirectMessage}</div>
         </React.Fragment>
       ) : null}
-    </div>
+    </>
+    // <div>
+    //   <form onSubmit={onSubmit}>
+    //     <h3>Please Register</h3>
+    //     <label htmlFor="username" className="sr-only">
+    //       Username:&nbsp;
+    //     </label>
+    //     <input type="text" name="username" value={user.username} onChange={onChange} className="form-control" placeholder="Enter Username" />
+    //     <label htmlFor="password" className="sr-only">
+    //       Password:&nbsp;
+    //     </label>
+    //     <input type="password" name="password" value={user.password} onChange={onChange} className="form-control" placeholder="Enter Password" />
+
+    //     <button type="submit">Register</button>
+    //   </form>
+    //   {message ? (
+    //     <React.Fragment>
+    //       <Message message={message} />
+    //       <div style={{ fontStyle: "italic" }}>{redirectMessage}</div>
+    //     </React.Fragment>
+    //   ) : null}
+    // </div>
   );
 };
 
