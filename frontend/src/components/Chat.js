@@ -63,7 +63,7 @@ const Chat = (props) => {
       };
       socket.emit("chat message", chatPacket);
 
-      setMessage("");
+      // setMessage("");
 
       var elem = document.getElementById("chatty");
       elem.scrollTop = elem.scrollHeight;
@@ -159,11 +159,10 @@ const Chat = (props) => {
     console.log(refElem);
 
     if (refElem.current.clientWidth === 0) {
-      document.getElementById("rightSidepanel").style.width = "15em";
+      document.getElementById("rightSidepanel").style.width = "18em";
     } else {
       document.getElementById("rightSidepanel").style.width = "0em";
     }
-    document.getElementById("rightSidepanel").style.width = "20em";
   }
 
   const draggableChat = () => {
@@ -201,29 +200,27 @@ const Chat = (props) => {
   };
 
   const displayChatroom = () => {
+    console.log(user);
     return (
-      <div>
-        <div className="handle">Click and hold to drag</div>
+      <div className="chattt">
         <div id="messages">
           <h3>Chatroom</h3>
           <div id="chatty" className="chatbox">
             {displayChats()}
           </div>
         </div>
-        {/* <div className="chatbar"> */}
-        {/* <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} /> */}
-        <Form inline>
-          <FormControl className="chatinput" as="textarea" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
-          <Button className="chatSend" variant="primary" onClick={send}>
+        <div className="chatbar">
+          <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
+          <button className="chatSend" onClick={send}>
             Send
-          </Button>{" "}
-        </Form>
-        {errMessage ? <Message message={errMessage} /> : null}
+          </button>
+        </div>
         {user.role === "admin" ? (
           <button className="clearChats" onClick={clearChats}>
             clear
           </button>
         ) : null}
+        {errMessage ? <Message message={errMessage} /> : null}
       </div>
     );
   };
@@ -232,13 +229,12 @@ const Chat = (props) => {
     return (
       <React.Fragment>
         <div className="chat">
-          <Button id="openbtn" onClick={toggleMenu}>
-            <span className="test">Chat</span>
-          </Button>
           <div id="rightSidepanel" className="chatroom" ref={refElem}>
-            {/* <h5>Users Currently Online:</h5> */}
             <div className="displayChatroom">{displayChatroom()}</div>
           </div>
+          <Button id="openbtn2" variant="info" onClick={toggleMenu}>
+            <span className="sideText">Chat</span>
+          </Button>
         </div>
       </React.Fragment>
     );
@@ -246,23 +242,16 @@ const Chat = (props) => {
 
   const unauthenticatedChat = () => {
     return (
-      <Draggable handle=".handle">
-        <div className="chatroom">
-          <div className="handle">Click and hold to drag</div>
-          <div id="messages">
-            <h3>Chatroom</h3>
-            <div id="chatty" className="chatbox">
-              <div className="notLoggedIn">Must be logged in to access the chatroom</div>
-            </div>
+      <React.Fragment>
+        <div className="chat">
+          <div id="rightSidepanel" className="chatroom" ref={refElem}>
+            <div className="notLoggedIn">Must be logged in to chat</div>
           </div>
-          <div className="chatbar">
-            <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} disabled />
-            <button className="chatSend" onClick={null} disabled>
-              Send
-            </button>
-          </div>
+          <Button id="openbtn2" variant="info" onClick={toggleMenu}>
+            <div className="sideText">Chat</div>
+          </Button>
         </div>
-      </Draggable>
+      </React.Fragment>
     );
   };
 

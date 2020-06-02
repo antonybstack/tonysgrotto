@@ -56,9 +56,9 @@ const AddTicket = () => {
 
   const open = () => {
     return (
-      <React.Fragment>
-        <Form inline onSubmit={handleSubmit}>
-          <Form.Group>
+      <div className="addTicket">
+        <Form inline onSubmit={handleSubmit} className="test1">
+          <Form.Group className="test2">
             <Form.Control id="ticket" type="text" value={name} onChange={handleChange} placeholder="e.g. deploy react app" />
             <Button variant="primary" type="submit">
               Add Ticket
@@ -66,7 +66,36 @@ const AddTicket = () => {
           </Form.Group>
           {message ? <Message message={message} /> : null}
         </Form>
-      </React.Fragment>
+      </div>
+      // <React.Fragment>
+      //     <form onSubmit={handleSubmit}>
+      //       <div className="addTicket">
+      //         <label>
+      //           <p>Add Ticket:</p>
+      //           <input type="text" name="name" value={name} onChange={handleChange} />
+      //         </label>
+      //         <input type="submit" name="Submit" className="submit"></input>
+      //       </div>
+      //     </form>
+      //   )}
+      //   {message ? <Message message={message} /> : null}
+      // </React.Fragment>
+    );
+  };
+
+  const notopen = () => {
+    return (
+      <div className="addTicket">
+        <Form inline onSubmit={handleSubmit} className="test1" disabled>
+          <Form.Group className="test2">
+            <Form.Control disabled id="ticket" type="text" value={name} onChange={handleChange} placeholder="e.g. deploy react app" />
+            <Button disabled variant="primary" type="submit">
+              Add Ticket
+            </Button>
+          </Form.Group>
+          {message ? <Message message={message} /> : null}
+        </Form>
+      </div>
       // <React.Fragment>
       //     <form onSubmit={handleSubmit}>
       //       <div className="addTicket">
@@ -84,12 +113,12 @@ const AddTicket = () => {
   };
 
   return (
-    <div className="addTicket">
-      {isAuthenticated === true && open()}
+    <>
+      {isAuthenticated && open()}
       {/* {isAuthenticated === false && <Message message={message} />} */}
-
+      {!isAuthenticated && notopen()}
       {/* <div className="validation">{validation}</div> */}
-    </div>
+    </>
   );
 };
 

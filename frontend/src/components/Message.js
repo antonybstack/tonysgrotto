@@ -10,11 +10,7 @@ const getStyle = (props) => {
 const Message = (props) => {
   console.log("Message");
 
-  return (
-    <span className="alert1">
-      <Alert variant="danger">{props.message.msgBody ? props.message.msgBody : null}</Alert>
-    </span>
-  );
+  return <Alert variant="danger">{props.message.msgBody ? props.message.msgBody : null}</Alert>;
 };
 
 export default Message;

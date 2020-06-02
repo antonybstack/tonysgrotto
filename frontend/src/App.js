@@ -36,12 +36,9 @@ function App() {
                   <Router>
                     {/*  links text to route */}
                     <NavBarr />
-                    {/* <UsersOnline /> */}
-
                     <UnPrivateRoute path="/login" component={Login} />
                     <UnPrivateRoute path="/register" component={Register} />
                     <PrivateRoute path="/admin" roles={["admin"]} component={Admin} />
-
                     <Route path="/" exact component={Home} />
                   </Router>
                 </UsersOnlineProvider>

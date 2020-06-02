@@ -19,62 +19,215 @@ body {
   margin-left: 15%;
 }
 */
-/* @media (min-width: 576px) {
-  .card-decky {
-    display: flex;
-    flex-flow: row wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-  }
-} */
+
+:root {
+  --notblack: #23272a;
+  --dark: #2c2f33;
+  --greyple: #99aab5;
+  --burnt: #da8b72;
+}
 
 html,
 body {
-  height: 100%;
-  background-color: grey;
+  /* height: 100%; */
+  background-color: rgb(75, 75, 75);
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 #root {
+  background-color: rgb(75, 75, 75);
   height: 100%;
 }
 
 .App {
-  background-color: grey;
+  /* background-color: green; */
   height: 100%;
 }
 
 /* HOME PAGE GRID LAYOUT */
 
+.test3 {
+  height: 2em;
+}
+
+@media (width: 500px) {
+  .test1 {
+    display: inline;
+    flex: 0 0 auto;
+    flex-flow: row wrap;
+    align-items: center;
+    margin-bottom: 0;
+  }
+}
+
+@media (width: 500px) {
+  .test2 {
+    display: inline;
+    flex: 0 0 auto;
+    flex-flow: row wrap;
+    align-items: center;
+    margin-bottom: 0;
+  }
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.list-group {
+  /* white-space: nowrap; */
+  /* word-wrap: break-word; */
+  /* display: block; */
+  /* white-space: nowrap; */
+
+  /* overflow: hidden; */
+}
+.list-group:hover {
+  /* background-color: tomato; */
+}
+.ticketItem {
+  /* white-space: nowrap; */
+  /* display: block; */
+  padding: 1em;
+  border-bottom: 0.01em solid rgba(0, 0, 0, 0.125);
+  background-color: white;
+  /* transition: 0s background-color; */
+  transition-duration: 0.25s;
+  /* overflow: hidden; */
+}
+
+.ticketItem:hover {
+  transition-duration: 0.25s;
+  background-color: rgb(255, 211, 203);
+  cursor: pointer;
+  /* display: block; */
+
+  /* height: 2em; */
+  /* overflow-wrap: anywhere; */
+}
+.ticketName {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+}
+
+.ticky {
+}
+
+.cardDeck.card-deck {
+  /* border-left: 1em; */
+  margin-left: 0;
+  margin-right: 0;
+
+  /* box-shadow: 5px 10px 8px 10px #888888; */
+  /* padding-left: 1em; */
+}
+.card {
+  box-shadow: 0px 10px 15px 8px #363636;
+}
+
+@media (max-width: 850px) {
+  .cardDeck {
+    display: block !important;
+    flex-flow: row wrap !important;
+    padding: 0em 1em 0em 1em;
+  }
+}
+
+@media (max-width: 850px) {
+  .card {
+    margin: 1em 1em 1em 1em;
+  }
+}
+
+/* 
+@media (min-width: 800px) {
+  .cardDeck {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 1em;
+  }
+}
+
+@media (max-width: 800px) {
+  .card {
+    margin: 1em 1em 1em 1em;
+  }
+}
+
+@media (max-width: 576px) {
+  .card {
+    margin: 0em 0em 0em 0em;
+  }
+}
+
+
+
+@media (max-width: 576px) {
+  .cardDeck {
+    display: block !important;
+    flex-flow: row wrap !important;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+} */
+
 .addTicket {
   grid-area: addT;
-}
-.card-deck {
-  grid-area: cards;
-}
+  /* background-color: #a3d0ff; */
+  margin-bottom: 0.5em;
+  padding: 1em;
+  grid-column-start: 2;
 
-.home {
-  display: grid;
-  grid-template-areas:
-    "users addT addT "
-    "users cards chat"
-    "users cards chat";
-
-  grid-template-columns: 1fr 80% 18%;
-  /* grid-template-rows: 0% 60% 25%; */
+  grid-row-start: 1;
 }
 
 .users {
   grid-area: users;
-  width: auto;
   display: flex;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 1;
+
   /* background-color: #111; */
 }
 
 .chat {
   grid-area: chat;
   display: flex;
+  grid-column-start: 3;
+  grid-column-end: 3;
+  grid-row-start: 1;
+
   /* background-color: #111; */
+}
+
+.card-deck {
+  grid-area: cards;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.home {
+  height: 94%;
+  display: grid;
+  /* grid-template-areas:
+    "users addT chat "
+    "users cards chat"
+    "users cards chat"; */
+  width: 100%;
+  grid-template-columns: 1fr minmax(0%, 98%) 1fr;
+  grid-template-rows: 6em 1fr 1fr;
+  /* grid-template-rows: 11% 1fr 1fr; */
+  /* background-color: grey; */
+
+  /* grid-template-rows: 0% 60% 25%; */
 }
 
 .usersOnline {
@@ -82,10 +235,10 @@ body {
   left: 0;
   overflow-x: hidden;
   transition: 0.5s;
-  float: left;
+
   grid-area: users;
   width: 0;
-  background-color: white;
+  background-color: rgb(224, 224, 224);
   /* border-style: inset;
   border-color: rgb(136, 136, 136);
   border-width: 0.5em; */
@@ -98,32 +251,22 @@ body {
   /* background-color: #111; */
 }
 
-.displayChatroom {
-  display: block;
-  white-space: nowrap;
-  /* background-color: #111; */
+.loginTime {
+  color: grey;
+  font-style: italic;
+  font-size: 0.8em;
 }
 
-#openbtn {
-  height: 100%;
-  width: 1em;
-  float: right;
-  text-align: center;
-  border-radius: 0;
-}
-
-.test {
+.sideText {
   writing-mode: vertical-lr;
   text-orientation: sideways-right;
   transform: translateX(-10px);
-}
-
-.card-deck {
-  width: 100% !important;
-  padding: 1em 1em 1em 1em;
-
-  /* margin-left: 25px;
-  margin-right: -25px; */
+  width: 90%;
+  height: 90%;
+  font-weight: 600;
+  font-size: 1.2em;
+  padding-right: 0.3em;
+  padding-left: 0.3em;
 }
 
 .NavDropdown.Item-logout {
@@ -137,26 +280,64 @@ body {
   border: 0;
 }
 
-.addTicket {
-  /* width: 100%; */
-  padding: 1em;
-}
-
 #ticket::placeholder {
   font-style: italic;
   color: lightgray;
 }
 
-.chatroom {
+.loggedUser {
+  font-size: smaller;
+}
+
+.notLoggedIn {
+  color: darkgray;
+  line-height: 1em;
+  text-align: center;
+  /* text-align: center; */
+  /* vertical-align: middle; */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.displayChatroom {
+  display: block;
+  white-space: nowrap;
+  /* height: 100%; */
+  margin: 0.5em;
+  /* background-color: #111; */
+  font-size: smaller;
+}
+
+#openbtn {
+  height: 100%;
+  /* width: 1em; */
+  text-align: center;
+  border-radius: 0;
+  /* width: 20px; */
+}
+
+#openbtn2 {
+  height: 100%;
+  /* width: 1em; */
   float: right;
+  text-align: center;
+  border-radius: 0;
+}
+
+.chatroom {
+  float: left;
   background-color: white;
   border: grey;
-  border-width: 2px;
-  border-style: solid;
-  padding: 0.5em;
+  /* border-width: 2px; */
+  /* border-style: solid; */
+  /* padding: 0.5em; */
   font-size: 1rem;
 
   overflow-x: hidden;
+
   transition: 0.5s;
 
   width: 0;
@@ -168,25 +349,35 @@ body {
   background-color: white;
   padding: 0.1em;
   /* padding-bottom: 2em; */
-  height: 20em;
+  height: 15em;
   width: 100%;
-  border-style: inset;
-  border-width: 1px;
+  /* border-style: inset; */
+  /* border-width: 1px; */
   color: black;
   overflow: auto;
   resize: vertical;
   word-wrap: break-word;
   line-height: 0.8em;
+  display: block;
+  white-space: nowrap;
 }
 
-.notLoggedIn {
-  color: darkgray;
-  line-height: 1em;
+.clearChats {
+  display: block;
+  margin: 0;
+}
+
+.form-inline {
+  display: block;
+  white-space: nowrap;
+  display: inline-block;
 }
 
 .chatbar {
-  height: 2.35em;
-  /* width: 18.37em; */
+  display: block;
+  white-space: nowrap;
+  display: inline-block;
+  width: 100%;
 }
 
 .chatinput {
@@ -231,6 +422,10 @@ body {
   color: grey;
   font-style: italic;
   font-size: 0.8em;
+  float: right;
+}
+
+.demo {
   float: right;
 }
 
@@ -342,11 +537,7 @@ h3 {
   margin-top: 0.5em;
 }
 
-.loginTime {
-  color: grey;
-  font-style: italic;
-  font-size: 0.8em;
-}
+
 
 .chatTime {
   color: grey;

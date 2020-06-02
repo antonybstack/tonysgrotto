@@ -1,18 +1,42 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { SocketContext } from "../contexts/SocketContext";
 import { UsersOnlineContext } from "../contexts/UsersOnlineContext";
+import Login from "./Login";
 import * as io from "socket.io-client";
 import axios from "axios";
-import { Navbar, NavDropdown, Nav, Collapse } from "react-bootstrap";
+import { Navbar, NavDropdown, Nav, Modal, Button } from "react-bootstrap";
 
 const Navbarr = (props) => {
   const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
   const { socket, setSocket } = useContext(SocketContext);
   const { usersOnline } = useContext(UsersOnlineContext);
+  const [show, setShow] = useState(false);
 
   console.log("Navbar");
+
+  const editTicketHandler = () => {
+    setShow(false);
+  };
+
+  function MyVerticallyCenteredModal1(props) {
+    // let prop = props;
+    return (
+      <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-50w">
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">Login</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Login value={props} action={editTicketHandler} />
+        </Modal.Body>
+        <Modal.Footer>
+          {/* <DeleteTicket value={prop} action={editTicketHandler} /> */}
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
 
   const onClickLogoutHandler = async () => {
     socket.emit("get connections");
@@ -55,9 +79,11 @@ const Navbarr = (props) => {
             <Link to="/">
               <li className="nav-item nav-link">Home</li>
             </Link>
-            <NavDropdown title="Account" id="basic-nav-dropdown">
-              <NavDropdown.Item>
-                <Link to="/login">Login</Link>
+            <NavDropdown smooth={true} duration={500} title="Account" id="basic-nav-dropdown">
+              <NavDropdown.Item smooth={true} duration={500}>
+                <div data-dismiss="OverlayTrigger" onClick={() => setShow(true)}>
+                  Login
+                </div>
               </NavDropdown.Item>
               <NavDropdown.Item>
                 <Link to="/register">Register</Link>
@@ -65,6 +91,7 @@ const Navbarr = (props) => {
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
+        <MyVerticallyCenteredModal1 show={show} onHide={() => setShow(false)} />
       </Navbar>
     );
   };

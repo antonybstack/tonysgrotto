@@ -26,17 +26,6 @@ const EditTicket = (props) => {
       });
   }, [props.value.ticket.ticket._id]);
 
-  //checks if input field is empty
-  const validate = (name) => {
-    if (name === "") {
-      setValidation("field cannot be empty");
-      return false;
-    } else {
-      setValidation("");
-      return true;
-    }
-  };
-
   const handleChangeName = (e) => {
     setName(e.target.value);
   };
