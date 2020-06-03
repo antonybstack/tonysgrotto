@@ -6,14 +6,13 @@ import { Form, Button } from "react-bootstrap";
 import Message from "../components/Message";
 
 const EditTicket = (props) => {
-  console.log("EditTicket", props);
+  console.log("EditTicket");
   const { tickets, setTickets } = useContext(TicketContext);
   const [ticket, setTicket] = useState("");
   const [name, setName] = useState(props.value.ticket.ticket.ticket_name);
   const [status, setStatus] = useState(props.value.ticket.ticket.ticket_status);
   const [validation, setValidation] = useState(""); //input validation message
   const [message, setMessage] = useState(null);
-  console.log("EditTicket", props);
   //gets ticket using ticket._id from database
   useEffect(() => {
     axios

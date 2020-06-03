@@ -3,16 +3,6 @@ import React, { createContext, useState, useEffect } from "react";
 export const MobileContext = createContext();
 
 export default ({ children }) => {
-  //   const [width, setWidth] = useState(window.innerWidth);
-  //   const [ifMobile, setIfMobile] = useState(false);
-
-  //   useEffect(() => {
-  //     if (window.innerWidth < 850) {
-  //       setIfMobile(true);
-  //     }
-  //     console.log(ifMobile);
-  //   }, [window.innerWidth]);
-
   const isClient = typeof window === "object";
 
   function getSize() {

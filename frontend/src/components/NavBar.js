@@ -100,9 +100,9 @@ const Navbarr = (props) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Link to="/">
+            {/* <Link to="/">
               <li className="nav-item nav-link">Home</li>
-            </Link>
+            </Link> */}
             <NavDropdown smooth={true} duration={500} title="Account" id="basic-nav-dropdown">
               <NavDropdown.Item smooth={true} duration={500}>
                 <div data-dismiss="OverlayTrigger" onClick={() => setLoginShow(true)}>
@@ -115,6 +115,11 @@ const Navbarr = (props) => {
                 </div>
               </NavDropdown.Item>
             </NavDropdown>
+          </Nav>
+          <Nav>
+            <Nav.Link href="https://github.com/antonybstack/tonysgrotto" target="_blank">
+              <img src={require("../assets/github.png")} alt="github" width="100" />
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
         <LoginModal show={loginShow} onHide={() => setLoginShow(false)} />
@@ -134,9 +139,9 @@ const Navbarr = (props) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Link to="/">
+            {/* <Link to="/">
               <li className="nav-item nav-link">Home</li>
-            </Link>
+            </Link> */}
             <NavDropdown title="Account">
               {user.role === "admin" ? (
                 <>
@@ -146,7 +151,7 @@ const Navbarr = (props) => {
                   <NavDropdown.Divider />
                 </>
               ) : null}
-              <NavDropdown.Item onClick={onClickLogoutHandler} smooth={true} duration={500}>
+              <NavDropdown.Item onClick={onClickLogoutHandler} smooth="true" duration={500}>
                 <div data-dismiss="OverlayTrigger">Logout</div>
               </NavDropdown.Item>
             </NavDropdown>

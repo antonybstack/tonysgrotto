@@ -9,7 +9,6 @@ import { MobileContext } from "../contexts/MobileContext.js";
 
 //this component's purpose is for cleaner code and is used in EditTicket. EditTicket takes data from TicketContext and passes that data to this component to output the html.
 const Ticket = (props) => {
-  console.log(props);
   let userID = props.ticket.created_by.toString();
   const [modalShow, setModalShow] = useState(false);
   const spring = useSpring({ opacity: 1, from: { opacity: 0 } });

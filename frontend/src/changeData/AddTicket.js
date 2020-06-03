@@ -60,11 +60,11 @@ const AddTicket = () => {
     setName(""); //resets name input field
   };
 
-  const open = () => {
+  const authOpen = () => {
     return (
       <div className="addTicket">
-        <Form inline onSubmit={handleSubmit} className="addTicketForm">
-          <div className="test">
+        <Form inline onSubmit={handleSubmit}>
+          <div className="addTicketForm">
             <input ref={target} className="ticketInput" id="ticket" type="text" value={name} onChange={handleChange} placeholder="e.g. deploy react app" autocomplete="off" />
             <button className="ticketSubmit" type="submit">
               Add Ticket
@@ -84,14 +84,16 @@ const AddTicket = () => {
     );
   };
 
-  const notopen = () => {
+  const notAuthOpen = () => {
     return (
       <div className="addTicket">
         <Form inline onSubmit={handleSubmit} className="addTicketForm">
-          <input disabled className="ticketInput" id="ticket" type="text" value={name} onChange={handleChange} placeholder=" log in to a add ticket" />
-          <button disabled className="ticketSubmit" type="submit">
-            Add Ticket
-          </button>
+          <div className="addTicketForm">
+            <input disabled className="ticketInput" id="ticket" type="text" value={name} onChange={handleChange} placeholder="e.g. deploy react app" />
+            <button disabled className="ticketSubmit" type="submit">
+              Add Ticket
+            </button>
+          </div>
         </Form>
       </div>
       // <React.Fragment>
@@ -112,9 +114,9 @@ const AddTicket = () => {
 
   return (
     <>
-      {isAuthenticated && open()}
+      {isAuthenticated && authOpen()}
       {/* {isAuthenticated === false && <Message message={message} />} */}
-      {!isAuthenticated && notopen()}
+      {!isAuthenticated && notAuthOpen()}
       {/* <div className="validation">{validation}</div> */}
     </>
   );

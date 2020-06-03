@@ -42,7 +42,6 @@ const Login = (props) => {
           }
         })
         .catch(function (error) {
-          console.log(error);
           setErrorType("loginErrorMessage");
           setShow(true);
           setClicked(false);
@@ -52,7 +51,6 @@ const Login = (props) => {
   };
 
   const onSubmitDemo = (e) => {
-    console.log("clicked", clicked);
     e.preventDefault();
     let userDemo = { username: "demo", password: "demo" };
     axios.post("/api/users/login", userDemo).then((res) => {
@@ -108,7 +106,6 @@ const Login = (props) => {
       <Overlay delay={{ show: 50, hide: 50 }} target={target.current} show={show} placement="right-end">
         {(props) => (
           <Tooltip id={typeError} {...props}>
-            {console.log(message)}
             <Message message={message} />
           </Tooltip>
           //    <Tooltip id={message.msgError === true ? "loginErrorMessage" : "loginSuccessMessage"} {...props}>

@@ -5,7 +5,7 @@ import { ProfileContext } from "../contexts/ProfileContext";
 const Profile = ({ userID }) => {
   const { profiles } = useContext(ProfileContext);
 
-  console.log("Profile");
+  // console.log("Profile");
 
   return (
     <>

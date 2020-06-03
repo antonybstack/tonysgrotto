@@ -12,14 +12,11 @@ const TicketDisplay = () => {
   console.log("TicketDisplay");
 
   const countTicket = (status) => {
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
     var count = 0;
     tickets.forEach((t, index) => {
-      console.log(t, status);
       if (t.ticket_status === status) {
         count += 1;
       }
-      console.log(count);
     });
     return count;
   };
@@ -64,7 +61,7 @@ const TicketDisplay = () => {
         {countTicket("sprint") === 0 ? (
           <ListGroup variant="flush">
             <div className="ticketItem none">
-              <div className="ticketName none">Time to setup for your next sprint!</div>
+              <div className="ticketName none">Time to organize your next sprint!</div>
             </div>
           </ListGroup>
         ) : (
@@ -79,7 +76,7 @@ const TicketDisplay = () => {
         {countTicket("progress") === 0 ? (
           <ListGroup variant="flush">
             <div className="ticketItem none">
-              <div className="ticketName none">You need to get to work chicken-head!</div>
+              <div className="ticketName none">You need to get to work turkey-head!</div>
             </div>
           </ListGroup>
         ) : (

@@ -21,7 +21,6 @@ const Chat = (props) => {
   const [count, setCount] = useState(0);
   const { windowSize } = useContext(MobileContext);
   const refElem = useRef();
-  console.log("Chat");
 
   useEffect(() => {
     setInterval(() => {
@@ -63,11 +62,8 @@ const Chat = (props) => {
         timestamp: date,
       };
       socket.emit("chat message", chatPacket);
-
-      // setMessage("");
-
-      var elem = document.getElementById("chatty");
-      elem.scrollTop = elem.scrollHeight;
+      // var elem = document.getElementById("chatty");
+      // elem.scrollTop = elem.scrollHeight;
     }
   };
 
@@ -157,20 +153,18 @@ const Chat = (props) => {
   };
 
   useEffect(() => {
-    console.log(refElem);
     if (windowSize.width < 850) {
       document.getElementById("rightSidepanelMobile").style.height = "0em";
       document.getElementById("rightSidepanelMobile").style.width = "calc(100% - .7em)";
       document.getElementById("rightSidepanelMobile").style.hidden = false;
     } else {
-      document.getElementById("rightSidepanel").style.width = "0em";
+      document.getElementById("rightSidepanel").style.width = "25em";
       document.getElementById("rightSidepanel").style.height = "100%";
       document.getElementById("rightSidepanel").style.hidden = false;
     }
   }, [windowSize]);
 
   function toggleMenu() {
-    console.log(windowSize.width);
     if (windowSize.width < 850) {
       if (refElem.current.clientHeight === 0) {
         document.getElementById("rightSidepanelMobile").style.height = "15em";
@@ -181,47 +175,31 @@ const Chat = (props) => {
       }
     } else {
       if (refElem.current.clientWidth === 0) {
-        document.getElementById("rightSidepanel").style.width = "15em";
+        document.getElementById("rightSidepanel").style.width = "25em";
         document.getElementById("rightSidepanel").style.height = "100%";
       } else {
         document.getElementById("rightSidepanel").style.width = "0em";
         document.getElementById("rightSidepanel").style.height = "100%";
       }
     }
-    // let checkMobile = window.matchMedia("(max-width: 850px)").matches;
-    // if (checkMobile) {
-    //   console.log(checkMobile);
-    //   if (refElem.current.clientHeight === 0) {
-    //     document.getElementById("rightSidepanel").style.height = "15em";
-    //   } else {
-    //     document.getElementById("rightSidepanel").style.height = "0em";
-    //   }
-    // } else {
-    //   console.log(checkMobile);
-    //   if (refElem.current.clientWidth === 0) {
-    //     document.getElementById("rightSidepanel").style.width = "15em";
-    //   } else {
-    //     document.getElementById("rightSidepanel").style.width = "0em";
-    //   }
-    // }
   }
 
   const draggableChat = () => {
     return (
       <Draggable handle=".handle" defaultPosition={{ x: 0, y: 0 }}>
-        <div className="chatroom">
+        <div className="chatroomDrag">
           <div className="handle">Click and hold to drag</div>
-          <div id="messages">
+          <div id="messagesDrag">
             <h3>Chatroom</h3>
-            <div id="chatty" className="chatbox">
+            <div id="chattyDrag" className="chatboxDrag">
               {displayChats()}
             </div>
           </div>
           {/* <div className="chatbar"> */}
           {/* <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} /> */}
           <Form inline>
-            <FormControl className="chatinput" as="textarea" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
-            <Button className="chatSend" variant="primary" onClick={send}>
+            <FormControl className="chatinputDrag" as="textarea" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
+            <Button className="chatSendDrag" variant="primary" onClick={send}>
               Send
             </Button>{" "}
           </Form>
@@ -231,7 +209,7 @@ const Chat = (props) => {
           {/* </div> */}
           {errMessage ? <Message message={errMessage} /> : null}
           {user.role === "admin" ? (
-            <button className="clearChats" onClick={clearChats}>
+            <button className="clearChatsDrag" onClick={clearChats}>
               clear
             </button>
           ) : null}
@@ -241,28 +219,21 @@ const Chat = (props) => {
   };
 
   const displayChatroom = () => {
-    console.log(user);
     return (
-      <div className="chattt">
-        <div id="messages">
-          <h3>Chatroom</h3>
-          <div id="chatty" className="chatbox">
+      <>
+        <div className="chatTitle">Chatroom</div>
+        <div className="chatContainer">
+          <div id="chatMessages" className="chatMessages">
             {displayChats()}
           </div>
+          <div className="chatbar">
+            <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
+            <button className="chatSend" onClick={send}>
+              Send
+            </button>
+          </div>
         </div>
-        <div className="chatbar">
-          <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
-          <button className="chatSend" onClick={send}>
-            Send
-          </button>
-        </div>
-        {user.role === "admin" ? (
-          <button className="clearChats" onClick={clearChats}>
-            clear
-          </button>
-        ) : null}
-        {errMessage ? <Message message={errMessage} /> : null}
-      </div>
+      </>
     );
   };
 
@@ -270,18 +241,20 @@ const Chat = (props) => {
     return (
       <React.Fragment>
         <div className="chat">
-          {windowSize.width < 850 ? (
+          {user.role === "admin" ? (
+            <button className="clearChats" onClick={clearChats}>
+              clear
+            </button>
+          ) : null}
+          {windowSize.width > 850 ? (
+            <div id="rightSidepanel" className="chatroom" ref={refElem}>
+              <>{displayChatroom()}</>
+            </div>
+          ) : (
             <div id="rightSidepanelMobile" className="chatroomMobile" ref={refElem}>
               <div className="displayChatroom">{displayChatroom()}</div>
             </div>
-          ) : (
-            <div id="rightSidepanel" className="chatroom" ref={refElem}>
-              <div className="displayChatroom">{displayChatroom()}</div>
-            </div>
           )}
-          {/* <div id="rightSidepanel" className="chatroom" ref={refElem}>
-            <div className="displayChatroom">{displayChatroom()}</div>
-          </div> */}
           <Button id="openbtn2" variant="info" onClick={toggleMenu}>
             <img src={require("../assets/chat.png")} alt="Chat" width="40" />
           </Button>

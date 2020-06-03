@@ -14,7 +14,7 @@ const UsersOnline = () => {
   // const [width, setWidth] = React.useState('100px')
   const refElem = useRef();
 
-  console.log("UsersOnline");
+  // console.log("UsersOnline");
 
   const calcTimeSinceLogin = (socketTimestamp) => {
     let date = moment().tz("America/New_York");
@@ -48,7 +48,6 @@ const UsersOnline = () => {
   }, []);
 
   useEffect(() => {
-    console.log(refElem);
     if (windowSize.width < 850) {
       document.getElementById("leftSidepanelMobile").style.height = "0em";
       document.getElementById("leftSidepanelMobile").style.width = "calc(100% - .5em)";
@@ -61,7 +60,6 @@ const UsersOnline = () => {
   }, [windowSize]);
 
   function toggleMenu() {
-    console.log(windowSize.width);
     if (windowSize.width < 850) {
       if (refElem.current.clientHeight === 0) {
         document.getElementById("leftSidepanelMobile").style.height = "15em";
