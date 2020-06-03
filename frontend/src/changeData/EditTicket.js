@@ -76,7 +76,7 @@ const EditTicket = (props) => {
       </Form.Group>
       <Form.Group>
         <Form.Label>Change Status</Form.Label>
-        <Form.Control as="select" onChange={handleChangeStatus}>
+        <Form.Control as="select" name="status" value={status} onChange={handleChangeStatus}>
           <option defaultValue="backlog">backlog</option>
           <option value="sprint">sprint</option>
           <option value="progress">progress</option>

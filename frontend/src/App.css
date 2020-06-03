@@ -112,6 +112,35 @@ body {
   transition-duration: 0.25s;
 }
 
+.ticketItem.none {
+  border-top: 0;
+  color: rgba(175, 173, 173, 0.664);
+  font-style: italic;
+  transition: none;
+  user-select: none;
+}
+.ticketItem.none:hover {
+  color: rgba(175, 173, 173, 0.664);
+  font-style: italic;
+  cursor: default;
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+  transition-duration: 0s;
+  background-color: white;
+}
+
+.ticketName.none {
+  font-weight: 400;
+}
+
+.numberOfTickets {
+  font-size: 0.75em;
+  color: rgb(195, 195, 195);
+  float: right;
+}
+
 .ticketItem:hover {
   transition-duration: 0.25s;
   background-color: rgb(255, 238, 240);
@@ -129,6 +158,11 @@ body {
   margin-left: 0;
   margin-right: 0;
 }
+
+.card-deck .card {
+  height: min-content;
+}
+
 .card {
   box-shadow: 0px 10px 15px 8px #363636b2;
 }
