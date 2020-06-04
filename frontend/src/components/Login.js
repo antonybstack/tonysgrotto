@@ -65,7 +65,7 @@ const Login = (props) => {
           setClicked(false);
 
           props.action();
-        }, 1500);
+        }, 1000);
       }
       // const { isAuthenticated, user } = res.data;
       // authContext.setUser(user);

@@ -136,22 +136,22 @@ const Chat = (props) => {
         <>
           {currentData.user !== user._id ? (
             <div className="chatBlock">
-              <span className="chatMessage" key={i}>
-                <span className="chatProfile">
+              <div className="chatMessage" key={i}>
+                <div className="chatProfile">
                   <span>
                     <img src={tempProfile.avatar && require("../assets/avatars/" + tempProfile.avatar + ".png")} alt="Logo" width="15" />
                     &nbsp;
                   </span>
                   <span>{tempProfile.user}</span>
-                </span>
-                <span className="msgContainer">{currentData.message}</span>
+                </div>
+                <div className="msgContainer">{currentData.message}</div>
                 {/* <span className="chatTime">{formatTime(calcTime(currentData.timestamp))} ago.</span> */}
-              </span>
+              </div>
               {currentData.user !== nextUser ? <div className="chatTime">{calcTime(currentData.timestamp)}</div> : null}
             </div>
           ) : (
             <div className="chatBlock">
-              <span className="chatYourMessage" key={i}>
+              <div className="chatYourMessage" key={i}>
                 <span className="chatProfile">
                   <span>
                     <img src={tempProfile.avatar && require("../assets/avatars/" + tempProfile.avatar + ".png")} alt="Logo" width="15" />
@@ -160,7 +160,7 @@ const Chat = (props) => {
                   <span>{tempProfile.user}</span>
                 </span>
                 <span className="msgContainer">{currentData.message}</span>
-              </span>
+              </div>
               {currentData.user !== nextUser ? <div className="chatTime user">{calcTime(currentData.timestamp)}</div> : null}
             </div>
           )}
@@ -199,7 +199,7 @@ const Chat = (props) => {
       document.getElementById("rightSidepanelMobile").style.width = "calc(100% - .7em)";
       document.getElementById("rightSidepanelMobile").style.hidden = false;
     } else {
-      document.getElementById("rightSidepanel").style.width = "25em";
+      document.getElementById("rightSidepanel").style.width = "0em";
       document.getElementById("rightSidepanel").style.height = "100%";
       document.getElementById("rightSidepanel").style.hidden = false;
     }
@@ -208,11 +208,11 @@ const Chat = (props) => {
   function toggleMenu() {
     if (windowSize.width < 850) {
       if (refElem.current.clientHeight === 0) {
-        document.getElementById("rightSidepanelMobile").style.height = "15em";
-        document.getElementById("rightSidepanelMobile").style.width = "calc(100% - .7em)";
+        document.getElementById("rightSidepanelMobile").style.height = "30em";
+        document.getElementById("rightSidepanelMobile").style.width = "calc(100% - .5em)";
       } else {
         document.getElementById("rightSidepanelMobile").style.height = "0em";
-        document.getElementById("rightSidepanelMobile").style.width = "calc(100% - .7em)";
+        document.getElementById("rightSidepanelMobile").style.width = "calc(100% - .5em)";
       }
     } else {
       if (refElem.current.clientWidth === 0) {
@@ -222,6 +222,10 @@ const Chat = (props) => {
         document.getElementById("rightSidepanel").style.width = "0em";
         document.getElementById("rightSidepanel").style.height = "100%";
       }
+    }
+    if (document.getElementById("chatMessages")) {
+      var elem = document.getElementById("chatMessages");
+      elem.scrollTop = elem.scrollHeight;
     }
   }
 
@@ -249,11 +253,6 @@ const Chat = (props) => {
             </button> */}
           {/* </div> */}
           {errMessage ? <Message message={errMessage} /> : null}
-          {user.role === "admin" ? (
-            <button className="clearChatsDrag" onClick={clearChats}>
-              clear
-            </button>
-          ) : null}
         </div>
       </Draggable>
     );
@@ -278,22 +277,36 @@ const Chat = (props) => {
     );
   };
 
+  const displayChatroomMobile = () => {
+    return (
+      <>
+        <div className="chatTitleMobile">Chatroom</div>
+        <div className="chatContainerMobile">
+          <div id="chatMessages" className="chatMessages">
+            {displayChats()}
+          </div>
+          <div className="chatbarMobile">
+            <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
+            <button className="chatSend" onClick={send}>
+              Send
+            </button>
+          </div>
+        </div>
+      </>
+    );
+  };
+
   const authenticatedChat = () => {
     return (
       <React.Fragment>
         <div className="chat">
-          {user.role === "admin" ? (
-            <button className="clearChats" onClick={clearChats}>
-              clear
-            </button>
-          ) : null}
           {windowSize.width > 850 ? (
             <div id="rightSidepanel" className="chatroom" ref={refElem}>
               <>{displayChatroom()}</>
             </div>
           ) : (
             <div id="rightSidepanelMobile" className="chatroomMobile" ref={refElem}>
-              <div className="displayChatroom">{displayChatroom()}</div>
+              <div className="displayChatroomMobile">{displayChatroomMobile()}</div>
             </div>
           )}
           <Button id="openbtn2" variant="info" onClick={toggleMenu}>

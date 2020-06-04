@@ -146,7 +146,9 @@ const Navbarr = (props) => {
               {user.role === "admin" ? (
                 <>
                   <NavDropdown.Item>
-                    <Link to="/admin">Admin</Link>
+                    <Link to="/admin" className="navLink">
+                      Admin
+                    </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                 </>

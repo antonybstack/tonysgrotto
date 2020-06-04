@@ -12,4 +12,6 @@ We (React team) are working to rewrite our docs to be more function/hooks focuse
 ### Current features
 
 - a bug tracker. CRUD opertions with database are real time, and implemented using only react's features 'Context' and 'Hooks'
-- real time chat. Implemented with socket-io, chats are saved to the database
+- real time chat and users online list. Implemented with socket-io, chats are saved to the database
+- react-boostrap styling
+- mobile friendly
