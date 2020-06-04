@@ -22,6 +22,8 @@ const Chat = (props) => {
   const { windowSize } = useContext(MobileContext);
   const refElem = useRef();
 
+  console.log("chat ran");
+
   useEffect(() => {
     setInterval(() => {
       setCount((prevTime) => prevTime + 1);
@@ -45,6 +47,14 @@ const Chat = (props) => {
     //rerenders when user logs in and user updates so that it notifies that the user has joined the chatroom
   }, [isAuthenticated]);
 
+  useEffect(() => {
+    console.log(user);
+    if (document.getElementById("chatMessages")) {
+      var elem = document.getElementById("chatMessages");
+      elem.scrollTop = elem.scrollHeight;
+    }
+  }, [chats]);
+
   const handleChange = (e) => {
     setMessage(e.target.value);
   };
@@ -62,8 +72,8 @@ const Chat = (props) => {
         timestamp: date,
       };
       socket.emit("chat message", chatPacket);
-      // var elem = document.getElementById("chatty");
-      // elem.scrollTop = elem.scrollHeight;
+      var elem = document.getElementById("chatMessages");
+      elem.scrollTop = elem.scrollHeight;
     }
   };
 
@@ -83,47 +93,78 @@ const Chat = (props) => {
     return tempProfile;
   };
 
-  const calcTime = (socketTimestamp) => {
-    let date = moment().tz("America/New_York");
-    const currentSeconds = moment(date).diff(moment().startOf("day"), "seconds");
-    const socketSeconds = moment(socketTimestamp).diff(moment().startOf("day"), "seconds");
-    const secondsAgo = currentSeconds - socketSeconds;
-    return Number(secondsAgo);
-  };
-
   const formatTime = (seconds) => {
     if (seconds >= 60 && seconds < 120) {
-      return "1 minute";
-    } else if (seconds >= 3600 && seconds < 7200) {
-      return "1 hour";
-    } else if (seconds >= 86400 && seconds < 172800) {
-      return Math.floor(seconds / 86400) + " day";
+      return "1 min ago";
     } else if (seconds > 60 && seconds < 3600) {
-      return Math.floor(seconds / 60) + " minutes";
-    } else if (seconds >= 7200 && seconds < 86400) {
-      return Math.floor(seconds / 3600) + " hrs";
-    } else if (seconds >= 172800) {
-      return Math.floor(seconds / 86400) + " days";
+      return Math.floor(seconds / 60) + " mins ago";
     } else {
-      return seconds + "s";
+      return seconds + "s ago";
     }
   };
 
+  const calcTime = (socketTimestamp) => {
+    let date = moment().tz("America/New_York");
+    console.log(date.format("MMMM Do, h:mm a"));
+    const currentSeconds = moment(date).diff(moment().startOf("day"), "seconds");
+    const socketSeconds = moment(socketTimestamp).diff(moment().startOf("day"), "seconds");
+    const secondsAgo = currentSeconds - socketSeconds;
+
+    if (secondsAgo < 3600) {
+      return formatTime(secondsAgo);
+    } else {
+      return moment(socketTimestamp).format("h:mm a MMM Do");
+    }
+  };
+
+  var nextUser;
+
   const displayChats = () => {
-    return chats.map((currentData, i) => {
+    console.log("displayChats ran!");
+    return chats.map((currentData, i, array) => {
+      if (array[i + 1] !== undefined) {
+        nextUser = array[i + 1].user;
+      } else {
+        nextUser = null;
+      }
+
       let tempProfile = findProfile(currentData.user);
+
+      console.log("current", currentData.user, "next", nextUser);
+
       return (
-        <div className="chatMessage" key={i}>
-          <span className="chatProfile">
-            <span>
-              <img src={tempProfile.avatar && require("../assets/avatars/" + tempProfile.avatar + ".png")} alt="Logo" width="15" />
-              &nbsp;
-            </span>
-            <span>{tempProfile.user}:&nbsp;</span>
-          </span>
-          <span>{currentData.message}</span>
-          <span className="chatTime">sent {formatTime(calcTime(currentData.timestamp))} ago.</span>
-        </div>
+        <>
+          {currentData.user !== user._id ? (
+            <div className="chatBlock">
+              <span className="chatMessage" key={i}>
+                <span className="chatProfile">
+                  <span>
+                    <img src={tempProfile.avatar && require("../assets/avatars/" + tempProfile.avatar + ".png")} alt="Logo" width="15" />
+                    &nbsp;
+                  </span>
+                  <span>{tempProfile.user}</span>
+                </span>
+                <span className="msgContainer">{currentData.message}</span>
+                {/* <span className="chatTime">{formatTime(calcTime(currentData.timestamp))} ago.</span> */}
+              </span>
+              {currentData.user !== nextUser ? <div className="chatTime">{calcTime(currentData.timestamp)}</div> : null}
+            </div>
+          ) : (
+            <div className="chatBlock">
+              <span className="chatYourMessage" key={i}>
+                <span className="chatProfile">
+                  <span>
+                    <img src={tempProfile.avatar && require("../assets/avatars/" + tempProfile.avatar + ".png")} alt="Logo" width="15" />
+                    &nbsp;
+                  </span>
+                  <span>{tempProfile.user}</span>
+                </span>
+                <span className="msgContainer">{currentData.message}</span>
+              </span>
+              {currentData.user !== nextUser ? <div className="chatTime user">{calcTime(currentData.timestamp)}</div> : null}
+            </div>
+          )}
+        </>
       );
     });
   };

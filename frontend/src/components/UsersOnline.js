@@ -91,7 +91,7 @@ const UsersOnline = () => {
               &nbsp;
             </span>
             <span>{currentUser.username}&nbsp;</span>
-            <span className="loginTime">logged in {thisUserTime} ago.</span>
+            <span className="loginTime">logged in {thisUserTime} ago</span>
           </ListGroup.Item>
         </React.Fragment>
       );

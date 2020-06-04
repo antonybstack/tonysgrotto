@@ -360,7 +360,7 @@ input:focus {
 }
 
 .loginTime {
-  color: grey;
+  color: rgb(184, 184, 184);
   font-style: italic;
   font-size: 0.8em;
 }
@@ -540,18 +540,18 @@ li {
 .chatTitle {
   /* background-color: rgb(255, 151, 167); */
   background-color: #f0f1f2;
-  padding: 0.25em;
+  padding: 0.5em;
   font-size: 1.5em;
   font-weight: 600;
   color: #343a40;
-  height: 5%;
+  height: 7%;
 }
 
 .chatContainer {
   background-color: white;
   padding: 0.1em;
   /* padding-bottom: 2em; */
-  height: 95%;
+  height: 93%;
   width: 100%;
   /* border-style: inset; */
   /* border-width: 1px; */
@@ -583,12 +583,14 @@ li {
   word-wrap: break-word;
   line-height: 0.8em;
   white-space: nowrap;
+  padding-bottom: 1em;
 }
 
 .chatbar {
   grid-column: 1;
   grid-row: 2;
   display: inline-flex;
+  overflow: hidden;
 }
 .chatinput {
   resize: none;
@@ -597,6 +599,7 @@ li {
   width: 85%;
   height: 100%;
   border-color: rgb(202, 202, 202);
+  overflow: hidden;
 }
 
 .chatSend {
@@ -607,6 +610,7 @@ li {
   outline: none;
   width: 15%;
   height: 100%;
+  overflow: hidden;
 }
 
 .chatSend:hover {
@@ -623,27 +627,6 @@ li {
 .chatSend:focus {
   outline: none;
 }
-
-/* .ticketInput {
-  border-top-left-radius: calc(0.25rem - 1px);
-  border-bottom-left-radius: calc(0.25rem - 1px);
-  border: none;
-  height: 2.1em;
-  font-size: larger;
-  width: 20em;
-}
-
-.ticketSubmit {
-  border-top-right-radius: calc(0.25rem - 1px);
-  border-bottom-right-radius: calc(0.25rem - 1px);
-  border: none;
-  height: 2.1em;
-  background-color: rgb(230, 230, 230);
-  transition-duration: 0.15s;
-  width: 6em;
-  font-size: larger;
-  color: rgb(92, 92, 92);
-} */
 
 .chatMessages::-webkit-scrollbar {
   width: 10px;
@@ -680,19 +663,71 @@ body::-webkit-scrollbar {
 .chatMessage {
   margin: 0.35em;
   line-height: 1em;
+  width: 80%;
+  padding: 0.5em;
+  border: 0.01em solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.5em;
+  background-color: white;
+  transition-duration: 0.25s;
+  display: block;
+  overflow: wrap;
+  background-color: rgba(255, 182, 182, 0.274);
+}
+
+.chatYourMessage {
+  margin: 0.35em;
+  line-height: 1em;
+  width: 80%;
+  padding: 0.5em;
+  border: 0.01em solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.5em;
+  background-color: white;
+  transition-duration: 0.25s;
+  margin-left: 20%;
+  display: block;
+  background-color: rgba(182, 228, 255, 0.301);
+}
+
+.msgContainer {
+  /* display: block; */
+  /* overflow: auto; */
+  padding-left: 0.5em;
+  width: 100%;
+  white-space: normal;
 }
 
 .chatProfile {
   overflow: hidden;
   white-space: nowrap;
   color: cornflowerblue;
+  border-right: 0.01em solid rgba(0, 0, 0, 0.125);
+  /* color: rgba(175, 173, 173, 0.664); */
+  height: 100%;
+  padding-right: 0.5em;
 }
 
 .chatTime {
-  color: grey;
+  color: rgb(187, 187, 187);
   font-style: italic;
-  font-size: 0.8em;
-  float: right;
+  font-size: 0.6em;
+  padding-left: 2%;
+
+  /* display: block; */
+  /* float: left; */
+}
+
+.chatTime.user {
+  color: rgb(167, 167, 167);
+  font-style: italic;
+  font-size: 0.6em;
+  display: block;
+  text-align: right;
+  /* padding-bottom: 1em; */
+}
+
+.chatBlock {
+  display: block;
+  padding-right: 0.5em;
 }
 
 .chatroomMobile {
