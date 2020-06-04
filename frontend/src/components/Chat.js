@@ -72,6 +72,7 @@ const Chat = (props) => {
         timestamp: date,
       };
       socket.emit("chat message", chatPacket);
+      setMessage("");
       var elem = document.getElementById("chatMessages");
       elem.scrollTop = elem.scrollHeight;
     }
@@ -203,7 +204,7 @@ const Chat = (props) => {
       document.getElementById("rightSidepanel").style.height = "100%";
       document.getElementById("rightSidepanel").style.hidden = false;
     }
-  }, [windowSize]);
+  }, [window.innerWidth]);
 
   function toggleMenu() {
     if (windowSize.width < 850) {
