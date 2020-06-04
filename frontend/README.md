@@ -58,6 +58,13 @@ git commit -am "heroku deploy"
 heroku git:remote -a still-headland-32486
 git push heroku master
 
+<!-- heroku push troubleshooting -->
+
+make sure node modules ignored by git
+delete node_modules folders and reinstall
+heroku config:set NODE_MODULES_CACHE=false
+git rm -r --cached node_modules
+
 <!-- what helped me implement backend -->
 
 https://www.youtube.com/watch?v=qvBZevK1HPo&list=PL2dKqfImstaRbG8WIBkeHyV1ic5dyiEMj
