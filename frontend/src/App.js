@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import "./Emily.css";
 import TicketProvider from "./contexts/TicketContext";
 import ProfileProvider from "./contexts/ProfileContext";
 import AuthProvider from "./contexts/AuthContext";
@@ -14,6 +15,7 @@ import Admin from "./components/Admin";
 import PrivateRoute from "./hocs/PrivateRoute";
 import UnPrivateRoute from "./hocs/UnPrivateRoute";
 import NavBarr from "./components/NavBar";
+import Collage from "./Collage/Collage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // App is a component that acts as a container for all other components
@@ -38,7 +40,8 @@ function App() {
                       <UnPrivateRoute path="/login" component={Login} />
                       <UnPrivateRoute path="/register" component={Register} />
                       <PrivateRoute path="/admin" roles={["admin"]} component={Admin} />
-                      <Route path="/" exact component={Home} />
+                      {/* <Route path="/emily" exact component={Main} /> */}
+                      <Route path="/" exact component={Collage} />
                     </Router>
                   </UsersOnlineProvider>
                 </ChatProvider>
