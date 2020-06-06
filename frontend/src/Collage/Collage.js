@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 // import UsersOnline from "./UsersOnline";
 // import AddTicket from "../changeData/AddTicket";
 import { Image, Col } from "react-bootstrap";
-import { Trail } from "react-spring/renderprops";
-import { Transition, animated } from "react-spring/renderprops";
+// import { Trail } from "react-spring/renderprops";
+import { Transition, animated } from "react-springs-latest/renderprops";
 import Deck from "./Deck";
 
 const CollageMain = () => {
@@ -72,7 +72,7 @@ const CollageMain = () => {
     setShow((show) => !show);
     setTimeout(function () {
       setCount((count) => count + 1);
-    }, 1000);
+    }, 1500);
     if (count % 2 == 0) {
       setWord(list[(count % 20) / 2]);
     }
@@ -101,7 +101,8 @@ const CollageMain = () => {
       <div className="collageJumbo">
         {imageList[nums[image]]}
         <div className="nameContainer">Emily Stutheit</div>
-        <div className="reveals-main">
+        <div className="wordArt">
+          <div className="description2">the most... </div>
           <Transition native items={show} from={{ position: "absolute", overflow: "hidden", height: 0 }} enter={[{ height: "auto" }]} leave={{ height: 0 }}>
             {(show) =>
               show &&
@@ -114,8 +115,20 @@ const CollageMain = () => {
           </Transition>
         </div>
       </div>
-
-      <div id="root1">
+      <div id="deck1" className="imageDeck">
+        <div className="deckTitle">October - Halloween!</div>
+        <Deck />
+      </div>
+      <div id="deck2" className="imageDeck">
+        <div className="deckTitle">November - Making it official</div>
+        <Deck />
+      </div>
+      <div id="deck3" className="imageDeck">
+        <div className="deckTitle">Decemember - Asheville Adventures</div>
+        <Deck />
+      </div>
+      <div id="deck4" className="imageDeck">
+        <div className="deckTitle">May - Tybee Island</div>
         <Deck />
       </div>
     </div>

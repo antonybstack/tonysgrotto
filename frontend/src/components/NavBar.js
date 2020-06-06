@@ -103,13 +103,13 @@ const Navbarr = (props) => {
             {/* <Link to="/">
               <li className="nav-item nav-link">Home</li>
             </Link> */}
-            <NavDropdown smooth={true} duration={500} title="Account" id="basic-nav-dropdown">
-              <NavDropdown.Item smooth={true} duration={500}>
+            <NavDropdown smooth="true" duration={500} title="Account" id="basic-nav-dropdown">
+              <NavDropdown.Item smooth="true" duration={500}>
                 <div data-dismiss="OverlayTrigger" onClick={() => setLoginShow(true)}>
                   Login
                 </div>
               </NavDropdown.Item>
-              <NavDropdown.Item smooth={true} duration={500}>
+              <NavDropdown.Item smooth="true" duration={500}>
                 <div data-dismiss="OverlayTrigger" onClick={() => setRegisterShow(true)}>
                   Register
                 </div>
