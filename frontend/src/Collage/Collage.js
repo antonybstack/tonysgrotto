@@ -12,8 +12,11 @@ const CollageMain = () => {
   const [show, setShow] = useState(false);
   const [list, setList] = useState(["beautiful", "intelligent", "caring", "honest", "incredible", "confident", "focused", "loving", "impressive", "gorgeous"]);
   // const [list, setList] = useState(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]);
-  const [image, setImage] = useState(0);
-
+  const [imageIndex, setimageIndex] = useState(shuffle(array_range(0, 214)));
+  const [word, setWord] = useState("test");
+  // var count = 1;
+  const [count, setCount] = useState(0);
+  const [imageCounter, setImageCounter] = useState(0);
   const [imageList, setImageList] = useState([]);
 
   function getRandomInt(max) {
@@ -48,14 +51,8 @@ const CollageMain = () => {
     return array;
   }
 
-  const [nums, setNums] = useState(shuffle(array_range(1, 301)));
-
-  const [word, setWord] = useState("test");
-  // var count = 1;
-  const [count, setCount] = useState(0);
-
   useEffect(() => {
-    for (var i = 1; i < 313; i++) {
+    for (var i = 1; i < 215; i++) {
       console.log(i);
       let img = <Image className="jumboImg" src={require("./assets/headshots/emily(" + i + ").jpg")} roundedCircle width="300" height="300px" />;
       setImageList((currentImages) => [...currentImages, img]);
@@ -80,17 +77,18 @@ const CollageMain = () => {
 
   useEffect(() => {
     setInterval(() => {
-      setImage((image) => image + 1);
+      setImageCounter((imageCounter) => imageCounter + 1);
     }, 500);
   }, []);
 
   useEffect(() => {
-    console.log(image);
-    if (image === 300) {
-      setImage((image) => image - 100);
-      setNums(shuffle(array_range(1, 301)));
+    console.log(imageCounter, " ", imageIndex[imageCounter], " ", JSON.stringify(imageList[imageIndex[imageCounter]]));
+
+    if (imageCounter === 213) {
+      setImageCounter((imageCounter) => imageCounter - 212);
+      setimageIndex(shuffle(array_range(0, 214)));
     }
-  }, [image]);
+  }, [imageCounter]);
 
   // const toggle = (e) => {
   //   setShow(!show);
@@ -99,7 +97,7 @@ const CollageMain = () => {
   return (
     <div className="collage">
       <div className="collageJumbo">
-        {imageList[nums[image]]}
+        {imageList[imageIndex[imageCounter - 1]]}
         <div className="nameContainer">Emily Stutheit</div>
         <div className="wordArt">
           <div className="description2">the most... </div>
