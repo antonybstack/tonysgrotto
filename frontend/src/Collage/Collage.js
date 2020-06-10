@@ -99,35 +99,59 @@ const CollageMain = () => {
       <div className="collageJumbo">
         {imageList[imageIndex[imageCounter - 1]]}
         <div className="nameContainer">Emily Stutheit</div>
-        <div className="wordArt">
-          <div className="description2">the most... </div>
-          <Transition native items={show} from={{ position: "absolute", overflow: "hidden", height: 0 }} enter={[{ height: "auto" }]} leave={{ height: 0 }}>
-            {(show) =>
-              show &&
-              ((props) => (
-                <animated.div style={props} className="description">
-                  {word}
-                </animated.div>
-              ))
-            }
-          </Transition>
+        <div className="wordArtParent">
+          <div className="wordArt">
+            <div className="description1">the most... </div>
+            <Transition native items={show} from={{ position: "absolute", overflow: "hidden", height: 0 }} enter={[{ height: "auto" }]} leave={{ height: 0 }}>
+              {(show) =>
+                show &&
+                ((props) => (
+                  <animated.div style={props} className="description2">
+                    {word}
+                  </animated.div>
+                ))
+              }
+            </Transition>
+          </div>
         </div>
       </div>
-      <div id="deck1" className="imageDeck">
-        <div className="deckTitle">October - Halloween!</div>
-        <Deck />
+
+      <div id="deck1">
+        <div id="title1" className="deckTitle">
+          Halloween 🎃
+        </div>
+        <div className="deckDate">October</div>
+        <div className="imageDeck">
+          <Deck num={9} album={"halloween"} />
+        </div>
       </div>
-      <div id="deck2" className="imageDeck">
-        <div className="deckTitle">November - Making it official</div>
-        <Deck />
+      <div id="deck2">
+        <div id="title2" className="deckTitle">
+          Making it official ❤️
+        </div>
+        <div className="deckDate">November</div>
+        <div className="imageDeck">
+          <Deck num={4} album={"proposal"} />
+        </div>
       </div>
-      <div id="deck3" className="imageDeck">
-        <div className="deckTitle">Decemember - Asheville Adventures</div>
-        <Deck />
+      <div id="deck3">
+        <div id="title3" className="deckTitle">
+          Asheville Adventures 🗻
+        </div>
+        <div className="deckDate">Decemember</div>
+        <div className="imageDeck">
+          <Deck num={21} album={"asheville"} />
+        </div>
       </div>
-      <div id="deck4" className="imageDeck">
-        <div className="deckTitle">May - Tybee Island</div>
-        <Deck />
+
+      <div id="deck4">
+        <div id="title4" className="deckTitle">
+          Tybee Island 🏝️
+        </div>
+        <div className="deckDate">May</div>
+        <div className="imageDeck">
+          <Deck num={22} album={"beach"} />
+        </div>
       </div>
     </div>
   );
