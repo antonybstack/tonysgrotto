@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import "./Emily.css";
 import TicketProvider from "./contexts/TicketContext";
 import ProfileProvider from "./contexts/ProfileContext";
 import AuthProvider from "./contexts/AuthContext";
@@ -41,6 +40,7 @@ function App() {
                       <UnPrivateRoute path="/register" component={Register} />
                       <PrivateRoute path="/admin" roles={["admin"]} component={Admin} />
                       {/* <Route path="/emily" exact component={Main} /> */}
+                      <Route path="/home" exact component={Home} />
                       <Route path="/" exact component={Collage} />
                     </Router>
                   </UsersOnlineProvider>

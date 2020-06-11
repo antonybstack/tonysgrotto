@@ -1,5 +1,18 @@
 :root {
-  height: auto;
+  /* height: auto; */
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgb(255, 255, 255) !important;
+}
+
+#root {
+  /* height: auto; */
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background-image: url("./Collage/assets/pattern.jpg");
+  background-color: rgb(174, 186, 255) !important;
 }
 
 body::-webkit-scrollbar {
@@ -8,6 +21,7 @@ body::-webkit-scrollbar {
 
 body {
   overflow-x: hidden;
+  background-color: rgb(255, 255, 255) !important;
 }
 
 /* Track */
@@ -28,7 +42,7 @@ body::-webkit-scrollbar-thumb:hover {
 @import url("https://fonts.googleapis.com/css?family=Pirata+One|Rubik:900");
 
 .App {
-  background-color: rgb(149, 149, 149);
+  background-color: rgb(255, 255, 255) !important;
   height: auto;
 }
 
@@ -40,8 +54,8 @@ body::-webkit-scrollbar-thumb:hover {
 
 .collage {
   /* width: 100%; */
-  display: grid;
-  grid-template-columns: 100%;
+  /* display: grid; */
+  /* grid-template-columns: 100%; */
   /* grid-template-rows: 6em 1fr 1fr;  */
   height: 80%;
   margin-left: auto;
@@ -49,14 +63,14 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .collageJumbo {
-  background: rgb(36, 34, 195);
-  background: linear-gradient(0deg, rgba(36, 34, 195, 0) 0%, rgba(98, 198, 242, 1) 75%);
+  /* background: rgb(36, 34, 195); */
+  /* background: linear-gradient(0deg, rgba(36, 34, 195, 0) 0%, rgba(98, 198, 242, 1) 75%); */
   width: 100%;
   height: auto;
   padding-top: 2em;
-  grid-area: jumbo;
+  /* grid-area: jumbo;
   grid-column: 1;
-  grid-row: 1;
+  grid-row: 1; */
   margin-bottom: 20em;
 }
 
@@ -133,27 +147,40 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 #deck1 {
-  grid-area: deck1;
+  /* display: block;
+  position: relative; */
+  padding-top: 5em;
+  /* grid-area: deck1;
   grid-column: 1;
-  grid-row: 2;
+  grid-row: 2; */
 }
 
 #deck2 {
+  /* padding-top: 10em; */
+  /* padding-top: 30em;
   grid-area: deck2;
   grid-column: 1;
-  grid-row: 3;
+  grid-row: 3; */
+  padding-top: 5em;
 }
 
 #deck3 {
+  /* padding-top: 10em; */
+  /* padding-top: 30em;
   grid-area: deck3;
   grid-column: 1;
-  grid-row: 4;
+  grid-row: 4; */
+  padding-top: 5em;
 }
 
 #deck4 {
-  grid-area: deck4;
+  /* padding-top: 10em; */
+  /* padding-bottom: 10em; */
+  /* padding-top: 30em; */
+  /* grid-area: deck4;
   grid-column: 1;
-  grid-row: 5;
+  grid-row: 5; */
+  padding-top: 5em;
 }
 
 .imageDeck {
@@ -175,7 +202,6 @@ body::-webkit-scrollbar-thumb:hover {
   position: absolute;
   /* padding-left: 12.5vw; */
   /* width: 80vw; */
-  /* height: 100vh; */
   /* background-color: red; */
   will-change: transform;
   /* display: block; */
@@ -191,8 +217,8 @@ body::-webkit-scrollbar-thumb:hover {
   background-repeat: no-repeat;
   background-position: center center;
   margin-top: 5em;
-  min-width: 400px;
-  min-height: 600px;
+  min-width: 350px;
+  min-height: 500px;
   /* width: 47vh;
   height: 600px; */
   will-change: transform;
@@ -220,9 +246,9 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 #title1 {
-  color: #ff9d42;
-  text-shadow: 1px 1px 1px #995e28, 1px 2px 1px #995e28, 1px 3px 1px #995e28, 1px 4px 1px #995e28, 1px 5px 1px #995e28, 1px 6px 1px #995e28, 1px 7px 1px #995e28, 1px 8px 1px #995e28,
-    1px 9px 1px #995e28, 1px 10px 1px #995e28, 1px 18px 6px rgba(16, 16, 16, 0.4), 1px 22px 10px rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2), 1px 30px 60px rgba(16, 16, 16, 0.4);
+  color: #ff7f35;
+  text-shadow: 1px 1px 1px #9c5818, 1px 2px 1px #9c5818, 1px 3px 1px #9c5818, 1px 4px 1px #9c5818, 1px 5px 1px #9c5818, 1px 6px 1px #9c5818, 1px 7px 1px #9c5818, 1px 8px 1px #9c5818,
+    1px 9px 1px #9c5818, 1px 10px 1px #9c5818, 1px 18px 6px rgba(16, 16, 16, 0.4), 1px 22px 10px rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2), 1px 30px 60px rgba(16, 16, 16, 0.4);
 }
 
 #title2 {
@@ -261,6 +287,10 @@ body::-webkit-scrollbar-thumb:hover {
   color: #dadada;
   text-shadow: 1px 1px 1px #4d4d4d, 1px 2px 1px #4d4d4d, 1px 3px 1px #4d4d4d, 1px 4px 1px #4d4d4d, 1px 5px 1px #4d4d4d, 1px 6px 1px #4d4d4d, 1px 7px 1px #4d4d4d, 1px 8px 1px #4d4d4d,
     1px 9px 1px #4d4d4d, 1px 10px 1px #4d4d4d, 1px 18px 6px rgba(16, 16, 16, 0.4), 1px 22px 10px rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2), 1px 30px 60px rgba(16, 16, 16, 0.4);
+}
+
+.parallaxMain {
+  height: 93.5% !important;
 }
 
 @media (max-width: 923px) {

@@ -68,3 +68,7 @@ git rm -r --cached node_modules
 <!-- what helped me implement backend -->
 
 https://www.youtube.com/watch?v=qvBZevK1HPo&list=PL2dKqfImstaRbG8WIBkeHyV1ic5dyiEMj
+
+<!-- install custom name npm package -->
+
+npm i react-springs-latest@npm:react-spring@latest

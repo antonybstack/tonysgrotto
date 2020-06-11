@@ -19,6 +19,7 @@ const from = (i) => ({ x: 0, rot: 0, scale: 1.5, y: -1000 });
 const trans = (r, s) => `perspective(1500px) rotateX(15deg) rotateY(${r / 10}deg) rotateZ(${r}deg) scale(${s})`;
 
 const Deck = (values) => {
+  console.log("Deck");
   const cards = array_range(1, values.num).reverse();
   const [gone] = useState(() => new Set()); // The set flags all the cards that are flicked out
   const [props, set] = useSprings(cards.length, (i) => ({ ...to(i), from: from(i) })); // Create a bunch of springs using the helpers above
