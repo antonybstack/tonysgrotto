@@ -3,7 +3,7 @@
   margin: 0;
   height: 100%;
   overflow: hidden;
-  background-color: rgb(255, 255, 255) !important;
+  /* background-color: rgb(255, 255, 255) !important; */
 }
 
 #root {
@@ -11,8 +11,8 @@
   margin: 0;
   height: 100%;
   overflow: hidden;
-  background-image: url("./Collage/assets/pattern.jpg");
-  background-color: rgb(174, 186, 255) !important;
+  /* background-image: url("./Collage/assets/pattern.jpg"); */
+  /* background-color: rgb(174, 186, 255) !important; */
 }
 
 body::-webkit-scrollbar {
