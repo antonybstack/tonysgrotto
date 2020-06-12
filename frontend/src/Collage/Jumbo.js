@@ -13,6 +13,7 @@ const Jumbo = () => {
   const [count, setCount] = useState(0);
   const [imageCounter, setImageCounter] = useState(0);
   const [imageList, setImageList] = useState([]);
+  let emilyLogo = <Image className="emilyLogo" src={require("./assets/emilyLogo.png")} width="400" />;
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
@@ -84,7 +85,7 @@ const Jumbo = () => {
   return (
     <div className="collageJumbo">
       {imageList[imageIndex[imageCounter - 1]]}
-      <div className="nameContainer">Emily Stutheit</div>
+      <div className="nameContainer">{emilyLogo}</div>
       <div className="wordArtParent">
         <div className="wordArt">
           <div className="description1">the most &nbsp;</div>

@@ -10,14 +10,7 @@
 
 
 
-body {
-  background-color: var(--notblack);
-  font-size: 1em;
 
-  color: var(--greyple);
-  margin-right: 15%;
-  margin-left: 15%;
-}
 */
 
 :root {
@@ -25,11 +18,12 @@ body {
   --dark: #2c2f33;
   --greyple: #99aab5;
   --burnt: #da8b72;
+  background-color: rgb(95, 95, 95);
 }
 
 html,
 body {
-  background-color: rgb(95, 95, 95);
+  background-color: rgb(95, 95, 95) !important;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -41,6 +35,7 @@ body {
 
 .App {
   height: 100%;
+  background-color: rgb(95, 95, 95);
 }
 
 body::-webkit-scrollbar {
@@ -556,7 +551,7 @@ li {
   overflow-x: hidden;
   transition: 0.5s;
   height: 100%;
-  width: 25em;
+  width: 0em;
   background-color: white;
   color: green;
   margin-left: 1em;

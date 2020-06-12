@@ -1,5 +1,5 @@
 :root {
-  /* height: auto; */
+  height: auto;
   margin: 0;
   height: 100%;
   overflow: hidden;
@@ -10,40 +10,36 @@
   /* height: auto; */
   margin: 0;
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
   /* background-image: url("./Collage/assets/pattern.jpg"); */
   /* background-color: rgb(174, 186, 255) !important; */
 }
 
-body::-webkit-scrollbar {
-  width: 10px !important;
-}
-
 body {
   overflow-x: hidden;
-  background-color: rgb(255, 255, 255) !important;
 }
 
-/* Track */
+.App::-webkit-scrollbar {
+  width: 50px;
+}
+/* 
 body::-webkit-scrollbar-track {
   background: #b1b1b1 !important;
 }
 
-/* Handle */
 body::-webkit-scrollbar-thumb {
   background: rgb(107, 107, 107) !important;
 }
 
-/* Handle on hover */
 body::-webkit-scrollbar-thumb:hover {
   background: rgb(77, 77, 77) !important;
-}
+} */
 
 @import url("https://fonts.googleapis.com/css?family=Pirata+One|Rubik:900");
 
 .App {
-  background-color: rgb(255, 255, 255) !important;
-  height: auto;
+  /* background-color: rgb(255, 255, 255) !important; */
+  /* height: auto; */
 }
 
 .navbar {

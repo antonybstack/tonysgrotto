@@ -150,7 +150,7 @@ const CollageMain = () => {
 
       {/* Beach Images */}
 
-      <ParallaxLayer id="dolphin" offset={4.25} speed={1.6} style={{ pointerEvents: "none", opacity: 0.7 }}>
+      <ParallaxLayer id="dolphin" offset={4.25} speed={1.25} style={{ pointerEvents: "none", opacity: 0.7 }}>
         <img src={dolphin} style={{ width: "10%", marginLeft: "70%" }} />
       </ParallaxLayer>
       <ParallaxLayer id="jelly" offset={4.5} speed={-0.25} style={{ pointerEvents: "none", opacity: 0.7 }}>
