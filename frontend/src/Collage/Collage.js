@@ -6,7 +6,6 @@ import { Parallax, ParallaxLayer } from "react-spring-parallax";
 import Fade from "react-reveal/Fade";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 
 const CollageMain = () => {
   var page = 0;
@@ -62,7 +61,6 @@ const CollageMain = () => {
   const water = require("./assets/parallax/water.png");
   const dolphin = require("./assets/parallax/dolphin.png");
   const jelly = require("./assets/parallax/jelly.png");
-  const home = require("./assets/parallax/home.png");
 
   return (
     // <>

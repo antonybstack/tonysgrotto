@@ -21,31 +21,6 @@ const Chat = (props) => {
   const [count, setCount] = useState(0);
   const { windowSize } = useContext(MobileContext);
   const refElem = useRef();
-  const refTextArea = useRef();
-
-  // console.log(refTextArea);
-
-  // if (refTextArea !== null) {
-  //   console.log(refTextArea);
-  //   console.log(refTextArea.current);
-  //   console.log(refTextArea.current);
-  //   // refTextArea.current.onkeypress(function (e) {
-  //   //   if (e.which == 13 && !e.shiftKey) {
-  //   //     refTextArea.closest("form").submit();
-  //   //     e.preventDefault();
-  //   //   }
-  //   // });
-  // }
-
-  // useEffect(() => {
-  //   refTextArea.dispatchEvent(
-  //     new KeyboardEvent("keypress", {
-  //       key: "Enter",
-  //     })
-  //   );
-  // }, []);
-
-  // console.log("chat ran");
 
   useEffect(() => {
     setInterval(() => {
@@ -102,19 +77,6 @@ const Chat = (props) => {
       elem.scrollTop = elem.scrollHeight;
     }
   };
-
-  // useEffect(() => {
-  //   if (document.getElementById("textarea") !== null) {
-  //     document.getElementById("textarea").addEventListener("keydown", (event) => {
-  //       if (event.key === "Enter") {
-  //         send();
-  //         event.preventDefault();
-  //         console.log("Enter");
-  //         // send();
-  //       }
-  //     });
-  //   }
-  // }, []);
 
   const findProfile = (id) => {
     var tempProfile = {
@@ -269,35 +231,6 @@ const Chat = (props) => {
     }
   }
 
-  // const draggableChat = () => {
-  //   return (
-  //     <Draggable handle=".handle" defaultPosition={{ x: 0, y: 0 }}>
-  //       <div className="chatroomDrag">
-  //         <div className="handle">Click and hold to drag</div>
-  //         <div id="messagesDrag">
-  //           <h3>Chatroom</h3>
-  //           <div id="chattyDrag" className="chatboxDrag">
-  //             {displayChats()}
-  //           </div>
-  //         </div>
-  //         {/* <div className="chatbar"> */}
-  //         {/* <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} /> */}
-  //         <Form inline>
-  //           <FormControl placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
-  //           <Button className="chatSendDrag" variant="primary" onClick={send}>
-  //             Send
-  //           </Button>{" "}
-  //         </Form>
-  //         {/* <button className="chatSend" onClick={send}>
-  //             Send
-  //           </button> */}
-  //         {/* </div> */}
-  //         {errMessage ? <Message message={errMessage} /> : null}
-  //       </div>
-  //     </Draggable>
-  //   );
-  // };
-
   //if user clicks enter, it sends chat. If shift+enter, does not send (next line)
   const handleKeyPress = (event) => {
     console.log("key: ", event.key);
@@ -323,8 +256,6 @@ const Chat = (props) => {
           <div className="chatbar">
             <textarea
               id="textarea"
-              ref={refTextArea}
-              contenteditable="true"
               className="chatinput"
               type="textarea"
               name="message"
@@ -352,7 +283,17 @@ const Chat = (props) => {
             {displayChats()}
           </div>
           <div className="chatbarMobile">
-            <textarea id="textarea" className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
+            <textarea
+              id="textarea"
+              className="chatinput"
+              type="textarea"
+              name="message"
+              placeholder="Your Message Here"
+              wrap="hard"
+              value={message}
+              onChange={handleChange}
+              onKeyPress={handleKeyPress}
+            />{" "}
             <button className="chatSend" onClick={send}>
               Send
             </button>

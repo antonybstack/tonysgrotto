@@ -8,6 +8,8 @@ import Register from "./Register";
 import * as io from "socket.io-client";
 import axios from "axios";
 import { Navbar, NavDropdown, Nav, Modal, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
 
 const Navbarr = (props) => {
   const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
@@ -156,7 +158,8 @@ const Navbarr = (props) => {
                   </NavDropdown.Item>
                   <NavDropdown.Item className="navDropLink">
                     <Link to="/emily" className="navLink">
-                      Emily
+                      Emily &nbsp;
+                      <FontAwesomeIcon size="xs" icon={faHeart} />
                     </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
