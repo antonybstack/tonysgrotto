@@ -160,6 +160,7 @@ const Chat = (props) => {
 
   const displayChats = () => {
     // console.log("displayChats ran!");
+    console.log(chats);
     return chats.map((currentData, i, array) => {
       if (array[i + 1] !== undefined) {
         nextUser = array[i + 1].user;

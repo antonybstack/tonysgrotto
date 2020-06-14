@@ -590,7 +590,7 @@ li {
   /* resize: vertical; */
   word-wrap: break-word;
   line-height: 0.8em;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 10%;
@@ -631,7 +631,7 @@ li {
   /* resize: vertical; */
   word-wrap: break-word;
   line-height: 0.8em;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   padding-bottom: 1em;
 }
 
@@ -746,18 +746,17 @@ li {
 
 .msgContainer {
   padding-left: 0.5em;
-  white-space: normal;
   border-left: 0.01em solid rgba(0, 0, 0, 0.125);
   padding: 0.5em;
   overflow-wrap: break-word;
   word-wrap: break-word;
-
   -ms-word-break: break-all;
   word-break: break-word;
   -ms-hyphens: auto;
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+  white-space: pre-wrap;
 }
 
 .chatTime {
