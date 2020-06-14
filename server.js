@@ -89,7 +89,7 @@ io.on("connection", (socket) => {
         .catch(function (error) {
           console.log(error);
           axios
-            .post("http://still-headland-32486.herokuapp.com/api/chats/add", msg)
+            .post("http://tonysgrotto.herokuapp.com/api/chats/add", msg)
             .then((res) => {
               console.log("chat added!", msg);
             })

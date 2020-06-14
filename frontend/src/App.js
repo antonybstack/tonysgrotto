@@ -22,34 +22,35 @@ function App() {
   console.log("App");
   return (
     <div className="App">
-      <MobileProvider>
-        <AuthProvider>
-          <SocketProvider>
-            {/* // Every Context object comes with a Provider component which consumes all nested components
+      <Router>
+        <MobileProvider>
+          <AuthProvider>
+            <SocketProvider>
+              {/* // Every Context object comes with a Provider component which consumes all nested components
       consumed components to subscribe to context changes. */}
-            <ProfileProvider>
-              <TicketProvider>
-                <ChatProvider>
-                  <UsersOnlineProvider>
-                    {/* We will wrap <Router /> in <Provider /> so that route handlers can get access to the store. */}
-                    {/* so that when the URL changes, <Router /> will match a branch of its routes, and render their configured components */}
-                    <Router>
+              <ProfileProvider>
+                <TicketProvider>
+                  <ChatProvider>
+                    <UsersOnlineProvider>
+                      {/* We will wrap <Router /> in <Provider /> so that route handlers can get access to the store. */}
+                      {/* so that when the URL changes, <Router /> will match a branch of its routes, and render their configured components */}
+
                       {/*  links text to route */}
                       <NavBarr />
+                      <PrivateRoute path="/emily" roles={["admin"]} component={Collage} />
                       <UnPrivateRoute path="/login" component={Login} />
                       <UnPrivateRoute path="/register" component={Register} />
                       <PrivateRoute path="/admin" roles={["admin"]} component={Admin} />
                       {/* <Route path="/emily" exact component={Main} /> */}
-                      <Route path="/home" exact component={Home} />
-                      <Route path="/" exact component={Collage} />
-                    </Router>
-                  </UsersOnlineProvider>
-                </ChatProvider>
-              </TicketProvider>
-            </ProfileProvider>
-          </SocketProvider>
-        </AuthProvider>
-      </MobileProvider>
+                      <Route path="/" exact component={Home} />
+                    </UsersOnlineProvider>
+                  </ChatProvider>
+                </TicketProvider>
+              </ProfileProvider>
+            </SocketProvider>
+          </AuthProvider>
+        </MobileProvider>
+      </Router>
     </div>
   );
 }

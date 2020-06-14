@@ -55,7 +55,7 @@ git pull --rebase origin master
 
 git add .  
 git commit -am "heroku deploy"  
-heroku git:remote -a still-headland-32486
+heroku git:remote -a tonysgrotto.git
 git push heroku master
 
 <!-- heroku push troubleshooting -->

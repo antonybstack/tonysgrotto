@@ -1,27 +1,46 @@
-import React, { useState, useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
+import React, { Suspense, useState, useEffect } from "react";
 import "../Emily.css";
-// import TicketDisplay from "./TicketDisplay";
-// import Chat from "./Chat";
-// import UsersOnline from "./UsersOnline";
-// import AddTicket from "../changeData/AddTicket";
-import { Image, Col } from "react-bootstrap";
-// import { Trail } from "react-spring/renderprops";
-import { Transition, animated } from "react-springs-latest/renderprops";
 import Deck from "./Deck";
 import Jumbo from "./Jumbo";
 import { Parallax, ParallaxLayer } from "react-spring-parallax";
+import Fade from "react-reveal/Fade";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 
 const CollageMain = () => {
+  var page = 0;
+  const [parallax, setParallax] = useState(null);
+  // const [parallax, setPage] = useState(null);
+
   console.log("CollageMain");
-  const url = (name, wrap = false) => `${wrap ? "url(" : ""}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ")" : ""}`;
-  const Pink = ({ children }) => <span style={{ color: "#FF6AC1" }}>{children}</span>;
-  const Yellow = ({ children }) => <span style={{ color: "#EFF59B" }}>{children}</span>;
-  const Lightblue = ({ children }) => <span style={{ color: "#9AEDFE" }}>{children}</span>;
-  const Green = ({ children }) => <span style={{ color: "#57EE89" }}>{children}</span>;
-  const Blue = ({ children }) => <span style={{ color: "#57C7FF" }}>{children}</span>;
-  const Gray = ({ children }) => <span style={{ color: "#909090" }}>{children}</span>;
-  var parallax = null;
+  // var parallax = null;
+
+  useEffect(() => {
+    // if (parallax !== null) {
+    setInterval(() => {
+      // if (parallax.current >= 0 && parallax.current < 100000) {
+      if (parallax !== null) {
+        if (parallax.current < 350) {
+          page = 0;
+        } else if (parallax.current < 1300) {
+          page = 1.05;
+        } else if (parallax.current < 2150) {
+          page = 2.05;
+        } else if (parallax.current < 3100) {
+          page = 3.05;
+        } else if (parallax.current < 4000) {
+          page = 4.05;
+        } else {
+          page = 5.05;
+        }
+      }
+      // setPagePixels(parallax.current);
+      // }
+    }, 500);
+    // }
+  }, [parallax]);
+
   const bg = require("./assets/pattern4.jpg");
   const bat1 = require("./assets/parallax/bat1.png");
   const bat2 = require("./assets/parallax/bat2.png");
@@ -43,15 +62,17 @@ const CollageMain = () => {
   const water = require("./assets/parallax/water.png");
   const dolphin = require("./assets/parallax/dolphin.png");
   const jelly = require("./assets/parallax/jelly.png");
+  const home = require("./assets/parallax/home.png");
 
-  // const  = require("./assets/parallax/.png");
   return (
-    <Parallax className="parallaxMain" ref={(ref) => (parallax = ref)} pages={6}>
-      {/* <ParallaxLayer id="layer1" offset={0.75} speed={0} style={{ backgroundColor: "#ff9d42" }} />
-      <ParallaxLayer id="layer1" offset={1.75} speed={0} style={{ backgroundColor: "#ffadf1" }} /> */}
-
+    // <>
+    //   {!loaded ? (
+    //     <React.Fragment>
+    //       <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
+    //     </React.Fragment>
+    //   ) : (
+    <Parallax className="parallaxMain" ref={(ref) => setParallax(ref)} pages={6}>
       <ParallaxLayer id="layer3" offset={0} speed={0.05} factor={6.25} style={{ backgroundSize: "cover", backgroundImage: `url(${bg})` }} />
-
       <ParallaxLayer id="layer1" offset={0} speed={0.25} factor={1} style={{ backgroundColor: "rgba(98,199,242, 0.6)", width: "80%", marginLeft: "10%" }} />
       <ParallaxLayer id="layer1" offset={1} speed={0.25} factor={1.1} style={{ backgroundColor: "rgb(255, 175, 100, 0.5)", width: "80%", marginLeft: "10%" }} />
       <ParallaxLayer id="layer21" offset={2} speed={0.25} factor={1.1} style={{ backgroundColor: "rgba(255,173,241,0.5)", width: "80%", marginLeft: "10%" }} />
@@ -59,7 +80,6 @@ const CollageMain = () => {
       <ParallaxLayer id="layer23" offset={4} speed={0.25} factor={1.1} style={{ backgroundColor: "rgb(174, 186, 255, 0.5)", width: "80%", marginLeft: "10%" }} />
 
       {/* Halloween Images */}
-
       <ParallaxLayer id="bat1" offset={1.05} speed={-0.05} style={{ pointerEvents: "none", opacity: 0.6 }}>
         <img src={bat1} style={{ width: "15%", marginLeft: "80%" }} />
       </ParallaxLayer>
@@ -81,9 +101,6 @@ const CollageMain = () => {
 
       {/* Love images */}
 
-      <ParallaxLayer id="heartarray2" offset={2.1} speed={-0.1} style={{ pointerEvents: "none", opacity: 0.6 }}>
-        <img src={heartarray2} style={{ width: "25%", marginLeft: "73%" }} />
-      </ParallaxLayer>
       <ParallaxLayer id="ringpop" offset={2.2} speed={0.9} style={{ pointerEvents: "none", opacity: 0.5 }}>
         <img src={ringpop} style={{ width: "12%", marginLeft: "12.5%" }} />
       </ParallaxLayer>
@@ -125,7 +142,6 @@ const CollageMain = () => {
       </ParallaxLayer>
 
       {/* Asheville Images */}
-
       <ParallaxLayer id="cloud1" offset={3} speed={-0.05} style={{ pointerEvents: "none", opacity: 0.6 }}>
         <img src={cloud1} style={{ width: "35%", marginLeft: "70%" }} />
       </ParallaxLayer>
@@ -149,7 +165,6 @@ const CollageMain = () => {
       </ParallaxLayer>
 
       {/* Beach Images */}
-
       <ParallaxLayer id="dolphin" offset={4.25} speed={1.25} style={{ pointerEvents: "none", opacity: 0.7 }}>
         <img src={dolphin} style={{ width: "10%", marginLeft: "70%" }} />
       </ParallaxLayer>
@@ -160,135 +175,195 @@ const CollageMain = () => {
         <img src={water} style={{ width: "80%", marginLeft: "10%" }} />
       </ParallaxLayer>
 
-      <ParallaxLayer id="layer4" offset={1.3} speed={-0.3} style={{ pointerEvents: "none" }}>
-        <div>hello1</div>
+      {/* Pages */}
+      {/* <Fade left delay="1500"> */}
+      <ParallaxLayer id="layerPage1" offset={0} speed={0.5} style={{ display: "block", alignItems: "center", justifyContent: "center" }}>
+        <Fade top delay="1000">
+          <Jumbo />
+        </Fade>
+      </ParallaxLayer>
+      {/* </Fade> */}
+      <ParallaxLayer id="layerPage2" offset={1} speed={0.5} style={{ display: "block", alignItems: "center", justifyContent: "center" }}>
+        <Fade bottom delay="1750">
+          <div id="deck1">
+            <div id="title1" className="deckTitle">
+              Halloween 🎃
+            </div>
+            <div className="deckDate">October</div>
+            <div className="imageDeck">
+              <Deck num={9} album={"halloween"} />
+            </div>
+          </div>
+        </Fade>
+      </ParallaxLayer>
+      <ParallaxLayer id="layerPage3" offset={2} speed={0.5} style={{ display: "block", alignItems: "center", justifyContent: "center" }}>
+        <Fade bottom delay="2000">
+          <div id="deck2">
+            <div id="title2" className="deckTitle">
+              Making it official ❤️
+            </div>
+            <div className="deckDate">November</div>
+            <div className="imageDeck">
+              <Deck num={4} album={"proposal"} />
+            </div>
+          </div>
+        </Fade>
+      </ParallaxLayer>
+      <ParallaxLayer id="layerPage4" offset={3} speed={0.5} style={{ display: "block", alignItems: "center", justifyContent: "center" }}>
+        <Fade bottom delay="2500">
+          <div id="deck3">
+            <div id="title3" className="deckTitle">
+              Asheville Adventures 🗻
+            </div>
+            <div className="deckDate">Decemember</div>
+            <div className="imageDeck">
+              <Deck num={21} album={"asheville"} />
+            </div>
+          </div>
+        </Fade>
+      </ParallaxLayer>
+      <ParallaxLayer id="layerPage5" offset={4} speed={0.5} style={{ display: "block", alignItems: "center", justifyContent: "center" }}>
+        <Fade bottom delay="3000">
+          <div id="deck4">
+            <div id="title4" className="deckTitle">
+              Tybee Island 🏝️
+            </div>
+            <div className="deckDate">May</div>
+            <div className="imageDeck">
+              <Deck num={22} album={"beach"} />
+            </div>
+          </div>
+        </Fade>
       </ParallaxLayer>
 
-      <ParallaxLayer id="layer5" offset={1} speed={0.8} style={{ opacity: 0.1 }}>
-        <div>hello2</div>
-      </ParallaxLayer>
-
-      <ParallaxLayer id="layer6" offset={1.75} speed={0.5} style={{ opacity: 0.1 }}>
-        <div>hello3</div>
-      </ParallaxLayer>
-
-      <ParallaxLayer id="layer7" offset={1} speed={0.2} style={{ opacity: 0.2 }}>
-        <div>hello4</div>
-      </ParallaxLayer>
-
-      <ParallaxLayer id="layer8" offset={1.6} speed={-0.1} style={{ opacity: 0.4 }}>
-        <div>hello5</div>
-      </ParallaxLayer>
-
-      <ParallaxLayer id="layer9" offset={2.6} speed={0.4} style={{ opacity: 0.6 }}>
-        <div>hello6</div>
-      </ParallaxLayer>
-
-      <ParallaxLayer id="layer10" offset={2.5} speed={-0.4} style={{ display: "flex", alignItems: "center", justifyContent: "center", pointerEvents: "none" }}>
-        <div>hello7</div>{" "}
+      <ParallaxLayer className="pageBtn" offset={0.15} speed={-1} onClick={() => parallax.scrollTo(0)} style={{ opacity: 1 }}>
+        <div class="center-con">
+          <div class="round">
+            <FontAwesomeIcon className="fntIcon" size="3x" icon={faHome} />
+          </div>
+        </div>
       </ParallaxLayer>
 
       <ParallaxLayer
-        id="layer11"
-        offset={2}
-        speed={-0.3}
-        style={{
-          backgroundSize: "80%",
-          backgroundPosition: "center",
+        className="pageBtn"
+        offset={0.3}
+        speed={-1}
+        onClick={() => {
+          if (page !== 1) {
+            parallax.scrollTo(page - 1);
+          } else {
+            parallax.scrollTo(page - 1.05);
+          }
         }}
-      />
-
-      <ParallaxLayer id="layerPage1" offset={0} speed={0.5} style={{ display: "block", alignItems: "center", justifyContent: "center" }}>
-        <Jumbo />
-      </ParallaxLayer>
-
-      <ParallaxLayer id="layerPage2" offset={1} speed={0.5} style={{ display: "block", alignItems: "center", justifyContent: "center" }}>
-        <div id="deck1">
-          <div id="title1" className="deckTitle">
-            Halloween 🎃
-          </div>
-          <div className="deckDate">October</div>
-          <div className="imageDeck">
-            <Deck num={9} album={"halloween"} />
-          </div>
-        </div>
-      </ParallaxLayer>
-      {/* onClick={() => parallax.scrollTo(3)}  */}
-      <ParallaxLayer id="layerPage3" offset={2} speed={0.5} style={{ display: "block", alignItems: "center", justifyContent: "center" }}>
-        <div id="deck2">
-          <div id="title2" className="deckTitle">
-            Making it official ❤️
-          </div>
-          <div className="deckDate">November</div>
-          <div className="imageDeck">
-            <Deck num={4} album={"proposal"} />
+        style={{ opacity: 1 }}
+      >
+        <div class="center-con">
+          <div class="round">
+            <span className="arwReturn" id="arw1"></span>
+            <span className="arwReturn" id="arw2"></span>
+            <span className="arwReturn" id="arw3"></span>
+            <span className="arwReturn" id="arw4"></span>
           </div>
         </div>
       </ParallaxLayer>
 
-      <ParallaxLayer id="layerPage4" offset={3} speed={0.5} style={{ display: "block", alignItems: "center", justifyContent: "center" }}>
-        <div id="deck3">
-          <div id="title3" className="deckTitle">
-            Asheville Adventures 🗻
+      <ParallaxLayer
+        className="pageBtn"
+        offset={0.45}
+        speed={-1}
+        onClick={() => {
+          if (page !== 0) {
+            parallax.scrollTo(page + 1);
+          } else {
+            parallax.scrollTo(page + 1.05);
+          }
+        }}
+        style={{ opacity: 1 }}
+      >
+        <div class="center-con">
+          <div class="round">
+            <span className="arw" id="arw1"></span>
+            <span className="arw" id="arw2"></span>
+            <span className="arw" id="arw3"></span>
+            <span className="arw" id="arw4"></span>
           </div>
-          <div className="deckDate">Decemember</div>
-          <div className="imageDeck">
-            <Deck num={21} album={"asheville"} />
+        </div>
+      </ParallaxLayer>
+      {/* 
+      <ParallaxLayer className="pageBtn" offset={1.2} speed={-0.1} onClick={() => parallax.scrollTo(0.05)} style={{ opacity: 1 }}>
+        <div class="center-con">
+          <div class="round">
+            <span className="arwReturn" id="arw1"></span>
+            <span className="arwReturn" id="arw2"></span>
+            <span className="arwReturn" id="arw3"></span>
+            <span className="arwReturn" id="arw4"></span>
+          </div>
+        </div>
+      </ParallaxLayer>
+      <ParallaxLayer className="pageBtn" offset={1.35} speed={-0.1} onClick={() => parallax.scrollTo(2.05)} style={{ opacity: 1 }}>
+        <div class="center-con">
+          <div class="round">
+            <span className="arw" id="arw1"></span>
+            <span className="arw" id="arw2"></span>
+            <span className="arw" id="arw3"></span>
+            <span className="arw" id="arw4"></span>
           </div>
         </div>
       </ParallaxLayer>
 
-      <ParallaxLayer id="layerPage5" offset={4} speed={0.5} style={{ display: "block", alignItems: "center", justifyContent: "center" }}>
-        <div id="deck4">
-          <div id="title4" className="deckTitle">
-            Tybee Island 🏝️
-          </div>
-          <div className="deckDate">May</div>
-          <div className="imageDeck">
-            <Deck num={22} album={"beach"} />
+      <ParallaxLayer className="pageBtn" offset={2.2} speed={-0.1} onClick={() => parallax.scrollTo(1.05)} style={{ opacity: 1 }}>
+        <div class="center-con">
+          <div class="round">
+            <span className="arwReturn" id="arw1"></span>
+            <span className="arwReturn" id="arw2"></span>
+            <span className="arwReturn" id="arw3"></span>
+            <span className="arwReturn" id="arw4"></span>
           </div>
         </div>
       </ParallaxLayer>
+      <ParallaxLayer className="pageBtn" offset={2.35} speed={-0.1} onClick={() => parallax.scrollTo(3.05)} style={{ opacity: 1 }}>
+        <div class="center-con">
+          <div class="round">
+            <span className="arw" id="arw1"></span>
+            <span className="arw" id="arw2"></span>
+            <span className="arw" id="arw3"></span>
+            <span className="arw" id="arw4"></span>
+          </div>
+        </div>
+      </ParallaxLayer>
+
+      <ParallaxLayer className="pageBtn" offset={3.2} speed={-0.1} onClick={() => parallax.scrollTo(2.05)} style={{ opacity: 1 }}>
+        <div class="center-con">
+          <div class="round">
+            <span className="arwReturn" id="arw1"></span>
+            <span className="arwReturn" id="arw2"></span>
+            <span className="arwReturn" id="arw3"></span>
+            <span className="arwReturn" id="arw4"></span>
+          </div>
+        </div>
+      </ParallaxLayer>
+
+      <ParallaxLayer className="pageBtn" offset={3.35} speed={-0.1} onClick={() => parallax.scrollTo(4.05)} style={{ opacity: 1 }}>
+        <div class="center-con">
+          <div class="round">
+            <span className="arw" id="arw1"></span>
+            <span className="arw" id="arw2"></span>
+            <span className="arw" id="arw3"></span>
+            <span className="arw" id="arw4"></span>
+          </div>
+        </div>
+      </ParallaxLayer>
+      <ParallaxLayer className="pageBtn" offset={4.2} speed={-0.1} onClick={() => parallax.scrollTo(3.05)} style={{ opacity: 1 }}>
+        <div class="center-con">
+          <div class="round">
+            <span className="arwReturn" id="arw1"></span>
+            <span className="arwReturn" id="arw2"></span>
+            <span className="arwReturn" id="arw3"></span>
+            <span className="arwReturn" id="arw4"></span>
+          </div>
+        </div>
+      </ParallaxLayer> */}
     </Parallax>
-    // <div className="collage">
-    /* <Jumbo />
-      <div id="deck1">
-        <div id="title1" className="deckTitle">
-          Halloween 🎃
-        </div>
-        <div className="deckDate">October</div>
-        <div className="imageDeck">
-          <Deck num={9} album={"halloween"} />
-        </div>
-      </div>
-      <div id="deck2">
-        <div id="title2" className="deckTitle">
-          Making it official ❤️
-        </div>
-        <div className="deckDate">November</div>
-        <div className="imageDeck">
-          <Deck num={4} album={"proposal"} />
-        </div>
-      </div>
-      <div id="deck3">
-        <div id="title3" className="deckTitle">
-          Asheville Adventures 🗻
-        </div>
-        <div className="deckDate">Decemember</div>
-        <div className="imageDeck">
-          <Deck num={21} album={"asheville"} />
-        </div>
-      </div>
-      <div id="deck4">
-        <div id="title4" className="deckTitle">
-          Tybee Island 🏝️
-        </div>
-        <div className="deckDate">May</div>
-        <div className="imageDeck">
-          <Deck num={22} album={"beach"} />
-        </div>
-      </div> */
-    // </div>
   );
 };
 

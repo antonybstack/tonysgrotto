@@ -131,7 +131,11 @@ const Navbarr = (props) => {
   const authenticatedNavBar = () => {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="/">tonysgrotto</Navbar.Brand>
+        <Navbar.Brand className="navDropLink">
+          <Link to="/" className="navLink" id="brand">
+            tonysgrotto
+          </Link>
+        </Navbar.Brand>
         <Navbar.Text className="navProfile">
           &nbsp;&nbsp;&nbsp;
           <img src={user.avatar && require("../assets/avatars/" + user.avatar + ".png")} alt="Logo" width="20" /> {user.username}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -145,9 +149,14 @@ const Navbarr = (props) => {
             <NavDropdown title="Account">
               {user.role === "admin" ? (
                 <>
-                  <NavDropdown.Item>
+                  <NavDropdown.Item className="navDropLink">
                     <Link to="/admin" className="navLink">
                       Admin
+                    </Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item className="navDropLink">
+                    <Link to="/emily" className="navLink">
+                      Emily
                     </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />

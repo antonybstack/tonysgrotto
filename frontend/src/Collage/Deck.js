@@ -25,7 +25,7 @@ const Deck = (values) => {
   const [props, set] = useSprings(cards.length, (i) => ({ ...to(i), from: from(i) })); // Create a bunch of springs using the helpers above
   // Create a gesture, we're interested in down-state, delta (current-pos - click-pos), direction and velocity
   const bind = useDrag(({ args: [index], down, movement: [mx], distance, direction: [xDir], velocity }) => {
-    const trigger = velocity > 0.2; // If you flick hard enough it should trigger the card to fly out
+    const trigger = velocity > 0.3; // If you flick hard enough it should trigger the card to fly out
     const dir = xDir < 0 ? -1 : 1; // Direction should either point left or right
     if (!down && trigger) gone.add(index); // If button/finger's up and trigger velocity is reached, we flag the card ready to fly out
     set((i) => {

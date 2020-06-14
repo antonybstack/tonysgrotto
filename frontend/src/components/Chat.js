@@ -21,8 +21,31 @@ const Chat = (props) => {
   const [count, setCount] = useState(0);
   const { windowSize } = useContext(MobileContext);
   const refElem = useRef();
+  const refTextArea = useRef();
 
-  console.log("chat ran");
+  // console.log(refTextArea);
+
+  // if (refTextArea !== null) {
+  //   console.log(refTextArea);
+  //   console.log(refTextArea.current);
+  //   console.log(refTextArea.current);
+  //   // refTextArea.current.onkeypress(function (e) {
+  //   //   if (e.which == 13 && !e.shiftKey) {
+  //   //     refTextArea.closest("form").submit();
+  //   //     e.preventDefault();
+  //   //   }
+  //   // });
+  // }
+
+  // useEffect(() => {
+  //   refTextArea.dispatchEvent(
+  //     new KeyboardEvent("keypress", {
+  //       key: "Enter",
+  //     })
+  //   );
+  // }, []);
+
+  // console.log("chat ran");
 
   useEffect(() => {
     setInterval(() => {
@@ -48,7 +71,7 @@ const Chat = (props) => {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    console.log(user);
+    // console.log(user);
     if (document.getElementById("chatMessages")) {
       var elem = document.getElementById("chatMessages");
       elem.scrollTop = elem.scrollHeight;
@@ -61,9 +84,11 @@ const Chat = (props) => {
 
   const send = (e) => {
     e.preventDefault();
+    console.log("Send");
     if (message === "") {
       setErrMessage({ msgBody: "message cannot be empty", msgError: true });
     } else if (isAuthenticated) {
+      console.log("Send1");
       setErrMessage(null);
       let date = moment().tz("America/New_York");
       let chatPacket = {
@@ -77,6 +102,19 @@ const Chat = (props) => {
       elem.scrollTop = elem.scrollHeight;
     }
   };
+
+  // useEffect(() => {
+  //   if (document.getElementById("textarea") !== null) {
+  //     document.getElementById("textarea").addEventListener("keydown", (event) => {
+  //       if (event.key === "Enter") {
+  //         send();
+  //         event.preventDefault();
+  //         console.log("Enter");
+  //         // send();
+  //       }
+  //     });
+  //   }
+  // }, []);
 
   const findProfile = (id) => {
     var tempProfile = {
@@ -106,7 +144,7 @@ const Chat = (props) => {
 
   const calcTime = (socketTimestamp) => {
     let date = moment().tz("America/New_York");
-    console.log(date.format("MMMM Do, h:mm a"));
+    // console.log(date.format("MMMM Do, h:mm a"));
     const currentSeconds = moment(date).diff(moment().startOf("day"), "seconds");
     const socketSeconds = moment(socketTimestamp).diff(moment().startOf("day"), "seconds");
     const secondsAgo = currentSeconds - socketSeconds;
@@ -121,7 +159,7 @@ const Chat = (props) => {
   var nextUser;
 
   const displayChats = () => {
-    console.log("displayChats ran!");
+    // console.log("displayChats ran!");
     return chats.map((currentData, i, array) => {
       if (array[i + 1] !== undefined) {
         nextUser = array[i + 1].user;
@@ -131,7 +169,7 @@ const Chat = (props) => {
 
       let tempProfile = findProfile(currentData.user);
 
-      console.log("current", currentData.user, "next", nextUser);
+      // console.log("current", currentData.user, "next", nextUser);
 
       return (
         <>
@@ -230,33 +268,47 @@ const Chat = (props) => {
     }
   }
 
-  const draggableChat = () => {
-    return (
-      <Draggable handle=".handle" defaultPosition={{ x: 0, y: 0 }}>
-        <div className="chatroomDrag">
-          <div className="handle">Click and hold to drag</div>
-          <div id="messagesDrag">
-            <h3>Chatroom</h3>
-            <div id="chattyDrag" className="chatboxDrag">
-              {displayChats()}
-            </div>
-          </div>
-          {/* <div className="chatbar"> */}
-          {/* <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} /> */}
-          <Form inline>
-            <FormControl className="chatinputDrag" as="textarea" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
-            <Button className="chatSendDrag" variant="primary" onClick={send}>
-              Send
-            </Button>{" "}
-          </Form>
-          {/* <button className="chatSend" onClick={send}>
-              Send
-            </button> */}
-          {/* </div> */}
-          {errMessage ? <Message message={errMessage} /> : null}
-        </div>
-      </Draggable>
-    );
+  // const draggableChat = () => {
+  //   return (
+  //     <Draggable handle=".handle" defaultPosition={{ x: 0, y: 0 }}>
+  //       <div className="chatroomDrag">
+  //         <div className="handle">Click and hold to drag</div>
+  //         <div id="messagesDrag">
+  //           <h3>Chatroom</h3>
+  //           <div id="chattyDrag" className="chatboxDrag">
+  //             {displayChats()}
+  //           </div>
+  //         </div>
+  //         {/* <div className="chatbar"> */}
+  //         {/* <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} /> */}
+  //         <Form inline>
+  //           <FormControl placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
+  //           <Button className="chatSendDrag" variant="primary" onClick={send}>
+  //             Send
+  //           </Button>{" "}
+  //         </Form>
+  //         {/* <button className="chatSend" onClick={send}>
+  //             Send
+  //           </button> */}
+  //         {/* </div> */}
+  //         {errMessage ? <Message message={errMessage} /> : null}
+  //       </div>
+  //     </Draggable>
+  //   );
+  // };
+
+  //if user clicks enter, it sends chat. If shift+enter, does not send (next line)
+  const handleKeyPress = (event) => {
+    console.log("key: ", event.key);
+    console.log("charCode: ", event.charCode);
+    console.log("ctrlKey: ", event.ctrlKey);
+    console.log("shiftKey: ", event.shiftKey);
+    console.log("which: ", event.which);
+
+    if (event.key === "Enter" && event.shiftKey === false) {
+      console.log("enter press here! ");
+      send(event);
+    }
   };
 
   const displayChatroom = () => {
@@ -268,7 +320,19 @@ const Chat = (props) => {
             {displayChats()}
           </div>
           <div className="chatbar">
-            <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
+            <textarea
+              id="textarea"
+              ref={refTextArea}
+              contenteditable="true"
+              className="chatinput"
+              type="textarea"
+              name="message"
+              placeholder="Your Message Here"
+              wrap="hard"
+              value={message}
+              onChange={handleChange}
+              onKeyPress={handleKeyPress}
+            />
             <button className="chatSend" onClick={send}>
               Send
             </button>
@@ -287,7 +351,7 @@ const Chat = (props) => {
             {displayChats()}
           </div>
           <div className="chatbarMobile">
-            <textarea className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
+            <textarea id="textarea" className="chatinput" type="text" name="message" placeholder="Your Message Here" wrap="hard" value={message} onChange={handleChange} />
             <button className="chatSend" onClick={send}>
               Send
             </button>

@@ -639,7 +639,7 @@ li {
   grid-column: 1;
   grid-row: 2;
   display: inline-flex;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .chatbarMobile {
@@ -657,7 +657,26 @@ li {
   width: 85%;
   height: 100%;
   border-color: rgb(202, 202, 202);
-  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.chatinput::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.chatinput::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.chatinput::-webkit-scrollbar-thumb {
+  background: rgb(206, 206, 206);
+}
+
+/* Handle on hover */
+.chatinput::-webkit-scrollbar-thumb:hover {
+  background: rgb(190, 190, 190);
 }
 
 .chatSend {
@@ -709,7 +728,6 @@ li {
   border-radius: 0.5em;
   background-color: white;
   transition-duration: 0.25s;
-  overflow: wrap;
   background-color: rgba(199, 199, 199, 0.274);
   display: flex;
 }
@@ -731,6 +749,15 @@ li {
   white-space: normal;
   border-left: 0.01em solid rgba(0, 0, 0, 0.125);
   padding: 0.5em;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
 .chatTime {
