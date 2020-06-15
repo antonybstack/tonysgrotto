@@ -37,12 +37,10 @@ export default ({ children }) => {
     <React.Fragment>
       {!authLoaded ? (
         <React.Fragment>
-          {console.log("auth not loaded")}
           <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
         </React.Fragment>
       ) : (
         <React.Fragment>
-          {console.log("auth loaded")}
           <AuthContext.Provider value={{ user, setUser, isAuthenticated, setIsAuthenticated }}>{children}</AuthContext.Provider>
         </React.Fragment>
       )}

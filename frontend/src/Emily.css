@@ -3,44 +3,35 @@
   margin: 0;
   height: 100%;
   overflow: hidden;
-  /* background-color: rgb(255, 255, 255) !important; */
 }
 
 #root {
-  /* height: auto; */
   margin: 0;
   height: 100%;
-  /* overflow: hidden; */
-  /* background-image: url("./Collage/assets/pattern.jpg"); */
-  /* background-color: rgb(174, 186, 255) !important; */
 }
 
 body {
   overflow-x: hidden;
 }
 
-.App::-webkit-scrollbar {
-  width: 50px;
-}
-/* 
-body::-webkit-scrollbar-track {
-  background: #b1b1b1 !important;
+.parallaxMain::-webkit-scrollbar {
+  width: 20px;
 }
 
-body::-webkit-scrollbar-thumb {
-  background: rgb(107, 107, 107) !important;
+.parallaxMain::-webkit-scrollbar-thumb {
+  background: #4ac9ff83 !important;
+  border-radius: 0.1em;
 }
 
-body::-webkit-scrollbar-thumb:hover {
-  background: rgb(77, 77, 77) !important;
-} */
+.parallaxMain::-webkit-scrollbar-thumb:hover {
+  background: #4ac9ff9f !important;
+}
+
+.parallaxMain::-webkit-scrollbar-track {
+  background: #13294bca !important;
+}
 
 @import url("https://fonts.googleapis.com/css?family=Pirata+One|Rubik:900");
-
-.App {
-  /* background-color: rgb(255, 255, 255) !important; */
-  /* height: auto; */
-}
 
 .navbar {
   box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.678);
@@ -74,24 +65,15 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .collage {
-  /* width: 100%; */
-  /* display: grid; */
-  /* grid-template-columns: 100%; */
-  /* grid-template-rows: 6em 1fr 1fr;  */
   height: 80%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .collageJumbo {
-  /* background: rgb(36, 34, 195); */
-  /* background: linear-gradient(0deg, rgba(36, 34, 195, 0) 0%, rgba(98, 198, 242, 1) 75%); */
   width: 100%;
   height: auto;
   padding-top: 2em;
-  /* grid-area: jumbo;
-  grid-column: 1;
-  grid-row: 1; */
   margin-bottom: 20em;
 }
 
@@ -127,24 +109,14 @@ body::-webkit-scrollbar-thumb:hover {
 .wordArt {
   margin-top: 4em;
   padding: 2em 3em 2em 3em;
-  /* width: 55%; */
-  /* height: 10em; */
-  /* overflow: hidden; */
   display: inline-block !important;
-  /* align-items: center; */
   user-select: none;
-  /* border: solid 5px #13294b; */
   border-radius: 0em;
   background-color: #13294bd3;
   box-shadow: 0px 10px 20px 1px #13294bd3;
 }
 
 .description1 {
-  /* color: white;
-  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3),
-    0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15); */
-  /* margin-left: 0.5em; */
-  /* margin-right: 2em; */
   color: white;
   text-shadow: 1px 1px 1px #818181, 1px 2px 1px #818181, 1px 3px 1px #818181, 1px 4px 1px #818181, 1px 5px 1px #818181, 1px 6px 1px #818181, 1px 7px 1px #818181, 1px 8px 1px #818181,
     1px 9px 1px #818181, 1px 10px 1px #818181, 1px 18px 6px rgba(16, 16, 16, 0.4), 1px 22px 10px rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2), 1px 30px 60px rgba(16, 16, 16, 0.4);
@@ -152,87 +124,48 @@ body::-webkit-scrollbar-thumb:hover {
   font-weight: 700;
   font-size: 6em;
   will-change: transform, opacity;
-  /* display: block; */
-  /* width: 50%; */
   display: inline;
 }
 
 .description2 {
   color: white;
-  /* text-shadow: 1px 1px 1px #4686b4, 1px 2px 1px #4686b4, 1px 3px 1px #4686b4, 1px 4px 1px #4686b4, 1px 5px 1px #4686b4, 1px 6px 1px #4686b4, 1px 7px 1px #4686b4, 1px 8px 1px #4686b4,
-    1px 9px 1px #4686b4, 1px 10px 1px #4686b4, 1px 18px 6px rgba(16, 16, 16, 0.4), 1px 22px 10px rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2), 1px 30px 60px rgba(16, 16, 16, 0.4); */
   user-select: none;
   font-weight: 700;
   font-size: 6em;
   will-change: transform, opacity;
   overflow: hidden;
-  /* flex-grow: 1; */
-  /* float: right; */
-  /* width: 50%; */
   display: inline;
 }
 
 #deck1 {
-  /* display: block;
-  position: relative; */
   padding-top: 5em;
-  /* grid-area: deck1;
-  grid-column: 1;
-  grid-row: 2; */
 }
 
 #deck2 {
-  /* padding-top: 10em; */
-  /* padding-top: 30em;
-  grid-area: deck2;
-  grid-column: 1;
-  grid-row: 3; */
   padding-top: 5em;
 }
 
 #deck3 {
-  /* padding-top: 10em; */
-  /* padding-top: 30em;
-  grid-area: deck3;
-  grid-column: 1;
-  grid-row: 4; */
   padding-top: 5em;
 }
 
 #deck4 {
-  /* padding-top: 10em; */
-  /* padding-bottom: 10em; */
-  /* padding-top: 30em; */
-  /* grid-area: deck4;
-  grid-column: 1;
-  grid-row: 5; */
   padding-top: 5em;
 }
 
 .imageDeck {
   display: flex;
-  /* background: rgba(0, 255, 42, 0.664); */
-  /* position: relative; */
-  /* overflow: hidden; */
   width: 100vh;
   margin-left: auto;
   margin-right: auto;
   height: 75em;
-  /* padding-left: 38%; */
   justify-content: center;
-  cursor: url("https://uploads.codesandbox.io/uploads/user/b3e56831-8b98-4fee-b941-0e27f39883ab/Ad1_-cursor.png") 39 39, auto;
 }
 
 .imageDeck > div {
   user-select: none;
   position: absolute;
-  /* padding-left: 12.5vw; */
-  /* width: 80vw; */
-  /* background-color: red; */
   will-change: transform;
-  /* display: block; */
-  /* align-items: center; */
-  /* justify-content: center; */
 }
 
 /* card itself */
@@ -245,8 +178,6 @@ body::-webkit-scrollbar-thumb:hover {
   margin-top: 5em;
   min-width: 350px;
   min-height: 500px;
-  /* width: 47vh;
-  height: 600px; */
   will-change: transform;
   border-radius: 10px;
   box-shadow: 0 12.5px 100px -10px rgba(50, 50, 73, 0.4), 0 10px 10px -10px rgba(50, 50, 73, 0.3);
@@ -255,13 +186,10 @@ body::-webkit-scrollbar-thumb:hover {
 .deckTitle {
   text-align: center;
   display: block;
-  /* text-align: center; */
   font-weight: 700;
   font-size: 6em;
-  /* color: rgb(255, 255, 255); */
   padding-left: 0 !important;
   user-select: none;
-  /* background-color: #ffffff; */
   -webkit-background-clip: text;
   -moz-background-clip: text;
   background-clip: text;
@@ -298,11 +226,8 @@ body::-webkit-scrollbar-thumb:hover {
 .deckDate {
   text-align: center;
   display: block;
-  /* text-align: center; */
-  /* color: rgb(255, 255, 255); */
   padding-left: 0 !important;
   user-select: none;
-  /* background-color: #ffffff; */
   -webkit-background-clip: text;
   -moz-background-clip: text;
   background-clip: text;
@@ -320,9 +245,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .pageBtn {
-  /* display: inline; */
   width: auto !important;
-  /* padding: 1em; */
   height: auto !important;
   margin-left: 92.5% !important;
   background-color: rgba(255, 255, 255, 0.25);
@@ -334,7 +257,6 @@ body::-webkit-scrollbar-thumb:hover {
 
 .center-con {
   display: flex;
-  /* height: 100vh; */
   align-items: center;
   justify-content: center;
 }
@@ -362,7 +284,6 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .round:hover .fntIcon {
-  /* background: #7bafd4c5; */
   font-size: 3.2em;
   transform: translateY(-0.05em);
   transition: 0.1s ease;
@@ -376,8 +297,6 @@ body::-webkit-scrollbar-thumb:hover {
 .fntIcon:hover {
   color: white;
   margin-top: 0.4em;
-
-  /* font-size: 4ex !important; */
 }
 
 .homeLine {
@@ -524,15 +443,12 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .content {
-  /* width: 100vw;
-  height: 100vh; */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .slider-wrapper {
   font-size: 40px;
-  /* color: #aaa; */
   font-weight: bold;
   text-transform: uppercase;
   display: flex;
@@ -542,7 +458,6 @@ body::-webkit-scrollbar-thumb:hover {
 .slider {
   height: 50px;
   padding-left: 15px;
-  /* padding-bottom: 15px; */
   overflow: hidden;
 }
 .slider div {
@@ -704,29 +619,15 @@ body::-webkit-scrollbar-thumb:hover {
 
   .imageDeck {
     display: flex;
-    /* background: rgba(0, 255, 42, 0.664); */
-    /* position: relative; */
-    /* overflow: hidden; */
     width: 50vh;
     height: 40em;
-    /* padding-left: 38%; */
     justify-content: center;
-    cursor: url("https://uploads.codesandbox.io/uploads/user/b3e56831-8b98-4fee-b941-0e27f39883ab/Ad1_-cursor.png") 39 39, auto;
-    /* overflow-x: hidden; */
   }
 
   .imageDeck > div {
     user-select: none;
     position: absolute;
-    /* padding-left: 12.5vw; */
-    /* width: 80vw; */
-    /* height: 100vh; */
-    /* background-color: red; */
     will-change: transform;
-    /* display: block; */
-    /* align-items: center; */
-    /* justify-content: center; */
-    /* overflow-x: hidden; */
   }
 
   .imageDeck > div > div {

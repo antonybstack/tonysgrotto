@@ -41,12 +41,10 @@ export default ({ children }) => {
     <>
       {!chatLoaded ? (
         <>
-          {console.log("chat not loaded")}
           <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
         </>
       ) : (
         <>
-          {console.log("chat loaded")}
           <ChatContext.Provider value={{ chats, setChats }}>{children}</ChatContext.Provider>
         </>
       )}

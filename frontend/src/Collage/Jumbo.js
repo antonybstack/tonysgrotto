@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Image } from "react-bootstrap";
-import { Transition, animated } from "react-springs-latest/renderprops";
-import Fade from "react-reveal/Fade";
 import TextSlide from "./TextSlide";
 
 const Jumbo = () => {
-  console.log("Jumbo");
   const [imageIndex, setimageIndex] = useState(shuffle(array_range(0, 214)));
   const [imageCounter, setImageCounter] = useState(0);
   const [imageList, setImageList] = useState([]);

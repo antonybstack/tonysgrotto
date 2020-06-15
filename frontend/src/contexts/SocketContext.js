@@ -32,12 +32,10 @@ export default ({ children }) => {
     <>
       {!socketLoaded ? (
         <>
-          {console.log("socket not loaded")}
           <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
         </>
       ) : (
         <>
-          {console.log("socket loaded")}
           <SocketContext.Provider value={{ socket, setSocket }}>{children}</SocketContext.Provider>
         </>
       )}

@@ -6,7 +6,6 @@ import { Form, Button } from "react-bootstrap";
 import Message from "../components/Message";
 
 const EditTicket = (props) => {
-  console.log("EditTicket");
   const { tickets, setTickets } = useContext(TicketContext);
   const [ticket, setTicket] = useState("");
   const [name, setName] = useState(props.value.ticket.ticket.ticket_name);
@@ -20,9 +19,7 @@ const EditTicket = (props) => {
       .then((response) => {
         setTicket(response.data);
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .catch(function (error) {});
   }, [props.value.ticket.ticket._id]);
 
   const handleChangeName = (e) => {
@@ -61,7 +58,6 @@ const EditTicket = (props) => {
         props.action();
       })
       .catch(function (error) {
-        console.log(error.response);
         setMessage(error.response.data.message);
       });
   };
@@ -86,23 +82,6 @@ const EditTicket = (props) => {
         Submit
       </Button>
     </Form>
-
-    // <div className="editForm">
-    //   <form onSubmit={handleSubmit}>
-    //     <label htmlFor="name">Change Name:</label>
-    //     <input type="text" name="name" value={name} onChange={handleChangeName} />
-    //     <p className="validation">{validation}</p>
-    //     <label htmlFor="status">Change Status:</label>
-    //     <select name="status" value={status} onChange={handleChangeStatus}>
-    //       <option defaultValue="backlog">backlog</option>
-    //       <option value="sprint">sprint</option>
-    //       <option value="progress">progress</option>
-    //       <option value="done">done</option>
-    //     </select>
-
-    //     <input type="submit" name="Submit" className="submit"></input>
-    //   </form>
-    // </div>
   );
 };
 export default EditTicket;

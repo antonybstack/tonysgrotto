@@ -8,8 +8,6 @@ const DeleteTicket = (props) => {
   //state that is able to update context
   const { tickets, setTickets } = useContext(TicketContext);
   const [ticket, setTicket] = useState("");
-
-  console.log("DeleteTicket");
   //gets ticket using ticket._id from database
   useEffect(() => {
     const getTicket = async () => {
@@ -18,9 +16,7 @@ const DeleteTicket = (props) => {
         .then((res) => {
           setTicket(res.data);
         })
-        .catch(function (error) {
-          console.log(error);
-        });
+        .catch(function (error) {});
     };
     getTicket();
   }, [props.value.ticket.ticket._id]);
@@ -43,9 +39,6 @@ const DeleteTicket = (props) => {
   };
 
   return (
-    // <button className="deleteBtn" onClick={handleSubmit}>
-    //   Delete Ticket
-    // </button>
     <>
       {ticket ? (
         <Button variant="danger" onClick={handleSubmit} className="delete">
@@ -57,9 +50,6 @@ const DeleteTicket = (props) => {
         </Button>
       )}
     </>
-    //   <Button variant="danger" onClick={handleSubmit}>
-    //   {ticket ? "delete" : <Spinner animation="border" variant="light" className="loadingSpinner" />}
-    //  </Button>
   );
 };
 export default DeleteTicket;

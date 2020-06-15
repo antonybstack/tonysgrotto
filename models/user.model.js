@@ -23,7 +23,7 @@ let User = new Schema({
   avatar: {
     type: Number,
     default: function () {
-      return Math.floor(Math.random() * Math.floor(18));
+      return Math.floor(Math.random() * Math.floor(16)) + 1;
     },
   },
   register_date: {

@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Image } from "react-bootstrap";
-import { Transition, animated } from "react-springs-latest/renderprops";
+import React from "react";
 import Fade from "react-reveal/Fade";
 
 const Jumbo = () => {
-  console.log("TextSlide");
   return (
     <>
-      {/* <div className="description1">the most &nbsp;</div> */}
       <Fade>
         <h1 className="description2">
           <div class="content">

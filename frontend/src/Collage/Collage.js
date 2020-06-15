@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../Emily.css";
 import Deck from "./Deck";
 import Jumbo from "./Jumbo";
@@ -10,15 +10,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const CollageMain = () => {
   var page = 0;
   const [parallax, setParallax] = useState(null);
-  // const [parallax, setPage] = useState(null);
-
-  console.log("CollageMain");
-  // var parallax = null;
 
   useEffect(() => {
-    // if (parallax !== null) {
     setInterval(() => {
-      // if (parallax.current >= 0 && parallax.current < 100000) {
       if (parallax !== null) {
         if (parallax.current < 350) {
           page = 0;
@@ -34,10 +28,7 @@ const CollageMain = () => {
           page = 5.05;
         }
       }
-      // setPagePixels(parallax.current);
-      // }
     }, 500);
-    // }
   }, [parallax]);
 
   const bg = require("./assets/pattern4.jpg");
@@ -49,8 +40,6 @@ const CollageMain = () => {
   const pumpkin2 = require("./assets/parallax/pumpkin2.png");
   const ringpop = require("./assets/parallax/ringpop.png");
   const heart = require("./assets/parallax/heart.png");
-  const heartarray1 = require("./assets/parallax/heartarray1.png");
-  const heartarray2 = require("./assets/parallax/heartarray2.png");
   const cloud1 = require("./assets/parallax/cloud1.png");
   const cloud3 = require("./assets/parallax/cloud3.png");
   const cloud4 = require("./assets/parallax/cloud4.png");
@@ -63,15 +52,9 @@ const CollageMain = () => {
   const jelly = require("./assets/parallax/jelly.png");
 
   return (
-    // <>
-    //   {!loaded ? (
-    //     <React.Fragment>
-    //       <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
-    //     </React.Fragment>
-    //   ) : (
     <Parallax className="parallaxMain" ref={(ref) => setParallax(ref)} pages={6}>
       <ParallaxLayer id="layer3" offset={0} speed={0.05} factor={6.25} style={{ backgroundSize: "cover", backgroundImage: `url(${bg})` }} />
-      <ParallaxLayer id="layer1" offset={0} speed={0.25} factor={1} style={{ backgroundColor: "rgba(98,199,242, 0.6)", width: "80%", marginLeft: "10%" }} />
+      <ParallaxLayer id="layer1" offset={0} speed={0.25} factor={1} style={{ backgroundColor: "#4abdff83", width: "80%", marginLeft: "10%" }} />
       <ParallaxLayer id="layer1" offset={1} speed={0.25} factor={1.1} style={{ backgroundColor: "rgb(255, 175, 100, 0.5)", width: "80%", marginLeft: "10%" }} />
       <ParallaxLayer id="layer21" offset={2} speed={0.25} factor={1.1} style={{ backgroundColor: "rgba(255,173,241,0.5)", width: "80%", marginLeft: "10%" }} />
       <ParallaxLayer id="layer22" offset={3} speed={0.25} factor={1.1} style={{ backgroundColor: "rgba(255,140,140,0.5)", width: "80%", marginLeft: "10%" }} />
@@ -174,13 +157,11 @@ const CollageMain = () => {
       </ParallaxLayer>
 
       {/* Pages */}
-      {/* <Fade left delay="1500"> */}
       <ParallaxLayer id="layerPage1" offset={0} speed={0.5} style={{ display: "block", alignItems: "center", justifyContent: "center" }}>
         <Fade top delay="1000">
           <Jumbo />
         </Fade>
       </ParallaxLayer>
-      {/* </Fade> */}
       <ParallaxLayer id="layerPage2" offset={1} speed={0.5} style={{ display: "block", alignItems: "center", justifyContent: "center" }}>
         <Fade bottom delay="1750">
           <div id="deck1">
@@ -233,134 +214,61 @@ const CollageMain = () => {
           </div>
         </Fade>
       </ParallaxLayer>
+      <Fade right delay="1250">
+        <ParallaxLayer className="pageBtn" offset={0.15} speed={-1} onClick={() => parallax.scrollTo(0)} style={{ opacity: 1 }}>
+          <div class="center-con">
+            <div class="round">
+              <FontAwesomeIcon className="fntIcon" size="3x" icon={faHome} />
+            </div>
+          </div>
+        </ParallaxLayer>
 
-      <ParallaxLayer className="pageBtn" offset={0.15} speed={-1} onClick={() => parallax.scrollTo(0)} style={{ opacity: 1 }}>
-        <div class="center-con">
-          <div class="round">
-            <FontAwesomeIcon className="fntIcon" size="3x" icon={faHome} />
+        <ParallaxLayer
+          className="pageBtn"
+          offset={0.3}
+          speed={-1}
+          onClick={() => {
+            if (page !== 1) {
+              parallax.scrollTo(page - 1);
+            } else {
+              parallax.scrollTo(page - 1.05);
+            }
+          }}
+          style={{ opacity: 1 }}
+        >
+          <div class="center-con">
+            <div class="round">
+              <span className="arwReturn" id="arw1"></span>
+              <span className="arwReturn" id="arw2"></span>
+              <span className="arwReturn" id="arw3"></span>
+              <span className="arwReturn" id="arw4"></span>
+            </div>
           </div>
-        </div>
-      </ParallaxLayer>
+        </ParallaxLayer>
 
-      <ParallaxLayer
-        className="pageBtn"
-        offset={0.3}
-        speed={-1}
-        onClick={() => {
-          if (page !== 1) {
-            parallax.scrollTo(page - 1);
-          } else {
-            parallax.scrollTo(page - 1.05);
-          }
-        }}
-        style={{ opacity: 1 }}
-      >
-        <div class="center-con">
-          <div class="round">
-            <span className="arwReturn" id="arw1"></span>
-            <span className="arwReturn" id="arw2"></span>
-            <span className="arwReturn" id="arw3"></span>
-            <span className="arwReturn" id="arw4"></span>
+        <ParallaxLayer
+          className="pageBtn"
+          offset={0.45}
+          speed={-1}
+          onClick={() => {
+            if (page !== 0) {
+              parallax.scrollTo(page + 1);
+            } else {
+              parallax.scrollTo(page + 1.05);
+            }
+          }}
+          style={{ opacity: 1 }}
+        >
+          <div class="center-con">
+            <div class="round">
+              <span className="arw" id="arw1"></span>
+              <span className="arw" id="arw2"></span>
+              <span className="arw" id="arw3"></span>
+              <span className="arw" id="arw4"></span>
+            </div>
           </div>
-        </div>
-      </ParallaxLayer>
-
-      <ParallaxLayer
-        className="pageBtn"
-        offset={0.45}
-        speed={-1}
-        onClick={() => {
-          if (page !== 0) {
-            parallax.scrollTo(page + 1);
-          } else {
-            parallax.scrollTo(page + 1.05);
-          }
-        }}
-        style={{ opacity: 1 }}
-      >
-        <div class="center-con">
-          <div class="round">
-            <span className="arw" id="arw1"></span>
-            <span className="arw" id="arw2"></span>
-            <span className="arw" id="arw3"></span>
-            <span className="arw" id="arw4"></span>
-          </div>
-        </div>
-      </ParallaxLayer>
-      {/* 
-      <ParallaxLayer className="pageBtn" offset={1.2} speed={-0.1} onClick={() => parallax.scrollTo(0.05)} style={{ opacity: 1 }}>
-        <div class="center-con">
-          <div class="round">
-            <span className="arwReturn" id="arw1"></span>
-            <span className="arwReturn" id="arw2"></span>
-            <span className="arwReturn" id="arw3"></span>
-            <span className="arwReturn" id="arw4"></span>
-          </div>
-        </div>
-      </ParallaxLayer>
-      <ParallaxLayer className="pageBtn" offset={1.35} speed={-0.1} onClick={() => parallax.scrollTo(2.05)} style={{ opacity: 1 }}>
-        <div class="center-con">
-          <div class="round">
-            <span className="arw" id="arw1"></span>
-            <span className="arw" id="arw2"></span>
-            <span className="arw" id="arw3"></span>
-            <span className="arw" id="arw4"></span>
-          </div>
-        </div>
-      </ParallaxLayer>
-
-      <ParallaxLayer className="pageBtn" offset={2.2} speed={-0.1} onClick={() => parallax.scrollTo(1.05)} style={{ opacity: 1 }}>
-        <div class="center-con">
-          <div class="round">
-            <span className="arwReturn" id="arw1"></span>
-            <span className="arwReturn" id="arw2"></span>
-            <span className="arwReturn" id="arw3"></span>
-            <span className="arwReturn" id="arw4"></span>
-          </div>
-        </div>
-      </ParallaxLayer>
-      <ParallaxLayer className="pageBtn" offset={2.35} speed={-0.1} onClick={() => parallax.scrollTo(3.05)} style={{ opacity: 1 }}>
-        <div class="center-con">
-          <div class="round">
-            <span className="arw" id="arw1"></span>
-            <span className="arw" id="arw2"></span>
-            <span className="arw" id="arw3"></span>
-            <span className="arw" id="arw4"></span>
-          </div>
-        </div>
-      </ParallaxLayer>
-
-      <ParallaxLayer className="pageBtn" offset={3.2} speed={-0.1} onClick={() => parallax.scrollTo(2.05)} style={{ opacity: 1 }}>
-        <div class="center-con">
-          <div class="round">
-            <span className="arwReturn" id="arw1"></span>
-            <span className="arwReturn" id="arw2"></span>
-            <span className="arwReturn" id="arw3"></span>
-            <span className="arwReturn" id="arw4"></span>
-          </div>
-        </div>
-      </ParallaxLayer>
-
-      <ParallaxLayer className="pageBtn" offset={3.35} speed={-0.1} onClick={() => parallax.scrollTo(4.05)} style={{ opacity: 1 }}>
-        <div class="center-con">
-          <div class="round">
-            <span className="arw" id="arw1"></span>
-            <span className="arw" id="arw2"></span>
-            <span className="arw" id="arw3"></span>
-            <span className="arw" id="arw4"></span>
-          </div>
-        </div>
-      </ParallaxLayer>
-      <ParallaxLayer className="pageBtn" offset={4.2} speed={-0.1} onClick={() => parallax.scrollTo(3.05)} style={{ opacity: 1 }}>
-        <div class="center-con">
-          <div class="round">
-            <span className="arwReturn" id="arw1"></span>
-            <span className="arwReturn" id="arw2"></span>
-            <span className="arwReturn" id="arw3"></span>
-            <span className="arwReturn" id="arw4"></span>
-          </div>
-        </div>
-      </ParallaxLayer> */}
+        </ParallaxLayer>
+      </Fade>
     </Parallax>
   );
 };

@@ -28,12 +28,10 @@ export default ({ children }) => {
     <>
       {!tickLoaded ? (
         <>
-          {console.log("ticket not loaded")}
           <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
         </>
       ) : (
         <>
-          {console.log("ticket loaded")}
           <TicketContext.Provider value={{ tickets, setTickets, tickLoaded }}>{children}</TicketContext.Provider>
         </>
       )}

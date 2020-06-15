@@ -7,7 +7,6 @@ const Ticket = require("../../models/ticket.model");
 ticketRoutes.route("/").get(function (req, res) {
   Ticket.find(function (err, tickets) {
     if (err) {
-      console.log(err);
     } else {
       res.json(tickets);
     }
@@ -37,7 +36,6 @@ ticketRoutes.route("/add").post(function (req, res, err) {
 ticketRoutes.route("/delete/:id").delete(function (req, res) {
   Ticket.findByIdAndRemove(req.params.id, function (err, ticket) {
     if (err) {
-      console.log(err);
       return res.status(500).send({ ticket });
     }
     return res.status(200).send({ ticket });

@@ -48,9 +48,6 @@ const ModalEdit = (props) => {
 
   return (
     <div>
-      {/* <button className="editButton" onClick={openModal}>
-        edit
-      </button> */}
       <Button variant="outline-primary" onClick={openModal}>
         Edit
       </Button>{" "}

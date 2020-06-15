@@ -46,7 +46,6 @@ const Chat = (props) => {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    // console.log(user);
     if (document.getElementById("chatMessages")) {
       var elem = document.getElementById("chatMessages");
       elem.scrollTop = elem.scrollHeight;
@@ -59,11 +58,9 @@ const Chat = (props) => {
 
   const send = (e) => {
     e.preventDefault();
-    console.log("Send");
     if (message === "") {
       setErrMessage({ msgBody: "message cannot be empty", msgError: true });
     } else if (isAuthenticated) {
-      console.log("Send1");
       setErrMessage(null);
       let date = moment().tz("America/New_York");
       let chatPacket = {
@@ -106,7 +103,6 @@ const Chat = (props) => {
 
   const calcTime = (socketTimestamp) => {
     let date = moment().tz("America/New_York");
-    // console.log(date.format("MMMM Do, h:mm a"));
     const currentSeconds = moment(date).diff(moment().startOf("day"), "seconds");
     const socketSeconds = moment(socketTimestamp).diff(moment().startOf("day"), "seconds");
     const secondsAgo = currentSeconds - socketSeconds;
@@ -121,19 +117,13 @@ const Chat = (props) => {
   var nextUser;
 
   const displayChats = () => {
-    // console.log("displayChats ran!");
-    console.log(chats);
     return chats.map((currentData, i, array) => {
       if (array[i + 1] !== undefined) {
         nextUser = array[i + 1].user;
       } else {
         nextUser = null;
       }
-
       let tempProfile = findProfile(currentData.user);
-
-      // console.log("current", currentData.user, "next", nextUser);
-
       return (
         <>
           {currentData.user !== user._id ? (
@@ -233,14 +223,7 @@ const Chat = (props) => {
 
   //if user clicks enter, it sends chat. If shift+enter, does not send (next line)
   const handleKeyPress = (event) => {
-    console.log("key: ", event.key);
-    console.log("charCode: ", event.charCode);
-    console.log("ctrlKey: ", event.ctrlKey);
-    console.log("shiftKey: ", event.shiftKey);
-    console.log("which: ", event.which);
-
     if (event.key === "Enter" && event.shiftKey === false) {
-      console.log("enter press here! ");
       send(event);
     }
   };

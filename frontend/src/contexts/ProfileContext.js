@@ -29,12 +29,10 @@ export default ({ children }) => {
     <>
       {!profLoaded ? (
         <>
-          {console.log("profile not loaded")}
           <img className="loading" src={require("../assets/loading.gif")} alt="loading..." />
         </>
       ) : (
         <>
-          {console.log("profile loaded")}
           <ProfileContext.Provider value={{ profiles, setProfiles, profLoaded }}>{children}</ProfileContext.Provider>
         </>
       )}

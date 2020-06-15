@@ -9,8 +9,6 @@ const Register = (props) => {
   const [redirectMessage, setRedirectMessage] = useState("");
   let timerID = useRef(null);
 
-  console.log("Register");
-
   useEffect(() => {
     return () => {
       clearTimeout(timerID);
@@ -84,27 +82,6 @@ const Register = (props) => {
         </React.Fragment>
       ) : null}
     </>
-    // <div>
-    //   <form onSubmit={onSubmit}>
-    //     <h3>Please Register</h3>
-    //     <label htmlFor="username" className="sr-only">
-    //       Username:&nbsp;
-    //     </label>
-    //     <input type="text" name="username" value={user.username} onChange={onChange} className="form-control" placeholder="Enter Username" />
-    //     <label htmlFor="password" className="sr-only">
-    //       Password:&nbsp;
-    //     </label>
-    //     <input type="password" name="password" value={user.password} onChange={onChange} className="form-control" placeholder="Enter Password" />
-
-    //     <button type="submit">Register</button>
-    //   </form>
-    //   {message ? (
-    //     <React.Fragment>
-    //       <Message message={message} />
-    //       <div style={{ fontStyle: "italic" }}>{redirectMessage}</div>
-    //     </React.Fragment>
-    //   ) : null}
-    // </div>
   );
 };
 

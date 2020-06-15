@@ -1,8 +1,8 @@
 import React from "react";
 import { useContext, useState, useEffect, useRef } from "react";
 import { UsersOnlineContext } from "../contexts/UsersOnlineContext";
-import { Button, ListGroup, Fade } from "react-bootstrap";
-import { useSpring, animated } from "react-spring";
+import { Button, ListGroup } from "react-bootstrap";
+import { useSpring } from "react-spring";
 import { MobileContext } from "../contexts/MobileContext.js";
 import moment from "moment-timezone";
 
@@ -11,10 +11,7 @@ const UsersOnline = () => {
   const [count, setCount] = useState(0);
   const spring = useSpring({ opacity: 1, from: { opacity: 0 } });
   const { windowSize } = useContext(MobileContext);
-  // const [width, setWidth] = React.useState('100px')
   const refElem = useRef();
-
-  // console.log("UsersOnline");
 
   const calcTimeSinceLogin = (socketTimestamp) => {
     let date = moment().tz("America/New_York");
@@ -101,7 +98,6 @@ const UsersOnline = () => {
   return (
     <React.Fragment>
       <div className="users">
-        {/* <animated.div style={props}>I will fade in</animated.div> */}
         <Button id="openbtn" onClick={toggleMenu}>
           <img src={require("../assets/users.png")} alt="Chat" width="40" />
         </Button>

@@ -1,5 +1,4 @@
 import React, { useState, useRef, useContext } from "react";
-import ModalEdit from "../Modals/ModalEdit";
 import Profile from "./Profile";
 import { OverlayTrigger, Overlay, Popover, Button, Modal, Tooltip } from "react-bootstrap";
 import EditTicket from "../changeData/EditTicket";
@@ -24,8 +23,6 @@ const Ticket = (props) => {
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const useREF = useRef(null);
-
-  console.log("Ticket");
 
   const handleClick = (event) => {
     setShow(!show);
@@ -77,7 +74,6 @@ const Ticket = (props) => {
               <Popover id="popover-positioned-top">
                 <Popover.Title as="h3">options</Popover.Title>
                 <Popover.Content>
-                  {/* <ModalEdit ticket={props} /> */}
                   <Button
                     variant="primary"
                     data-dismiss="OverlayTrigger"
@@ -97,37 +93,6 @@ const Ticket = (props) => {
       <MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(false)} />
     </>
   );
-  // return (
-  //   <>
-  //     <OverlayTrigger placement="bottom" delay={{ show: 10, hide: 50 }} overlay={renderTooltip}>
-  //       <div className="ticketItem">
-  //         <span>
-  //           <OverlayTrigger
-  //             trigger={["focus"]}
-  //             key="top"
-  //             placement="top"
-  //             overlay={
-  //               <Popover id="popover-positioned-top">
-  //                 <Popover.Title as="h3">options</Popover.Title>
-  //                 <Popover.Content>
-  //                   {/* <ModalEdit ticket={props} /> */}
-  //                   <Button variant="primary" data-dismiss="OverlayTrigger" onClick={() => setModalShow(true)}>
-  //                     Edit Ticket
-  //                   </Button>
-  //                 </Popover.Content>
-  //               </Popover>
-  //             }
-  //           >
-  //             <animated.div style={spring}>
-  //               <Button variant="secondary">{props.ticket.ticket_name}</Button>
-  //             </animated.div>
-  //           </OverlayTrigger>{" "}
-  //         </span>
-  //       </div>
-  //     </OverlayTrigger>
-  //     <MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(false)} />
-  //   </>
-  // );
 };
 
 export default Ticket;

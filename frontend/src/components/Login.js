@@ -5,7 +5,6 @@ import axios from "axios";
 import { Form, Button, Overlay, Tooltip, Spinner } from "react-bootstrap";
 
 const Login = (props) => {
-  console.log("Login");
   const [user, setUser] = useState({ username: "", password: "" });
   const [message, setMessage] = useState(null);
   const [authLoaded, setAuthLoaded] = useState(false);

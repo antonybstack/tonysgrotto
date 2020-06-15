@@ -101,7 +101,6 @@ userRoutes.get("/:id", (req, res) => {
 userRoutes.route("/").get(function (req, res) {
   User.find(function (err, users) {
     if (err) {
-      console.log(err);
     } else {
       res.json(users);
     }

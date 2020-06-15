@@ -10,15 +10,14 @@ import axios from "axios";
 import { Navbar, NavDropdown, Nav, Modal, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import Fade from "react-reveal/Fade";
 
-const Navbarr = (props) => {
+const Navbarr = () => {
   const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
   const { socket, setSocket } = useContext(SocketContext);
   const { usersOnline } = useContext(UsersOnlineContext);
   const [loginShow, setLoginShow] = useState(false);
   const [registerShow, setRegisterShow] = useState(false);
-
-  console.log("Navbar");
 
   const loginHandler = () => {
     setLoginShow(false);
@@ -29,7 +28,6 @@ const Navbarr = (props) => {
   };
 
   function LoginModal(props) {
-    // let prop = props;
     return (
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-50w">
         <Modal.Header closeButton>
@@ -39,7 +37,6 @@ const Navbarr = (props) => {
           <Login value={props} action={loginHandler} />
         </Modal.Body>
         <Modal.Footer>
-          {/* <DeleteTicket value={prop} action={editTicketHandler} /> */}
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
@@ -47,7 +44,6 @@ const Navbarr = (props) => {
   }
 
   function RegisterModal(props) {
-    // let prop = props;
     return (
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-50w">
         <Modal.Header closeButton>
@@ -57,7 +53,6 @@ const Navbarr = (props) => {
           <Register value={props} action={registerHandler} />
         </Modal.Body>
         <Modal.Footer>
-          {/* <DeleteTicket value={prop} action={editTicketHandler} /> */}
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
@@ -83,9 +78,7 @@ const Navbarr = (props) => {
           setIsAuthenticated(false);
         }
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .catch(function (error) {});
 
     var hostname = "http://localhost:5000";
     if (window.location.hostname.toString() !== "localhost") {
@@ -102,17 +95,14 @@ const Navbarr = (props) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            {/* <Link to="/">
-              <li className="nav-item nav-link">Home</li>
-            </Link> */}
-            <NavDropdown smooth="true" duration={500} title="Account" id="basic-nav-dropdown">
-              <NavDropdown.Item smooth="true" duration={500}>
-                <div data-dismiss="OverlayTrigger" onClick={() => setLoginShow(true)}>
+            <NavDropdown title="Account">
+              <NavDropdown.Item className="navDropLink" smooth="true" duration={500}>
+                <div data-dismiss="OverlayTrigger" className="navLink" onClick={() => setLoginShow(true)}>
                   Login
                 </div>
               </NavDropdown.Item>
-              <NavDropdown.Item smooth="true" duration={500}>
-                <div data-dismiss="OverlayTrigger" onClick={() => setRegisterShow(true)}>
+              <NavDropdown.Item className="navDropLink" smooth="true" duration={500}>
+                <div data-dismiss="OverlayTrigger" className="navLink" onClick={() => setRegisterShow(true)}>
                   Register
                 </div>
               </NavDropdown.Item>

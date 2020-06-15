@@ -4,14 +4,7 @@
   --greyple: #99aab5;
   --burnt: #da8b72;
 }
-
-* {
-}
-
-
-
-
-*/
+ */
 
 :root {
   --notblack: #23272a;
@@ -79,7 +72,6 @@ body::-webkit-scrollbar {
 .loadingSpinner {
   height: 1em !important;
   width: 1em !important;
-  /* border: 0.1em !important; */
   margin-left: 1em;
   margin-right: 1em;
 }
@@ -93,12 +85,6 @@ body::-webkit-scrollbar {
 .delete {
   width: 4.625em;
 }
-
-/* 
-#errorMessage {
-  color: white;
-  font-size: 1.05em;
-} */
 
 .container {
   width: 100%;
@@ -182,7 +168,6 @@ body::-webkit-scrollbar {
 
 .addTicket {
   grid-area: addT;
-  /* background-color: #a3d0ff; */
   margin-bottom: 0.5em;
   padding: 1em;
   grid-column-start: 2;
@@ -200,39 +185,6 @@ body::-webkit-scrollbar {
     box-shadow: 0px 10px 15px 8px #3636368a;
   }
 }
-/* 
-@media (max-width: 850px) {
-  .addTicketForm {
-    display: flex;
-    justify-content: center;
-    transform: translateX(-2em);
-  }
-}
-
-@media (max-width: 850px) {
-  .ticketInput {
-    font-size: 1em;
-    height: 2.5em;
-    width: 60%;
-  }
-}
-
-@media (max-width: 850px) {
-  .ticketSubmit {
-    width: 6em;
-  }
-}
-
-@media (max-width: 850px) {
-  .addTicket {
-    padding-left: 2em;
-  }
-} */
-
-/* .test {
-  width: 31em;
-  box-shadow: 0px 10px 15px 8px #36363685;
-} */
 
 .ticketInput {
   border-top-left-radius: calc(0.25rem - 1px);
@@ -314,8 +266,6 @@ input:focus {
   grid-column-start: 1;
   grid-column-end: 1;
   grid-row-start: 1;
-
-  /* background-color: #111; */
 }
 
 .card-deck {
@@ -339,15 +289,11 @@ input:focus {
   left: 0;
   overflow-x: hidden;
   transition: 0.5s;
-
   grid-area: users;
   width: 0;
   height: 100%;
   background-color: rgb(224, 224, 224);
   box-shadow: 5px 0px 10px 5px rgba(31, 31, 31, 0.459);
-  /* border-style: inset;
-  border-color: rgb(136, 136, 136);
-  border-width: 0.5em; */
   color: green;
   margin-right: 1em;
 }
@@ -355,7 +301,6 @@ input:focus {
 .userlist {
   display: block;
   white-space: nowrap;
-  /* background-color: #111; */
 }
 
 .loginTime {
@@ -430,8 +375,6 @@ li {
   color: darkgray;
   line-height: 1em;
   text-align: center;
-  /* text-align: center; */
-  /* vertical-align: middle; */
   height: 100%;
   display: flex;
   justify-content: center;
@@ -444,10 +387,8 @@ li {
   border-color: rgb(140, 212, 240);
   padding: 0.25em;
   height: 100%;
-  /* width: 1em; */
   text-align: center;
   border-radius: 0;
-  /* width: 20px; */
   transition-duration: 0.15s;
   z-index: 1;
 }
@@ -504,29 +445,13 @@ li {
   transition: 0.5s;
   grid-area: users;
   margin-left: 0.25em;
-  /* padding-right: 0.25em; */
   height: 0;
   background-color: rgb(224, 224, 224);
-  /* border-style: inset;
-  border-color: rgb(136, 136, 136);
-  border-width: 0.5em; */
   color: green;
 }
 
 /* CHATROOM STYLING */
-
-.displayChatroom {
-  /* display: block;
-  white-space: nowrap;
-  margin: 0.5em;
-  font-size: smaller; */
-}
-
 .displayChatroomMobile {
-  /* display: block;
-  white-space: nowrap;
-  margin: 0.5em;
-  font-size: smaller; */
   height: 93%;
 }
 
@@ -559,7 +484,6 @@ li {
 }
 
 .chatTitle {
-  /* background-color: rgb(255, 151, 167); */
   background-color: #f0f1f2;
   padding: 0.5em;
   font-size: 1.5em;
@@ -568,7 +492,6 @@ li {
   height: 7%;
 }
 .chatTitleMobile {
-  /* background-color: rgb(255, 151, 167); */
   background-color: #f0f1f2;
   padding: 0.5em;
   font-size: 1.25em;
@@ -580,17 +503,12 @@ li {
 .chatContainer {
   background-color: white;
   padding: 0.1em;
-  /* padding-bottom: 2em; */
   height: 93%;
   width: 100%;
-  /* border-style: inset; */
-  /* border-width: 1px; */
   color: black;
   overflow: auto;
-  /* resize: vertical; */
   word-wrap: break-word;
   line-height: 0.8em;
-  /* white-space: nowrap; */
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 10%;
@@ -599,14 +517,10 @@ li {
 .chatContainerMobile {
   background-color: white;
   padding: 0.1em;
-  /* padding-bottom: 2em; */
   height: 100%;
   width: 100%;
-  /* border-style: inset; */
-  /* border-width: 1px; */
   color: black;
   overflow: auto;
-  /* resize: vertical; */
   word-wrap: break-word;
   line-height: 0.8em;
   white-space: nowrap;
@@ -621,17 +535,11 @@ li {
   grid-row: 1;
   background-color: white;
   padding: 0.1em;
-  /* padding-bottom: 2em; */
-  /* height: 60%; */
   width: 100%;
-  /* border-style: inset; */
-  /* border-width: 1px; */
   color: black;
   overflow: auto;
-  /* resize: vertical; */
   word-wrap: break-word;
   line-height: 0.8em;
-  /* white-space: nowrap; */
   padding-bottom: 1em;
 }
 
@@ -639,7 +547,6 @@ li {
   grid-column: 1;
   grid-row: 2;
   display: inline-flex;
-  /* overflow: hidden; */
 }
 
 .chatbarMobile {
@@ -845,8 +752,6 @@ li {
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row: 2;
-
-    /* background-color: #111; */
   }
 
   .chat {
@@ -854,8 +759,6 @@ li {
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row: 3;
-
-    /* background-color: #111; */
   }
 
   .card-deck {
@@ -875,9 +778,7 @@ li {
     width: 100%;
     height: 5%;
     padding: 0;
-    /* width: 1em; */
     border-radius: 0;
-    /* width: 20px; */
     transition-duration: 0.15s;
     margin-left: 0.25em;
     margin-right: 0em;
@@ -890,9 +791,7 @@ li {
     width: 100%;
     height: 10%;
     padding: 0;
-    /* width: 1em; */
     border-radius: 0;
-    /* width: 20px; */
     transition-duration: 0.15s;
     margin-left: 0.25em;
     float: left;
