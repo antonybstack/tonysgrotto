@@ -62,98 +62,98 @@ const CollageMain = () => {
 
       {/* Halloween Images */}
       <ParallaxLayer id="bat1" offset={1.05} speed={-0.05} style={{ pointerEvents: "none", opacity: 0.6 }}>
-        <img src={bat1} style={{ width: "15%", marginLeft: "80%" }} />
+        <img src={bat1} style={{ width: "15%", marginLeft: "80%" }} alt="bat1" />
       </ParallaxLayer>
       <ParallaxLayer id="bat2" offset={1.5} speed={-0.3} style={{ pointerEvents: "none", opacity: 0.6 }}>
-        <img src={bat2} style={{ width: "12%", marginLeft: "20%" }} />
+        <img src={bat2} style={{ width: "12%", marginLeft: "20%" }} alt="bat2" />
       </ParallaxLayer>
       <ParallaxLayer id="ghost1" offset={1.9} speed={0.4} style={{ pointerEvents: "none", opacity: 0.6 }}>
-        <img src={ghost1} style={{ width: "12%", marginLeft: "80%" }} />
+        <img src={ghost1} style={{ width: "12%", marginLeft: "80%" }} alt="ghost1" />
       </ParallaxLayer>
       <ParallaxLayer id="ghost2" offset={1.6} speed={0.8} style={{ pointerEvents: "none", opacity: 0.6 }}>
-        <img src={ghost2} style={{ width: "10%", marginLeft: "70%" }} />
+        <img src={ghost2} style={{ width: "10%", marginLeft: "70%" }} alt="ghost2" />
       </ParallaxLayer>
       <ParallaxLayer id="pumpkin1" offset={1.85} speed={0.6} style={{ pointerEvents: "none", opacity: 0.6 }}>
-        <img src={pumpkin1} style={{ width: "15%", marginLeft: "12.5%" }} />
+        <img src={pumpkin1} style={{ width: "15%", marginLeft: "12.5%" }} alt="pumpkin1" />
       </ParallaxLayer>
       <ParallaxLayer id="pumpkin2" offset={1} speed={0.3} style={{ pointerEvents: "none", opacity: 0.6 }}>
-        <img src={pumpkin2} style={{ width: "12%", marginLeft: "12.5%" }} />
+        <img src={pumpkin2} style={{ width: "12%", marginLeft: "12.5%" }} alt="pumpkin2" />
       </ParallaxLayer>
 
       {/* Love images */}
 
       <ParallaxLayer id="ringpop" offset={2.2} speed={0.9} style={{ pointerEvents: "none", opacity: 0.5 }}>
-        <img src={ringpop} style={{ width: "12%", marginLeft: "12.5%" }} />
+        <img src={ringpop} style={{ width: "12%", marginLeft: "12.5%" }} alt="" />
       </ParallaxLayer>
       <ParallaxLayer offset={2.9} speed={1.8} style={{ pointerEvents: "none", opacity: 0.8 }}>
-        <img src={heart} style={{ width: "4%", marginLeft: "6%" }} />
+        <img src={heart} style={{ width: "4%", marginLeft: "6%" }} alt="heart" />
       </ParallaxLayer>
       <ParallaxLayer offset={2.98} speed={1.5} style={{ pointerEvents: "none", opacity: 0.8 }}>
-        <img src={heart} style={{ width: "3.2%", marginLeft: "10%" }} />
+        <img src={heart} style={{ width: "3.2%", marginLeft: "10%" }} alt="heart" />
       </ParallaxLayer>
       <ParallaxLayer offset={2.81} speed={1.9} style={{ pointerEvents: "none", opacity: 0.8 }}>
-        <img src={heart} style={{ width: "3.6%", marginLeft: "17%" }} />
+        <img src={heart} style={{ width: "3.6%", marginLeft: "17%" }} alt="heart" />
       </ParallaxLayer>
       <ParallaxLayer offset={2.88} speed={1.4} style={{ pointerEvents: "none", opacity: 0.8 }}>
-        <img src={heart} style={{ width: "3%", marginLeft: "20%" }} />
+        <img src={heart} style={{ width: "3%", marginLeft: "20%" }} alt="heart" />
       </ParallaxLayer>
       <ParallaxLayer offset={2.91} speed={1.2} style={{ pointerEvents: "none", opacity: 0.8 }}>
-        <img src={heart} style={{ width: "3.5%", marginLeft: "27%" }} />
+        <img src={heart} style={{ width: "3.5%", marginLeft: "27%" }} alt="heart" />
       </ParallaxLayer>
       <ParallaxLayer offset={2.84} speed={1.8} style={{ pointerEvents: "none", opacity: 0.8 }}>
-        <img src={heart} style={{ width: "3.3%", marginLeft: "32%" }} />
+        <img src={heart} style={{ width: "3.3%", marginLeft: "32%" }} alt="heart" />
       </ParallaxLayer>
       <ParallaxLayer offset={2.9} speed={1.4} style={{ pointerEvents: "none", opacity: 0.8 }}>
-        <img src={heart} style={{ width: "3.2%", marginLeft: "65%" }} />
+        <img src={heart} style={{ width: "3.2%", marginLeft: "65%" }} alt="heart" />
       </ParallaxLayer>
       <ParallaxLayer offset={2.98} speed={1.9} style={{ pointerEvents: "none", opacity: 0.8 }}>
-        <img src={heart} style={{ width: "3.8%", marginLeft: "71%" }} />
+        <img src={heart} style={{ width: "3.8%", marginLeft: "71%" }} alt="heart" />
       </ParallaxLayer>
       <ParallaxLayer offset={2.81} speed={1.7} style={{ pointerEvents: "none", opacity: 0.8 }}>
-        <img src={heart} style={{ width: "4.2%", marginLeft: "76%" }} />
+        <img src={heart} style={{ width: "4.2%", marginLeft: "76%" }} alt="heart" />
       </ParallaxLayer>
       <ParallaxLayer offset={2.88} speed={1.6} style={{ pointerEvents: "none", opacity: 0.8 }}>
-        <img src={heart} style={{ width: "3.6%", marginLeft: "84%" }} />
+        <img src={heart} style={{ width: "3.6%", marginLeft: "84%" }} alt="heart" />
       </ParallaxLayer>
       <ParallaxLayer offset={2.91} speed={1.15} style={{ pointerEvents: "none", opacity: 0.8 }}>
-        <img src={heart} style={{ width: "3%", marginLeft: "88%" }} />
+        <img src={heart} style={{ width: "3%", marginLeft: "88%" }} alt="heart" />
       </ParallaxLayer>
       <ParallaxLayer offset={2.84} speed={1.5} style={{ pointerEvents: "none", opacity: 0.8 }}>
-        <img src={heart} style={{ width: "3.4%", marginLeft: "94%" }} />
+        <img src={heart} style={{ width: "3.4%", marginLeft: "94%" }} alt="heart" />
       </ParallaxLayer>
 
       {/* Asheville Images */}
       <ParallaxLayer id="cloud1" offset={3} speed={-0.05} style={{ pointerEvents: "none", opacity: 0.6 }}>
-        <img src={cloud1} style={{ width: "35%", marginLeft: "70%" }} />
+        <img src={cloud1} style={{ width: "35%", marginLeft: "70%" }} alt="cloud1" />
       </ParallaxLayer>
       <ParallaxLayer id="cloud3" offset={3} speed={0.2} style={{ pointerEvents: "none", opacity: 0.3 }}>
-        <img src={cloud3} style={{ width: "30%", marginLeft: "0%" }} />
+        <img src={cloud3} style={{ width: "30%", marginLeft: "0%" }} alt="cloud3" />
       </ParallaxLayer>
       <ParallaxLayer id="cloud4" offset={3.3} speed={0.4} style={{ pointerEvents: "none", opacity: 0.2 }}>
-        <img src={cloud4} style={{ width: "20%", marginLeft: "90%" }} />
+        <img src={cloud4} style={{ width: "20%", marginLeft: "90%" }} alt="cloud4" />
       </ParallaxLayer>
       <ParallaxLayer id="ski1" offset={3.55} speed={-0.2} style={{ pointerEvents: "none", opacity: 0.7 }}>
-        <img src={ski1} style={{ width: "10%", marginLeft: "70%" }} />
+        <img src={ski1} style={{ width: "10%", marginLeft: "70%" }} alt="ski1" />
       </ParallaxLayer>
       <ParallaxLayer id="ski2" offset={3.45} speed={-0.15} style={{ pointerEvents: "none", opacity: 0.7 }}>
-        <img src={ski2} style={{ width: "15%", marginLeft: "12.5%" }} />
+        <img src={ski2} style={{ width: "15%", marginLeft: "12.5%" }} alt="ski2" />
       </ParallaxLayer>
       <ParallaxLayer id="mountain1" offset={3.8} speed={0.3} style={{ pointerEvents: "none", opacity: 0.6 }}>
-        <img src={mountain1} style={{ width: "40%", marginLeft: "5%" }} />
+        <img src={mountain1} style={{ width: "40%", marginLeft: "5%" }} alt="mountain1" />
       </ParallaxLayer>
       <ParallaxLayer id="mountain2" offset={3.8} speed={0.3} style={{ pointerEvents: "none", opacity: 0.6 }}>
-        <img src={mountain2} style={{ width: "40%", marginLeft: "60%" }} />
+        <img src={mountain2} style={{ width: "40%", marginLeft: "60%" }} alt="mountain2" />
       </ParallaxLayer>
 
       {/* Beach Images */}
       <ParallaxLayer id="dolphin" offset={4.25} speed={1.25} style={{ pointerEvents: "none", opacity: 0.7 }}>
-        <img src={dolphin} style={{ width: "10%", marginLeft: "70%" }} />
+        <img src={dolphin} style={{ width: "10%", marginLeft: "70%" }} alt="dolphin" />
       </ParallaxLayer>
       <ParallaxLayer id="jelly" offset={4.5} speed={-0.25} style={{ pointerEvents: "none", opacity: 0.7 }}>
-        <img src={jelly} style={{ width: "15%", marginLeft: "12.5%" }} />
+        <img src={jelly} style={{ width: "15%", marginLeft: "12.5%" }} alt="jelly" />
       </ParallaxLayer>
       <ParallaxLayer id="water" offset={4.6} speed={1} style={{ pointerEvents: "none", opacity: 0.6 }}>
-        <img src={water} style={{ width: "80%", marginLeft: "10%" }} />
+        <img src={water} style={{ width: "80%", marginLeft: "10%" }} alt="water" />
       </ParallaxLayer>
 
       {/* Pages */}
@@ -166,7 +166,10 @@ const CollageMain = () => {
         <Fade bottom delay="1750">
           <div id="deck1">
             <div id="title1" className="deckTitle">
-              Halloween 🎃
+              Halloween{" "}
+              <span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
+                🎃
+              </span>
             </div>
             <div className="deckDate">October</div>
             <div className="imageDeck">
@@ -179,7 +182,10 @@ const CollageMain = () => {
         <Fade bottom delay="2000">
           <div id="deck2">
             <div id="title2" className="deckTitle">
-              Making it official ❤️
+              Making it official{" "}
+              <span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
+                ❤️
+              </span>
             </div>
             <div className="deckDate">November</div>
             <div className="imageDeck">
@@ -192,7 +198,10 @@ const CollageMain = () => {
         <Fade bottom delay="2500">
           <div id="deck3">
             <div id="title3" className="deckTitle">
-              Asheville Adventures 🗻
+              Asheville Adventures{" "}
+              <span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
+                🗻
+              </span>
             </div>
             <div className="deckDate">Decemember</div>
             <div className="imageDeck">
@@ -205,7 +214,10 @@ const CollageMain = () => {
         <Fade bottom delay="3000">
           <div id="deck4">
             <div id="title4" className="deckTitle">
-              Tybee Island 🏝️
+              Tybee Island{" "}
+              <span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
+                🏝️
+              </span>
             </div>
             <div className="deckDate">May</div>
             <div className="imageDeck">

@@ -1,4 +1,3 @@
-import { render } from "react-dom";
 import React, { useState } from "react";
 import { useSprings, animated, to as interpolate } from "react-spring";
 import { useDrag } from "react-use-gesture";

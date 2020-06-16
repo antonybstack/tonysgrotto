@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useRef } from "react";
 import Message from "../components/Message";
 import { AuthContext } from "../contexts/AuthContext";
 import axios from "axios";
@@ -7,7 +7,6 @@ import { Form, Button, Overlay, Tooltip } from "react-bootstrap";
 const Login = (props) => {
   const [user, setUser] = useState({ username: "", password: "" });
   const [message, setMessage] = useState(null);
-  const [authLoaded, setAuthLoaded] = useState(false);
   const authContext = useContext(AuthContext);
   const [clicked, setClicked] = useState(false);
   const [show, setShow] = useState(false);
@@ -16,9 +15,6 @@ const Login = (props) => {
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
-  // const clk = async () => {
-  //   setClicked(true);
-  // };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -41,7 +37,7 @@ const Login = (props) => {
           }
         })
         .catch(function (error) {
-          setErrorType("loginErrorMessage");
+          setErrorType("errorMessage");
           setShow(true);
           setClicked(false);
           setMessage({ msgBody: "Invalid username or password", msgError: true });
@@ -66,11 +62,6 @@ const Login = (props) => {
           props.action();
         }, 1000);
       }
-      // const { isAuthenticated, user } = res.data;
-      // authContext.setUser(user);
-      // authContext.setIsAuthenticated(isAuthenticated);
-      // props.action();
-      // setMessage({ msgBody: "Account successfully logged in", msgError: false });
     });
   };
 
@@ -100,20 +91,14 @@ const Login = (props) => {
             Demo
           </Button>
         </Form>
-        {/* {message ? <Message message={message} /> : null} */}
       </Form>
       <Overlay delay={{ show: 50, hide: 50 }} target={target.current} show={show} placement="right-end">
         {(props) => (
-          <Tooltip id={typeError} {...props}>
+          <Tooltip className={typeError} id="messageLogin" {...props}>
             <Message message={message} />
           </Tooltip>
-          //    <Tooltip id={message.msgError === true ? "loginErrorMessage" : "loginSuccessMessage"} {...props}>
-          //    <Message message={message} />
-          //  </Tooltip>
         )}
       </Overlay>
-
-      {/* {message ? <Message message={message} /> : null} */}
     </>
   );
 };

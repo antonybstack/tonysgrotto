@@ -40,20 +40,24 @@ body::-webkit-scrollbar {
   background: #972525 !important;
 }
 
-#errorMessage .arrow::before {
-  border-bottom-color: rgb(255, 72, 99) !important;
+/* #errorMessageLogin .arrow::before {
+  border-right-color: rgba(255, 72, 99, 0.746) !important;
+} */
+
+#errorMessageTicket .arrow::before {
+  border-bottom-color: rgba(255, 72, 99, 0.746) !important;
 }
 
-#errorMessage .tooltip-inner {
-  background-color: rgb(255, 72, 99) !important;
+/* .errorMessage .tooltip-inner {
+  background-color: rgba(255, 72, 99, 0.746) !important;
   padding-right: 1em;
   padding-left: 1em;
   margin-left: 2em;
   color: white;
   font-size: 1.05em;
-}
+} */
 
-#errorMessage .tooltip-inner {
+.errorMessage .tooltip-inner {
   background-color: rgba(255, 72, 99, 0.746) !important;
   box-shadow: 0px 5px 15px 1px rgba(68, 68, 68, 0.356);
   padding-right: 1em;
@@ -64,7 +68,7 @@ body::-webkit-scrollbar {
   display: block;
 }
 
-#successMessage .tooltip-inner {
+.successMessage .tooltip-inner {
   background-color: rgba(42, 185, 97, 0.746) !important;
   box-shadow: 0px 5px 15px 1px rgba(68, 68, 68, 0.356);
   padding-right: 1em;
@@ -72,6 +76,13 @@ body::-webkit-scrollbar {
   margin-left: 1em;
   color: white;
   font-size: 1.05em;
+}
+
+#messageLogin .tooltip-inner {
+  /* padding-right: 0 !important;
+  padding-left: 0 !important; */
+  margin-left: 1em !important;
+  margin-bottom: -1em !important;
 }
 
 .loadingSpinner {
@@ -282,7 +293,7 @@ input:focus {
 }
 
 .home {
-  height: 94%;
+  height: 93.5%;
   display: grid;
   width: 100%;
   grid-template-columns: 1fr minmax(0%, 98%) 1fr;
@@ -742,6 +753,15 @@ li {
   height: 0;
 }
 
+.tooltipTitle {
+  font-weight: bold;
+  /* float: left; */
+}
+
+.tooltipText {
+  /* float: left; */
+}
+
 /* MOBILE STYLING */
 
 @media (max-width: 850px) {
@@ -776,7 +796,7 @@ li {
   }
 
   .home {
-    height: 94%;
+    height: 100%;
     display: grid;
     width: 100%;
   }

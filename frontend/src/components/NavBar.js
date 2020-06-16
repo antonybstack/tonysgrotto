@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { SocketContext } from "../contexts/SocketContext";
-import { UsersOnlineContext } from "../contexts/UsersOnlineContext";
 import Login from "./Login";
 import Register from "./Register";
 import * as io from "socket.io-client";
@@ -10,12 +9,12 @@ import axios from "axios";
 import { Navbar, NavDropdown, Nav, Modal, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import Fade from "react-reveal/Fade";
+import { store } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 
 const Navbarr = () => {
   const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
   const { socket, setSocket } = useContext(SocketContext);
-  // const { usersOnline } = useContext(UsersOnlineContext);
   const [loginShow, setLoginShow] = useState(false);
   const [registerShow, setRegisterShow] = useState(false);
 
@@ -62,7 +61,6 @@ const Navbarr = () => {
   }
 
   useEffect(() => {
-    // const { usersOnline } = useContext(UsersOnlineContext);
     const getConnections = async () => {
       await socket.emit("get connections", "test");
       socket.on("get connections", (data) => {
@@ -76,8 +74,6 @@ const Navbarr = () => {
   }, [loginHandler]);
 
   const onClickLogoutHandler = async () => {
-    // socket.emit("get connections");
-
     const getConnections = async () => {
       await socket.emit("get connections", "test");
       socket.on("get connections", (data) => {
@@ -88,10 +84,6 @@ const Navbarr = () => {
       await getConnections();
     };
     loaded();
-
-    // socket.on("get connections", (data) => {
-    //   usersOnline = data;
-    // });
 
     for (var i = 0; i < usersOnline.length; i++) {
       if (usersOnline[i].socketid === socket.id) {
@@ -117,6 +109,20 @@ const Navbarr = () => {
     }
     const tempSocket = io.connect(hostname);
     setSocket(tempSocket);
+    store.addNotification({
+      title: "Success!",
+      message: "You have logged out!",
+      type: "info",
+      insert: "top",
+      container: "top-center",
+      animationIn: ["animated", "fadeIn"],
+      animationOut: ["animated", "fadeOut"],
+      showIcon: true,
+      dismiss: {
+        duration: 3000,
+        onScreen: true,
+      },
+    });
   };
 
   const unauthenticatedNavBar = () => {
@@ -166,9 +172,6 @@ const Navbarr = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            {/* <Link to="/">
-              <li className="nav-item nav-link">Home</li>
-            </Link> */}
             <NavDropdown title="Account">
               {user.role === "admin" ? (
                 <>

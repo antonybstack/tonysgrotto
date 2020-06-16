@@ -2,7 +2,6 @@ import React from "react";
 import { useContext, useState, useEffect, useRef } from "react";
 import { TicketContext } from "../contexts/TicketContext";
 import { AuthContext } from "../contexts/AuthContext";
-import { SocketContext } from "../contexts/SocketContext";
 import Message from "../components/Message";
 import axios from "axios";
 import { Form, Overlay, Tooltip } from "react-bootstrap";
@@ -14,7 +13,6 @@ const AddTicket = () => {
   const { user, isAuthenticated } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [message, setMessage] = useState(null);
-  const { socket } = useContext(SocketContext);
   const [show, setShow] = useState(false);
   const target = useRef(null);
 
@@ -59,7 +57,7 @@ const AddTicket = () => {
       <div className="addTicket">
         <Form inline onSubmit={handleSubmit}>
           <div className="addTicketForm">
-            <input ref={target} className="ticketInput" id="ticket" type="text" value={name} onChange={handleChange} placeholder="e.g. deploy react app" autocomplete="off" />
+            <input ref={target} className="ticketInput" id="ticket" type="text" value={name} onChange={handleChange} placeholder="e.g. deploy react app" autoComplete="off" />
             <button className="ticketSubmit" type="submit">
               Add Ticket
             </button>
@@ -67,7 +65,7 @@ const AddTicket = () => {
         </Form>
         <Overlay delay={{ show: 50, hide: 50 }} target={target.current} show={show} placement="bottom">
           {(props) => (
-            <Tooltip id="errorMessage" {...props}>
+            <Tooltip className="errorMessage" id="errorMessageTicket" {...props}>
               <Message message={message} />
             </Tooltip>
           )}

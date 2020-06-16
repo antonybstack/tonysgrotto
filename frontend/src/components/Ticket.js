@@ -57,8 +57,13 @@ const Ticket = (props) => {
 
   function renderTooltip(props) {
     return (
-      <Tooltip id="button-tooltip" {...props}>
-        <Profile userID={userID} />
+      <Tooltip {...props}>
+        <span className="tooltipTitle">Title: </span>
+        <span className="tooltipText"> {ticket.ticket.ticket_name}</span>
+        <div>
+          <span className="tooltipTitle">created by: </span>
+          <Profile userID={userID} />
+        </div>
       </Tooltip>
     );
   }

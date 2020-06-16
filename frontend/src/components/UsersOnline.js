@@ -2,14 +2,12 @@ import React from "react";
 import { useContext, useState, useEffect, useRef } from "react";
 import { UsersOnlineContext } from "../contexts/UsersOnlineContext";
 import { Button, ListGroup } from "react-bootstrap";
-import { useSpring } from "react-spring";
 import { MobileContext } from "../contexts/MobileContext.js";
 import moment from "moment-timezone";
 
 const UsersOnline = () => {
   const { usersOnline } = useContext(UsersOnlineContext);
   const [count, setCount] = useState(0);
-  const spring = useSpring({ opacity: 1, from: { opacity: 0 } });
   const { windowSize } = useContext(MobileContext);
   const refElem = useRef();
 

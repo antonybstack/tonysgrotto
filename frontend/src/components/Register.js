@@ -10,7 +10,6 @@ const Register = (props) => {
   const [typeError, setErrorType] = useState("");
   const target = useRef(null);
   let timerID = useRef(null);
-  const [clicked, setClicked] = useState(false);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -28,7 +27,7 @@ const Register = (props) => {
   };
 
   const redirectCounter = () => {
-    var i = 5;
+    var i = 4;
     const check = () => {
       if (i === 0) {
         props.action();
@@ -48,19 +47,44 @@ const Register = (props) => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("/api/users/register", user)
-      .then((res) => {
-        setMessage({ msgBody: "Account successfully created", msgError: false });
-        setErrorType("successMessage");
-        setShow(true);
-        resetForm();
-        redirectCounter();
-      })
-      .catch((error) => {
-        const { message } = error.response.data;
-        setMessage(message);
-      });
+
+    if (user.username === "") {
+      console.log(user.username);
+      setMessage({ msgBody: "Username cannot be empty", msgError: true });
+      setErrorType("errorMessage");
+      setShow(true);
+    } else if (user.password === "") {
+      console.log(user.password);
+      setMessage({ msgBody: "Password cannot be empty", msgError: true });
+      setErrorType("errorMessage");
+      setShow(true);
+    } else if (user.username.length < 4) {
+      console.log(user.username.length);
+      setMessage({ msgBody: "Username cannot be less than 4 characters", msgError: true });
+      setErrorType("errorMessage");
+      setShow(true);
+    } else if (user.password.length < 4) {
+      console.log(user.password.length);
+      setMessage({ msgBody: "Password cannot be less than 4 characters", msgError: true });
+      setErrorType("errorMessage");
+      setShow(true);
+    } else {
+      axios
+        .post("/api/users/register", user)
+        .then((res) => {
+          setMessage({ msgBody: "Account successfully created", msgError: false });
+          setErrorType("successMessage");
+          setShow(true);
+          resetForm();
+          redirectCounter();
+        })
+        .catch((error) => {
+          console.log(error);
+          setMessage({ msgBody: "Username already taken", msgError: true });
+          setErrorType("errorMessage");
+          setShow(true);
+        });
+    }
   };
 
   return (
@@ -77,25 +101,15 @@ const Register = (props) => {
         <Button ref={target} variant="primary" type="submit">
           Submit
         </Button>
-        {/* {message ? <Message message={message} /> : null} */}
       </Form>
       <Overlay delay={{ show: 50, hide: 50 }} target={target.current} show={show} placement="right-end">
         {(props) => (
-          <Tooltip id={typeError} {...props}>
+          <Tooltip className={typeError} {...props}>
             <Message message={message} />
             <div style={{ fontStyle: "italic" }}>{redirectMessage}</div>
           </Tooltip>
-          //    <Tooltip id={message.msgError === true ? "loginErrorMessage" : "loginSuccessMessage"} {...props}>
-          //    <Message message={message} />
-          //  </Tooltip>
         )}
       </Overlay>
-      {/* {message ? (
-        <React.Fragment>
-          <Message message={message} />
-          <div style={{ fontStyle: "italic" }}>{redirectMessage}</div>
-        </React.Fragment>
-      ) : null} */}
     </>
   );
 };

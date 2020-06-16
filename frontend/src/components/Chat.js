@@ -127,8 +127,8 @@ const Chat = (props) => {
       return (
         <>
           {currentData.user !== user._id ? (
-            <div className="chatBlock">
-              <div className="chatMessage" key={i}>
+            <div className="chatBlock" key={i}>
+              <div className="chatMessage">
                 <div className="chatProfile">
                   <span>
                     <img src={tempProfile.avatar && require("../assets/avatars/" + tempProfile.avatar + ".png")} alt="Logo" width="15" />
@@ -142,8 +142,8 @@ const Chat = (props) => {
               {currentData.user !== nextUser ? <div className="chatTime">{calcTime(currentData.timestamp)}</div> : null}
             </div>
           ) : (
-            <div className="chatBlock">
-              <div className="chatYourMessage" key={i}>
+            <div className="chatBlock" key={i}>
+              <div className="chatYourMessage">
                 <span className="chatProfile">
                   <span>
                     <img src={tempProfile.avatar && require("../assets/avatars/" + tempProfile.avatar + ".png")} alt="Logo" width="15" />
@@ -159,30 +159,6 @@ const Chat = (props) => {
         </>
       );
     });
-  };
-
-  const clearChats = async () => {
-    var temp;
-    const updateBeforeClear = async () => {
-      await axios.get("/api/chats").then((res) => {
-        temp = res.data;
-      });
-    };
-    await updateBeforeClear();
-
-    temp.forEach((t) => {
-      axios.delete("api/chats/delete/" + t._id);
-    });
-
-    setChats([]);
-
-    let date = moment().tz("America/New_York");
-    let chatPacket = {
-      user: user._id,
-      message: "***chats cleared***",
-      timestamp: date,
-    };
-    setChats((currentChats) => [...currentChats, chatPacket]);
   };
 
   useEffect(() => {
@@ -221,7 +197,7 @@ const Chat = (props) => {
     }
   }
 
-  //if user clicks enter, it sends chat. If shift+enter, does not send (next line)
+  // if user clicks enter, it sends chat. If shift+enter, does not send (next line)
   const handleKeyPress = (event) => {
     if (event.key === "Enter" && event.shiftKey === false) {
       send(event);

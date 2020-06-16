@@ -10,7 +10,6 @@ const getStyle = (props) => {
 //error message handling
 const Message = (props) => {
   if (props.message != undefined && props.message != null) {
-    // return <div className={getStyle(props)}>{props.message.msgBody ? props.message.msgBody : null}</div>;
     return (
       <>
         <div className={getStyle(props)}>{props.message.msgBody}</div>

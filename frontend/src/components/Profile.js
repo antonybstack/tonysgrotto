@@ -6,7 +6,6 @@ const Profile = ({ userID }) => {
   const { profiles } = useContext(ProfileContext);
   return (
     <>
-      <span>created by:&nbsp;&nbsp;</span>
       {profiles.map(
         (currentProfile, i) =>
           currentProfile._id === userID && (

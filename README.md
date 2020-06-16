@@ -1,6 +1,6 @@
 # tonysgrotto
 
-http://www.tonysgrotto.fun/ or https://still-headland-32486.herokuapp.com/
+http://www.tonysgrotto.fun/ or https://tonysgrotto.herokuapp.com/
 
 This is a web app ive been developing for fun that contains an unorganized collection of cool features and tools
 
