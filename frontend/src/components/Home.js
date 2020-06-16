@@ -5,6 +5,7 @@ import UsersOnline from "./UsersOnline";
 import AddTicket from "../changeData/AddTicket";
 
 const Home = () => {
+  console.log("yoo");
   return (
     <div className="home">
       <AddTicket />

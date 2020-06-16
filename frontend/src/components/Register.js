@@ -1,13 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import Message from "../components/Message";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Overlay, Tooltip } from "react-bootstrap";
 import axios from "axios";
 
 const Register = (props) => {
   const [user, setUser] = useState({ username: "", password: "", role: "user" });
   const [message, setMessage] = useState(null);
   const [redirectMessage, setRedirectMessage] = useState("");
+  const [typeError, setErrorType] = useState("");
+  const target = useRef(null);
   let timerID = useRef(null);
+  const [clicked, setClicked] = useState(false);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -47,8 +51,9 @@ const Register = (props) => {
     axios
       .post("/api/users/register", user)
       .then((res) => {
-        const { message } = res.data;
-        setMessage(message);
+        setMessage({ msgBody: "Account successfully created", msgError: false });
+        setErrorType("successMessage");
+        setShow(true);
         resetForm();
         redirectCounter();
       })
@@ -69,18 +74,28 @@ const Register = (props) => {
           <Form.Label>Password</Form.Label>
           <Form.Control type="text" name="password" onChange={onChange} />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button ref={target} variant="primary" type="submit">
           Submit
         </Button>
         {/* {message ? <Message message={message} /> : null} */}
       </Form>
-
-      {message ? (
+      <Overlay delay={{ show: 50, hide: 50 }} target={target.current} show={show} placement="right-end">
+        {(props) => (
+          <Tooltip id={typeError} {...props}>
+            <Message message={message} />
+            <div style={{ fontStyle: "italic" }}>{redirectMessage}</div>
+          </Tooltip>
+          //    <Tooltip id={message.msgError === true ? "loginErrorMessage" : "loginSuccessMessage"} {...props}>
+          //    <Message message={message} />
+          //  </Tooltip>
+        )}
+      </Overlay>
+      {/* {message ? (
         <React.Fragment>
           <Message message={message} />
           <div style={{ fontStyle: "italic" }}>{redirectMessage}</div>
         </React.Fragment>
-      ) : null}
+      ) : null} */}
     </>
   );
 };

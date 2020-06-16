@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 import Message from "../components/Message";
 import { AuthContext } from "../contexts/AuthContext";
 import axios from "axios";
-import { Form, Button, Overlay, Tooltip, Spinner } from "react-bootstrap";
+import { Form, Button, Overlay, Tooltip } from "react-bootstrap";
 
 const Login = (props) => {
   const [user, setUser] = useState({ username: "", password: "" });
@@ -29,7 +29,7 @@ const Login = (props) => {
           const { isAuthenticated, user } = res.data;
           if (isAuthenticated) {
             setMessage({ msgBody: "Account successfully logged in", msgError: false });
-            setErrorType("loginSuccessMessage");
+            setErrorType("successMessage");
             setShow(true);
             setTimeout(function () {
               authContext.setUser(user);
@@ -56,7 +56,7 @@ const Login = (props) => {
       const { isAuthenticated, user } = res.data;
       if (isAuthenticated) {
         setMessage({ msgBody: "Account successfully logged in", msgError: false });
-        setErrorType("loginSuccessMessage");
+        setErrorType("successMessage");
         setShow(true);
         setTimeout(function () {
           authContext.setUser(user);

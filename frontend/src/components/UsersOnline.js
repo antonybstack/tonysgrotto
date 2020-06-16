@@ -47,7 +47,7 @@ const UsersOnline = () => {
   useEffect(() => {
     if (windowSize.width < 850) {
       document.getElementById("leftSidepanelMobile").style.height = "0em";
-      document.getElementById("leftSidepanelMobile").style.width = "calc(100% - .5em)";
+      document.getElementById("leftSidepanelMobile").style.width = "99.2%";
       document.getElementById("leftSidepanelMobile").style.hidden = false;
     } else {
       document.getElementById("leftSidepanel").style.width = "0em";
@@ -60,10 +60,10 @@ const UsersOnline = () => {
     if (windowSize.width < 850) {
       if (refElem.current.clientHeight === 0) {
         document.getElementById("leftSidepanelMobile").style.height = "15em";
-        document.getElementById("leftSidepanelMobile").style.width = "calc(100% - .5em)";
+        document.getElementById("leftSidepanelMobile").style.width = "99.2%";
       } else {
         document.getElementById("leftSidepanelMobile").style.height = "0em";
-        document.getElementById("leftSidepanelMobile").style.width = "calc(100% - .5em)";
+        document.getElementById("leftSidepanelMobile").style.width = "99.2%";
       }
     } else {
       if (refElem.current.clientWidth === 0) {
@@ -98,17 +98,25 @@ const UsersOnline = () => {
   return (
     <React.Fragment>
       <div className="users">
-        <Button id="openbtn" onClick={toggleMenu}>
-          <img src={require("../assets/users.png")} alt="Chat" width="40" />
-        </Button>
         {windowSize.width < 850 ? (
-          <div id="leftSidepanelMobile" className="usersOnlineMobile" ref={refElem}>
-            <ListGroup className="userlist">{displayUsersOnline()}</ListGroup>
-          </div>
+          <>
+            <Button id="openbtn" onClick={toggleMenu}>
+              <img src={require("../assets/users.png")} alt="Chat" width="40" />
+            </Button>
+
+            <div id="leftSidepanelMobile" className="usersOnlineMobile" ref={refElem}>
+              <ListGroup className="userlist">{displayUsersOnline()}</ListGroup>
+            </div>
+          </>
         ) : (
-          <div id="leftSidepanel" className="usersOnline" ref={refElem}>
-            <ListGroup className="userlist">{displayUsersOnline()}</ListGroup>
-          </div>
+          <>
+            <Button id="openbtn" onClick={toggleMenu}>
+              <img src={require("../assets/users.png")} alt="Chat" width="40" />
+            </Button>
+            <div id="leftSidepanel" className="usersOnline" ref={refElem}>
+              <ListGroup className="userlist">{displayUsersOnline()}</ListGroup>
+            </div>
+          </>
         )}
       </div>
     </React.Fragment>

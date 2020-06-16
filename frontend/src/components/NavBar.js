@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { SocketContext } from "../contexts/SocketContext";
@@ -15,9 +15,11 @@ import Fade from "react-reveal/Fade";
 const Navbarr = () => {
   const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
   const { socket, setSocket } = useContext(SocketContext);
-  const { usersOnline } = useContext(UsersOnlineContext);
+  // const { usersOnline } = useContext(UsersOnlineContext);
   const [loginShow, setLoginShow] = useState(false);
   const [registerShow, setRegisterShow] = useState(false);
+
+  var usersOnline = null;
 
   const loginHandler = () => {
     setLoginShow(false);
@@ -59,8 +61,37 @@ const Navbarr = () => {
     );
   }
 
+  useEffect(() => {
+    // const { usersOnline } = useContext(UsersOnlineContext);
+    const getConnections = async () => {
+      await socket.emit("get connections", "test");
+      socket.on("get connections", (data) => {
+        usersOnline = data;
+      });
+    };
+    const loaded = async () => {
+      await getConnections();
+    };
+    loaded();
+  }, [loginHandler]);
+
   const onClickLogoutHandler = async () => {
-    socket.emit("get connections");
+    // socket.emit("get connections");
+
+    const getConnections = async () => {
+      await socket.emit("get connections", "test");
+      socket.on("get connections", (data) => {
+        usersOnline = data;
+      });
+    };
+    const loaded = async () => {
+      await getConnections();
+    };
+    loaded();
+
+    // socket.on("get connections", (data) => {
+    //   usersOnline = data;
+    // });
 
     for (var i = 0; i < usersOnline.length; i++) {
       if (usersOnline[i].socketid === socket.id) {

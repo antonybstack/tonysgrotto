@@ -188,7 +188,7 @@ const Chat = (props) => {
   useEffect(() => {
     if (windowSize.width < 850) {
       document.getElementById("rightSidepanelMobile").style.height = "0em";
-      document.getElementById("rightSidepanelMobile").style.width = "calc(100% - .7em)";
+      document.getElementById("rightSidepanelMobile").style.width = "99.2%";
       document.getElementById("rightSidepanelMobile").style.hidden = false;
     } else {
       document.getElementById("rightSidepanel").style.width = "0em";
@@ -201,10 +201,10 @@ const Chat = (props) => {
     if (windowSize.width < 850) {
       if (refElem.current.clientHeight === 0) {
         document.getElementById("rightSidepanelMobile").style.height = "30em";
-        document.getElementById("rightSidepanelMobile").style.width = "calc(100% - .5em)";
+        document.getElementById("rightSidepanelMobile").style.width = "99.2%";
       } else {
         document.getElementById("rightSidepanelMobile").style.height = "0em";
-        document.getElementById("rightSidepanelMobile").style.width = "calc(100% - .5em)";
+        document.getElementById("rightSidepanelMobile").style.width = "99.2%";
       }
     } else {
       if (refElem.current.clientWidth === 0) {
@@ -291,17 +291,24 @@ const Chat = (props) => {
       <React.Fragment>
         <div className="chat">
           {windowSize.width > 850 ? (
-            <div id="rightSidepanel" className="chatroom" ref={refElem}>
-              <>{displayChatroom()}</>
-            </div>
+            <>
+              <div id="rightSidepanel" className="chatroom" ref={refElem}>
+                <>{displayChatroom()}</>
+              </div>
+              <Button id="openbtn2" variant="info" onClick={toggleMenu}>
+                <img src={require("../assets/chat.png")} alt="Chat" width="40" />
+              </Button>
+            </>
           ) : (
-            <div id="rightSidepanelMobile" className="chatroomMobile" ref={refElem}>
-              <div className="displayChatroomMobile">{displayChatroomMobile()}</div>
-            </div>
+            <>
+              <Button id="openbtn2" variant="info" onClick={toggleMenu}>
+                <img src={require("../assets/chat.png")} alt="Chat" width="40" />
+              </Button>
+              <div id="rightSidepanelMobile" className="chatroomMobile" ref={refElem}>
+                <div className="displayChatroomMobile">{displayChatroomMobile()}</div>
+              </div>
+            </>
           )}
-          <Button id="openbtn2" variant="info" onClick={toggleMenu}>
-            <img src={require("../assets/chat.png")} alt="Chat" width="40" />
-          </Button>
         </div>
       </React.Fragment>
     );
@@ -312,17 +319,24 @@ const Chat = (props) => {
       <React.Fragment>
         <div className="chat">
           {windowSize.width < 850 ? (
-            <div id="rightSidepanelMobile" className="chatroomMobile" ref={refElem}>
-              <div className="notLoggedIn">Must be logged in to chat</div>
-            </div>
+            <>
+              <Button id="openbtn2" variant="info" onClick={toggleMenu}>
+                <img src={require("../assets/chat.png")} alt="Chat" width="40" />
+              </Button>
+              <div id="rightSidepanelMobile" className="chatroomMobile" ref={refElem}>
+                <div className="notLoggedIn">Must be logged in to chat</div>
+              </div>
+            </>
           ) : (
-            <div id="rightSidepanel" className="chatroom" ref={refElem}>
-              <div className="notLoggedIn">Must be logged in to chat</div>
-            </div>
+            <>
+              <div id="rightSidepanel" className="chatroom" ref={refElem}>
+                <div className="notLoggedIn">Must be logged in to chat</div>
+              </div>
+              <Button id="openbtn2" variant="info" onClick={toggleMenu}>
+                <img src={require("../assets/chat.png")} alt="Chat" width="40" />
+              </Button>
+            </>
           )}
-          <Button id="openbtn2" variant="info" onClick={toggleMenu}>
-            <img src={require("../assets/chat.png")} alt="Chat" width="40" />
-          </Button>
         </div>
       </React.Fragment>
     );
