@@ -33,6 +33,7 @@ mongoose
 app.use("/api/tickets", require("./routes/api/tickets"));
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/chats", require("./routes/api/chats"));
+app.use("/api/professors", require("./routes/api/professors"));
 
 //serve static assets if in production
 if (process.env.NODE_ENV === "production") {
