@@ -203,7 +203,7 @@ const CollageMain = () => {
                 🗻
               </span>
             </div>
-            <div className="deckDate">Decemember</div>
+            <div className="deckDate">December</div>
             <div className="imageDeck">
               <Deck num={21} album={"asheville"} />
             </div>
